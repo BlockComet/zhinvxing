@@ -42,6 +42,30 @@ describe("restoration source continuity", () => {
     const restored = new RestorationStore(path.dirname(store.root), projects);
     expect((await restored.state(projectId)).restoration).toMatchObject({ state: "paused", route: "rebuild" });
   });
+  it("attaches an existing directory without copying and refuses snapshot rollback", async () => {
+    const { source, store, projects } = await fixture();
+    await writeFile(path.join(source, "save.json"), '{"xp":25}');
+    const { projectId } = await store.import(source, "现有客户端", "保留进度", "in-place");
+    const project = projects.get(projectId)!;
+    expect(project.workspaceLocation).toBe("external");
+    expect(project.workspacePath).toBe(source);
+    expect(await readdir(store.directory(projectId))).not.toContain("original");
+    expect(await readdir(source)).not.toContain("restoration-work");
+    expect((await store.state(projectId)).restoration?.storageMode).toBe("in-place");
+    await expect(store.rollback(projectId)).rejects.toThrow("没有原始快照");
+    await store.update(projectId, { state: "paused" });
+    expect(await readFile(path.join(source, "RESTORATION.md"), "utf8")).toContain("直接修改");
+    await projects.delete(projectId);
+    expect(await readFile(path.join(source, "save.json"), "utf8")).toBe('{"xp":25}');
+    expect(await readFile(path.join(source, "config.ini"), "utf8")).toBe("server=offline\n");
+  });
+  it("rejects in-place file inputs and protects existing task notes", async () => {
+    const { source, store } = await fixture();
+    await expect(store.import(path.join(source, "config.ini"), "", "test", "in-place")).rejects.toThrow("整个游戏文件夹");
+    await writeFile(path.join(source, "RESTORATION.md"), "existing notes");
+    await expect(store.import(source, "", "test", "in-place")).rejects.toThrow("已有 RESTORATION.md");
+    expect(await readFile(path.join(source, "RESTORATION.md"), "utf8")).toBe("existing notes");
+  });
   it("recognizes APK container evidence without calling it recovered source", async () => {
     const { source, store } = await fixture();
     const zip = new ZipFile();

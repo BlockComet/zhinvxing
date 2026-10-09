@@ -9,6 +9,7 @@ export interface Restoration {
   state: "ready" | "paused";
   route: "repair" | "rebuild" | "remake";
   sourceName: string;
+  storageMode?: "copy" | "in-place";
   files: SourceEvidence[];
   findings: Finding[];
   milestones: Array<{ name: string; status: "done" | "pending" | "blocked"; detail: string }>;

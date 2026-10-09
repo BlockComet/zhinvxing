@@ -8,6 +8,7 @@ export function StudioCenter({ projectId, onClose, onOpen }: { projectId?: strin
   const dialog = useRef<HTMLDialogElement>(null);
   const [data, setData] = useState<StudioState>();
   const [source, setSource] = useState("");
+  const [storageMode, setStorageMode] = useState<"copy" | "in-place">("copy");
   const [name, setName] = useState("");
   const [goal, setGoal] = useState("确认启动阻塞，并制定恢复单机体验的计划");
   const [target, setTarget] = useState<StudioTarget>("windows");
@@ -32,24 +33,26 @@ export function StudioCenter({ projectId, onClose, onOpen }: { projectId?: strin
   return <dialog ref={dialog} className="studio-center" aria-labelledby="studio-center-title" onCancel={event => { event.preventDefault(); if (!busy) onClose(); }}>
     <header><div><small>创作 · 复原 · 发布</small><h2 id="studio-center-title">{projectId ? "复原与发布中心" : "复原已有游戏"}</h2></div><button type="button" disabled={busy} onClick={onClose} aria-label="关闭">关闭</button></header>
     {!projectId ? <form onSubmit={event => { event.preventDefault(); void run(async () => {
-      const result = await request<{ projectId: string }>("/studio/import", { method: "POST", body: JSON.stringify({ sourcePath: source.trim(), name, goal }) });
+      const result = await request<{ projectId: string }>("/studio/import", { method: "POST", body: JSON.stringify({ sourcePath: source.trim(), name, goal, storageMode }) });
       onOpen?.(result.projectId);
     }); }}>
-      <p>导入客户端、APK、源码或资料。原始材料单独保留，修改在工作副本中进行。</p>
+      <p>导入客户端、APK、源码或资料。</p>
+      <label>文件处理方式<select disabled={busy} value={storageMode} onChange={event => setStorageMode(event.target.value as "copy" | "in-place")}><option value="copy">保存原始副本，在工作副本中修改</option><option value="in-place">直接使用现有文件夹，不复制客户端</option></select></label>
+      {storageMode === "in-place" ? <aside>将直接修改现有文件。不会创建原始快照，不提供整项目还原；保留已有角色和存档。</aside> : null}
       <label>游戏名称<input value={name} onChange={event => setName(event.target.value)} placeholder="可选，默认使用文件名" maxLength={120} /></label>
       <label onDragOver={event => event.preventDefault()} onDrop={event => { event.preventDefault(); if (busy) return; try { const file = event.dataTransfer.files[0]; const selected = file && window.ohMyGameDesktop?.droppedFilePath?.(file); if (selected) setSource(selected); else setError("请使用文件选择按钮或填写本地完整路径。"); } catch { setError("无法读取拖入的路径，请使用文件选择按钮。"); } }}>本地文件或文件夹的完整路径（也可拖入）<input required value={source} onChange={event => setSource(event.target.value)} placeholder="例如 D:\Games\旧游戏 或 D:\Games\game.apk" /></label>
       {window.ohMyGameDesktop?.selectRestorationFile ? <button type="button" disabled={busy} onClick={() => void run(async () => { const selected = await window.ohMyGameDesktop?.selectRestorationFile?.(); if (selected) setSource(selected); })}>选择客户端／APK／资料文件</button> : null}
       {window.ohMyGameDesktop?.selectProjectDirectory ? <button type="button" disabled={busy} onClick={() => void run(async () => { const selected = await window.ohMyGameDesktop?.selectProjectDirectory(); if (selected) setSource(selected); })}>选择游戏文件夹</button> : null}
       <label>这次想先达到什么目标？<textarea required value={goal} maxLength={2000} onChange={event => setGoal(event.target.value)} /></label>
       <aside>当前可建立文件清单、校验副本、分析 APK 容器与工程线索。原生隔离运行器尚未接入，因此不会自动启动导入程序，也不会把解析成功标成复原成功。</aside>
-      <button className="studio-primary" disabled={busy || !source.trim() || !goal.trim()}>{busy ? "正在复制与校验材料…" : "建立复原项目"}</button>
+      <button className="studio-primary" disabled={busy || !source.trim() || !goal.trim()}>{busy ? "正在读取与登记材料…" : "建立复原项目"}</button>
     </form> : <>
       {!data ? <p>正在读取项目记录…</p> : restoration ? <section>
         <h3>复原任务 · {restoration.sourceName}</h3><p>{restoration.goal}</p>
         <div className="studio-controls"><label>恢复路线<select disabled={busy} value={restoration.route} onChange={event => void run(() => request(`${endpoint}/restoration`, { method: "PATCH", body: JSON.stringify({ route: event.target.value }) }))}>
           <option value="repair">保留原程序，修复问题</option><option value="rebuild">重建缺失组件</option><option value="remake">基于资料重新实现</option>
         </select></label><button disabled={busy} onClick={() => void run(() => request(`${endpoint}/restoration`, { method: "PATCH", body: JSON.stringify({ state: restoration.state === "paused" ? "ready" : "paused" }) }))}>{restoration.state === "paused" ? "恢复任务" : "暂停后续任务"}</button>
-        <button disabled={busy} onClick={() => setRollback(true)}>还原工作副本…</button></div>
+        {restoration.storageMode !== "in-place" ? <button disabled={busy} onClick={() => setRollback(true)}>还原工作副本…</button> : <span>直接修改现有目录 · 无原始快照</span>}</div>
         {rollback ? <aside>将把当前工作副本移入历史目录，再从原始材料恢复。<button disabled={busy} onClick={() => void run(async () => { await request(`${endpoint}/rollback`, { method: "POST" }); setRollback(false); })}>确认还原并保留历史</button><button disabled={busy} onClick={() => setRollback(false)}>取消</button></aside> : null}
         <ol className="studio-milestones">{restoration.milestones.map(step => <li key={step.name}><b>{step.status === "done" ? "已完成" : step.status === "blocked" ? "待接入" : "待执行"} · {step.name}</b><p>{step.detail}</p></li>)}</ol>
         <details><summary>分析证据 · {restoration.files.length} 个文件</summary>{restoration.findings.map((finding, index) => <div className="studio-finding" key={index}><b>{({ confirmed: "已确认", inferred: "推测", unknown: "未知" })[finding.certainty]}</b> {finding.message}<pre>{finding.evidence.join("\n")}</pre></div>)}</details>

@@ -11,11 +11,12 @@ export function registerStudioRoutes(app: FastifyInstance, projects: ProjectMana
     if (error instanceof StudioError) throw error;
     throw new StudioError(error instanceof Error ? error.message : String(error));
   });
-  app.post<{ Body: { sourcePath: string; name?: string; goal: string } }>("/studio/import", { schema: { body: {
+  app.post<{ Body: { sourcePath: string; name?: string; goal: string; storageMode?: "copy" | "in-place" } }>("/studio/import", { schema: { body: {
     type: "object", additionalProperties: false, required: ["sourcePath", "goal"], properties: {
+      storageMode: { enum: ["copy", "in-place"] },
       sourcePath: { type: "string", minLength: 1, maxLength: 4096 }, name: { type: "string", maxLength: 120 }, goal: { type: "string", minLength: 1, maxLength: 2000 },
     },
-  } } }, request => wrap(() => store.import(request.body.sourcePath, request.body.name ?? "", request.body.goal)));
+  } } }, request => wrap(() => store.import(request.body.sourcePath, request.body.name ?? "", request.body.goal, request.body.storageMode)));
   app.get<{ Params: { projectId: string } }>("/projects/:projectId/studio", request => wrap(() => store.state(request.params.projectId)));
   app.patch<{ Params: { projectId: string }; Body: { state?: Restoration["state"]; route?: Restoration["route"] } }>("/projects/:projectId/studio/restoration", { schema: { body: {
     type: "object", additionalProperties: false, minProperties: 1, properties: { state: { enum: ["ready", "paused"] }, route: { enum: ["repair", "rebuild", "remake"] } },
