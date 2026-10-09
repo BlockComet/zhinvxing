@@ -1,4 +1,4 @@
-import { Plus, RefreshCw } from "./icons.js";
+import { RefreshCw } from "./icons.js";
 import { useEffect, useRef, useState } from "react";
 import type { PluginMention, ProjectState, ProjectType, PromptAttachment, PromptImage, PromptMode } from "../shared/contracts.js";
 import { deleteProject, duplicateProject, listProjects, renameProject, waitForRuntime } from "./api.js";
@@ -84,10 +84,13 @@ export function Home({ onNavigate, onCreate, onOpen }: HomeProps) {
       <section className="home-content home-content-fitted">
         <WindowDragRegion />
         <div className="home-start">
-          <h1>今天想做点什么？</h1>
-          <button className="studio-entry" type="button" onClick={() => setCreateOpen(true)}>创造新游戏</button>
-          <button className="studio-entry" type="button" onClick={() => setRestoreOpen(true)}>复原已有游戏</button>
-          <a className="studio-entry" href={projectsHash()}>继续项目</a>
+          <h1>今天，创造一点不同。</h1>
+          <p className="home-start-subtitle">从一个新想法开始，或让熟悉的游戏再次运行。</p>
+          <nav className="studio-entry-grid" aria-label="开始工作">
+            <button className="studio-entry-card" type="button" onClick={() => setCreateOpen(true)}><strong>创造新游戏</strong><span>把想法变成可玩的作品</span></button>
+            <button className="studio-entry-card" type="button" onClick={() => setRestoreOpen(true)}><strong>复原已有游戏</strong><span>从客户端、源码或资料开始</span></button>
+            <a className="studio-entry-card" href={projectsHash()}><strong>继续项目</strong><span>接着上次的进度往下做</span></a>
+          </nav>
           <ProjectPromptCreator
             projectType={projectType}
             projectTypes={GAME_PROJECT_TYPES}
@@ -96,9 +99,7 @@ export function Home({ onNavigate, onCreate, onOpen }: HomeProps) {
             onOpenProject={onOpen}
             onCreate={onCreate}
           />
-          <button className="home-start-blank" type="button" onClick={() => setCreateOpen(true)}>
-            <Plus size={14} />从空白开始
-          </button>
+
         </div>
 
         <section ref={sectionRef} className="home-recent studio-projects" aria-labelledby="projects-heading">

@@ -9,6 +9,7 @@ import { applyAppearance, readAppearance } from "./appearance.js";
 import { DesktopWindowFrame } from "./desktop-window-frame.js";
 import { initializeAnalytics } from "./analytics.js";
 import "./styles.css";
+import "./refinement.css";
 
 const root = document.getElementById("root");
 if (!root) throw new Error("找不到界面根节点");

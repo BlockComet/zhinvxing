@@ -1,0 +1,56 @@
+/* Shared visual rhythm for the Chinese desktop interface. */
+:root {
+  --radius: 8px;
+  --radius-panel: 12px;
+  --ui-content-width: 1000px;
+}
+:root[data-appearance="light"] {
+  --canvas: #f7f8f9;
+  --text-secondary: #60646b;
+  --text-muted: #6d727a;
+  --border: #e3e5e8;
+  --border-strong: #cbd0d6;
+}
+.home-content.home-content-fitted { padding: clamp(28px, 6vh, 64px) 40px 40px; gap: 32px; }
+.home-content-fitted > :is(.home-start,.home-recent,.home-discover) { width: min(var(--ui-content-width), 100%); margin: 0 auto; }
+.home-start { text-align: left; }
+.home-start h1 { margin: 0 0 10px; font-family: inherit; font-size: clamp(24px, 2.4vw, 30px); font-weight: 600; line-height: 1.45; letter-spacing: -.025em; }
+.home-start-subtitle { font-size: 13px; line-height: 1.7; }
+.studio-entry-grid { display: grid; grid-template-columns: repeat(3,minmax(0,1fr)); gap: 12px; margin: 24px 0 20px; }
+.studio-entry-card { display: flex; min-width: 0; flex-direction: column; gap: 6px; align-items: flex-start; padding: 16px 18px; border: 1px solid var(--border); border-radius: 10px; background: var(--surface); color: var(--text); text-align: left; font: inherit; text-decoration: none; cursor: pointer; transition: background-color 140ms, border-color 140ms; }
+.studio-entry-card strong { font-size: 13px; font-weight: 600; line-height: 1.5; }
+.studio-entry-card span { color: var(--text-secondary); font-size: 12px; line-height: 1.6; }
+.studio-entry-card:hover { border-color: var(--border-strong); background: var(--control-surface); }
+.studio-entry-card:focus-visible { outline: 2px solid var(--focus-ring); outline-offset: 3px; }
+.studio-section-heading { margin-bottom: 16px; }
+.studio-section-heading h2 { font-size: 14px; font-weight: 600; }
+.home-sidebar .home-nav-item { min-height: 36px; border-radius: 8px; font-size: 13px; }
+.home-sidebar-brand { font-family: inherit; }
+.sidebar-page { padding-inline: 40px; }
+.sidebar-page-inner { width: min(var(--ui-content-width), 100%); }
+.sidebar-page-header h1 { font-family: inherit; line-height: 1.4; }
+.sidebar-page-breadcrumb h1 { line-height: 16px; }
+.projects-controls { gap: 12px; align-items: center; }
+.projects-type-filter { height: 36px; border-radius: 8px; font-size: 12px; }
+.project-card-name { font-size: 13px; line-height: 1.5; }
+.settings-panel-header h3 { font-size: 20px; line-height: 1.4; }
+.settings-section-heading, .settings-provider-group > h4 { font-size: 12px; line-height: 1.5; padding-bottom: 10px; }
+.settings-provider-row { padding: 12px; border-radius: 10px; }
+.settings-page-nav-item { min-height: 36px; font-size: 13px; }
+.pane-header { gap: 8px; }
+.pane-header > .studio-entry { flex: 0 1 auto; min-height: 28px; margin: 0; padding: 3px 10px; border-color: transparent; white-space: nowrap; font-size: 12px; }
+.pane-header-actions { gap: 4px; }
+:is(.project-create-dialog,.project-settings-dialog,.publish-dialog,.connection-dialog) { border-color: var(--border); border-radius: 14px; box-shadow: 0 20px 64px rgb(0 0 0 / 18%); }
+:is(.project-create-dialog,.project-settings-dialog,.publish-dialog) h2 { font-size: 18px; line-height: 1.45; font-weight: 600; }
+@media (max-width: 900px) {
+  .home-content.home-content-fitted, .sidebar-page { padding-inline: 24px; }
+  .studio-entry-card { padding: 14px; }
+}
+@media (max-width: 620px) {
+  .home-content.home-content-fitted, .sidebar-page { padding-inline: 16px; }
+  .studio-entry-grid { grid-template-columns: 1fr; gap: 8px; }
+  .studio-entry-card { gap: 4px; padding: 12px 16px; }
+}
+@media (prefers-reduced-motion: reduce) {
+  .studio-entry-card { transition: none; }
+}
