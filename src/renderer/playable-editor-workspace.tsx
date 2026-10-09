@@ -440,7 +440,7 @@ export function PlayableEditorWorkspace({ project, agentBusy, publishing, worksp
   useEffect(() => {
     if (!selectedNavigation || openedNodeId || projectSettingsOpen) return;
     const onKeyDown = (event: KeyboardEvent) => {
-      if ((event.key !== "Delete" && event.key !== "Backspace") || isTextEntry(event.target)) return;
+      if ((event.key !== "删除" && event.key !== "Backspace") || isTextEntry(event.target)) return;
       setEdges((current) => current.filter((edge) => edge.id !== selectedEdgeId));
       setSelectedEdgeId(undefined);
     };
@@ -460,7 +460,7 @@ export function PlayableEditorWorkspace({ project, agentBusy, publishing, worksp
       () => { setNotice(undefined); setCodeRevision((revision) => revision + 1); },
       (error) => {
         if (queuedCodebase.current === serialized) queuedCodebase.current = undefined;
-        setNotice(`Could not save your changes: ${errorMessage(error)}`);
+        setNotice(`无法保存更改：${errorMessage(error)}`);
       },
     );
     return operation;
@@ -798,7 +798,7 @@ export function PlayableEditorWorkspace({ project, agentBusy, publishing, worksp
   }
 
   async function publishGame(details: PublishDetails): Promise<boolean> {
-    if (!codebase) throw new Error("The game is still loading. Try publishing again when it is ready.");
+    if (!codebase) throw new Error("游戏仍在加载。请等待加载完成后重新发布。");
     await save(codebase);
     return onPublish(details);
   }
@@ -852,13 +852,13 @@ export function PlayableEditorWorkspace({ project, agentBusy, publishing, worksp
   const canvasPlayer = useMemo(() => ({ projectId, onRenameNode: renameNode, onSelectEdge: selectEdge, onOpenNode: openNode }), [projectId]);
   const projectIssues = issues.filter((issue) => !issue.surfaceId && !nodeIdForIssuePath(issue.path, nodes));
   const tabs: WorkspaceTabOption<"canvas" | "design" | "code">[] = [
-    { id: "canvas", label: "Story", icon: Clapperboard },
-    ...(onDesignOpenChange ? [{ id: "design" as const, label: "Design", icon: FileText }] : []),
-    { id: "code", label: "Code", icon: Code2 },
+    { id: "canvas", label: "故事", icon: Clapperboard },
+    ...(onDesignOpenChange ? [{ id: "design" as const, label: "设计", icon: FileText }] : []),
+    { id: "code", label: "代码", icon: Code2 },
   ];
   const renderNavigation = () => <div className={`viewer-navigation${chatOnRight ? " is-chat-right" : ""}`}>
     {chatOnRight && onHome ? (
-      <button className="icon-button pane-header-action workspace-home-button" type="button" onClick={onHome} title="Home" aria-label="Home"><House size={14} /></button>
+      <button className="icon-button pane-header-action workspace-home-button" type="button" onClick={onHome} title="首页" aria-label="首页"><House size={14} /></button>
     ) : null}
     <WorkspaceTabs
       tabs={tabs} active={designOpen ? "design" : workspaceView}
@@ -880,7 +880,7 @@ export function PlayableEditorWorkspace({ project, agentBusy, publishing, worksp
     <section
       className={`viewer-pane interactive-story-workspace playable-editor-workspace${openedNode ? " is-node-editor-open" : ""}`}
       data-active-tab={designOpen ? "design" : workspaceView}
-      aria-label="Playable Nodes workspace"
+      aria-label="互动节点工作区"
       style={{
         "--story-viewport-ratio": `${playerViewport.width} / ${playerViewport.height}`,
         "--story-viewport-aspect": playerViewportAspect,
@@ -892,18 +892,18 @@ export function PlayableEditorWorkspace({ project, agentBusy, publishing, worksp
         <span className="workspace-navigation-drag-exclusion" aria-hidden="true" />
         {renderNavigation()}
         <div className={`viewer-publish${designOpen ? " design-header-actions" : ""}`} ref={setDesignHeaderActions}>
-          {!designOpen ? <><button className="icon-button pane-header-action" type="button" title="Project settings" aria-label="Project settings" aria-haspopup="dialog" disabled={phase !== "ready"} onClick={() => setProjectSettingsOpen(true)}>
+          {!designOpen ? <><button className="icon-button pane-header-action" type="button" title="项目设置" aria-label="项目设置" aria-haspopup="dialog" disabled={phase !== "ready"} onClick={() => setProjectSettingsOpen(true)}>
             <Settings size={14} />
           </button>
-          <button className="icon-button pane-header-action" type="button" data-tooltip={playtesting ? "Opening playtest..." : "Playtest in a new window"} aria-label="Playtest" disabled={phase !== "ready" || building || playtesting} onClick={() => void startPlaytest()}>
+          <button className="icon-button pane-header-action" type="button" data-tooltip={playtesting ? "正在打开试玩…" : "在新窗口中试玩"} aria-label="试玩" disabled={phase !== "ready" || building || playtesting} onClick={() => void startPlaytest()}>
             {playtesting ? <LoaderCircle className="spin" size={14} /> : <Play size={14} />}
           </button>
-          <button className="publish-button workspace-publish-button" type="button" title={publishing ? "Publishing" : "Publish"} aria-label={publishing ? "Publishing" : "Publish"} disabled={agentBusy || publishing || building} onClick={onOpenPublish}>
+          <button className="publish-button workspace-publish-button" type="button" title={publishing ? "正在发布" : "发布"} aria-label={publishing ? "正在发布" : "发布"} disabled={agentBusy || publishing || building} onClick={onOpenPublish}>
             {publishing ? <LoaderCircle className="spin" size={14} /> : <Share2 size={14} />}
-            <span>Publish</span>
+            <span>发布</span>
           </button>
           {chatOnRight && chatCollapsed && onToggleChat ? (
-            <button className="icon-button pane-header-action" type="button" title="Show chat" aria-label="Show chat" onClick={onToggleChat}>
+            <button className="icon-button pane-header-action" type="button" title="显示聊天" aria-label="显示聊天" onClick={onToggleChat}>
               <PanelToggle size={14} />
             </button>
           ) : null}
@@ -914,7 +914,7 @@ export function PlayableEditorWorkspace({ project, agentBusy, publishing, worksp
         project={project} headerActionsTarget={designHeaderActions} onLeaveReady={registerDesignLeave} onSaveReady={onDesignSaveReady} onContextChange={onDesignContextChange}
       /></Suspense> : workspaceView !== "code" ? <div className="interactive-story-body">
         <div className="interactive-story-canvas">
-          {phase === "loading" ? <div className="story-canvas-state">Loading Scenes...</div> : null}
+          {phase === "loading" ? <div className="story-canvas-state">正在加载场景…</div> : null}
           {phase === "error" ? <div className="story-canvas-state story-canvas-state-error">{notice}</div> : null}
           {phase === "ready" ? (
             <PlayableCanvasContext.Provider value={canvasPlayer}>
@@ -928,7 +928,7 @@ export function PlayableEditorWorkspace({ project, agentBusy, publishing, worksp
                   onAdd={(presetId, position) => void addNodeFromPreset(presetId, position)}
                 />}
                 onOpenMenu={setCanvasContextMenu}
-                deleteKeyCode={openedNode || projectSettingsOpen ? null : ["Backspace", "Delete"]}
+                deleteKeyCode={openedNode || projectSettingsOpen ? null : ["Backspace", "删除"]}
                 onNodesChange={onNodesChange}
                 onNodeDragStart={() => { setCanvasContextMenu(undefined); beginHistoryGesture(); }}
                 onNodeDragStop={finishHistoryGesture}
@@ -980,11 +980,11 @@ export function PlayableEditorWorkspace({ project, agentBusy, publishing, worksp
           {notice && phase === "ready" ? <div className="story-save-notice" role="alert">{notice}</div> : null}
           {projectIssues.length && phase === "ready" ? (
             <div className="story-play-issue" role="alert">
-              <div><strong>The project does not compile</strong><span>{projectIssues[0]!.message}</span></div>
+              <div><strong>项目无法编译</strong><span>{projectIssues[0]!.message}</span></div>
             </div>
           ) : null}
         </div>
-      </div> : <main className="story-code-view" aria-label="Playable Nodes code">
+      </div> : <main className="story-code-view" aria-label="互动节点代码">
         <WorkspaceCodeView projectId={projectId} revision={workspaceRevision + codeRevision} openFileRequest={fileRequest} />
       </main>}
       {openedNode && codebase ? <PlayableNodeWorkbench

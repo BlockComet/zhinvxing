@@ -43,7 +43,7 @@ export function CanvasChipSelect<Value extends string>({ label, value, options, 
   const menu = useRef<HTMLDivElement>(null);
   const search = useRef<HTMLInputElement>(null);
   const current = options.find((option) => option.value === value);
-  const text = current?.label ?? placeholder ?? "Select";
+  const text = current?.label ?? placeholder ?? "选择";
   const searchable = options.length > SEARCH_THRESHOLD;
   const ActionIcon = action?.icon ?? Settings;
   const OptionActionIcon = optionAction?.icon;
@@ -167,8 +167,8 @@ export function CanvasChipSelect<Value extends string>({ label, value, options, 
               {group.notes.map((note) => <p className="canvas-chip-menu-note" key={note}>{note}</p>)}
             </div>
           ))}
-          {normalizedQuery && visible.length === 0 ? <p className="canvas-chip-menu-note">No matches</p> : null}
-          {!normalizedQuery && options.length === 0 && notes.length === 0 ? <p className="canvas-chip-menu-note">{placeholder ?? "Nothing to choose"}</p> : null}
+          {normalizedQuery && visible.length === 0 ? <p className="canvas-chip-menu-note">没有匹配项</p> : null}
+          {!normalizedQuery && options.length === 0 && notes.length === 0 ? <p className="canvas-chip-menu-note">{placeholder ?? "没有可选内容"}</p> : null}
         </div>
         {action ? <button
           type="button"

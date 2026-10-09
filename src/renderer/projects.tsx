@@ -117,28 +117,28 @@ export function ProjectsPage({ projectType = "all", onNavigate, onOpenProject }:
   return (
     <SidebarPageLayout active="projects" onNavigate={onNavigate}>
       <SidebarPageHeader
-        title="Projects"
+        title="项目"
         actions={(
           <div className="projects-controls">
-            <select className="projects-type-filter" aria-label="Project type" value={projectType} onChange={(event) => {
+            <select className="projects-type-filter" aria-label="项目类型" value={projectType} onChange={(event) => {
               const type = event.target.value as ProjectType | "all";
               window.location.hash = projectsHash(type === "all" ? undefined : type);
             }}>
-              <option value="all">All types</option>
+              <option value="all">全部类型</option>
               {PROJECT_TYPES.map(({ value, label }) => <option key={value} value={value}>{label}</option>)}
             </select>
             <label className="projects-search" htmlFor="projects-search-input">
               <Search size={14} aria-hidden="true" />
-              <input id="projects-search-input" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search projects" />
+              <input id="projects-search-input" value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索项目" />
             </label>
             <div className="projects-sort" ref={sortControl}>
-              <button className="projects-icon-button" type="button" aria-label="Sort projects" aria-expanded={sortOpen} onClick={() => setSortOpen((current) => !current)}>
+              <button className="projects-icon-button" type="button" aria-label="项目排序" aria-expanded={sortOpen} onClick={() => setSortOpen((current) => !current)}>
                 <ArrowDownUp size={16} />
               </button>
               {sortOpen ? (
                 <div className="projects-sort-menu" role="menu">
-                  <button className={sort === "updated" ? "is-active" : undefined} type="button" role="menuitem" onClick={() => { setSort("updated"); setSortOpen(false); }}>Recently updated</button>
-                  <button className={sort === "name" ? "is-active" : undefined} type="button" role="menuitem" onClick={() => { setSort("name"); setSortOpen(false); }}>Name</button>
+                  <button className={sort === "updated" ? "is-active" : undefined} type="button" role="menuitem" onClick={() => { setSort("updated"); setSortOpen(false); }}>最近更新</button>
+                  <button className={sort === "name" ? "is-active" : undefined} type="button" role="menuitem" onClick={() => { setSort("name"); setSortOpen(false); }}>名称</button>
                 </div>
               ) : null}
             </div>
@@ -146,13 +146,13 @@ export function ProjectsPage({ projectType = "all", onNavigate, onOpenProject }:
         )}
       />
 
-      {phase === "loading" ? <ProjectState><LoaderCircle className="spin" size={18} />Loading projects</ProjectState> : null}
-      {phase === "error" ? <ProjectState error><X size={18} />{error}<button type="button" onClick={() => void load()}><RefreshCw size={14} />Retry</button></ProjectState> : null}
+      {phase === "loading" ? <ProjectState><LoaderCircle className="spin" size={18} />正在加载项目</ProjectState> : null}
+      {phase === "error" ? <ProjectState error><X size={18} />{error}<button type="button" onClick={() => void load()}><RefreshCw size={14} />重试</button></ProjectState> : null}
       {phase === "ready" ? (
         <div className="projects-grid">
           <button className="project-card project-card-new" type="button" onClick={() => setCreateOpen(true)}>
             <span className="project-card-new-art"><FolderPlus size={24} /></span>
-            <span className="project-card-copy"><strong>New project</strong><span>Start from an idea</span></span>
+            <span className="project-card-copy"><strong>新建项目</strong><span>从一个想法开始</span></span>
           </button>
           {visibleProjects.map((project, index) => (
             <ProjectCard
@@ -169,7 +169,7 @@ export function ProjectsPage({ projectType = "all", onNavigate, onOpenProject }:
           ))}
         </div>
       ) : null}
-      {phase === "ready" && projects.length > 0 && visibleProjects.length === 0 ? <ProjectState><FolderPlus size={18} />No projects match your search</ProjectState> : null}
+      {phase === "ready" && projects.length > 0 && visibleProjects.length === 0 ? <ProjectState><FolderPlus size={18} />没有匹配的项目</ProjectState> : null}
       {actionError ? <p className="projects-notice" role="alert">{actionError}</p> : null}
       {renameTarget ? <ProjectRenameDialog name={renameTarget.name} returnFocus={renameTrigger.current} onClose={() => setRenameTarget(undefined)} onConfirm={(name) => {
         const project = renameTarget;

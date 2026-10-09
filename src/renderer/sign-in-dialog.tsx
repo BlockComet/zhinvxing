@@ -63,23 +63,23 @@ export function SignInDialog({ allowClose = false, configured, error, pendingPro
   }, []);
 
   const canClose = !pendingProvider || allowClose;
-  const displayedError = configured ? error : "Sign-in is currently unavailable.";
+  const displayedError = configured ? error : "登录暂不可用。";
   return createPortal(
     <div className="project-settings-backdrop" onMouseDown={(event) => {
       if (event.target === event.currentTarget && canClose) onClose();
     }}>
       <section ref={dialog} className="project-settings-dialog sign-in-dialog" role="dialog" aria-modal="true" aria-labelledby={titleId} aria-describedby={descriptionId} tabIndex={-1}>
         <header>
-          <div className="sign-in-heading"><img src={brandMark} alt="" /><h2 id={titleId}>Join the community</h2></div>
-          <button type="button" onClick={onClose} disabled={!canClose} aria-label="Close sign in"><X size={16} /></button>
+          <div className="sign-in-heading"><img src={brandMark} alt="" /><h2 id={titleId}>加入社区</h2></div>
+          <button type="button" onClick={onClose} disabled={!canClose} aria-label="关闭登录"><X size={16} /></button>
         </header>
         <div className="sign-in-body">
-          <p id={descriptionId} className="sign-in-description">Create games with or without an account.</p>
+          <p id={descriptionId} className="sign-in-description">无论是否登录，都可以创作游戏。</p>
           <div className="sign-in-actions">
             <ProviderButton provider="google" configured={configured} pendingProvider={pendingProvider} onSignIn={onSignIn} />
             <ProviderButton provider="github" configured={configured} pendingProvider={pendingProvider} onSignIn={onSignIn} />
           </div>
-          {displayedError ? <p className="project-settings-error" role="alert">{displayedError}</p> : pendingProvider ? <p className="sign-in-status" role="status">Complete {pendingProvider === "google" ? "Google" : "GitHub"} sign-in in your browser.</p> : null}
+          {displayedError ? <p className="project-settings-error" role="alert">{displayedError}</p> : pendingProvider ? <p className="sign-in-status" role="status">请完成 {pendingProvider === "google" ? "Google" : "GitHub"} 浏览器登录。</p> : null}
         </div>
       </section>
     </div>, document.body,
@@ -95,9 +95,9 @@ function ProviderButton({ provider, configured, pendingProvider, onSignIn }: {
   const pending = pendingProvider === provider;
   const name = provider === "google" ? "Google" : "GitHub";
   return (
-    <button className="settings-secondary-button sign-in-provider" type="button" aria-label={`Sign in with ${name}`} disabled={!configured || Boolean(pendingProvider)} aria-busy={pending} onClick={() => onSignIn(provider)}>
+    <button className="settings-secondary-button sign-in-provider" type="button" aria-label={`使用以下账号登录：${name}`} disabled={!configured || Boolean(pendingProvider)} aria-busy={pending} onClick={() => onSignIn(provider)}>
       {pending ? <LoaderCircle className="spin" size={16} aria-hidden="true" /> : provider === "google" ? <GoogleIcon /> : <GitHubIcon />}
-      <span>Continue with {name}</span>
+      <span>使用以下账号继续： {name}</span>
     </button>
   );
 }

@@ -3,7 +3,7 @@ import type { KeyboardEvent } from "react";
 export interface TransferredFile { file: File; relativePath?: string }
 
 export function hasTransferredFiles(transfer: DataTransfer): boolean {
-  return transfer.types.includes("Files") || [...transfer.items].some((item) => item.kind === "file");
+  return transfer.types.includes("文件") || [...transfer.items].some((item) => item.kind === "file");
 }
 
 export function clipboardFiles(transfer: DataTransfer): File[] {
@@ -21,7 +21,7 @@ export async function transferredFiles(transfer: DataTransfer): Promise<Transfer
 
 function filesFromEntry(entry: FileSystemEntry, prefix = ""): Promise<TransferredFile[]> {
   if (entry.isFile) return new Promise((resolve, reject) => {
-    (entry as FileSystemFileEntry).file((file) => resolve([{ file, relativePath: `${prefix}${file.name}` }]), () => reject(new Error(`Could not read ${prefix}${entry.name}`)));
+    (entry as FileSystemFileEntry).file((file) => resolve([{ file, relativePath: `${prefix}${file.name}` }]), () => reject(new Error(`无法读取 ${prefix}${entry.name}`)));
   });
   if (!entry.isDirectory) return Promise.resolve([]);
   const reader = (entry as FileSystemDirectoryEntry).createReader();

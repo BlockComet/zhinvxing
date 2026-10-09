@@ -36,7 +36,8 @@ export class DesktopUpdater {
   }
 
   async check(): Promise<void> {
-    if (!app.isPackaged) {
+    // Official updates do not contain this local language patch.
+    if (!app.isPackaged || app.getVersion().includes("-zh.")) {
       this.#set({ type: "up-to-date" });
       return;
     }

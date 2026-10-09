@@ -37,7 +37,7 @@ export function PublishDialog({ project, publishing, justPublished = false, onCl
   const [editing, setEditing] = useState(!project.publication);
   const publication = editing ? undefined : project.publication;
   const busy = publishing || submitting || Boolean(coverOperation);
-  const submitLabel = coverOperation === "process" ? "Processing cover..." : coverOperation ? "Saving cover..." : busy ? "Publishing..." : project.publication ? "Publish update" : "Publish";
+  const submitLabel = coverOperation === "process" ? "正在处理封面…" : coverOperation ? "正在保存封面…" : busy ? "正在发布…" : project.publication ? "发布更新" : "发布";
 
   useEffect(() => {
     if (!editing) return;
@@ -123,7 +123,7 @@ export function PublishDialog({ project, publishing, justPublished = false, onCl
       setSavedCover(nextCover);
       setPendingCover(undefined);
       setCoverMode("custom");
-      setCoverNotice("Cover applied. Automatic replacement is off.");
+      setCoverNotice("封面已应用，自动替换已关闭。");
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : String(cause));
     } finally {
@@ -141,7 +141,7 @@ export function PublishDialog({ project, publishing, justPublished = false, onCl
       setCoverMode("auto");
       setSavedCover(undefined);
       setSavedCover(await getProjectCover(project.id));
-      setCoverNotice("Automatic cover restored.");
+      setCoverNotice("已恢复自动封面。");
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : String(cause));
     } finally {
@@ -154,7 +154,7 @@ export function PublishDialog({ project, publishing, justPublished = false, onCl
     const normalizedTitle = title.trim();
     if (!normalizedTitle || busy || coverLoading) return;
     if (pendingCover) {
-      setError("Apply or cancel the selected cover before publishing.");
+      setError("发布前请先应用或取消所选封面。");
       return;
     }
     setError(undefined);
@@ -162,7 +162,7 @@ export function PublishDialog({ project, publishing, justPublished = false, onCl
     try {
       if (await onPublish({ title: normalizedTitle, description: description.trim() })) {
         setEditing(false);
-      } else setError("Publishing did not complete. Please try again.");
+      } else setError("发布未完成，请重试。");
     } catch (cause) {
       setError(cause instanceof Error ? cause.message : String(cause));
     } finally {
@@ -172,7 +172,7 @@ export function PublishDialog({ project, publishing, justPublished = false, onCl
 
   return <div className="project-create-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget && !busy) onClose(); }}>
     <section ref={dialog} className="publish-dialog" role="dialog" aria-modal="true" aria-busy={busy} aria-labelledby={titleId} tabIndex={-1}>
-      <header><h2 id={titleId}>{publication ? justPublished ? "Game published" : "Published game" : project.publication ? "Publish update" : "Publish game"}</h2><button type="button" disabled={busy} onClick={onClose} aria-label="Close"><X size={16} /></button></header>
+      <header><h2 id={titleId}>{publication ? justPublished ? "游戏已发布" : "已发布的游戏" : project.publication ? "发布更新" : "发布游戏"}</h2><button type="button" disabled={busy} onClick={onClose} aria-label="关闭"><X size={16} /></button></header>
       {publication ? <PublicationDetails
         publication={publication}
         name={project.name}
@@ -185,10 +185,10 @@ export function PublishDialog({ project, publishing, justPublished = false, onCl
       /> : <form onSubmit={(event) => void submit(event)}>
         <div className="publish-cover-field">
           <label htmlFor={coverInputId}>
-            <span className="publish-cover-heading">Cover{pendingCover ? <span>Not applied</span> : coverMode ? <span>{coverMode === "custom" ? "Custom" : "Automatic"}</span> : null}</span>
+            <span className="publish-cover-heading">封面{pendingCover ? <span>尚未应用</span> : coverMode ? <span>{coverMode === "custom" ? "自定义" : "自动"}</span> : null}</span>
             <span className="publish-cover-preview">
-              {coverUrl ? <img src={coverUrl} alt="Game cover preview" /> : <span>{coverLoading ? <LoaderCircle className="spin" size={22} /> : <Image size={22} />}{coverLoading ? "Loading cover..." : "The preview is captured automatically"}</span>}
-              <span className="publish-cover-action"><Upload size={14} />Replace cover</span>
+              {coverUrl ? <img src={coverUrl} alt="游戏封面预览" /> : <span>{coverLoading ? <LoaderCircle className="spin" size={22} /> : <Image size={22} />}{coverLoading ? "正在加载封面…" : "将自动截取预览画面"}</span>}
+              <span className="publish-cover-action"><Upload size={14} />更换封面</span>
             </span>
           </label>
           <input id={coverInputId} hidden type="file" accept="image/png,image/jpeg,image/webp" disabled={busy || coverLoading} onChange={(event) => {
@@ -196,19 +196,19 @@ export function PublishDialog({ project, publishing, justPublished = false, onCl
             event.target.value = "";
           }} />
           {pendingCover ? <div className="publish-cover-controls">
-            <button type="button" disabled={busy} onClick={() => { setPendingCover(undefined); setError(undefined); setCoverNotice(undefined); }}>Cancel selection</button>
-            <button className="project-create-submit" type="button" disabled={busy} onClick={() => void applyCover()}>{coverOperation === "apply" ? <LoaderCircle className="spin" size={14} /> : <Check size={14} />}Apply cover</button>
+            <button type="button" disabled={busy} onClick={() => { setPendingCover(undefined); setError(undefined); setCoverNotice(undefined); }}>取消选择</button>
+            <button className="project-create-submit" type="button" disabled={busy} onClick={() => void applyCover()}>{coverOperation === "apply" ? <LoaderCircle className="spin" size={14} /> : <Check size={14} />}应用封面</button>
           </div> : coverMode === "custom" ? <div className="publish-cover-controls">
-            <button type="button" disabled={busy || coverLoading} onClick={() => void restoreCover()}><RefreshCw className={coverOperation === "restore" ? "spin" : undefined} size={14} />Restore automatic cover</button>
+            <button type="button" disabled={busy || coverLoading} onClick={() => void restoreCover()}><RefreshCw className={coverOperation === "restore" ? "spin" : undefined} size={14} />恢复自动封面</button>
           </div> : null}
-          <p className="publish-cover-status" role="status">{pendingCover ? "Apply or cancel the selected cover before publishing." : coverNotice ?? (coverMode === "custom" ? "Automatic replacement is off." : "The cover updates automatically with your project preview.")}</p>
-          {project.publication ? <p className="publish-cover-status">This is your local project cover. Publish an update to change the Community cover.</p> : null}
+          <p className="publish-cover-status" role="status">{pendingCover ? "发布前请先应用或取消所选封面。" : coverNotice ?? (coverMode === "custom" ? "自动替换已关闭。" : "封面会随项目预览自动更新。")}</p>
+          {project.publication ? <p className="publish-cover-status">这是本地项目封面。发布更新后才会更改社区中的封面。</p> : null}
         </div>
-        <label><span>Name</span><input ref={titleInput} value={title} maxLength={200} disabled={busy} required onChange={(event) => setTitle(event.target.value)} /></label>
-        <label><span>Description</span><textarea value={description} maxLength={2000} disabled={busy} rows={4} placeholder="Describe what makes this game worth playing" onChange={(event) => setDescription(event.target.value)} /></label>
+        <label><span>名称</span><input ref={titleInput} value={title} maxLength={200} disabled={busy} required onChange={(event) => setTitle(event.target.value)} /></label>
+        <label><span>描述</span><textarea value={description} maxLength={2000} disabled={busy} rows={4} placeholder="描述这款游戏的独特乐趣" onChange={(event) => setDescription(event.target.value)} /></label>
         {localDebug ? <LocalPublishNotice /> : null}
         {error ? <p className="project-create-error" role="alert">{error}</p> : null}
-        <footer><button type="button" disabled={busy} onClick={onClose}>Close</button><button className="project-create-submit" type="submit" aria-label={submitLabel} disabled={busy || coverLoading || Boolean(pendingCover) || !title.trim()}>{busy ? <LoaderCircle className="spin" size={14} /> : <Upload size={14} />}<span role={busy ? "status" : undefined}>{submitLabel}</span></button></footer>
+        <footer><button type="button" disabled={busy} onClick={onClose}>关闭</button><button className="project-create-submit" type="submit" aria-label={submitLabel} disabled={busy || coverLoading || Boolean(pendingCover) || !title.trim()}>{busy ? <LoaderCircle className="spin" size={14} /> : <Upload size={14} />}<span role={busy ? "status" : undefined}>{submitLabel}</span></button></footer>
       </form>}
     </section>
   </div>;
@@ -264,37 +264,37 @@ export function PublicationDetails({ publication, name, justPublished = false, o
 
   return <div className="publication-details">
     <div className="publication-summary">
-      {coverUrl ? <img src={coverUrl} alt="Game cover" /> : <Check className="publication-check" size={22} />}
+      {coverUrl ? <img src={coverUrl} alt="游戏封面" /> : <Check className="publication-check" size={22} />}
       <div>
         <h3>{publication.title ?? name}</h3>
-        {justPublished ? <p role="status">Published successfully</p> : null}
-        <time dateTime={publication.publishedAt} title="Last published"><RefreshCw size={12} aria-hidden="true" />{publicationTime(publication.publishedAt)}</time>
+        {justPublished ? <p role="status">发布成功</p> : null}
+        <time dateTime={publication.publishedAt} title="上次发布"><RefreshCw size={12} aria-hidden="true" />{publicationTime(publication.publishedAt)}</time>
       </div>
     </div>
     {publication.gameId.startsWith("local-") ? <LocalPublishNotice /> : null}
     <div className="publication-link-field">
-      <label htmlFor={linkId}>Game link</label>
+      <label htmlFor={linkId}>游戏链接</label>
       <div>
         <input id={linkId} readOnly value={publication.playUrl} onFocus={(event) => event.currentTarget.select()} />
-        <button type="button" className="icon-button" onClick={() => void copyLink()} title={copied ? "Link copied" : "Copy game link"} aria-label="Copy game link">
+        <button type="button" className="icon-button" onClick={() => void copyLink()} title={copied ? "链接已复制" : "复制游戏链接"} aria-label="复制游戏链接">
           {copied ? <Check size={16} /> : <Copy size={16} />}
         </button>
-        <a className="icon-button" href={publication.playUrl} target="_blank" rel="noopener noreferrer" title="Open game" aria-label="Open game"><ExternalLink size={16} /></a>
+        <a className="icon-button" href={publication.playUrl} target="_blank" rel="noopener noreferrer" title="打开游戏" aria-label="打开游戏"><ExternalLink size={16} /></a>
       </div>
-      <p className={`publication-copy-status${copyError ? " is-error" : ""}`} role={copyError ? "alert" : "status"}>{copyError ? "Could not copy the link." : copied ? "Link copied" : ""}</p>
+      <p className={`publication-copy-status${copyError ? " is-error" : ""}`} role={copyError ? "alert" : "status"}>{copyError ? "无法复制链接。" : copied ? "链接已复制" : ""}</p>
     </div>
     <div className="publication-secondary-actions">
-      <a href={gameHash(publication.gameId)} onClick={onClose}>View in Community</a>
-      <button type="button" onClick={onUpdate}><Upload size={13} />Publish update</button>
+      <a href={gameHash(publication.gameId)} onClick={onClose}>在社区中查看</a>
+      <button type="button" onClick={onUpdate}><Upload size={13} />发布更新</button>
     </div>
   </div>;
 }
 
 function LocalPublishNotice() {
-  return <p className="publish-local-notice"><InfoCircle size={15} /><span>Local debug publish. This link only works on this computer until the local runtime stops or restarts.</span></p>;
+  return <p className="publish-local-notice"><InfoCircle size={15} /><span>本地调试发布。此链接仅在本机有效，本地服务停止或重启后失效。</span></p>;
 }
 
 function publicationTime(value: string): string {
   const date = new Date(value);
-  return Number.isFinite(date.getTime()) ? new Intl.DateTimeFormat(undefined, { dateStyle: "medium", timeStyle: "short" }).format(date) : "Unknown publication time";
+  return Number.isFinite(date.getTime()) ? new Intl.DateTimeFormat(undefined, { dateStyle: "medium", timeStyle: "short" }).format(date) : "发布时间未知";
 }

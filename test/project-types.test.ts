@@ -4,9 +4,9 @@ import { defaultProjectName, GAME_PROJECT_TYPES, PROJECT_TYPES, projectTypeLabel
 describe("project types", () => {
   it("keeps the shared labels and display order", () => {
     expect(PROJECT_TYPES).toEqual([
-      { label: "Web Game", value: "web-game" },
-      { label: "Interactive Story", value: "interactive-story" },
-      { label: "Asset Canvas", value: "asset-canvas" },
+      { label: "网页游戏", value: "web-game" },
+      { label: "互动故事", value: "interactive-story" },
+      { label: "素材画布", value: "asset-canvas" },
       { label: "Godot", value: "godot-game" },
     ]);
   });
@@ -16,8 +16,8 @@ describe("project types", () => {
   });
 
   it("provides labels and default names", () => {
-    expect(projectTypeLabel("interactive-story")).toBe("Interactive Story");
-    expect(defaultProjectName("interactive-story")).toBe("Untitled story");
-    expect(defaultProjectName("web-game")).toBe("Untitled project");
+    expect(projectTypeLabel("interactive-story")).toBe("互动故事");
+    expect(defaultProjectName("interactive-story")).toBe("未命名故事");
+    expect(defaultProjectName("web-game")).toBe("未命名项目");
   });
 });

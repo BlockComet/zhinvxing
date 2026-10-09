@@ -11,7 +11,7 @@ import { initializeAnalytics } from "./analytics.js";
 import "./styles.css";
 
 const root = document.getElementById("root");
-if (!root) throw new Error("Renderer root was not found");
+if (!root) throw new Error("找不到界面根节点");
 const route = parseAppRoute(window.location.hash);
 if (window.ohMyGameDesktop) initSentry();
 // The hidden thumbnail window is not a visit.

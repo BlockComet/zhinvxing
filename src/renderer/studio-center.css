@@ -1,0 +1,27 @@
+.studio-center { width:min(820px,92vw); max-height:86vh; overflow:auto; padding:28px; border:1px solid #52657755; border-radius:18px; background:var(--bg, #151a22); color:var(--text, #edf1f7); box-shadow:0 24px 80px #0008; }
+.studio-center::backdrop { background:#080e1aba; }
+.studio-center header { display:flex; justify-content:space-between; align-items:center; gap:24px; margin-bottom:24px; }
+.studio-center h2 { margin:6px 0 0; font-size:23px; }
+.studio-center small { color:#92b5db; letter-spacing:2px; }
+.studio-center section { border-top:1px solid #8396aa33; padding:18px 0; }
+.studio-center p,.studio-center aside { font-size:13px; line-height:1.8; }
+.studio-center label { display:flex; flex-direction:column; gap:8px; margin:14px 0; font-size:13px; flex:1; }
+.studio-center input,.studio-center textarea,.studio-center select { width:100%; box-sizing:border-box; background:#090e1666; color:inherit; border:1px solid #91a5bc55; border-radius:8px; padding:10px; font:inherit; }
+.studio-center select option { background:#18202c; color:#edf1f7; }
+.studio-center textarea { min-height:70px; resize:vertical; }
+.studio-center button,.studio-entry { border:1px solid #91a5bc55; border-radius:8px; padding:8px 13px; color:inherit; background:transparent; cursor:pointer; font:inherit; }
+.studio-center button:disabled { opacity:.5; cursor:wait; }
+.studio-center .studio-primary { background:#426bdf; color:white; border:0; margin-top:16px; }
+.studio-controls { display:flex; flex-wrap:wrap; align-items:center; gap:12px; }
+.studio-center aside { background:#789ac018; border-radius:10px; padding:12px; margin:12px 0; color:#afc1d7; }
+.studio-milestones { display:grid; grid-template-columns:1fr 1fr; gap:12px; padding:0; list-style:none; }
+.studio-milestones li,.studio-export { border:1px solid #8396aa33; border-radius:10px; padding:12px; margin:10px 0; }
+.studio-center pre,.studio-center code,.studio-path { overflow-wrap:anywhere; white-space:pre-wrap; font-size:12px; }
+.studio-finding { font-size:13px; border-bottom:1px solid #8396aa22; padding:12px 0; }
+.studio-center .studio-error { color:#ffb1aa; padding:12px; border:1px solid #b35858; border-radius:8px; }
+.studio-entry { margin:8px; font-size:12px; }
+@media(max-width:600px) { .studio-milestones { grid-template-columns:1fr; } .studio-center { padding:18px; } }
+.studio-center { background:var(--surface); color:var(--text); app-region:no-drag; }
+.studio-entry { app-region:no-drag; }
+.studio-center input,.studio-center textarea,.studio-center select,.studio-center select option { background:var(--control-surface); color:var(--text); }
+.studio-center aside { color:var(--text-secondary); }

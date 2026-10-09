@@ -15,7 +15,7 @@ import { CircleHelp, Download, LoaderCircle } from "./icons.js";
 import { ProjectSettingsDialogFrame } from "./project-settings-dialog.js";
 
 const variablesHelp =
-  "What the game remembers between Scenes. Ask the AI to add or change these values.";
+  "游戏在场景之间保留的数据。可请 AI 添加或修改这些值。";
 
 export function PlayableProjectSettingsDialog({
   project,
@@ -73,15 +73,15 @@ export function PlayableProjectSettingsDialog({
   return (
     <ProjectSettingsDialogFrame busy={saving || exporting} onClose={onClose}>
       <form onSubmit={(event) => void submit(event)}>
-        <section className="project-settings-project" aria-label="Project">
-          <span>Project</span>
+        <section className="project-settings-project" aria-label="项目">
+          <span>项目</span>
           <strong title={project.name}>{project.name}</strong>
         </section>
         <fieldset
           className="project-settings-section"
           disabled={saving || exporting}
         >
-          <legend>Screen size</legend>
+          <legend>画面尺寸</legend>
           <p className="project-settings-hint">
             {canvasFormatSummary(viewport)}
           </p>
@@ -92,17 +92,17 @@ export function PlayableProjectSettingsDialog({
           />
           {changed && graph.nodes.length > 0 ? (
             <p className="project-settings-hint">
-              Review each Scene after changing screen size.
+              修改画面尺寸后，请逐一检查场景。
             </p>
           ) : null}
         </fieldset>
-        <fieldset className="project-settings-section" aria-label="Variables">
+        <fieldset className="project-settings-section" aria-label="变量">
           <legend className="project-settings-section-heading">
-            Variables
+            变量
             <button
               className="icon-button project-settings-help"
               type="button"
-              aria-label="About variables"
+              aria-label="关于变量"
               aria-description={variablesHelp}
               data-tooltip={variablesHelp}
               disabled={saving || exporting}
@@ -111,13 +111,13 @@ export function PlayableProjectSettingsDialog({
             </button>
           </legend>
           {names.length ? (
-            <ul className="playable-variables" aria-label="Variables">
+            <ul className="playable-variables" aria-label="变量">
               {names.map((name) => (
                 <li key={name}>
                   <div className="playable-variables-head">
                     <strong>{name}</strong>
                     <span title={formatStateValue(graph.initialState[name])}>
-                      Starts {describePlayableValue(graph.initialState[name]!)}
+                      初始值 {describePlayableValue(graph.initialState[name]!)}
                     </span>
                   </div>
                   {graph.variables?.[name] ? (
@@ -128,15 +128,15 @@ export function PlayableProjectSettingsDialog({
             </ul>
           ) : (
             <p className="playable-variables-empty">
-              Nothing yet. The game doesn't remember anything between Scenes.
+              暂无变量。游戏不会在场景之间保留数据。
             </p>
           )}
         </fieldset>
         <fieldset className="project-settings-section">
-          <legend>Export</legend>
+          <legend>导出</legend>
           {changed ? (
             <p className="project-settings-hint">
-              Save screen size changes before exporting.
+              导出前请先保存画面尺寸更改。
             </p>
           ) : null}
           <button
@@ -150,7 +150,7 @@ export function PlayableProjectSettingsDialog({
             ) : (
               <Download size={14} />
             )}
-            {exporting ? "Exporting..." : "Export game"}
+            {exporting ? "正在导出…" : "导出游戏"}
           </button>
         </fieldset>
         {error ? (
@@ -164,7 +164,7 @@ export function PlayableProjectSettingsDialog({
             disabled={saving || exporting}
             onClick={onClose}
           >
-            Cancel
+            取消
           </button>
           <button
             className="project-settings-submit"
@@ -172,7 +172,7 @@ export function PlayableProjectSettingsDialog({
             disabled={saving || exporting}
           >
             {saving ? <LoaderCircle className="spin" size={14} /> : null}
-            Save
+            保存
           </button>
         </footer>
       </form>

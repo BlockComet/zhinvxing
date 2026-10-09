@@ -86,7 +86,7 @@ export function HighlightedCode({ path, content }: { path: string; content: stri
       })
       .catch((error: unknown) => {
         if (!disposed) {
-          console.warn("Workspace code highlighting failed.", error);
+          console.warn("工作区代码高亮失败。", error);
           setHtml(undefined);
         }
       });

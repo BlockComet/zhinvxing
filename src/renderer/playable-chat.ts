@@ -96,7 +96,7 @@ export function usePlayableChatReport({ graph, nodeId, picks, strokes, media, on
       ...(context ? {
         surface: {
           key: `node:${nodeId}`,
-          chip: { key: `node:${nodeId}`, kind: "playable-node", label: context.label, detail: "Scene" },
+          chip: { key: `node:${nodeId}`, kind: "playable-node", label: context.label, detail: "场景" },
           context,
           references: playableNodeReferences(graph, nodeId),
         },

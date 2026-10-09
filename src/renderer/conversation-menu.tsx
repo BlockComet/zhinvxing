@@ -95,34 +95,34 @@ export function ConversationMenu({
         aria-expanded={open}
         aria-controls="conversation-menu-popover"
         aria-haspopup="dialog"
-        title="Conversation history"
-        aria-label="Conversation history"
+        title="对话历史"
+        aria-label="对话历史"
         onClick={() => setOpen((value) => !value)}
       >
         <History size={14} />
       </button>
 
       {open ? (
-        <div id="conversation-menu-popover" className="conversation-popover" role="dialog" aria-label="Conversations">
+        <div id="conversation-menu-popover" className="conversation-popover" role="dialog" aria-label="对话">
           <label className="project-switcher-search">
             <Search size={13} />
-            <input ref={searchInput} aria-label="Search conversations" value={query} placeholder="Search conversations" onChange={(event) => setQuery(event.target.value)} />
+            <input ref={searchInput} aria-label="搜索对话" value={query} placeholder="搜索对话" onChange={(event) => setQuery(event.target.value)} />
           </label>
           <div className="conversation-list">
             {visibleConversations.map((conversation) => editingId === conversation.id ? (
               <form className="conversation-rename" key={conversation.id} onSubmit={submitRename}>
                 <input
                   ref={editInput}
-                  aria-label="Conversation title"
+                  aria-label="对话标题"
                   disabled={saving}
                   maxLength={80}
                   onChange={(event) => setTitle(event.target.value)}
                   value={title}
                 />
-                <button type="submit" disabled={!title.trim() || saving} title="Save title" aria-label="Save title">
+                <button type="submit" disabled={!title.trim() || saving} title="保存标题" aria-label="保存标题">
                   {saving ? <LoaderCircle className="spin" size={13} /> : <Check size={13} />}
                 </button>
-                <button type="button" disabled={saving} onClick={() => setEditingId(undefined)} title="Cancel rename" aria-label="Cancel rename">
+                <button type="button" disabled={saving} onClick={() => setEditingId(undefined)} title="取消重命名" aria-label="取消重命名">
                   <X size={13} />
                 </button>
               </form>
@@ -142,9 +142,9 @@ export function ConversationMenu({
                     <span className="conversation-option-title">{conversation.title}</span>
                     <span className="conversation-option-meta">
                       {conversation.id === activeConversationId
-                        ? "Running"
+                        ? "正在运行"
                         : conversation.messageCount === 0
-                          ? "Empty"
+                          ? "空白"
                           : `${conversation.messageCount} ${conversation.messageCount === 1 ? "message" : "messages"}`}
                     </span>
                   </span>
@@ -156,14 +156,14 @@ export function ConversationMenu({
                   className="conversation-rename-button"
                   type="button"
                   onClick={() => startRename(conversation)}
-                  title="Rename conversation"
-                  aria-label={`Rename ${conversation.title}`}
+                  title="重命名对话"
+                  aria-label={`重命名 ${conversation.title}`}
                 >
                   <FilePenLine size={13} />
                 </button>
               </div>
             ))}
-            {!visibleConversations.length ? <div className="conversation-menu-empty">No matching conversations</div> : null}
+            {!visibleConversations.length ? <div className="conversation-menu-empty">没有匹配的对话</div> : null}
           </div>
           {error ? <p className="conversation-menu-error" role="alert">{error}</p> : null}
         </div>

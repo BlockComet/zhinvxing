@@ -11,7 +11,7 @@ export interface CanvasTextModels {
   defaultReasoningLevel?: AgentReasoningLevel;
 }
 
-export function CanvasTextComposer({ models, modelStatus, defaultModel, defaultReasoningLevel = "medium", model, reasoningLevel, instruction, generating, busy, error, label = "Text generation instruction", placeholder = "Describe the text you want to generate", generateLabel = "Generate text", onInstruction, onModel, onReasoningChange, onGenerate }: CanvasTextModels & {
+export function CanvasTextComposer({ models, modelStatus, defaultModel, defaultReasoningLevel = "medium", model, reasoningLevel, instruction, generating, busy, error, label = "文本生成指令", placeholder = "描述要生成的文本", generateLabel = "生成文本", onInstruction, onModel, onReasoningChange, onGenerate }: CanvasTextModels & {
   model?: AgentModelRef;
   reasoningLevel?: AgentReasoningLevel;
   instruction: string;

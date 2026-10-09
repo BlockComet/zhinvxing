@@ -17,18 +17,18 @@ import type { PluginDetail } from "../shared/plugins.js";
 
 const BILLING_DASHBOARD_URL = "https://account.ohmygame.ai/account/billing";
 const CHAT_LAYOUT_OPTIONS: readonly { value: ChatLayout; label: string }[] = [
-  { value: "left", label: "Left" },
-  { value: "right", label: "Right" },
+  { value: "left", label: "左侧" },
+  { value: "right", label: "右侧" },
 ];
 
 const SETTINGS_SECTIONS: Array<{ section: SettingsSection; label: string; icon: typeof UserRound }> = [
-  { section: "providers", label: "Providers & Models", icon: Server },
-  { section: "account", label: "Account", icon: UserRound },
-  { section: "appearance", label: "Appearance", icon: Palette },
-  { section: "web-search", label: "Web Search", icon: Globe2 },
-  { section: "plugins", label: "Plugins", icon: Package },
-  { section: "connections", label: "Connections", icon: Plug },
-  { section: "about", label: "About", icon: InfoCircle },
+  { section: "providers", label: "服务商与模型", icon: Server },
+  { section: "account", label: "账号", icon: UserRound },
+  { section: "appearance", label: "外观", icon: Palette },
+  { section: "web-search", label: "网络搜索", icon: Globe2 },
+  { section: "plugins", label: "插件", icon: Package },
+  { section: "connections", label: "连接", icon: Plug },
+  { section: "about", label: "关于", icon: InfoCircle },
 ];
 
 export function SettingsPage({ section, pluginId, onBack, onSectionChange, onPluginChange, onAddPlugin, onTryPlugin }: {
@@ -61,10 +61,10 @@ export function SettingsPage({ section, pluginId, onBack, onSectionChange, onPlu
         <div className="home-sidebar-header-spacer" aria-hidden="true" />
         <button className="settings-page-back" type="button" onClick={onBack}>
           <ArrowLeft size={17} />
-          <span>Back to app</span>
+          <span>返回应用</span>
         </button>
-        <nav className="settings-page-nav" aria-label="Settings sections" ref={navigation}>
-          <div className="home-nav-label">SETTINGS</div>
+        <nav className="settings-page-nav" aria-label="设置分类" ref={navigation}>
+          <div className="home-nav-label">设置</div>
           {SETTINGS_SECTIONS.map((item) => {
             const Icon = item.icon;
             const active = section === item.section;
@@ -105,10 +105,10 @@ async function openBillingDashboard(): Promise<void> {
 function BillingSettings() {
   return (
     <section className="settings-panel settings-overview-panel settings-billing-panel">
-      <header className="settings-panel-header"><h3>Billing</h3></header>
-      <p>Manage your OhMyGame Cloud plan, usage, and payment details on the web.</p>
+      <header className="settings-panel-header"><h3>账单</h3></header>
+      <p>在网页中管理 OhMyGame Cloud 套餐、用量和支付信息。</p>
       <button className="settings-primary-button" type="button" onClick={() => void openBillingDashboard()}>
-        <span>Open billing dashboard</span>
+        <span>打开账单管理</span>
         <ExternalLink size={14} aria-hidden="true" />
       </button>
     </section>
@@ -131,20 +131,20 @@ function AppearanceSettings() {
 
   return (
     <section className="settings-panel settings-overview-panel settings-appearance-panel">
-      <header className="settings-panel-header"><h3>Appearance</h3></header>
+      <header className="settings-panel-header"><h3>外观</h3></header>
       <div className="settings-appearance-group">
-        <h4 className="settings-section-heading">Theme</h4>
-        <fieldset className="settings-theme-options" aria-label="Theme">
+        <h4 className="settings-section-heading">主题</h4>
+        <fieldset className="settings-theme-options" aria-label="主题">
           <ThemeOption appearance="system" selected={appearance === "system"} onSelect={chooseAppearance} />
           <ThemeOption appearance="light" selected={appearance === "light"} onSelect={chooseAppearance} />
           <ThemeOption appearance="dark" selected={appearance === "dark"} onSelect={chooseAppearance} />
         </fieldset>
       </div>
       <div className="settings-appearance-group">
-        <h4 className="settings-section-heading">Workspace</h4>
+        <h4 className="settings-section-heading">工作区</h4>
         <div className="settings-chat-layout-row">
-          <span className="settings-chat-layout-label">Chat position</span>
-          <SegmentedControl className="settings-chat-layout-control" label="Chat panel position" options={CHAT_LAYOUT_OPTIONS} value={chatLayout} onChange={chooseChatLayout} />
+          <span className="settings-chat-layout-label">聊天面板位置</span>
+          <SegmentedControl className="settings-chat-layout-control" label="聊天面板位置" options={CHAT_LAYOUT_OPTIONS} value={chatLayout} onChange={chooseChatLayout} />
         </div>
       </div>
     </section>
@@ -156,7 +156,7 @@ function ThemeOption({ appearance, selected, onSelect }: {
   selected: boolean;
   onSelect: (appearance: Appearance) => void;
 }) {
-  const label = appearance === "system" ? "System" : appearance === "light" ? "Light" : "Dark";
+  const label = appearance === "system" ? "跟随系统" : appearance === "light" ? "浅色" : "深色";
   return (
     <button
       className={`settings-theme-option is-${appearance}${selected ? " is-selected" : ""}`}
@@ -205,21 +205,21 @@ function AccountSettings() {
   const [error, setError] = useState<string>();
   return (
     <section className="settings-panel settings-overview-panel settings-account-panel">
-      <header className="settings-panel-header"><h3>Account</h3></header>
+      <header className="settings-panel-header"><h3>账号</h3></header>
       {auth.state.status === "signed-in" ? (
         <div className="settings-account-row">
           <div className="settings-account-profile">
             <UserAvatar className="settings-account-avatar" name={auth.state.user.name} avatarUrl={auth.state.user.avatarUrl} />
             <span className="settings-account-copy">
-              <small>Signed in as</small>
+              <small>当前登录账号</small>
               <strong>{auth.state.user.name}</strong>
               {auth.state.user.email ? <span>{auth.state.user.email}</span> : null}
             </span>
           </div>
-          <button className="settings-danger-button" type="button" onClick={() => void auth.signOut().catch((cause) => setError(errorMessage(cause)))}>Sign out</button>
+          <button className="settings-danger-button" type="button" onClick={() => void auth.signOut().catch((cause) => setError(errorMessage(cause)))}>退出登录</button>
         </div>
       ) : (
-        <button className="settings-primary-button" type="button" onClick={auth.openSignIn}>Sign in</button>
+        <button className="settings-primary-button" type="button" onClick={auth.openSignIn}>登录</button>
       )}
       {error ? <p className="settings-error" role="alert">{error}</p> : null}
     </section>
@@ -227,6 +227,7 @@ function AccountSettings() {
 }
 
 function AboutSettings() {
+  const localChineseBuild = __APP_VERSION__.includes("-zh.");
   const [update, setUpdate] = useState<DesktopUpdateState | null>(null);
   const updates = window.ohMyGameDesktop?.updates;
   useEffect(() => {
@@ -237,31 +238,31 @@ function AboutSettings() {
     return () => { disposed = true; unsubscribe(); };
   }, [updates]);
   const status = update?.status;
-  const message = status?.type === "up-to-date" ? "You're up to date"
-    : status?.type === "checking" ? "Checking for updates..."
-      : status?.type === "available" ? `Update available: ${status.version}`
-        : status?.type === "downloading" ? `Downloading update (${status.percent}%)`
-          : status?.type === "ready" ? `Ready to restart: ${status.version}`
-            : status?.type === "error" ? status.message : "Not checked yet";
+  const message = status?.type === "up-to-date" ? "已是最新版本"
+    : status?.type === "checking" ? "正在检查更新…"
+      : status?.type === "available" ? `有可用更新：${status.version}`
+        : status?.type === "downloading" ? `正在下载更新（${status.percent}%)`
+          : status?.type === "ready" ? `重启后更新至：${status.version}`
+            : status?.type === "error" ? status.message : "尚未检查";
   const busy = status?.type === "checking" || status?.type === "downloading";
   return (
     <section className="settings-panel settings-overview-panel">
-      <header className="settings-panel-header"><h3>About</h3></header>
+      <header className="settings-panel-header"><h3>关于</h3></header>
       <div className="settings-about-list">
         <div className="settings-about-row">
-          <span>Version</span>
+          <span>版本</span>
           <strong>{update?.currentVersion ?? __APP_VERSION__}</strong>
         </div>
         <div className="settings-about-row">
-          <span>Updates</span>
+          <span>更新</span>
           <div className="settings-about-update">
-            <span className="settings-about-status">{message}</span>
-            {updates ? (
+            <span className="settings-about-status">{localChineseBuild ? "本地简体中文版。升级需要重新汉化打包。" : message}</span>
+            {updates && !localChineseBuild ? (
               <div className="settings-about-actions">
-                {status?.type === "available" ? <button className="settings-primary-button" type="button" onClick={() => void updates.download()}>Download update</button> : null}
-                {status?.type === "ready" ? <button className="settings-primary-button" type="button" onClick={() => void updates.install()}>Restart to update</button> : null}
+                {status?.type === "available" ? <button className="settings-primary-button" type="button" onClick={() => void updates.download()}>下载更新</button> : null}
+                {status?.type === "ready" ? <button className="settings-primary-button" type="button" onClick={() => void updates.install()}>重启并更新</button> : null}
                 <button className="settings-secondary-button" type="button" disabled={busy} onClick={() => void updates.check()}>
-                  {status?.type === "error" ? "Check again" : "Check for updates"}
+                  {status?.type === "error" ? "再次检查" : "检查更新"}
                 </button>
               </div>
             ) : null}

@@ -38,13 +38,13 @@ function PlayableNodeCard({ id, data, selected }: NodeProps<PlayableFlowNode>) {
     <div className="story-media-node-label story-scene-node-label">
       <span><InlinePlayableTitle nodeId={id} value={node.title} onRename={canvas?.onRenameNode} /></span>
       <div className="playable-node-badges">
-        {entry ? <span className="playable-node-badge is-entry" title="The player starts here"><Flag size={11} /><span>Start</span></span> : null}
-        {node.story?.hidden ? <span className="playable-node-badge" title="Not shown on the Story map, and the Scenes before and after it are joined there"><span>Off map</span></span> : ending ? <span className="playable-node-badge" title="Counted as an ending on the Story map"><span>Ending</span></span> : null}
+        {entry ? <span className="playable-node-badge is-entry" title="玩家从这里开始"><Flag size={11} /><span>开始</span></span> : null}
+        {node.story?.hidden ? <span className="playable-node-badge" title="不显示在故事地图中，其前后场景将在地图上直接连接"><span>不显示在地图上</span></span> : ending ? <span className="playable-node-badge" title="在故事地图中计为一个结局"><span>结局</span></span> : null}
       </div>
     </div>
     <div data-alignment-frame className={`story-media-stage playable-node-stage${failed ? " is-failed" : ""}`}>
       <PlayableNodePicture projectId={canvas?.projectId} node={node} thumbnail={thumbnail} coverAsset={coverAsset} />
-      {thumbnail?.stale && !failed ? <span className="playable-node-stale" title="The Scene changed since this picture was taken.">Stale</span> : null}
+      {thumbnail?.stale && !failed ? <span className="playable-node-stale" title="此截图生成后，场景已发生更改。">已过时</span> : null}
       {issues.length ? <p className="playable-node-issue" role="alert"><InfoCircle size={13} /><span title={issues.join("\n")}>{issues[0]}</span></p> : null}
       <button
         type="button"
@@ -54,7 +54,7 @@ function PlayableNodeCard({ id, data, selected }: NodeProps<PlayableFlowNode>) {
           canvas?.onOpenNode(id);
         }}
       >
-        Open Scene editor
+        打开场景编辑器
       </button>
     </div>
     <PlayableSignalOutputs signals={node.signals} connected={connected} onSelectEdge={canvas?.onSelectEdge} />
@@ -121,7 +121,7 @@ function PlayableSignalOutputs({ signals, connected, onSelectEdge }: {
   connected: PlayableFlowData["connected"];
   onSelectEdge?: (edgeId: string) => void;
 }) {
-  if (!signals.length) return <div className="story-node-outputs playable-node-outputs-empty"><span>No exits yet</span></div>;
+  if (!signals.length) return <div className="story-node-outputs playable-node-outputs-empty"><span>暂无出口</span></div>;
   return <div className="story-node-outputs">{signals.map((signal) => {
     const route = connected[signal.id];
     const name = signal.label || signal.id;
@@ -129,7 +129,7 @@ function PlayableSignalOutputs({ signals, connected, onSelectEdge }: {
       <span className="story-node-output-label" title={route
         ? name
         : `"${name}" doesn't go anywhere yet. Drag from here to a Scene.`}>{name}</span>
-      {signal.when ? <span className="playable-node-output-when" title={`Taken ${signal.when}`}>{signal.when}</span> : null}
+      {signal.when ? <span className="playable-node-output-when" title={`截图时间：${signal.when}`}>{signal.when}</span> : null}
       <Handle className="story-node-output-handle" id={signal.id} type="source" position={Position.Right} />
       {route && signal.role === "navigation" ? <button
         type="button"
@@ -181,7 +181,7 @@ function InlinePlayableTitle({ nodeId, value, onRename }: {
     className="story-node-title-input"
     value={draft}
     maxLength={120}
-    aria-label="Scene title"
+    aria-label="场景标题"
     onChange={(event) => setDraft(event.target.value)}
     onBlur={commit}
     onPointerDown={(event) => event.stopPropagation()}

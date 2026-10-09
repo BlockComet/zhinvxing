@@ -14,6 +14,7 @@ import { projectsHash, type AppNavigationTarget } from "./routes.js";
 import { WindowDragRegion } from "./window-drag-region.js";
 import { useProjectShelfLayout } from "./use-project-shelf-layout.js";
 import "./studios.css";
+import { StudioCenter } from "./studio-center.js";
 
 interface HomeProps {
   onNavigate: (page: AppNavigationTarget) => void;
@@ -28,6 +29,7 @@ export function Home({ onNavigate, onCreate, onOpen }: HomeProps) {
   const [projectActionError, setProjectActionError] = useState<string>();
   const [projectType, setProjectType] = useState<ProjectType>("web-game");
   const [createOpen, setCreateOpen] = useState(false);
+  const [restoreOpen, setRestoreOpen] = useState(false);
   const [renameTarget, setRenameTarget] = useState<ProjectState>();
   const renameTrigger = useRef<HTMLElement | null>(null);
   const { examples, covers: exampleCovers } = useExamples();
@@ -82,29 +84,32 @@ export function Home({ onNavigate, onCreate, onOpen }: HomeProps) {
       <section className="home-content home-content-fitted">
         <WindowDragRegion />
         <div className="home-start">
-          <h1>What are we making today?</h1>
+          <h1>今天想做点什么？</h1>
+          <button className="studio-entry" type="button" onClick={() => setCreateOpen(true)}>创造新游戏</button>
+          <button className="studio-entry" type="button" onClick={() => setRestoreOpen(true)}>复原已有游戏</button>
+          <a className="studio-entry" href={projectsHash()}>继续项目</a>
           <ProjectPromptCreator
             projectType={projectType}
             projectTypes={GAME_PROJECT_TYPES}
-            placeholder="Describe the game you want to create..."
+            placeholder="描述你想创作的游戏…"
             onProjectTypeChange={setProjectType}
             onOpenProject={onOpen}
             onCreate={onCreate}
           />
           <button className="home-start-blank" type="button" onClick={() => setCreateOpen(true)}>
-            <Plus size={14} />Start blank
+            <Plus size={14} />从空白开始
           </button>
         </div>
 
         <section ref={sectionRef} className="home-recent studio-projects" aria-labelledby="projects-heading">
           <div className="studio-section-heading">
-            <h2 id="projects-heading">Recent projects</h2>
+            <h2 id="projects-heading">最近的项目</h2>
             {phase === "error" ? (
               <button className="studio-text-link" type="button" onClick={() => void loadProjects()}>
-                <RefreshCw size={14} />Retry
+                <RefreshCw size={14} />重试
               </button>
             ) : projects.length > recentProjectLimit ? (
-              <a className="studio-text-link" href={projectsHash()}>Show all</a>
+              <a className="studio-text-link" href={projectsHash()}>显示全部</a>
             ) : null}
           </div>
 
@@ -112,7 +117,7 @@ export function Home({ onNavigate, onCreate, onOpen }: HomeProps) {
           {phase === "error" ? <p className="home-project-state" role="alert">{loadError}</p> : null}
           {phase === "ready" && projects.length === 0 ? (
             <p className="home-project-state">
-              No projects yet
+              暂无项目
             </p>
           ) : null}
           {phase === "ready" && projects.length > 0 ? (
@@ -134,7 +139,7 @@ export function Home({ onNavigate, onCreate, onOpen }: HomeProps) {
           {projectActionError ? <p className="home-notice" role="alert">{projectActionError}</p> : null}
         </section>
         {visibleExamples.length > 0 ? <section className="home-discover home-explore studio-examples" aria-labelledby="home-examples-heading">
-          <div className="studio-section-heading"><h2 id="home-examples-heading">Explore</h2></div>
+          <div className="studio-section-heading"><h2 id="home-examples-heading">探索</h2></div>
           <ExampleShelf examples={visibleExamples} covers={exampleCovers} showType onOpenProject={onOpen} />
         </section> : null}
       </section>
@@ -147,13 +152,14 @@ export function Home({ onNavigate, onCreate, onOpen }: HomeProps) {
         setCreateOpen(false);
         onOpen(project.id);
       }} /> : null}
+      {restoreOpen ? <StudioCenter onClose={() => setRestoreOpen(false)} onOpen={id => { setRestoreOpen(false); onOpen(id); }} /> : null}
     </main>
   );
 }
 
 function ProjectGridSkeleton({ count }: { count: number }) {
   return (
-    <div className="studio-project-grid" aria-label="Loading projects">
+    <div className="studio-project-grid" aria-label="正在加载项目">
       {Array.from({ length: count }, (_, item) => <div className="studio-project-skeleton" key={item} />)}
     </div>
   );

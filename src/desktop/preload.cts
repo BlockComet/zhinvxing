@@ -1,4 +1,4 @@
-import { contextBridge, ipcRenderer } from "electron";
+import { contextBridge, ipcRenderer, webUtils } from "electron";
 import type { DesktopUpdateState } from "../shared/desktop-update.js";
 import type { ProjectFileOpenMode } from "../shared/contracts.js";
 import type { PlaytestWatchState } from "../shared/playtest.js";
@@ -33,6 +33,9 @@ if (process.isMainFrame) {
     revealPluginSkill: (pluginId: string, skillId: string) => ipcRenderer.invoke("ohmygame:reveal-plugin-skill", pluginId, skillId) as Promise<void>,
     selectPluginDirectory: () => ipcRenderer.invoke("ohmygame:select-plugin-directory") as Promise<string | undefined>,
     selectProjectDirectory: () => ipcRenderer.invoke("ohmygame:select-project-directory") as Promise<string | undefined>,
+    selectRestorationFile: () => ipcRenderer.invoke("ohmygame:select-restoration-file") as Promise<string | undefined>,
+    droppedFilePath: (file: File) => webUtils.getPathForFile(file),
+    revealStudioExport: (projectId: string, exportId: string) => ipcRenderer.invoke("ohmygame:reveal-studio-export", projectId, exportId) as Promise<void>,
     clipboard: Object.freeze({
       files: () => ipcRenderer.invoke("ohmygame:clipboard-files") as Promise<DesktopClipboardFile[]>,
       paste: () => ipcRenderer.invoke("ohmygame:paste-native") as Promise<void>,

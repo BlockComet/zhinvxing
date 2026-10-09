@@ -93,6 +93,9 @@ declare global {
       revealPluginSkill: (pluginId: string, skillId: string) => Promise<void>;
       selectPluginDirectory: () => Promise<string | undefined>;
       selectProjectDirectory: () => Promise<string | undefined>;
+      selectRestorationFile?: () => Promise<string | undefined>;
+      droppedFilePath?: (file: File) => string;
+      revealStudioExport?: (projectId: string, exportId: string) => Promise<void>;
       clipboard: {
         files: () => Promise<DesktopClipboardFile[]>;
         paste: () => Promise<void>;
@@ -459,7 +462,7 @@ export async function waitForRuntime(timeoutMs = 10_000): Promise<void> {
       await delay(200);
     }
   }
-  throw new Error("Could not reach the local runtime");
+  throw new Error("无法连接本地服务");
 }
 
 export async function getProject(projectId: string): Promise<ProjectState> {
@@ -637,7 +640,7 @@ export async function getWorkspaceFile(projectId: string, filePath: string): Pro
 
 export async function getConversationImage(url: string, signal?: AbortSignal): Promise<Blob> {
   if (!/^\/projects\/[^/]+\/conversation-images\/[a-f0-9]{64}\.(png|jpg|webp|gif)$/.test(url)) {
-    throw new Error("Invalid conversation image reference");
+    throw new Error("对话图片引用无效");
   }
   const response = await fetch(apiUrl(url), { headers: runtimeHeaders(), signal });
   if (!response.ok) throw await responseError(response);
@@ -845,7 +848,7 @@ export async function request<T>(path: string, init: RequestInit = {}): Promise<
 
 async function responseError(response: Response): Promise<ApiError> {
   const body = await response.json().catch(() => ({})) as { error?: string; message?: string };
-  return new ApiError(body.message ?? body.error ?? `Request failed with ${response.status}`, response.status);
+  return new ApiError(body.message ?? body.error ?? `请求失败，状态码 ${response.status}`, response.status);
 }
 
 async function streamProjectEvents(
@@ -871,7 +874,7 @@ async function streamProjectEvents(
         continue;
       }
       if (!response.ok || !response.body) {
-        throw new ApiError(`Event stream failed with ${response.status}`, response.status);
+        throw new ApiError(`事件连接失败，状态码 ${response.status}`, response.status);
       }
       handlers.onOpen();
       await consumeEventStream(response.body, (event) => {
@@ -900,7 +903,7 @@ async function streamModelAuthEvents(
         headers: { accept: "text/event-stream", ...runtimeHeaders() },
         signal,
       });
-      if (!response.ok || !response.body) throw new ApiError(`Authentication stream failed with ${response.status}`, response.status);
+      if (!response.ok || !response.body) throw new ApiError(`身份验证连接失败，状态码 ${response.status}`, response.status);
       const finished = await consumeModelAuthStream(response.body, (event) => {
         if (event.id <= cursor) return;
         cursor = Math.max(cursor, event.id);

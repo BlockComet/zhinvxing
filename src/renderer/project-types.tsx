@@ -8,9 +8,9 @@ export interface ProjectTypeOption {
 }
 
 export const PROJECT_TYPES = [
-  { label: "Web Game", value: "web-game" },
-  { label: "Interactive Story", value: "interactive-story" },
-  { label: "Asset Canvas", value: "asset-canvas" },
+  { label: "网页游戏", value: "web-game" },
+  { label: "互动故事", value: "interactive-story" },
+  { label: "素材画布", value: "asset-canvas" },
   { label: "Godot", value: "godot-game" },
 ] as const satisfies readonly ProjectTypeOption[];
 

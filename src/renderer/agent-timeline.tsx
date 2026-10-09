@@ -212,7 +212,7 @@ function equalControls<T extends object>(previous: T, next: T): boolean {
 function SteeringActivity() {
   return (
     <div className="thinking-activity" role="status">
-      <ShimmerText text="Waiting to steer" />
+      <ShimmerText text="等待调整方向" />
     </div>
   );
 }
@@ -233,7 +233,7 @@ function FinalResponse({ projectId, items, artifacts, controls }: {
       {artifacts.length > 0 ? <ArtifactPreviews projectId={projectId} artifacts={artifacts} /> : null}
       {responseId ? (
         <div className="assistant-response-footer">
-          <button type="button" aria-label="Copy response" title="Copy" onClick={() => controls.onCopy(responseId, text)}>
+          <button type="button" aria-label="复制回复" title="复制" onClick={() => controls.onCopy(responseId, text)}>
             {responseId === controls.copiedItemId ? <Check size={13} /> : <Copy size={13} />}
           </button>
           {timestamp ? <time dateTime={new Date(timestamp).toISOString()}>{formatResponseTime(timestamp)}</time> : null}
@@ -265,7 +265,7 @@ function UserInput({ item, controls }: { item: Extract<ThreadItem, { type: "user
     <div className="user-input">
       {item.images?.length ? (
         <div className="user-message-images">
-          {item.images.map((image, index) => <ConversationImage key={`${image.mediaType}:${index}`} image={image} alt={`Attached image ${index + 1}`} />)}
+          {item.images.map((image, index) => <ConversationImage key={`${image.mediaType}:${index}`} image={image} alt={`附件图片 ${index + 1}`} />)}
         </div>
       ) : null}
       {attachments.length ? <UserAttachments attachments={attachments} /> : null}
@@ -282,22 +282,22 @@ function UserInput({ item, controls }: { item: Extract<ThreadItem, { type: "user
             }}
             onKeyDown={keyDown}
             disabled={controls.disabled}
-            aria-label="Edit message"
+            aria-label="编辑消息"
           />
           <div className="user-message-editor-actions">
-            <button type="button" onClick={controls.onCancel} disabled={controls.disabled}>Cancel</button>
-            <button className="primary" type="button" onClick={controls.onSubmit} disabled={controls.disabled || !controls.draft.trim()}>Send</button>
+            <button type="button" onClick={controls.onCancel} disabled={controls.disabled}>取消</button>
+            <button className="primary" type="button" onClick={controls.onSubmit} disabled={controls.disabled || !controls.draft.trim()}>发送</button>
           </div>
         </div>
       ) : item.text ? (
         <>
           <div className="user-message">{item.text}</div>
           <div className="user-message-actions">
-            <button type="button" aria-label="Copy message" title="Copy" onClick={() => controls.onCopy(item)}>
+            <button type="button" aria-label="复制消息" title="复制" onClick={() => controls.onCopy(item)}>
               {controls.copied ? <Check size={13} /> : <Copy size={13} />}
             </button>
             {controls.canEdit ? (
-              <button type="button" aria-label="Edit message" title="Edit" onClick={() => controls.onEdit(item)} disabled={controls.disabled}>
+              <button type="button" aria-label="编辑消息" title="编辑" onClick={() => controls.onEdit(item)} disabled={controls.disabled}>
                 <Pencil size={13} />
               </button>
             ) : null}
@@ -309,7 +309,7 @@ function UserInput({ item, controls }: { item: Extract<ThreadItem, { type: "user
 }
 
 function UserContexts({ contexts }: { contexts: PromptContextLabel[] }) {
-  return <div className="user-message-contexts" aria-label="Editor context">
+  return <div className="user-message-contexts" aria-label="编辑器上下文">
     {contexts.map((context, index) => <div className="user-message-context" key={`${context.kind}:${index}`} title={context.label}>
       <PromptContextIcon kind={context.kind} />
       <span>{context.label}</span>
@@ -318,7 +318,7 @@ function UserContexts({ contexts }: { contexts: PromptContextLabel[] }) {
 }
 
 function UserAttachments({ attachments }: { attachments: ConversationAttachment[] }) {
-  return <div className="user-message-attachments" aria-label="Attached files">
+  return <div className="user-message-attachments" aria-label="附件">
     {attachments.map((attachment, index) => <div className="user-message-attachment" key={`${attachment.relativePath}:${index}`} title={`${attachment.relativePath} · ${formatBytes(attachment.size)}`}>
       <FileText size={13} />
       <span>{attachment.relativePath}</span>
@@ -344,7 +344,7 @@ function ShimmerText({ text, active = true, className, title, role }: {
 }
 
 function ActiveWork({ display, now }: { display: TurnDisplay; now: number }) {
-  const label = display.working ? `Working for ${activeTurnDuration(display, now)}` : "Thinking";
+  const label = display.working ? `已工作 ${activeTurnDuration(display, now)}` : "思考中";
   return (
     <section className="work-activity work-activity-active">
       <div className={`work-summary work-summary-active${display.working ? "" : " work-summary-thinking"}`}>
@@ -367,14 +367,14 @@ function CompletedWork({ display }: { display: TurnDisplay }) {
   const content = <div className="work-items">
     <WorkItems items={display.work} images={display.user?.images} failed={display.status === "failed"} />
     {display.status === "cancelled" && display.work.length === 0 ? (
-      <div className="stopped-work-note">{display.hadThinking ? "Stopped while thinking" : "Stopped before work began"}</div>
+      <div className="stopped-work-note">{display.hadThinking ? "已停止思考" : "已在开始前停止"}</div>
     ) : null}
   </div>;
   if (display.status === "cancelled" || display.status === "failed") {
     return (
       <section className={`work-activity ${display.status === "cancelled" ? "work-activity-stopped" : "work-activity-failed"}`}>
         <div className={`work-summary ${display.status === "cancelled" ? "work-summary-stopped" : "work-summary-failed"}`}>
-          <span>{display.status === "cancelled" ? `You stopped after ${turnDuration(display)}` : `Worked for ${turnDuration(display)}`}</span>
+          <span>{display.status === "cancelled" ? `已停止，用时 ${turnDuration(display)}` : `用时 ${turnDuration(display)}`}</span>
         </div>
         {content}
       </section>
@@ -383,7 +383,7 @@ function CompletedWork({ display }: { display: TurnDisplay }) {
   return (
     <LazyDetails className="work-activity" summary={
       <summary className="work-summary">
-        <span>Worked for {turnDuration(display)}</span>
+        <span>用时 {turnDuration(display)}</span>
         <ChevronRight className="work-chevron" size={13} />
       </summary>}>
       {content}
@@ -406,7 +406,7 @@ function WorkItems({ items, images, failed = false }: { items: TurnDisplay["work
     const hasFailedRetry = items.some((item) => item.kind === "item" && item.item.type === "retry" && item.item.status === "failed");
     const error = items.flatMap((item) => item.kind === "item" && item.item.type === "agentMessage" && item.item.error ? [item.item] : []).at(-1);
     if (!hasFailedRetry && error?.type === "agentMessage" && error.error) {
-      rendered.push(<ConnectionActivity key="turn-connection-error" title="Connection error" error={error.error} failed />);
+      rendered.push(<ConnectionActivity key="turn-connection-error" title="连接错误" error={error.error} failed />);
     }
   }
   return rendered;
@@ -418,7 +418,7 @@ function ToolActivityGroup({ tools, thinking }: { tools: ToolItem[]; thinking: b
   const Icon = runningPresentation?.icon ?? toolGroupIcon(tools);
   const runningLabel = runningTool && runningPresentation ? runningToolGroupLabel(runningTool, runningPresentation.label) : undefined;
   const showThinking = thinking && !runningTool;
-  const summaryLabel = showThinking ? "Thinking" : runningLabel ?? toolGroupSummary(tools);
+  const summaryLabel = showThinking ? "思考中" : runningLabel ?? toolGroupSummary(tools);
   return (
     <LazyDetails className="tool-activity-group" summary={
       <summary className={`tool-group-summary${showThinking ? " tool-group-summary-thinking" : ""}`}>
@@ -481,10 +481,10 @@ function compactionStats(tokensBefore: number, estimatedTokensAfter?: number): s
 
 function compactionLabel(item: Extract<ThreadItem, { type: "contextCompaction" }>): string {
   if (item.error) return item.error.message;
-  if (item.status === "completed") return "Context compacted";
-  if (item.status === "cancelled") return "Context compaction stopped";
-  if (item.status === "failed") return "Context compaction failed";
-  return "Compacting context";
+  if (item.status === "completed") return "上下文已压缩";
+  if (item.status === "cancelled") return "上下文压缩已停止";
+  if (item.status === "failed") return "上下文压缩失败";
+  return "正在压缩上下文";
 }
 
 function formatDuration(milliseconds: number): string {
@@ -496,7 +496,7 @@ function formatDuration(milliseconds: number): string {
 function ThinkingActivity() {
   return (
     <div className="thinking-activity" role="status">
-      <ShimmerText text="Thinking" />
+      <ShimmerText text="思考中" />
     </div>
   );
 }
@@ -507,12 +507,12 @@ function TimelineItem({ item, images, hideError = false }: { item: ThreadItem; i
   if (item.type === "modelChange") {
     return (
       <div className="model-change-event" role="status">
-        <span>Switched to {item.name ?? item.model.id}</span>
+        <span>已切换至 {item.name ?? item.model.id}</span>
       </div>
     );
   }
   if (item.type === "imageRead") {
-    const label = item.count === 1 ? "Viewed an image" : `Viewed ${item.count} images`;
+    const label = item.count === 1 ? "已查看图片" : `已查看 ${item.count} images`;
     if (images?.length) {
       return (
         <LazyDetails className="image-read-details" summary={
@@ -543,7 +543,7 @@ function TimelineItem({ item, images, hideError = false }: { item: ThreadItem; i
   if (item.type === "dynamicToolCall" || item.type === "mcpToolCall") return <ToolActivity item={item} />;
   if (item.type === "retry") {
     return <ConnectionActivity
-      title={item.status === "failed" ? "Connection error" : `Reconnecting ${item.attempt}/${item.maxAttempts}`}
+      title={item.status === "failed" ? "连接错误" : `正在重连 ${item.attempt}/${item.maxAttempts}`}
       error={item.error}
       failed={item.status === "failed"}
     />;
@@ -580,15 +580,15 @@ function TimelineItem({ item, images, hideError = false }: { item: ThreadItem; i
     const message = (
       <div className={`assistant-message assistant-${item.status}`}>
         {item.text ? <MarkdownContent text={item.text} {...workspaceLinks} /> : null}
-        {item.status === "cancelled" && !item.text ? <span className="muted-text">Stopped</span> : null}
-        {item.status === "interrupted" && !item.text ? <span className="muted-text">Interrupted</span> : null}
+        {item.status === "cancelled" && !item.text ? <span className="muted-text">已停止</span> : null}
+        {item.status === "interrupted" && !item.text ? <span className="muted-text">已中断</span> : null}
       </div>
     );
     if (!item.error || hideError) return message;
     return (
       <>
         {message}
-        <ConnectionActivity title="Connection error" error={item.error} failed />
+        <ConnectionActivity title="连接错误" error={item.error} failed />
       </>
     );
   }
@@ -613,8 +613,8 @@ function ConnectionActivity({ title, error, failed = false }: { title: string; e
 function connectionErrorPresentation(title: string, error: ThreadItemError): { title: string; message: string } {
   if (error.code === "model_not_configured") {
     return {
-      title: "Model setup required",
-      message: "The selected model isn't configured. Choose an available model or connect its provider in Settings, then try again.",
+      title: "请先配置模型",
+      message: "所选模型尚未配置。请选用可用模型，或在设置中连接其服务商后重试。",
     };
   }
   return { title, message: error.message };
@@ -657,39 +657,39 @@ function ToolDetails({ item }: { item: ToolCallItem }) {
 function WebSearchDetails({ item, args }: { item: Extract<ThreadItem, { type: "dynamicToolCall" }>; args: Record<string, unknown> | undefined }) {
   const query = text(args?.query);
   return <div className="tool-details">
-    {query ? <ToolDetailBlock label="Query"><code>{query}</code></ToolDetailBlock> : null}
-    {item.webSearch ? <ToolDetailBlock label="Provider"><code>{item.webSearch.providerName}</code></ToolDetailBlock> : null}
-    {item.webSearch?.fallbackFrom ? <p className="tool-details-truncated">Fallback used after {providerLabel(item.webSearch.fallbackFrom)} was unavailable.</p> : null}
-    {item.output ? <ToolDetailBlock label="Results"><pre>{item.output}</pre></ToolDetailBlock> : null}
-    {item.truncated ? <p className="tool-details-truncated">Results truncated</p> : null}
-    {!item.output && item.status === "failed" ? <p className="tool-details-error">Web search failed without output.</p> : null}
+    {query ? <ToolDetailBlock label="查询"><code>{query}</code></ToolDetailBlock> : null}
+    {item.webSearch ? <ToolDetailBlock label="服务商"><code>{item.webSearch.providerName}</code></ToolDetailBlock> : null}
+    {item.webSearch?.fallbackFrom ? <p className="tool-details-truncated">已使用备用服务，因为 {providerLabel(item.webSearch.fallbackFrom)} 暂不可用。</p> : null}
+    {item.output ? <ToolDetailBlock label="结果"><pre>{item.output}</pre></ToolDetailBlock> : null}
+    {item.truncated ? <p className="tool-details-truncated">结果已截断</p> : null}
+    {!item.output && item.status === "failed" ? <p className="tool-details-error">网络搜索失败，未返回结果。</p> : null}
   </div>;
 }
 
 function ShellDetails({ item, command }: { item: ToolCallItem; command: string }) {
   return <div className="tool-details tool-shell-details">
-    <ToolDetailBlock label="Shell"><pre className="tool-shell-command"><span className="tool-shell-prompt">$</span> {command || "command"}</pre></ToolDetailBlock>
+    <ToolDetailBlock label="命令行"><pre className="tool-shell-command"><span className="tool-shell-prompt">$</span> {command || "command"}</pre></ToolDetailBlock>
     {item.output ? <pre className="tool-shell-output">{item.output}</pre> : null}
-    {item.truncated ? <p className="tool-details-truncated">Output truncated</p> : null}
-    {!item.output && item.status === "failed" ? <p className="tool-details-error">Command failed without output.</p> : null}
+    {item.truncated ? <p className="tool-details-truncated">输出已截断</p> : null}
+    {!item.output && item.status === "failed" ? <p className="tool-details-error">命令执行失败，未返回输出。</p> : null}
   </div>;
 }
 
 function FileOperationDetails({ item, args }: { item: ToolCallItem; args: Record<string, unknown> | undefined }) {
   return <div className="tool-details">
     {fileOperationContext(item.tool, args)}
-    {item.output ? <ToolDetailBlock label="Result"><pre>{item.output}</pre></ToolDetailBlock> : null}
-    {item.truncated ? <p className="tool-details-truncated">Result truncated</p> : null}
-    {!item.output && item.status === "failed" ? <p className="tool-details-error">Operation failed without output.</p> : null}
+    {item.output ? <ToolDetailBlock label="结果"><pre>{item.output}</pre></ToolDetailBlock> : null}
+    {item.truncated ? <p className="tool-details-truncated">结果已截断</p> : null}
+    {!item.output && item.status === "failed" ? <p className="tool-details-error">操作失败，未返回结果。</p> : null}
   </div>;
 }
 
 function FileChangeDetails({ item, args }: { item: ToolCallItem; args: Record<string, unknown> | undefined }) {
   return <div className="tool-details">
-    <ToolDetailBlock label="File"><code>{text(args?.path) || text(args?.file_path) || "Unknown file"}</code></ToolDetailBlock>
-    {item.output ? <ToolDetailBlock label="Result"><pre>{item.output}</pre></ToolDetailBlock> : null}
-    {item.truncated ? <p className="tool-details-truncated">Result truncated</p> : null}
-    {!item.output && item.status === "failed" ? <p className="tool-details-error">File change failed without output.</p> : null}
+    <ToolDetailBlock label="文件"><code>{text(args?.path) || text(args?.file_path) || "未知文件"}</code></ToolDetailBlock>
+    {item.output ? <ToolDetailBlock label="结果"><pre>{item.output}</pre></ToolDetailBlock> : null}
+    {item.truncated ? <p className="tool-details-truncated">结果已截断</p> : null}
+    {!item.output && item.status === "failed" ? <p className="tool-details-error">文件修改失败，未返回结果。</p> : null}
   </div>;
 }
 
@@ -697,10 +697,10 @@ function StructuredToolDetails({ item }: { item: ToolCallItem }) {
   return (
     <div className="tool-details">
       {item.images?.length ? <ToolImagePreviews images={item.images} /> : null}
-      {item.arguments !== undefined ? <ToolDetailBlock label="Input"><pre>{formatToolValue(item.arguments)}</pre></ToolDetailBlock> : null}
-      {item.output ? <ToolDetailBlock label="Output"><pre>{item.output}</pre></ToolDetailBlock> : null}
-      {item.truncated ? <p className="tool-details-truncated">Output truncated</p> : null}
-      {!item.output && item.status === "failed" ? <p className="tool-details-error">The tool call failed without output.</p> : null}
+      {item.arguments !== undefined ? <ToolDetailBlock label="输入"><pre>{formatToolValue(item.arguments)}</pre></ToolDetailBlock> : null}
+      {item.output ? <ToolDetailBlock label="输出"><pre>{item.output}</pre></ToolDetailBlock> : null}
+      {item.truncated ? <p className="tool-details-truncated">输出已截断</p> : null}
+      {!item.output && item.status === "failed" ? <p className="tool-details-error">工具调用失败，未返回结果。</p> : null}
     </div>
   );
 }
@@ -711,7 +711,7 @@ function ToolImagePreviews({ images }: { images: PromptImage[] }) {
       <ConversationImage
         key={`${image.mediaType}:${index}`}
         image={image}
-        alt={image.name ?? (images.length === 1 ? "Tool result image" : `Tool result image ${index + 1}`)}
+        alt={image.name ?? (images.length === 1 ? "工具返回的图片" : `工具返回的图片 ${index + 1}`)}
       />
     ))}
   </div>;
@@ -720,10 +720,10 @@ function ToolImagePreviews({ images }: { images: PromptImage[] }) {
 function fileOperationContext(tool: string, args: Record<string, unknown> | undefined): ReactNode {
   const path = text(args?.path) || text(args?.file_path);
   const query = text(args?.pattern) || text(args?.query);
-  if (tool === "read") return path ? <ToolDetailBlock label="File"><code>{path}</code></ToolDetailBlock> : null;
-  if (query && path) return <ToolDetailBlock label="Search"><code>{query} in {path}</code></ToolDetailBlock>;
-  if (query) return <ToolDetailBlock label="Search"><code>{query}</code></ToolDetailBlock>;
-  return path ? <ToolDetailBlock label="Path"><code>{path}</code></ToolDetailBlock> : null;
+  if (tool === "read") return path ? <ToolDetailBlock label="文件"><code>{path}</code></ToolDetailBlock> : null;
+  if (query && path) return <ToolDetailBlock label="搜索"><code>{query} in {path}</code></ToolDetailBlock>;
+  if (query) return <ToolDetailBlock label="搜索"><code>{query}</code></ToolDetailBlock>;
+  return path ? <ToolDetailBlock label="路径"><code>{path}</code></ToolDetailBlock> : null;
 }
 
 function ToolDetailBlock({ label, children }: { label: string; children: ReactNode }) {
@@ -770,23 +770,23 @@ function ArtifactPreview({ projectId, artifact }: { projectId: string; artifact:
     };
   }, [artifact.path, projectId, visible]);
   return <div ref={target} className="tool-artifact-preview">{!url ? null : artifact.type === "model"
-    ? <ModelPreview source={url} label="Generated 3D model" minHeight={320} />
+    ? <ModelPreview source={url} label="已生成 3D 模型" minHeight={320} />
     : artifact.type === "video"
       ? <video className="tool-artifact-video" src={url} controls preload="metadata" />
-    : <img className="tool-artifact-image" src={url} alt="Generated image" />}</div>;
+    : <img className="tool-artifact-image" src={url} alt="已生成图片" />}</div>;
 }
 
 function preparingToolLabel(toolName: string): string {
   switch (toolName) {
-    case "bash": return "Preparing command";
-    case "read": return "Preparing read";
-    case "write": return "Preparing file";
-    case "edit": return "Preparing edit";
-    case "web_search": return "Preparing web search";
-    case "mcp": return "Preparing MCP";
-    case "game_use": return "Preparing game use";
-    case "tool": return "Preparing";
-    default: return `Preparing ${toolName}`;
+    case "bash": return "正在准备命令";
+    case "read": return "正在准备读取";
+    case "write": return "正在准备文件";
+    case "edit": return "正在准备编辑";
+    case "web_search": return "正在准备网络搜索";
+    case "mcp": return "正在准备 MCP";
+    case "game_use": return "正在准备游戏操作";
+    case "tool": return "正在准备";
+    default: return `正在准备 ${toolName}`;
   }
 }
 
@@ -794,12 +794,12 @@ function runningToolGroupLabel(item: ToolCallItem, label: string): string {
   if (item.type === "mcpToolCall") return label;
   switch (item.tool) {
     case "edit":
-    case "write": return "Edit Files";
-    case "read": return "Read Files";
+    case "write": return "编辑文件";
+    case "read": return "读取文件";
     case "grep":
-    case "find": return "Search Files";
-    case "ls": return "List Files";
-    case "web_search": return "Search Web";
+    case "find": return "搜索文件";
+    case "ls": return "列出文件";
+    case "web_search": return "搜索网络";
     default: return item.status === "preparing" ? preparingToolLabel(item.tool) : label;
   }
 }
@@ -812,16 +812,16 @@ function toolPresentation(item: Extract<ThreadItem, { type: "dynamicToolCall" | 
   const args = item.arguments;
   const values = record(args);
   switch (toolName) {
-    case "bash": return { icon: Terminal, label: `Running ${text(values?.command) || "command"}` };
-    case "edit": return { icon: FilePenLine, label: withTarget("Editing", values) };
-    case "write": return { icon: FileText, label: withTarget("Writing", values) };
-    case "read": return { icon: FileText, label: withTarget("Reading", values) };
-    case "grep": return { icon: Search, label: searchLabel("Searching for", values) };
-    case "find": return { icon: Search, label: searchLabel("Finding", values) };
-    case "ls": return { icon: FileText, label: withTarget("Listing", values) };
-    case "web_search": return { icon: Search, label: searchLabel("Searching the web for", values) };
+    case "bash": return { icon: Terminal, label: `正在运行 ${text(values?.command) || "command"}` };
+    case "edit": return { icon: FilePenLine, label: withTarget("正在编辑", values) };
+    case "write": return { icon: FileText, label: withTarget("正在写入", values) };
+    case "read": return { icon: FileText, label: withTarget("正在读取", values) };
+    case "grep": return { icon: Search, label: searchLabel("正在搜索", values) };
+    case "find": return { icon: Search, label: searchLabel("正在查找", values) };
+    case "ls": return { icon: FileText, label: withTarget("正在列出", values) };
+    case "web_search": return { icon: Search, label: searchLabel("正在搜索网络：", values) };
     case "game_use": return { icon: Gamepad2, label: playtestLabel(values, false) };
-    case "generate_image": return { icon: WandSparkles, label: "Generating image" };
+    case "generate_image": return { icon: WandSparkles, label: "正在生成图片" };
     default: return { icon: Wrench, label: toolName };
   }
 }
@@ -834,37 +834,37 @@ function completedToolPresentation(item: Extract<ThreadItem, { type: "dynamicToo
   const args = item.arguments;
   const values = record(args);
   switch (toolName) {
-    case "bash": return { icon: Terminal, label: `Ran ${text(values?.command) || "command"}` };
+    case "bash": return { icon: Terminal, label: `已运行 ${text(values?.command) || "command"}` };
     case "edit":
-    case "write": return { icon: FilePenLine, label: withTarget("Edited", values) };
-    case "read": return { icon: FileText, label: withTarget("Read", values) };
-    case "grep": return { icon: Search, label: searchLabel("Searched for", values) };
-    case "find": return { icon: Search, label: searchLabel("Searched for", values) };
-    case "ls": return { icon: FileText, label: withTarget("Listed", values) };
-    case "web_search": return { icon: Search, label: searchLabel("Searched the web for", values) };
+    case "write": return { icon: FilePenLine, label: withTarget("已编辑", values) };
+    case "read": return { icon: FileText, label: withTarget("已读取", values) };
+    case "grep": return { icon: Search, label: searchLabel("已搜索", values) };
+    case "find": return { icon: Search, label: searchLabel("已搜索", values) };
+    case "ls": return { icon: FileText, label: withTarget("已列出", values) };
+    case "web_search": return { icon: Search, label: searchLabel("已搜索网络：", values) };
     case "game_use": return { icon: Gamepad2, label: playtestLabel(values, true) };
-    case "generate_image": return { icon: WandSparkles, label: "Generated image" };
-    default: return { icon: Wrench, label: `Used ${toolName}` };
+    case "generate_image": return { icon: WandSparkles, label: "已生成图片" };
+    default: return { icon: Wrench, label: `已使用 ${toolName}` };
   }
 }
 
 function playtestLabel(values: Record<string, unknown> | undefined, completed: boolean): string {
   switch (text(values?.operation)) {
-    case "open": return completed ? "Opened game preview" : "Opening game preview";
-    case "inspect": return completed ? "Inspected game state" : "Inspecting game state";
+    case "open": return completed ? "已打开游戏预览" : "正在打开游戏预览";
+    case "inspect": return completed ? "已检查游戏状态" : "正在检查游戏状态";
     case "act": {
       const count = Array.isArray(values?.actions) ? values.actions.length : 0;
-      const target = count === 1 ? "a playtest action" : "playtest actions";
-      return completed ? `Ran ${target}` : `Running ${target}`;
+      const target = count === 1 ? "一次试玩操作" : "试玩操作";
+      return completed ? `已运行 ${target}` : `正在运行 ${target}`;
     }
-    case "capture": return completed ? "Captured game screenshot" : "Capturing game screenshot";
-    case "close": return completed ? "Closed game preview" : "Closing game preview";
-    default: return completed ? "Used game playtest" : "Running game playtest";
+    case "capture": return completed ? "已截取游戏画面" : "正在截取游戏画面";
+    case "close": return completed ? "已关闭游戏预览" : "正在关闭游戏预览";
+    default: return completed ? "已使用游戏试玩" : "正在运行游戏试玩";
   }
 }
 
 function providerLabel(provider: "exa" | "parallel" | "custom"): string {
-  return provider === "exa" ? "Exa" : provider === "parallel" ? "Parallel" : "the custom provider";
+  return provider === "exa" ? "Exa" : provider === "parallel" ? "Parallel" : "自定义服务商";
 }
 
 function searchLabel(action: string, values: Record<string, unknown> | undefined): string {

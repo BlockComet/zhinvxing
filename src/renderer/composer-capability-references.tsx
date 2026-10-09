@@ -14,8 +14,8 @@ export function ComposerCapabilityReferences({ skill, plugin, onRemoveSkill, onR
     {skill ? <button
       className="composer-capability-reference"
       type="button"
-      title="Remove skill"
-      aria-label={`Remove ${skillDisplayName(skill)} skill`}
+      title="移除技能"
+      aria-label={`移除 ${skillDisplayName(skill)} skill`}
       onClick={onRemoveSkill}
     >
       <WandSparkles size={15} aria-hidden="true" />
@@ -24,8 +24,8 @@ export function ComposerCapabilityReferences({ skill, plugin, onRemoveSkill, onR
     {plugin ? <button
       className="composer-capability-reference"
       type="button"
-      title="Remove plugin"
-      aria-label={`Remove ${plugin.displayName} plugin`}
+      title="移除插件"
+      aria-label={`移除 ${plugin.displayName} plugin`}
       onClick={onRemovePlugin}
     >
       {isGodotPlugin(plugin) ? <GodotIcon size={15} /> : <Package size={15} aria-hidden="true" />}

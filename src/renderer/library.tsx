@@ -77,7 +77,7 @@ export function LibraryPage({ onNavigate }: LibraryPageProps) {
         setDeleteTarget({ asset, references });
         return;
       }
-      if (!window.confirm(`Delete “${fileName(asset.path)}” from Library? This cannot be undone.`)) return;
+      if (!window.confirm(`删除「${fileName(asset.path)}” from Library? This cannot be undone.`)) return;
       if (await runAssetAction(() => deleteLibraryAsset(asset.id))) setSelectedAsset(undefined);
     } catch (cause) {
       setActionError(errorMessage(cause));
@@ -99,15 +99,15 @@ export function LibraryPage({ onNavigate }: LibraryPageProps) {
 
   return (
     <SidebarPageLayout active="library" onNavigate={onNavigate}>
-      <SidebarPageHeader title="Library">
+      <SidebarPageHeader title="素材库">
         <AssetToolbar mediaFilter={mediaFilter} query={query} onMediaFilterChange={setMediaFilter} onQueryChange={setQuery}>
           <LibraryCollectionFilters assets={assets} filters={filters} onChange={setFilters} />
         </AssetToolbar>
       </SidebarPageHeader>
       {actionError ? <p className="library-action-error" role="alert">{actionError}</p> : null}
-      {phase === "loading" && assets.length === 0 ? <LibraryState><LoaderCircle className="spin" size={18} />Loading assets</LibraryState> : null}
-      {phase === "error" ? <LibraryState error><X size={18} />{error}<button type="button" onClick={() => void load()}><RefreshCw size={14} />Retry</button></LibraryState> : null}
-      {phase === "ready" && visibleAssets.length === 0 ? <LibraryState><ImageIcon size={18} />{assets.length ? "No assets match these filters" : "No media assets yet"}</LibraryState> : null}
+      {phase === "loading" && assets.length === 0 ? <LibraryState><LoaderCircle className="spin" size={18} />正在加载素材</LibraryState> : null}
+      {phase === "error" ? <LibraryState error><X size={18} />{error}<button type="button" onClick={() => void load()}><RefreshCw size={14} />重试</button></LibraryState> : null}
+      {phase === "ready" && visibleAssets.length === 0 ? <LibraryState><ImageIcon size={18} />{assets.length ? "没有符合筛选条件的素材" : "暂无媒体素材"}</LibraryState> : null}
       {visibleAssets.length ? <div className="library-grid">{visibleAssets.map((asset) => <WorkspaceAssetCard
         asset={asset}
         key={asset.id}
@@ -126,15 +126,15 @@ export function LibraryPage({ onNavigate }: LibraryPageProps) {
       /> : null}
       {deleteTarget ? <div className="library-delete-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget) setDeleteTarget(undefined); }}>
         <section className="library-delete-dialog" role="alertdialog" aria-modal="true" aria-labelledby="library-delete-title" onKeyDown={(event) => { if (event.key === "Escape" && !deleting) setDeleteTarget(undefined); }}>
-          <h2 id="library-delete-title">Delete asset everywhere?</h2>
-          <p><strong>{fileName(deleteTarget.asset.path)}</strong> is used by {deleteTarget.references.length === 1 ? "this project" : `${deleteTarget.references.length} projects`}.</p>
-          <p className="library-delete-warning">Deleting it removes it from these projects. Code that still uses it will need a new asset. This cannot be undone.</p>
+          <h2 id="library-delete-title">从所有位置删除素材？</h2>
+          <p><strong>{fileName(deleteTarget.asset.path)}</strong> 正在被以下项目使用： {deleteTarget.references.length === 1 ? "此项目" : `${deleteTarget.references.length} projects`}.</p>
+          <p className="library-delete-warning">删除后，该素材也会从这些项目中移除。仍引用它的代码需要更换素材。此操作无法撤销。</p>
           <ul>{deleteTarget.references.map((reference) => <li key={reference.id}>{reference.name}</li>)}</ul>
           {actionError ? <p className="library-delete-error" role="alert">{actionError}</p> : null}
-          <footer><button type="button" autoFocus disabled={deleting} onClick={() => setDeleteTarget(undefined)}>Cancel</button><button className="library-action-delete" type="button" disabled={deleting} onClick={() => void confirmForceDelete()}>{deleting ? "Deleting..." : "Delete everywhere"}</button></footer>
+          <footer><button type="button" autoFocus disabled={deleting} onClick={() => setDeleteTarget(undefined)}>取消</button><button className="library-action-delete" type="button" disabled={deleting} onClick={() => void confirmForceDelete()}>{deleting ? "正在删除…" : "从所有位置删除"}</button></footer>
         </section>
       </div> : null}
-      {renameTarget ? <ProjectRenameDialog title="Rename asset" name={fileStem(renameTarget.path)} returnFocus={null} onClose={() => setRenameTarget(undefined)} onConfirm={(input) => {
+      {renameTarget ? <ProjectRenameDialog title="重命名素材" name={fileStem(renameTarget.path)} returnFocus={null} onClose={() => setRenameTarget(undefined)} onConfirm={(input) => {
         const asset = renameTarget;
         setRenameTarget(undefined);
         const name = input.trim();

@@ -129,7 +129,7 @@ handle("ohmygame:popup-window-menu", (event, label: unknown, x: unknown, y: unkn
       typeof y !== "number" || !Number.isFinite(y)) {
     throw new Error("Invalid window menu request");
   }
-  const item = Menu.getApplicationMenu()?.items.find((candidate) => candidate.label.replaceAll("&", "") === label);
+  const item = Menu.getApplicationMenu()?.items.find((candidate) => candidate.id === label);
   if (!item?.submenu) throw new Error(`Window menu is not available: ${label}`);
   item.submenu.popup({ window: mainWindow, x: Math.max(0, Math.round(x)), y: Math.max(0, Math.round(y)) });
 });
@@ -185,6 +185,21 @@ handle("ohmygame:select-project-directory", async (event) => {
     properties: ["openDirectory", "createDirectory"],
   });
   return result.canceled ? undefined : result.filePaths[0];
+});
+handle("ohmygame:select-restoration-file", async (event) => {
+  if (!mainWindow || event.sender !== mainWindow.webContents) throw new Error("Invalid file selection source");
+  const result = await dialog.showOpenDialog(mainWindow, { title: "选择游戏客户端、APK 或资料", properties: ["openFile"] });
+  return result.canceled ? undefined : result.filePaths[0];
+});
+handle("ohmygame:reveal-studio-export", async (event, projectId: unknown, exportId: unknown) => {
+  if (!mainWindow || event.sender !== mainWindow.webContents || !daemon || !validRouteId(projectId) || !validRouteId(exportId)) throw new Error("Invalid export request");
+  const response = await fetch(`${daemon.runtime.url}/projects/${encodeURIComponent(projectId)}/studio`, { headers: { authorization: `Bearer ${daemon.runtime.token}` } });
+  if (!response.ok) throw new Error("导出记录不可用");
+  const result = await response.json() as { exports: Array<{ id: string; directory: string }> };
+  const entry = result.exports.find(item => item.id === exportId);
+  if (!entry || !path.isAbsolute(entry.directory)) throw new Error("导出目录不存在");
+  const error = await shell.openPath(entry.directory);
+  if (error) throw new Error(error);
 });
 handle("ohmygame:capture-page", async (event, rectangle: unknown) => {
   const window = mainWindow && event.sender === mainWindow.webContents
@@ -326,6 +341,21 @@ app.on("before-quit", (event) => {
 
 try {
   await app.whenReady();
+  Menu.setApplicationMenu(Menu.buildFromTemplate([
+    { id: "File", label: "文件", submenu: [{ role: "close", label: "关闭窗口" }, { type: "separator" }, { role: "quit", label: "退出" }] },
+    { id: "Edit", label: "编辑", submenu: [
+      { role: "undo", label: "撤销" }, { role: "redo", label: "重做" }, { type: "separator" },
+      { role: "cut", label: "剪切" }, { role: "copy", label: "复制" }, { role: "paste", label: "粘贴" },
+      { role: "delete", label: "删除" }, { role: "selectAll", label: "全选" },
+    ] },
+    { id: "View", label: "视图", submenu: [
+      { role: "reload", label: "重新加载" }, { role: "forceReload", label: "强制重新加载" },
+      { role: "toggleDevTools", label: "开发者工具" }, { type: "separator" },
+      { role: "resetZoom", label: "实际大小" }, { role: "zoomIn", label: "放大" }, { role: "zoomOut", label: "缩小" },
+      { type: "separator" }, { role: "togglefullscreen", label: "切换全屏" },
+    ] },
+    { id: "Window", label: "窗口", submenu: [{ role: "minimize", label: "最小化" }, { role: "zoom", label: "缩放窗口" }, { role: "close", label: "关闭" }] },
+  ]));
   nativeTheme.themeSource = "system";
   const rendererOrigin = useBuiltRenderer ? "null" : new URL(developmentRendererUrl).origin;
   daemon = await startDaemon({

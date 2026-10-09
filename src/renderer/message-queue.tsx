@@ -13,7 +13,7 @@ export function MessageQueue({ items, disabled, onRemove, onSteer, onEdit }: Mes
   if (items.length === 0) return null;
 
   return (
-    <div className="message-queue" aria-label="Queued messages">
+    <div className="message-queue" aria-label="排队中的消息">
       {items.map((item) => (
         <QueueRow key={item.turnId} item={item} disabled={disabled} onEdit={onEdit} onSteer={onSteer} onRemove={onRemove} />
       ))}
@@ -40,16 +40,16 @@ function QueueRow({ item, disabled, onEdit, onSteer, onRemove }: {
           type="button"
           disabled={disabled || !canEdit}
           onClick={() => onEdit(item)}
-          title={canEdit ? "Edit queued message" : "Remove and resend messages with attachments"}
-          aria-label="Edit queued message"
+          title={canEdit ? "编辑排队消息" : "移除并重新发送含附件的消息"}
+          aria-label="编辑排队消息"
         >
           <Pencil size={12} />
         </button>
-        <button type="button" disabled={disabled} onClick={() => onSteer(item.turnId)} title="Steer current run">
+        <button type="button" disabled={disabled} onClick={() => onSteer(item.turnId)} title="调整当前任务方向">
           <CornerDownRight size={12} />
-          <span>Steer</span>
+          <span>调整方向</span>
         </button>
-        <button type="button" disabled={disabled} onClick={() => onRemove(item.turnId)} title="Remove queued message" aria-label="Remove queued message">
+        <button type="button" disabled={disabled} onClick={() => onRemove(item.turnId)} title="移除排队消息" aria-label="移除排队消息">
           <Trash2 size={12} />
         </button>
       </div>

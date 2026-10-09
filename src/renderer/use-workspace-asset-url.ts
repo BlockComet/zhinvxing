@@ -6,7 +6,7 @@ export interface LocalCanvasAsset { projectId: string; path: string; name: strin
 export function canvasAssetSources(projectId: string, assets: readonly CanvasAssetCatalogEntry[], unavailable: readonly UnavailableCanvasAsset[] = []): ReadonlyMap<string, LocalCanvasAsset> {
   return new Map([
     ...assets.map((asset): [string, LocalCanvasAsset] => [asset.id, { projectId, path: asset.path, name: asset.name, revision: Date.parse(asset.createdAt) }]),
-    ...unavailable.map((asset): [string, LocalCanvasAsset] => [asset.id, { projectId, path: asset.path, name: asset.name, revision: 0, error: `${asset.status === "missing" ? "File missing" : "File unavailable"}: ${asset.path}` }]),
+    ...unavailable.map((asset): [string, LocalCanvasAsset] => [asset.id, { projectId, path: asset.path, name: asset.name, revision: 0, error: `${asset.status === "missing" ? "文件缺失" : "文件不可用"}: ${asset.path}` }]),
   ]);
 }
 const CanvasAssets = createContext<{ byId: ReadonlyMap<string, LocalCanvasAsset>; byPath: ReadonlyMap<string, LocalCanvasAsset> }>({ byId: new Map(), byPath: new Map() });

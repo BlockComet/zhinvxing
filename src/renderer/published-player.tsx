@@ -17,7 +17,7 @@ function PublishedPlayer() {
     let disposed = false;
     void fetch("./manifest.json").then(requireJson).then((value) => {
       if (!isPublishedNodeManifest(value)) {
-        throw new Error("The Published Player manifest is invalid.");
+        throw new Error("已发布游戏的清单无效。");
       }
       if (!disposed) setManifest(value);
     }).catch((cause) => {
@@ -41,7 +41,7 @@ function PublishedNodePlayer({ manifest }: { manifest: PublishedNodeManifest }) 
   useEffect(() => {
     let disposed = false;
     void Promise.all([
-      fetchVerified(manifest.definition.path, manifest.definition.integrity, "Published Node definition")
+      fetchVerified(manifest.definition.path, manifest.definition.integrity, "已发布的节点定义")
         .then((bytes) => JSON.parse(new TextDecoder().decode(bytes)) as unknown),
       mapConcurrent(Object.entries(manifest.assets), 4, async ([id, asset]) => {
         const bytes = await fetchVerified(asset.path, asset.integrity, `Asset "${id}"`);
@@ -51,7 +51,7 @@ function PublishedNodePlayer({ manifest }: { manifest: PublishedNodeManifest }) 
     ]).then(([definition, assets]) => {
       if (disposed) return;
       if (!isPublishedNodeDefinition(definition, manifest)) {
-        throw new Error("The Published Node definition does not match its manifest.");
+        throw new Error("已发布节点的定义与清单不一致。");
       }
       document.title = definition.graph.title;
       setState({ loading: false, definition, assets: Object.fromEntries(assets) });
@@ -175,12 +175,12 @@ function isRecord(value: unknown): value is Record<string, unknown> {
 
 function PublishedState({ error }: { error?: string }) {
   return <main className="playable-player-page">
-    <div className="playable-player-page-state" role={error ? "alert" : undefined}>{error ?? "Loading game..."}</div>
+    <div className="playable-player-page-state" role={error ? "alert" : undefined}>{error ?? "正在加载游戏…"}</div>
   </main>;
 }
 
 async function requireJson(response: Response): Promise<unknown> {
-  if (!response.ok) throw new Error("The published game could not be loaded.");
+  if (!response.ok) throw new Error("无法加载已发布的游戏。");
   return response.json();
 }
 

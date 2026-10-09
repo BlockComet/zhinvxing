@@ -148,7 +148,7 @@ export function useCanvasDocuments(projectId: string) {
             remote: remoteDetail,
           });
         setError(
-          "The same document was edited elsewhere. Choose a version before saving.",
+          "文档已在其他位置修改。请先选择版本再保存。",
         );
         return local ?? { ...remote, ...ours };
       }
@@ -162,7 +162,7 @@ export function useCanvasDocuments(projectId: string) {
       if (!before || equal(before.document, local)) continue;
       let issue = next.documentIssues?.find((issue) => issue.id === local.id);
       if (!issue) {
-        issue = { id: local.id, title: local.title, source: canvasDocumentPath(local.id), message: "Document was removed from the workspace index" };
+        issue = { id: local.id, title: local.title, source: canvasDocumentPath(local.id), message: "文档已从工作区索引中移除" };
         (next.documentIssues ??= []).push(issue);
       }
       bases.current.set(local.id, before);
@@ -207,11 +207,11 @@ export function useCanvasDocuments(projectId: string) {
       .then(async () => {
         if (!current.current) return;
         if (conflictRef.current)
-          throw new Error("Resolve the document conflict before saving.");
+          throw new Error("请先解决文档冲突再保存。");
         try {
           while (true) {
             if (conflictRef.current)
-              throw new Error("Resolve the document conflict before saving.");
+              throw new Error("请先解决文档冲突再保存。");
             const entries = current.current.documents.filter((doc) => {
               if (current.current?.documentIssues?.some((issue) => issue.id === doc.id)) return false;
               const base = bases.current.get(doc.id);
@@ -249,7 +249,7 @@ export function useCanvasDocuments(projectId: string) {
                     );
                     reportConflict({ local: latest ?? outgoing, remote });
                     throw new Error(
-                      "The same document was edited elsewhere. Choose a version before saving.",
+                      "文档已在其他位置修改。请先选择版本再保存。",
                     );
                   }
                   base = remote;
@@ -258,7 +258,7 @@ export function useCanvasDocuments(projectId: string) {
               }
               if (!saved)
                 throw new Error(
-                  "The document keeps changing. Try saving again.",
+                  "文档仍在变化，请重新保存。",
                 );
               const now = current.current.documents.find(
                 (doc) => doc.id === entry.id,
@@ -270,7 +270,7 @@ export function useCanvasDocuments(projectId: string) {
               );
               if (!merged) {
                 reportConflict({ local: now, remote: saved });
-                throw new Error("Review the document changes before saving.");
+                throw new Error("请先检查文档更改再保存。");
               }
               bases.current.set(entry.id, saved);
               publish({
@@ -303,7 +303,7 @@ export function useCanvasDocuments(projectId: string) {
   }, [workspace, flush, conflict]);
   const create = useCallback(async () => {
     await flush();
-    const detail = await createCanvasDocument(projectId, "Untitled document");
+    const detail = await createCanvasDocument(projectId, "未命名文档");
     await refresh();
     return detail.document.id;
   }, [projectId, flush, refresh]);
@@ -329,9 +329,9 @@ export function useCanvasDocuments(projectId: string) {
       if (proposal === undefined || state?.generating || state?.applying) return;
       changeGeneration(id, { applying: true });
       try {
-        if (conflictRef.current) throw new Error("Resolve the document conflict before adopting this draft.");
+        if (conflictRef.current) throw new Error("请先解决文档冲突再采用此草稿。");
         if (!current.current?.documents.some((doc) => doc.id === id) || current.current.documentIssues?.some((issue) => issue.id === id))
-          throw new Error("Restore the document file before adopting this draft. You can still edit or copy it.");
+          throw new Error("请先恢复文档文件再采用此草稿。你仍可编辑或复制草稿。");
         update(id, { markdown: proposal });
         await flush();
         changeGeneration(id, { proposal: undefined, proposalStatus: undefined, error: undefined });
@@ -354,7 +354,7 @@ export function useCanvasDocuments(projectId: string) {
       try {
         await flush();
         const base = current.current?.documents.find((doc) => doc.id === id);
-        if (!base) throw new Error("Document not found");
+        if (!base) throw new Error("找不到文档");
         const result = await generateCanvasDocument(projectId, id, {
           instruction,
           model,
@@ -389,7 +389,7 @@ export function useCanvasDocuments(projectId: string) {
         else
           changeGeneration(id, {
             error:
-              "The document changed during generation. Review the AI result before replacing it.",
+              "生成期间文档已更改。请检查 AI 结果后再替换文档。",
           });
       } catch (cause) {
         changeGeneration(id, { error: message(cause) });
@@ -453,8 +453,8 @@ export function readDocumentGenerations(key: string): Record<string, DocumentGen
         reasoningLevel: AGENT_REASONING_LEVELS.includes(state.reasoningLevel!) ? state.reasoningLevel : undefined,
         proposal: typeof state.proposal === "string" ? state.proposal : undefined,
         proposalStatus: state.proposalStatus === "complete" || state.proposalStatus === "incomplete" ? state.proposalStatus : undefined,
-        error: state.generating ? "Document generation was interrupted. Your instruction and candidate draft are kept. Try again."
-          : state.applying ? "Saving was interrupted. Review the document before adopting the candidate draft again."
+        error: state.generating ? "文档生成已中断。指令和候选草稿已保留，请重试。"
+          : state.applying ? "保存已中断。请检查文档后再次采用候选草稿。"
           : typeof state.error === "string" ? state.error : undefined,
       }]];
     }));

@@ -79,7 +79,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         if (!callback || !active) return;
         await exchangeDesktopCallback(supabase, callback);
         const accessToken = await getAccessToken(supabase);
-        if (!accessToken) throw new Error("Sign-in did not create a session");
+        if (!accessToken) throw new Error("登录未创建会话");
         if (active) {
           settleAccessTokenRequest(accessToken);
           setDialogOpen(false);
@@ -132,7 +132,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       return LOCAL_DEBUG_ACCESS_TOKEN;
     }
     if (!supabase) {
-      setError("Supabase Auth is not configured.");
+      setError("尚未配置 Supabase 登录服务。");
       setDialogOpen(true);
       return undefined;
     }
@@ -141,7 +141,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       if (accessToken) return accessToken;
       setError(undefined);
     } catch {
-      setError("Your session expired. Sign in again.");
+      setError("登录已过期，请重新登录。");
     }
     setState({ status: "signed-out" });
     setPendingProvider(undefined);
@@ -169,7 +169,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   async function signIn(provider: SignInProvider) {
     if (!supabase) {
-      setError("Supabase Auth is not configured.");
+      setError("尚未配置 Supabase 登录服务。");
       return;
     }
     setPendingProvider(provider);
@@ -225,7 +225,7 @@ export function useAuth(): AuthContextValue {
 export function authUser(user: User): AuthUser {
   const metadata = user.user_metadata;
   const name = stringValue(metadata.full_name) ?? stringValue(metadata.name)
-    ?? stringValue(metadata.user_name) ?? user.email ?? "OhMyGame creator";
+    ?? stringValue(metadata.user_name) ?? user.email ?? "OhMyGame 创作者";
   return {
     id: user.id,
     name,
@@ -264,19 +264,19 @@ export async function createOAuthAuthorizationUrl(
     options: { redirectTo, skipBrowserRedirect: true },
   });
   if (error) throw error;
-  if (!data.url) throw new Error("Supabase did not return an OAuth authorization URL");
+  if (!data.url) throw new Error("Supabase 未返回 OAuth 授权地址");
   return data.url;
 }
 
 export async function exchangeDesktopCallback(client: AuthClient, callback: string): Promise<void> {
   const url = new URL(callback);
   if (url.protocol !== "http:" || url.hostname !== "127.0.0.1" || !url.pathname.startsWith("/auth/callback/")) {
-    throw new Error("Invalid OAuth callback");
+    throw new Error("OAuth 回调无效");
   }
   const providerError = url.searchParams.get("error_description") ?? url.searchParams.get("error");
   if (providerError) throw new Error(providerError);
   const code = url.searchParams.get("code");
-  if (!code) throw new Error("OAuth callback did not include an authorization code");
+  if (!code) throw new Error("OAuth 回调未包含授权码");
   const { error } = await client.auth.exchangeCodeForSession(code);
   if (error) throw error;
 }

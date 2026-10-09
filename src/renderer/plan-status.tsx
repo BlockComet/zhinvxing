@@ -11,7 +11,7 @@ export function PlanStatus({ plan }: PlanStatusProps) {
   const current = plan.steps[currentIndex];
   const completed = plan.steps.filter((step) => step.status === "completed").length;
   const summary = current
-    ? `Step ${currentIndex + 1} / ${plan.steps.length} · ${current.step}`
+    ? `步骤 ${currentIndex + 1} / ${plan.steps.length} · ${current.step}`
     : `${completed} / ${plan.steps.length} steps completed`;
 
   return (

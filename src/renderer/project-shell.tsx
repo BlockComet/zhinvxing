@@ -63,6 +63,7 @@ import { useAuth } from "./auth.js";
 import { readChatLayout, type ChatLayout } from "./chat-layout.js";
 import { forgetPendingPublish, rememberPendingPublish, takePendingPublish } from "./pending-publish.js";
 import type { PublishDetails } from "./publish-dialog.js";
+import { StudioCenter } from "./studio-center.js";
 import { usePlaytestAskRequests } from "./playable-playtest.js";
 
 interface ProjectShellProps {
@@ -119,6 +120,7 @@ export function ProjectShell({
   const [maximumAgentWidth, setMaximumAgentWidth] = useState(DEFAULT_AGENT_WIDTH);
   const [resizingAgent, setResizingAgent] = useState(false);
   const [publishing, setPublishing] = useState(false);
+  const [studioOpen, setStudioOpen] = useState(false);
   const [publishDialog, setPublishDialog] = useState<{ projectId: string; status: "open" | "success" }>();
   const [workspaceRevision, setWorkspaceRevision] = useState(0);
   const [openFileRequest, setOpenFileRequest] = useState<{ path: string; id: number }>();
@@ -264,7 +266,7 @@ export function ProjectShell({
         const [project, availableConversations] = await Promise.all([getProject(projectId), listConversations(projectId)]);
         if (disposed) return;
         if (project.workspaceAvailable === false) {
-          dispatch({ type: "fatal", message: "The selected workspace folder is no longer available." });
+          dispatch({ type: "fatal", message: "所选工作区文件夹已不可用。" });
           return;
         }
         setConversations(availableConversations);
@@ -405,7 +407,7 @@ export function ProjectShell({
   }, [auth.state.status, state.phase, state.project?.id, state.project?.type, state.agent.status, sendingInitialPrompt, publishing]);
 
   if (state.phase === "fatal") {
-    return <FatalState message={state.notice ?? "Could not reach the local runtime."} onHome={onHome} />;
+    return <FatalState message={state.notice ?? "无法连接本地服务。"} onHome={onHome} />;
   }
 
   const project = state.project;
@@ -683,7 +685,7 @@ export function ProjectShell({
   }
 
   function confirmNavigation(): boolean {
-    return !composerDirty || window.confirm("Discard the message you are composing?");
+    return !composerDirty || window.confirm("丢弃正在编写的消息？");
   }
 
   function requestHome(): void {
@@ -730,8 +732,10 @@ export function ProjectShell({
         />
       ) : null}
 
-      <section className="agent-pane" aria-label="Agent">
+      <section className="agent-pane" aria-label="AI 助手">
         <header className="pane-header window-drag-handle">
+          <button className="studio-entry" type="button" onClick={() => setStudioOpen(true)}>复原与发布</button>
+          {studioOpen ? <StudioCenter projectId={projectId} onClose={() => setStudioOpen(false)} /> : null}
           <span className="workspace-navigation-drag-exclusion" aria-hidden="true" />
           <div className="pane-header-actions">
             <button
@@ -739,8 +743,8 @@ export function ProjectShell({
               type="button"
               disabled={!project || creatingConversation}
               onClick={() => void newConversation()}
-              title="New conversation"
-              aria-label="New conversation"
+              title="新建对话"
+              aria-label="新建对话"
             >
               {creatingConversation ? <LoaderCircle className="spin" size={14} /> : <MessageSquarePlus size={14} />}
             </button>
@@ -757,8 +761,8 @@ export function ProjectShell({
                 className="icon-button pane-header-action"
                 type="button"
                 onClick={() => setGodotWorkspaceVisibility(true)}
-                title="Show workspace"
-                aria-label="Show workspace"
+                title="显示工作区"
+                aria-label="显示工作区"
               >
                 <PanelToggle size={14} />
               </button>
@@ -767,8 +771,8 @@ export function ProjectShell({
                 className="icon-button pane-header-action"
                 type="button"
                 onClick={() => setAgentCollapsed(true)}
-                title="Hide agent"
-                aria-label="Hide agent"
+                title="隐藏 AI 助手"
+                aria-label="隐藏 AI 助手"
               >
                 <PanelToggle size={14} />
               </button>
@@ -829,7 +833,7 @@ export function ProjectShell({
             pendingPrompts={state.pendingPrompts}
             plan={activePlan}
             planMode={state.plan.mode}
-            notice={state.connection === "reconnecting" ? "Connection lost. Reconnecting..." : state.notice}
+            notice={state.connection === "reconnecting" ? "连接已断开，正在重新连接…" : state.notice}
             models={modelCatalog.models}
             modelStatus={modelCatalog.status}
             model={effectiveModel}
@@ -873,7 +877,7 @@ export function ProjectShell({
       <div
         className="workspace-resizer"
         role="separator"
-        aria-label="Resize agent panel"
+        aria-label="调整 AI 面板宽度"
         aria-orientation="vertical"
         aria-valuemin={MIN_AGENT_WIDTH}
         aria-valuemax={maximumAgentWidth}
@@ -970,12 +974,12 @@ function WorkspaceNavigationActions({ collapsed, onHome, onExpand }: {
   onExpand: () => void;
 }) {
   return (
-    <div className="workspace-navigation-actions" role="toolbar" aria-label="Workspace navigation">
-      <button className="icon-button workspace-home-button" type="button" onClick={onHome} title="Home" aria-label="Home">
+    <div className="workspace-navigation-actions" role="toolbar" aria-label="工作区导航">
+      <button className="icon-button workspace-home-button" type="button" onClick={onHome} title="首页" aria-label="首页">
         <House size={14} />
       </button>
       {collapsed ? (
-        <button className="icon-button" type="button" onClick={onExpand} title="Show agent" aria-label="Show agent">
+        <button className="icon-button" type="button" onClick={onExpand} title="显示 AI 助手" aria-label="显示 AI 助手">
           <PanelToggle size={15} />
         </button>
       ) : null}
@@ -985,7 +989,7 @@ function WorkspaceNavigationActions({ collapsed, onHome, onExpand }: {
 
 function TimelineSkeleton() {
   return (
-    <div className="timeline-skeleton" aria-label="Loading project">
+    <div className="timeline-skeleton" aria-label="正在加载项目">
       <span />
       <span />
       <span />
@@ -997,11 +1001,11 @@ function FatalState({ message, onHome }: { message: string; onHome: () => void }
   return (
     <main className="fatal-state">
       <X size={24} />
-      <h1>Workspace unavailable</h1>
+      <h1>工作区不可用</h1>
       <p>{message}</p>
       <div className="fatal-actions">
-        <button type="button" onClick={onHome}><ArrowLeft size={15} />Home</button>
-        <button type="button" onClick={() => window.location.reload()}><RefreshCw size={15} />Reload</button>
+        <button type="button" onClick={onHome}><ArrowLeft size={15} />首页</button>
+        <button type="button" onClick={() => window.location.reload()}><RefreshCw size={15} />重新加载</button>
       </div>
     </main>
   );

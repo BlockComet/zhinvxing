@@ -65,7 +65,7 @@ export function WebSearchSettingsPanel() {
     return (
       <section className="settings-panel settings-overview-panel">
         <p className={error ? "settings-error" : "settings-loading"}>
-          {error ?? "Loading web search settings..."}
+          {error ?? "正在加载网络搜索设置…"}
         </p>
       </section>
     );
@@ -85,10 +85,10 @@ export function WebSearchSettingsPanel() {
       }}
     >
       <header className="settings-panel-header">
-        <h3>Web Search</h3>
+        <h3>网络搜索</h3>
       </header>
       <div className="settings-search-row">
-        <strong>Web search</strong>
+        <strong>网络搜索</strong>
         <label className="settings-toggle">
           <input
             type="checkbox"
@@ -101,20 +101,20 @@ export function WebSearchSettingsPanel() {
 
       <section className="settings-search-section">
         <div className="settings-search-section-header">
-          <h4>Provider</h4>
-          <p>Choose the service that runs web searches.</p>
+          <h4>服务商</h4>
+          <p>选择执行网络搜索的服务。</p>
         </div>
         <div
           className="settings-provider-options"
           role="radiogroup"
-          aria-label="Web search provider"
+          aria-label="网络搜索服务商"
         >
           {(
             [
-              ["auto", "Auto", "Select Exa or Parallel automatically"],
-              ["exa", "Exa", "Always use Exa"],
-              ["parallel", "Parallel", "Always use Parallel"],
-              ["custom", "Custom MCP", "Use a compatible MCP server"],
+              ["auto", "自动", "自动选择 Exa 或 Parallel"],
+              ["exa", "Exa", "始终使用 Exa"],
+              ["parallel", "Parallel", "始终使用 Parallel"],
+              ["custom", "自定义 MCP", "使用兼容的 MCP 服务器"],
             ] as const
           ).map(([value, label, description]) => (
             <label className="settings-provider-option" key={value}>
@@ -135,9 +135,9 @@ export function WebSearchSettingsPanel() {
         </div>
         <div className="settings-search-option-row">
           <span>
-            <strong>Use fallback provider</strong>
+            <strong>使用备用服务商</strong>
             <small>
-              Retry with the other public provider when automatic search fails.
+              自动搜索失败时，使用另一个公共服务商重试。
             </small>
           </span>
           <label className="settings-toggle">
@@ -154,12 +154,12 @@ export function WebSearchSettingsPanel() {
 
       <section className="settings-search-section">
         <div className="settings-search-section-header">
-          <h4>API keys</h4>
-          <p>Add credentials for the public providers you use.</p>
+          <h4>API 密钥</h4>
+          <p>添加所使用的公共服务商凭据。</p>
         </div>
         <div className="settings-search-credentials">
           <SearchCredential
-            label="Exa API key"
+            label="Exa API 密钥"
             configured={settings.exaApiKeyConfigured}
             value={form.exaApiKey}
             clear={form.clearExaApiKey}
@@ -172,7 +172,7 @@ export function WebSearchSettingsPanel() {
             }
           />
           <SearchCredential
-            label="Parallel API key"
+            label="Parallel API 密钥"
             configured={settings.parallelApiKeyConfigured}
             value={form.parallelApiKey}
             clear={form.clearParallelApiKey}
@@ -190,12 +190,12 @@ export function WebSearchSettingsPanel() {
       {form.provider === "custom" ? (
         <section className="settings-search-section settings-custom-search-section">
           <div className="settings-search-section-header">
-            <h4>Custom MCP</h4>
-            <p>Connect a compatible server for web search.</p>
+            <h4>自定义 MCP</h4>
+            <p>连接兼容的服务器进行网络搜索。</p>
           </div>
           <div className="settings-search-fields">
             <label>
-              <span className="settings-search-field-label">Name</span>
+              <span className="settings-search-field-label">名称</span>
               <input
                 className="settings-search-input"
                 value={form.customName}
@@ -204,7 +204,7 @@ export function WebSearchSettingsPanel() {
               />
             </label>
             <label>
-              <span className="settings-search-field-label">Endpoint</span>
+              <span className="settings-search-field-label">接口地址</span>
               <input
                 className="settings-search-input"
                 type="url"
@@ -217,7 +217,7 @@ export function WebSearchSettingsPanel() {
               />
             </label>
             <label>
-              <span className="settings-search-field-label">Tool name</span>
+              <span className="settings-search-field-label">工具名称</span>
               <input
                 className="settings-search-input"
                 value={form.customToolName}
@@ -229,7 +229,7 @@ export function WebSearchSettingsPanel() {
               />
             </label>
             <SearchCredential
-              label="Bearer token"
+              label="Bearer 令牌"
               configured={settings.custom?.apiKeyConfigured ?? false}
               value={form.customApiKey}
               clear={form.clearCustomApiKey}
@@ -251,7 +251,7 @@ export function WebSearchSettingsPanel() {
         </p>
       ) : null}
       {saved ? (
-        <p className="settings-success">Web search settings saved.</p>
+        <p className="settings-success">网络搜索设置已保存。</p>
       ) : null}
       <div className="settings-form-actions">
         <button
@@ -259,7 +259,7 @@ export function WebSearchSettingsPanel() {
           type="submit"
           disabled={saving}
         >
-          {saving ? "Saving..." : "Save"}
+          {saving ? "正在保存…" : "保存"}
         </button>
       </div>
     </form>
@@ -289,7 +289,7 @@ function SearchCredential({
         <span className="settings-search-field-label">
           <span>{label}</span>
           {configured && !clear ? (
-            <span className="settings-search-field-status">Saved</span>
+            <span className="settings-search-field-status">已保存</span>
           ) : null}
         </span>
         <input
@@ -300,8 +300,8 @@ function SearchCredential({
           disabled={disabled || clear}
           placeholder={
             configured && !clear
-              ? "Saved - enter a new value to replace"
-              : "Optional"
+              ? "已保存，输入新值即可替换"
+              : "可选"
           }
           onChange={(event) => onChange(event.target.value)}
         />
@@ -314,7 +314,7 @@ function SearchCredential({
             disabled={disabled}
             onChange={(event) => onClear(event.target.checked)}
           />
-          <span>Remove saved key</span>
+          <span>移除已保存的密钥</span>
         </label>
       ) : null}
     </div>

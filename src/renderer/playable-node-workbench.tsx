@@ -224,7 +224,7 @@ export function PlayableNodeWorkbench({
   const askAgent = useCallback(async (text: string, contexts: PromptContext[], summary: string): Promise<void> => {
     if (onSendToAgent && await onSendToAgent(text, contexts)) return;
     if (onAskAgent) return onAskAgent(text);
-    showToast({ tone: "error", text: `Could not ask the AI: ${summary}` });
+    showToast({ tone: "error", text: `无法请求 AI：${summary}` });
   }, [onAskAgent, onSendToAgent, showToast]);
 
   const onTextEdit = useCallback((edit: PlayableTextEdit) => {
@@ -234,7 +234,7 @@ export function PlayableNodeWorkbench({
         try {
           if (await onWriteText(edit)) return;
         } catch (cause) {
-          return showToast({ tone: "error", text: `Could not change the text: ${errorMessage(cause)}` });
+          return showToast({ tone: "error", text: `无法修改文本：${errorMessage(cause)}` });
         }
       }
       await askAgent(playableTextEditRequest(edit.before, edit.after), [playableElementContext(edit.pick)], `Changing "${edit.before}" to "${edit.after}"`);
@@ -247,7 +247,7 @@ export function PlayableNodeWorkbench({
         try {
           if (await onWriteMove(move)) return;
         } catch (cause) {
-          return showToast({ tone: "error", text: `Could not move it: ${errorMessage(cause)}` });
+          return showToast({ tone: "error", text: `无法移动：${errorMessage(cause)}` });
         }
       }
       const excerpt = move.pick.text ? ` "${move.pick.text}"` : "";
@@ -272,16 +272,16 @@ export function PlayableNodeWorkbench({
       const type = asset.type;
       setMedia((current) => [...current.filter((item) => item.assetId !== assetId), { assetId, name: asset.name, type }]);
     } catch (cause) {
-      showToast({ tone: "error", text: `Could not add ${asset.name}: ${errorMessage(cause)}` });
+      showToast({ tone: "error", text: `无法添加 ${asset.name}: ${errorMessage(cause)}` });
     }
   }, [onAddAsset, onSetBackdrop, showToast]);
 
   const removeBackdrop = useCallback(async () => {
     try {
-      if (!onRemoveBackdrop || !await onRemoveBackdrop()) return showToast({ tone: "error", text: "This Scene has no background to remove" });
+      if (!onRemoveBackdrop || !await onRemoveBackdrop()) return showToast({ tone: "error", text: "此场景没有可移除的背景" });
       setPicks((current) => current.filter((pick) => pick.mediaSlot !== "backdrop"));
     } catch (cause) {
-      showToast({ tone: "error", text: `Could not remove the background: ${errorMessage(cause)}` });
+      showToast({ tone: "error", text: `无法移除背景：${errorMessage(cause)}` });
     }
   }, [onRemoveBackdrop, showToast]);
 
@@ -297,8 +297,8 @@ export function PlayableNodeWorkbench({
 
   // In the header, where the canvas has Playtest.
   const actions = <div className="story-node-editor-actions">
-    <button type="button" className="icon-button pane-header-action" title="Play this Scene again from the start" aria-label="Replay" disabled={!runtime.definition} onClick={() => setSession((current) => current + 1)}><RotateCcw size={14} /></button>
-    {onPlayFromHere ? <button type="button" className="icon-button pane-header-action" data-tooltip="Playtest from this Scene" aria-label="Play from here" onClick={() => onPlayFromHere({ nodeId: node.id })}><Play size={14} /></button> : null}
+    <button type="button" className="icon-button pane-header-action" title="从头重新游玩此场景" aria-label="重玩" disabled={!runtime.definition} onClick={() => setSession((current) => current + 1)}><RotateCcw size={14} /></button>
+    {onPlayFromHere ? <button type="button" className="icon-button pane-header-action" data-tooltip="从此场景开始试玩" aria-label="从这里开始" onClick={() => onPlayFromHere({ nodeId: node.id })}><Play size={14} /></button> : null}
   </div>;
 
   const previewPane = <WorkbenchPreview
@@ -326,7 +326,7 @@ export function PlayableNodeWorkbench({
       <PreviewToasts
         errors={errors}
         toasts={toasts}
-        onFix={() => void askAgent(fixErrorsRequest(node.title, errors), [], "Fixing the errors")}
+        onFix={() => void askAgent(fixErrorsRequest(node.title, errors), [], "正在修复错误")}
         onOpenNode={onOpenNode}
         onDismiss={dismissToast}
       />
@@ -348,7 +348,7 @@ export function PlayableNodeWorkbench({
       onSnapshot={setSnapshot}
       onDiagnostic={onDiagnostic}
     /> : <div className={`playable-workbench-stage-state${runtime.error ? " is-error" : ""}`} role={runtime.error ? "alert" : undefined}>
-      {runtime.error ?? "Loading preview..."}
+      {runtime.error ?? "正在加载预览…"}
     </div>}
     {tool === "draw" || strokes.length ? <DrawingLayer
       viewport={graph.viewport}
@@ -374,18 +374,18 @@ export function PlayableNodeWorkbench({
 
 
 const TOOLS: { tool: PreviewTool; label: string; title: string; icon: IconComponent }[] = [
-  { tool: "play", label: "Play", title: "Play the preview", icon: Play },
-  { tool: "select", label: "Select", title: "Pick things to talk about with the AI. Shift-click to pick more.", icon: MousePointer2 },
-  { tool: "text", label: "Text", title: "Click text to change it", icon: Type },
-  { tool: "move", label: "Move", title: "Drag things to move them", icon: Move },
-  { tool: "draw", label: "Draw", title: "Draw on the preview to show the AI what you mean", icon: Brush },
+  { tool: "play", label: "游玩", title: "游玩预览", icon: Play },
+  { tool: "select", label: "选择", title: "选择要与 AI 讨论的内容。按住 Shift 点击可多选。", icon: MousePointer2 },
+  { tool: "text", label: "文本", title: "点击文字进行修改", icon: Type },
+  { tool: "move", label: "移动", title: "拖动内容以移动位置", icon: Move },
+  { tool: "draw", label: "绘制", title: "在预览上绘制，向 AI 表达你的想法", icon: Brush },
 ];
 
 const TOOL_HINTS: Record<Exclude<PreviewTool, "play">, string> = {
-  select: "Click to pick · Shift-click for more · Esc to play",
-  text: "Click text to change it · Enter to keep · Esc to play",
-  move: "Drag to move · Esc to play",
-  draw: "Draw, then say what you want in the chat · Esc to play",
+  select: "点击选择 · Shift 点击多选 · Esc 返回游玩",
+  text: "点击修改文字 · Enter 保留 · Esc 返回游玩",
+  move: "拖动以移动 · Esc 返回游玩",
+  draw: "绘制后在聊天中说明需求 · Esc 返回游玩",
 };
 
 /** Floats over the bottom of the preview. */
@@ -402,7 +402,7 @@ export function PreviewToolbar({ tool, disabled, strokes, picks, onTool, onUndoS
 }) {
   return <div className="playable-preview-toolbar">
     {tool !== "play" ? <p className="playable-preview-toolbar-hint">{TOOL_HINTS[tool]}{tool === "select" && picks ? ` · ${picks} picked` : ""}</p> : null}
-    <div role="toolbar" aria-label="Preview tools">
+    <div role="toolbar" aria-label="预览工具">
       {TOOLS.map(({ tool: value, label, title, icon: Icon }) => <button
         key={value}
         type="button"
@@ -415,8 +415,8 @@ export function PreviewToolbar({ tool, disabled, strokes, picks, onTool, onUndoS
       {media ? <><span className="playable-preview-toolbar-divider" aria-hidden="true" />{media}</> : null}
       {strokes ? <>
         <span className="playable-preview-toolbar-divider" aria-hidden="true" />
-        <button type="button" title="Undo the last stroke" aria-label="Undo stroke" onClick={onUndoStroke}><Undo2 size={14} /></button>
-        <button type="button" title="Clear the drawing" aria-label="Clear drawing" onClick={onClearStrokes}><Trash2 size={14} /></button>
+        <button type="button" title="撤销上一笔" aria-label="撤销笔画" onClick={onUndoStroke}><Undo2 size={14} /></button>
+        <button type="button" title="清除绘图" aria-label="清除绘图" onClick={onClearStrokes}><Trash2 size={14} /></button>
       </> : null}
     </div>
   </div>;
@@ -451,7 +451,7 @@ export function DrawingLayer({ viewport, strokes, drawing, onStroke }: {
     className={`playable-drawing-layer${drawing ? " is-drawing" : ""}`}
     viewBox={`0 0 ${viewport.width} ${viewport.height}`}
     preserveAspectRatio="none"
-    aria-label={drawing ? "Drawing" : undefined}
+    aria-label={drawing ? "绘图" : undefined}
     aria-hidden={drawing ? undefined : true}
     onPointerDown={(event) => {
       if (!drawing || event.button !== 0) return;
@@ -499,10 +499,10 @@ function useMediaChooser(onAsset: (asset: PlayableAssetRequest, target: MediaTar
       event.target.value = "";
       if (!file) return;
       setUploading(true);
-      void uploadLibraryFile(file).then((asset) => { setLibrary(undefined); use(asset); }, (cause) => onError(`Could not upload: ${errorMessage(cause)}`)).finally(() => setUploading(false));
+      void uploadLibraryFile(file).then((asset) => { setLibrary(undefined); use(asset); }, (cause) => onError(`无法上传：${errorMessage(cause)}`)).finally(() => setUploading(false));
     }} />
     {library ? <LibraryAssetPicker
-      title={target.current === "backdrop" ? "Choose a background" : "Add to chat"}
+      title={target.current === "backdrop" ? "选择背景" : "添加到聊天"}
       assets={library.filter((asset) => {
         const type = playableAssetType(asset.mediaType);
         return type === "image" || type === "video";
@@ -520,7 +520,7 @@ function useMediaChooser(onAsset: (asset: PlayableAssetRequest, target: MediaTar
     /** Opens the picker for the given target, with Upload in it. */
     choose: (to: MediaTarget) => {
       target.current = to;
-      void loadLibraryAssets().then(setLibrary, (cause) => onError(`Could not open the Library: ${errorMessage(cause)}`));
+      void loadLibraryAssets().then(setLibrary, (cause) => onError(`无法打开素材库：${errorMessage(cause)}`));
     },
   };
 }
@@ -541,13 +541,13 @@ function MediaMenu({ disabled, uploading, canSetBackdrop, canRemoveBackdrop, onC
   const choose = (to: MediaTarget) => () => { setOpen(false); onChoose(to); };
 
   return <span className="playable-preview-media">
-    <button ref={button} type="button" title="Add an image or a video" aria-haspopup="menu" aria-expanded={open} disabled={disabled || uploading} onClick={() => setOpen((current) => !current)}>
-      {uploading ? <LoaderCircle className="spin" size={14} /> : <Image size={14} />}<span>Media</span>
+    <button ref={button} type="button" title="添加图片或视频" aria-haspopup="menu" aria-expanded={open} disabled={disabled || uploading} onClick={() => setOpen((current) => !current)}>
+      {uploading ? <LoaderCircle className="spin" size={14} /> : <Image size={14} />}<span>媒体</span>
     </button>
-    {open ? <div ref={menu} className="playable-preview-popover is-media" role="menu" aria-label="Media">
-      <button type="button" role="menuitem" disabled={!canSetBackdrop} title={canSetBackdrop ? "Show it behind this Scene" : "This Scene has no background to set; add it to the chat instead"} onClick={choose("backdrop")}><Image size={13} /><span>As background</span></button>
-      <button type="button" role="menuitem" onClick={choose("chat")}><MessageSquarePlus size={13} /><span>Add to chat</span></button>
-      {canRemoveBackdrop ? <button type="button" role="menuitem" title="Take the background off this Scene" onClick={() => { setOpen(false); onRemoveBackdrop(); }}><ImageOff size={13} /><span>Remove background</span></button> : null}
+    {open ? <div ref={menu} className="playable-preview-popover is-media" role="menu" aria-label="媒体">
+      <button type="button" role="menuitem" disabled={!canSetBackdrop} title={canSetBackdrop ? "在此场景后方显示" : "此场景没有可设置的背景，请改为添加到聊天"} onClick={choose("backdrop")}><Image size={13} /><span>设为背景</span></button>
+      <button type="button" role="menuitem" onClick={choose("chat")}><MessageSquarePlus size={13} /><span>添加到聊天</span></button>
+      {canRemoveBackdrop ? <button type="button" role="menuitem" title="移除此场景的背景" onClick={() => { setOpen(false); onRemoveBackdrop(); }}><ImageOff size={13} /><span>移除背景</span></button> : null}
     </div> : null}
   </span>;
 }
@@ -594,19 +594,19 @@ function PreviewToasts({ errors, toasts, onFix, onOpenNode, onDismiss }: {
   onOpenNode: (nodeId: string) => void;
   onDismiss: (id: number) => void;
 }) {
-  return <div className="playable-preview-toasts" aria-live="polite" aria-label="What happened in the preview">
+  return <div className="playable-preview-toasts" aria-live="polite" aria-label="预览中发生的情况">
     {errors.length ? <p className="playable-preview-toast is-error" role="alert">
       <InfoCircle size={12} />
       <span title={errors.join("\n")}>{errors[0]}{errors.length > 1 ? ` (+${errors.length - 1} more)` : ""}</span>
-      <button type="button" title="Ask the AI to fix this" onClick={onFix}>Fix</button>
+      <button type="button" title="请 AI 修复此问题" onClick={onFix}>修复</button>
     </p> : null}
     {toasts.map((toast) => {
       const Icon = TOAST_ICONS[toast.tone];
       return <p key={toast.id} className={`playable-preview-toast is-${toast.tone}`} role={toast.tone === "error" ? "alert" : undefined}>
         <Icon size={12} />
         <span title={toast.text}>{toast.text}</span>
-        {toast.targetNodeId ? <button type="button" onClick={() => { onDismiss(toast.id); onOpenNode(toast.targetNodeId!); }}>Open</button> : null}
-        <button type="button" className="playable-preview-toast-close" aria-label="Dismiss" onClick={() => onDismiss(toast.id)}><X size={11} /></button>
+        {toast.targetNodeId ? <button type="button" onClick={() => { onDismiss(toast.id); onOpenNode(toast.targetNodeId!); }}>打开</button> : null}
+        <button type="button" className="playable-preview-toast-close" aria-label="关闭提示" onClick={() => onDismiss(toast.id)}><X size={11} /></button>
       </p>;
     })}
   </div>;
@@ -618,13 +618,13 @@ function PreviewToasts({ errors, toasts, onFix, onOpenNode, onDismiss }: {
  */
 function reportToast(graph: NodeGraph, report: NodeRuntimeSnapshot["reports"][number]): Omit<PreviewToast, "id"> {
   if (!report.targetNodeId) {
-    return { tone: "warning", text: report.kind === "back" ? "Nowhere to go back to" : "Doesn't open anything yet" };
+    return { tone: "warning", text: report.kind === "back" ? "没有可返回的位置" : "尚未连接目标" };
   }
   const title = playableNodeById(graph, report.targetNodeId)?.title ?? report.targetNodeId;
-  const text = report.kind === "back" ? `Would go back to ${title}`
-    : report.kind === "restart" ? `Would restart at ${title}`
-      : report.kind === "continue" ? `Would continue at ${title}`
-        : `Would open ${title}`;
+  const text = report.kind === "back" ? `将返回 ${title}`
+    : report.kind === "restart" ? `将从这里重新开始：${title}`
+      : report.kind === "continue" ? `将从这里继续：${title}`
+        : `将打开 ${title}`;
   return { tone: "info", text, targetNodeId: report.targetNodeId };
 }
 
@@ -652,7 +652,7 @@ function previewErrors(
 /** The chat request behind Fix. */
 function fixErrorsRequest(title: string, errors: readonly string[]): string {
   const one = errors.length === 1;
-  return `The preview of ${title} shows ${one ? "this error" : "these errors"}:\n${errors.map((error) => `- ${error}`).join("\n")}\nFix ${one ? "it" : "them"}.`;
+  return `The preview of ${title} shows ${one ? "此错误" : "这些错误"}:\n${errors.map((error) => `- ${error}`).join("\n")}\nFix ${one ? "it" : "them"}.`;
 }
 
 /**
@@ -699,7 +699,7 @@ export function usePlayablePreviewRuntime(projectId: string, revision: number): 
   useEffect(() => {
     let disposed = false;
     void getNodeRuntime(projectId).then(async (result) => {
-      if (!result.available) throw new Error("This project has no Scenes yet.");
+      if (!result.available) throw new Error("此项目尚无场景。");
       const key = playableRuntimeKey(result.definition);
       if (key === runtimeKey.current) {
         if (!disposed) setRuntime((current) => ({ ...current, error: undefined }));

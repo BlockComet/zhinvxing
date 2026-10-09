@@ -62,9 +62,9 @@ export function AppSidebar({ active, onNavigate }: AppSidebarProps) {
 
   const updateStatus = update?.status.type;
   const updateAction = updateStatus === "available"
-    ? { label: "Update", icon: <ArrowDownToLine size={15} />, action: () => void window.ohMyGameDesktop?.updates.download() }
+    ? { label: "更新", icon: <ArrowDownToLine size={15} />, action: () => void window.ohMyGameDesktop?.updates.download() }
     : updateStatus === "ready"
-      ? { label: "Restart", icon: <RefreshCw size={14} />, action: () => void window.ohMyGameDesktop?.updates.install() }
+      ? { label: "重启", icon: <RefreshCw size={14} />, action: () => void window.ohMyGameDesktop?.updates.install() }
       : undefined;
   const updateButton = updateAction ? (
     <button className="home-sidebar-update" type="button" aria-label={updateAction.label} onClick={updateAction.action}>
@@ -113,20 +113,20 @@ export function AppSidebar({ active, onNavigate }: AppSidebarProps) {
         <img src={brandMark} alt="OhMyGame" />
         <span>OhMyGame</span>
       </div>
-      <nav aria-label="Main navigation">
-        <NavigationItem active={active === "home"} icon="home" label="Home" onClick={() => onNavigate("home")} />
-        <NavigationItem active={active === "projects"} icon="project" label="Projects" onClick={() => onNavigate("projects")} />
-        <NavigationItem active={active === "library"} icon="library" label="Library" onClick={() => onNavigate("library")} />
-        <NavigationItem active={active === "community"} icon="community" label="Community" onClick={() => onNavigate("community")} />
-        <div className="home-nav-label home-nav-label-spaced">STUDIOS</div>
-        <NavigationItem active={active === "web-game"} icon="web-game" label="Web Game" onClick={() => onNavigate("web-game")} />
-        <NavigationItem active={active === "interactive-story"} icon="interactive-story" label="Interactive Story" onClick={() => onNavigate("interactive-story")} />
+      <nav aria-label="主导航">
+        <NavigationItem active={active === "home"} icon="home" label="首页" onClick={() => onNavigate("home")} />
+        <NavigationItem active={active === "projects"} icon="project" label="项目" onClick={() => onNavigate("projects")} />
+        <NavigationItem active={active === "library"} icon="library" label="素材库" onClick={() => onNavigate("library")} />
+        <NavigationItem active={active === "community"} icon="community" label="社区" onClick={() => onNavigate("community")} />
+        <div className="home-nav-label home-nav-label-spaced">创作工作室</div>
+        <NavigationItem active={active === "web-game"} icon="web-game" label="网页游戏" onClick={() => onNavigate("web-game")} />
+        <NavigationItem active={active === "interactive-story"} icon="interactive-story" label="互动故事" onClick={() => onNavigate("interactive-story")} />
         <NavigationItem active={active === "godot"} icon="godot" label="Godot" onClick={() => onNavigate("godot")} />
-        <NavigationItem active={active === "asset-canvas"} icon="asset-canvas" label="Asset Canvas" onClick={() => onNavigate("asset-canvas")} />
+        <NavigationItem active={active === "asset-canvas"} icon="asset-canvas" label="素材画布" onClick={() => onNavigate("asset-canvas")} />
       </nav>
       {auth.state.status === "signed-in" ? (
         <div className="home-sidebar-account" ref={account}>
-          <button className="home-sidebar-account-main" type="button" aria-label="Open account menu" aria-expanded={accountMenuOpen} onClick={() => {
+          <button className="home-sidebar-account-main" type="button" aria-label="打开账号菜单" aria-expanded={accountMenuOpen} onClick={() => {
             setAccountMenuOpen((open) => !open);
           }}>
             <UserAvatar className="home-sidebar-avatar" name={auth.state.user.name} avatarUrl={auth.state.user.avatarUrl} />
@@ -140,7 +140,7 @@ export function AppSidebar({ active, onNavigate }: AppSidebarProps) {
                 onNavigate("settings");
               }}>
                 <Wrench size={16} />
-                <span>Settings</span>
+                <span>设置</span>
               </button>
             </div>
           ) : null}
@@ -149,9 +149,9 @@ export function AppSidebar({ active, onNavigate }: AppSidebarProps) {
         <div className="home-sidebar-account" ref={account}>
           <button className="home-sidebar-sign-in-main" type="button" onClick={auth.openSignIn} disabled={auth.state.status === "loading"}>
             <span className="home-sidebar-signed-out-icon" aria-hidden="true"><UserRound size={16} /></span>
-            <span className="home-sidebar-account-name">{auth.state.status === "loading" ? "Loading account" : "Sign in"}</span>
+            <span className="home-sidebar-account-name">{auth.state.status === "loading" ? "正在加载账号" : "登录"}</span>
           </button>
-          {updateButton ?? <button className="home-sidebar-account-menu" type="button" aria-label="Application menu" aria-expanded={accountMenuOpen} onClick={() => setAccountMenuOpen((open) => !open)}><MoreHorizontal size={16} /></button>}
+          {updateButton ?? <button className="home-sidebar-account-menu" type="button" aria-label="应用菜单" aria-expanded={accountMenuOpen} onClick={() => setAccountMenuOpen((open) => !open)}><MoreHorizontal size={16} /></button>}
           {accountMenuOpen ? (
             <div className="home-sidebar-account-popover" role="menu">
               <button type="button" role="menuitem" onClick={() => {
@@ -159,7 +159,7 @@ export function AppSidebar({ active, onNavigate }: AppSidebarProps) {
                 onNavigate("settings");
               }}>
                 <Wrench size={16} />
-                <span>Settings</span>
+                <span>设置</span>
               </button>
             </div>
           ) : null}
@@ -168,7 +168,7 @@ export function AppSidebar({ active, onNavigate }: AppSidebarProps) {
       <div
         className="home-sidebar-resizer"
         role="separator"
-        aria-label="Resize sidebar"
+        aria-label="调整侧栏宽度"
         aria-orientation="vertical"
         aria-valuemin={MIN_SIDEBAR_WIDTH}
         aria-valuemax={MAX_SIDEBAR_WIDTH}

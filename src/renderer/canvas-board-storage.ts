@@ -16,7 +16,7 @@ export interface CanvasBoardStorage {
 export interface CanvasBoardConflict { local: AssetCanvasDocument; remote: CanvasBoardDetail }
 
 const canvasOnly = ({ id: _id, ...canvas }: CanvasBoardDetail["board"]): AssetCanvasDocument => canvas;
-const conflictMessage = "The board was edited elsewhere. Choose a version before saving.";
+const conflictMessage = "画板已在其他位置修改。请先选择版本再保存。";
 
 export function createCanvasBoardStorage({ projectId, boardId, onConflict, flushDocuments }: {
   projectId: string;
@@ -55,7 +55,7 @@ export function createCanvasBoardStorage({ projectId, boardId, onConflict, flush
   };
   const ready = async () => {
     if (loading) await loading;
-    if (!base) throw new Error("Reload the canvas before saving. Your edits are kept in this session.");
+    if (!base) throw new Error("请先重新加载画布再保存。当前修改仍保留在本次会话中。");
   };
   return {
     key: `${projectId}:${boardId}`,
@@ -102,7 +102,7 @@ export function createCanvasBoardStorage({ projectId, boardId, onConflict, flush
           base = remote; outgoing = merged;
         }
       }
-      throw new Error("The board keeps changing. Try saving again.");
+      throw new Error("画板仍在变化，请重新保存。");
     }),
     refresh: (local) => enqueue(async () => {
       await ready();
@@ -123,7 +123,7 @@ export function createCanvasBoardStorage({ projectId, boardId, onConflict, flush
         const outgoing = conflicting ? mergeCanvasDocument(canvasOnly(conflicting.remote.board), local, canvasOnly(remote.board)) : local;
         if (!outgoing) {
           conflict(local, remote);
-          throw new Error("The board changed again. Review the latest version before choosing.");
+          throw new Error("画板再次发生变化。请选择前先检查最新版本。");
         }
         remember(outgoing);
         const saved = await saveCanvasBoard(projectId, { board: { ...outgoing, id: boardId }, revision: remote.revision });

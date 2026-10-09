@@ -109,8 +109,8 @@ export function CodingWorkspace({
   const supportsPreview = project?.type === "web-game";
   const publishingUnavailable = project?.type === "godot-game";
   const publishLabel = publishingUnavailable
-    ? "Godot publishing is not available yet"
-    : publishing ? "Publishing" : "Publish";
+    ? "暂不支持发布 Godot 项目"
+    : publishing ? "正在发布" : "发布";
   const [activeTab, setActiveTab] = useState<WorkspaceTab>(supportsPreview ? "preview" : "code");
   const shownTab = designOpen ? "design" : activeTab;
   const [designHeaderActions, setDesignHeaderActions] = useState<HTMLDivElement | null>(null);
@@ -252,14 +252,14 @@ export function CodingWorkspace({
   }
 
   const tabs: WorkspaceTabOption<WorkspaceTab | "design">[] = [
-    ...(supportsPreview ? [{ id: "preview" as const, label: "Preview", icon: Globe2 }] : []),
-    ...(onDesignOpenChange ? [{ id: "design" as const, label: "Design", icon: FileText }] : []),
-    { id: "code", label: "Code", icon: Code2 },
-    { id: "assets", label: "Assets", icon: Layers3 },
+    ...(supportsPreview ? [{ id: "preview" as const, label: "预览", icon: Globe2 }] : []),
+    ...(onDesignOpenChange ? [{ id: "design" as const, label: "设计", icon: FileText }] : []),
+    { id: "code", label: "代码", icon: Code2 },
+    { id: "assets", label: "素材", icon: Layers3 },
   ];
   const renderNavigation = () => <div className={`viewer-navigation${chatOnRight ? " is-chat-right" : ""}`}>
     {chatOnRight && onHome ? (
-      <button className="icon-button pane-header-action workspace-home-button" type="button" onClick={onHome} title="Home" aria-label="Home">
+      <button className="icon-button pane-header-action workspace-home-button" type="button" onClick={onHome} title="首页" aria-label="首页">
         <House size={14} />
       </button>
     ) : null}
@@ -274,7 +274,7 @@ export function CodingWorkspace({
   </div>;
 
   return (
-    <section className="viewer-pane coding-workspace" data-active-tab={shownTab} aria-label="Coding workspace">
+    <section className="viewer-pane coding-workspace" data-active-tab={shownTab} aria-label="编程工作区">
       <header className="pane-header viewer-header window-drag-handle">
         <span className="workspace-navigation-drag-exclusion" aria-hidden="true" />
         {renderNavigation()}
@@ -285,7 +285,7 @@ export function CodingWorkspace({
               paths={knownPaths}
               previewUrl={previewPageUrl}
               refreshDisabled={!project || preview?.status === "waiting" || preview?.status === "starting"}
-              refreshLabel={preview?.status === "ready" ? "Reload preview" : "Restart preview"}
+              refreshLabel={preview?.status === "ready" ? "重新加载预览" : "重启预览"}
               viewport={viewport}
               agentPlaytestWatch={agentPlaytestWatch}
               agentPlaytestWatchPending={agentPlaytestWatchPending}
@@ -302,8 +302,8 @@ export function CodingWorkspace({
           {supportsPreview ? <button
             className={`icon-button pane-header-action preview-play-button${player.open ? " is-active" : ""}`}
             type="button"
-            aria-label={player.open ? "Return to game" : "Play"}
-            data-tooltip={player.pending ? "Opening game..." : player.open ? "Return to game" : "Play in a new window"}
+            aria-label={player.open ? "返回游戏" : "游玩"}
+            data-tooltip={player.pending ? "正在打开游戏…" : player.open ? "返回游戏" : "在新窗口中游玩"}
             disabled={player.pending || (player.checking && !player.error) || (!player.open && (!project || preview?.status === "waiting" || preview?.status === "starting"))}
             onClick={playGame}
           >{player.pending ? <LoaderCircle className="spin" size={14} /> : <Play size={14} />}</button> : null}
@@ -316,15 +316,15 @@ export function CodingWorkspace({
             aria-label={publishLabel}
           >
             {publishing ? <LoaderCircle className="spin" size={14} /> : <Share2 size={14} />}
-            <span>Publish</span>
+            <span>发布</span>
           </button>
           {onClose ? (
             <button
               className="icon-button pane-header-action"
               type="button"
               onClick={onClose}
-              title="Hide workspace"
-              aria-label="Hide workspace"
+              title="隐藏工作区"
+              aria-label="隐藏工作区"
             >
               <PanelToggle size={14} />
             </button>
@@ -334,8 +334,8 @@ export function CodingWorkspace({
               className="icon-button pane-header-action"
               type="button"
               onClick={onToggleChat}
-              title="Show chat"
-              aria-label="Show chat"
+              title="显示聊天"
+              aria-label="显示聊天"
             >
               <PanelToggle size={14} />
             </button>
@@ -447,7 +447,7 @@ function PreviewControls({
         onRefresh={onRefresh}
       />
       {agentPlaytestWatch ? (
-        <button className={`icon-button pane-header-action preview-agent-watch-button${agentPlaytestWatch.visible ? " is-active" : ""}`} type="button" aria-label={agentPlaytestWatch.visible ? "Hide Agent playtest window" : "Show Agent playtests when they run"} aria-pressed={agentPlaytestWatch.visible} disabled={agentPlaytestWatchPending} data-tooltip={agentPlaytestWatch.visible ? "Hide Agent playtest window" : "Show Agent playtests when they run"} onClick={onToggleAgentPlaytestWatch}>
+        <button className={`icon-button pane-header-action preview-agent-watch-button${agentPlaytestWatch.visible ? " is-active" : ""}`} type="button" aria-label={agentPlaytestWatch.visible ? "隐藏 AI 试玩窗口" : "在 AI 试玩时显示窗口"} aria-pressed={agentPlaytestWatch.visible} disabled={agentPlaytestWatchPending} data-tooltip={agentPlaytestWatch.visible ? "隐藏 AI 试玩窗口" : "在 AI 试玩时显示窗口"} onClick={onToggleAgentPlaytestWatch}>
           <Video size={15} />
         </button>
       ) : null}
@@ -455,8 +455,8 @@ function PreviewControls({
         className="icon-button quiet-button preview-settings-button"
         type="button"
         onClick={onOpenSettings}
-        title="Project settings"
-        aria-label="Project settings"
+        title="项目设置"
+        aria-label="项目设置"
       >
         <Wrench size={15} />
       </button>
@@ -554,7 +554,7 @@ function PreviewLocation({
         <ChevronDown className={open ? "preview-location-chevron-open" : undefined} size={13} />
       </button>
       {open ? (
-        <div className="preview-location-popover" id={popoverId} role="dialog" aria-label="Preview pages">
+        <div className="preview-location-popover" id={popoverId} role="dialog" aria-label="预览页面">
           <form
             className="preview-location-search"
             onSubmit={(event) => {
@@ -565,8 +565,8 @@ function PreviewLocation({
             <Search size={16} />
             <input
               ref={search}
-              aria-label="Find page or enter path"
-              placeholder="Find page or enter path"
+              aria-label="查找页面或输入路径"
+              placeholder="查找页面或输入路径"
               spellCheck={false}
               value={query}
               onChange={(event) => setQuery(event.target.value)}
@@ -631,7 +631,7 @@ function ViewportMenu({ value, onChange }: { value: PreviewViewport; onChange: (
         aria-controls={menuId}
         aria-expanded={open}
         aria-haspopup="menu"
-        aria-label="Preview viewport"
+        aria-label="预览尺寸"
         title={viewportLabel(value)}
         onClick={() => setOpen((current) => !current)}
       >
@@ -639,7 +639,7 @@ function ViewportMenu({ value, onChange }: { value: PreviewViewport; onChange: (
         <ChevronDown size={11} />
       </button>
       {open ? (
-        <div className="viewport-menu-popover" id={menuId} role="menu" aria-label="Preview viewport">
+        <div className="viewport-menu-popover" id={menuId} role="menu" aria-label="预览尺寸">
           {(["fit", "tablet", "mobile"] as const).map((viewport) => (
             <button
               className="viewport-option"
@@ -671,9 +671,9 @@ function ViewportIcon({ viewport }: { viewport: PreviewViewport }) {
 }
 
 function viewportLabel(viewport: PreviewViewport): string {
-  if (viewport === "tablet") return "Tablet · 768px";
-  if (viewport === "mobile") return "Mobile · 375px";
-  return "Fit";
+  if (viewport === "tablet") return "平板 · 768px";
+  if (viewport === "mobile") return "手机 · 375px";
+  return "自适应";
 }
 
 export function playerViewport(viewport: PreviewViewport, bounds?: { width: number; height: number }): { width: number; height: number } {
@@ -731,9 +731,9 @@ export function PreviewView({ project, reload, revision, url, viewport, active =
         {cover ? <img className="preview-player-cover" src={cover} alt="" /> : null}
         <div className="preview-empty-state">
           <div className="preview-empty-mark" aria-hidden="true">{pending ? <LoaderCircle className="spin" size={20} /> : <Play size={20} />}</div>
-          <p className="preview-empty-title">{pending ? "Opening game..." : "Game is running in its own window"}</p>
-          <p className="preview-empty-description">Close the game window to return to the preview.</p>
-          {playerOpen && onPlay ? <button type="button" className="preview-return-button" disabled={pending} onClick={onPlay}>Return to game</button> : null}
+          <p className="preview-empty-title">{pending ? "正在打开游戏…" : "游戏正在独立窗口中运行"}</p>
+          <p className="preview-empty-description">关闭游戏窗口即可返回预览。</p>
+          {playerOpen && onPlay ? <button type="button" className="preview-return-button" disabled={pending} onClick={onPlay}>返回游戏</button> : null}
         </div>
       </div> : (active || started) && preview?.status === "ready" && url ? (
         <div className="preview-frame-wrap">
@@ -742,7 +742,7 @@ export function PreviewView({ project, reload, revision, url, viewport, active =
             key={`${url}:${reload}`}
             className="preview-frame"
             src={url}
-            title={`${project?.name ?? "Project"} preview`}
+            title={`${project?.name ?? "项目"} preview`}
             sandbox="allow-forms allow-modals allow-pointer-lock allow-same-origin allow-scripts"
             onLoad={(event) => scheduleCoverCapture(event.currentTarget)}
           />
@@ -843,10 +843,10 @@ function CodeView({
       void mutate(async () => { await saveProjectAssetToLibrary(projectId, entry.path); return {}; });
       return;
     }
-    if (!window.confirm(`Delete “${entry.path}”${entry.directory ? " and all its contents" : ""}? References in code will need to be updated. This cannot be undone.`)) return;
+    if (!window.confirm(`删除「${entry.path}”${entry.directory ? " 及其全部内容" : ""}? References in code will need to be updated. This cannot be undone.`)) return;
     void mutate(async () => { await deleteWorkspaceEntry(projectId, entry.path); return { from: entry.path }; });
   }
-  if (loading && files.length === 0) return <WorkspaceState loading label="Loading code" />;
+  if (loading && files.length === 0) return <WorkspaceState loading label="正在加载代码" />;
   if (error && !selectedPath) return <WorkspaceState error={error} />;
   return <>
     <div className="code-view" ref={codeElement} style={{ "--file-explorer-width": `${explorerWidth}px` } as CSSProperties}>
@@ -857,8 +857,8 @@ function CodeView({
             type="search"
             value={searchTerm}
             onChange={(event) => setSearchTerm(event.target.value)}
-            placeholder="Filter files…"
-            aria-label="Filter workspace files"
+            placeholder="筛选文件…"
+            aria-label="筛选工作区文件"
           />
         </label>
         {actionError ? <p className="file-action-error" role="alert">{actionError}</p> : null}
@@ -886,7 +886,7 @@ function CodeView({
                 if (node.data.path && !node.data.directory) onSelect(node.data.path);
                 else node.toggle();
               }}
-              aria-label="Workspace files"
+              aria-label="工作区文件"
             >
               {(props) => <WorkspaceTreeNode {...props} onContextMenu={projectId ? (node, event) => {
                 event.preventDefault();
@@ -907,7 +907,7 @@ function CodeView({
       <div
         className="file-explorer-resizer"
         role="separator"
-        aria-label="Resize file explorer"
+        aria-label="调整文件树宽度"
         aria-orientation="vertical"
         onPointerDown={(event) => {
           if (!event.isPrimary || event.button !== 0) return;
@@ -930,7 +930,7 @@ function CodeView({
         onLostPointerCapture={finishExplorerResize}
       />
       <div className="file-content">
-        {error ? <WorkspaceState error={error} /> : loading ? <WorkspaceState loading label="Loading file" /> : selectedFile ? (
+        {error ? <WorkspaceState error={error} /> : loading ? <WorkspaceState loading label="正在加载文件" /> : selectedFile ? (
           <>
             <div className="file-content-header">
               <span className="file-content-path" title={selectedFile.path}>{selectedFile.path}{selectedFile.truncated ? " (truncated)" : ""}</span>
@@ -939,14 +939,14 @@ function CodeView({
             {selectedMedia && projectId
               ? <WorkspaceMediaPreview projectId={projectId} file={selectedMedia} revision={revision} />
               : selectedFile.binary
-              ? <WorkspaceState label="Binary file preview is unavailable" />
+              ? <WorkspaceState label="无法预览二进制文件" />
               : <HighlightedCode path={selectedFile.path} content={selectedFile.content ?? ""} />}
           </>
-        ) : <WorkspaceState icon={<FolderOpen size={20} />} label="Select a file from the workspace tree" />}
+        ) : <WorkspaceState icon={<FolderOpen size={20} />} label="请从工作区文件树中选择文件" />}
       </div>
     </div>
     {contextMenu ? <WorkspaceTreeContextMenu menu={contextMenu} file={files.find((file) => file.path === contextMenu.path)} onClose={() => setContextMenu(undefined)} onOpen={onOpenExternal} onAction={(action) => entryAction(action, contextMenu)} /> : null}
-    {entryDialog ? <ProjectRenameDialog title={entryDialog.kind === "rename" ? `Rename ${fileName(entryDialog.path)}` : `New ${entryDialog.kind}`} name={entryDialog.kind === "rename" ? fileName(entryDialog.path) : ""} returnFocus={null} onClose={() => setEntryDialog(undefined)} onConfirm={(name) => {
+    {entryDialog ? <ProjectRenameDialog title={entryDialog.kind === "rename" ? `重命名 ${fileName(entryDialog.path)}` : `New ${entryDialog.kind}`} name={entryDialog.kind === "rename" ? fileName(entryDialog.path) : ""} returnFocus={null} onClose={() => setEntryDialog(undefined)} onConfirm={(name) => {
       const entry = entryDialog;
       setEntryDialog(undefined);
       if (!projectId || !name.trim()) return;
@@ -1067,10 +1067,10 @@ function FileOpenActions({ path, onOpen }: { path: string; onOpen: (path: string
 
   return (
     <div className="file-open-actions" ref={actions}>
-      <button type="button" disabled={opener.opening} onClick={() => void opener.choose("default")} title="Open in default app" aria-label="Open file in default app">
+      <button type="button" disabled={opener.opening} onClick={() => void opener.choose("default")} title="用默认应用打开" aria-label="用默认应用打开文件">
         <ExternalLink size={13} />
       </button>
-      <button className="file-open-menu-button" type="button" onClick={() => setOpen((value) => !value)} title="Choose how to open" aria-label="Choose how to open file" aria-expanded={open} aria-haspopup="menu">
+      <button className="file-open-menu-button" type="button" onClick={() => setOpen((value) => !value)} title="选择打开方式" aria-label="选择文件打开方式" aria-expanded={open} aria-haspopup="menu">
         <ChevronDown size={12} />
       </button>
       {open ? (
@@ -1131,7 +1131,7 @@ function WorkspaceTreeContextMenu({ menu, file, onClose, onOpen, onAction }: {
       ref={root}
       className="workspace-tree-context-menu"
       role="menu"
-      aria-label={menu.directory ? "Folder actions" : "File actions"}
+      aria-label={menu.directory ? "文件夹操作" : "文件操作"}
       tabIndex={-1}
       style={{ left: position.x, top: position.y }}
       onContextMenu={(event) => event.preventDefault()}
@@ -1145,19 +1145,19 @@ function WorkspaceTreeContextMenu({ menu, file, onClose, onOpen, onAction }: {
         items[next]?.focus();
       }}
     >
-      <button type="button" role="menuitem" onClick={() => onAction("new-file")}><Plus size={14} /><span>New file</span></button>
-      <button type="button" role="menuitem" onClick={() => onAction("new-folder")}><FolderPlus size={14} /><span>New folder</span></button>
+      <button type="button" role="menuitem" onClick={() => onAction("new-file")}><Plus size={14} /><span>新建文件</span></button>
+      <button type="button" role="menuitem" onClick={() => onAction("new-folder")}><FolderPlus size={14} /><span>新建文件夹</span></button>
       {menu.path ? <>
         <hr />
-        <button type="button" role="menuitem" onClick={() => onAction("rename")}><Pencil size={14} /><span>Rename</span></button>
-        <button type="button" role="menuitem" onClick={() => onAction("copy-path")}><Copy size={14} /><span>Copy relative path</span></button>
-        {file?.mediaType ? <button type="button" role="menuitem" onClick={() => onAction("save-library")}><Layers3 size={14} /><span>Save to Library</span></button> : null}
+        <button type="button" role="menuitem" onClick={() => onAction("rename")}><Pencil size={14} /><span>重命名</span></button>
+        <button type="button" role="menuitem" onClick={() => onAction("copy-path")}><Copy size={14} /><span>复制相对路径</span></button>
+        {file?.mediaType ? <button type="button" role="menuitem" onClick={() => onAction("save-library")}><Layers3 size={14} /><span>保存到素材库</span></button> : null}
       </> : null}
       {options.length ? <hr /> : null}
       {options.map(({ mode, label, icon: Icon }) => (
         <button type="button" role="menuitem" disabled={opener.opening} key={mode} onClick={() => void opener.choose(mode)}><Icon size={14} /><span>{label}</span></button>
       ))}
-      {menu.path ? <><hr /><button type="button" role="menuitem" className="workspace-file-delete" onClick={() => onAction("delete")}><Trash2 size={14} /><span>Delete</span></button></> : null}
+      {menu.path ? <><hr /><button type="button" role="menuitem" className="workspace-file-delete" onClick={() => onAction("delete")}><Trash2 size={14} /><span>删除</span></button></> : null}
       {opener.error ? <p className="file-open-error" role="alert">{opener.error}</p> : null}
     </div>,
     document.body,
@@ -1192,15 +1192,15 @@ function useProjectEntryOpener(
 }
 
 function projectEntryOpenOptions(platform: string | undefined, directory: boolean): Array<{ mode: ProjectFileOpenMode; label: string; icon: IconComponent }> {
-  const fileManager = platform === "darwin" ? "Finder" : platform === "win32" ? "File Explorer" : "file manager";
+  const fileManager = platform === "darwin" ? "Finder" : platform === "win32" ? "文件资源管理器" : "文件管理器";
   return [
-    { mode: "default", label: directory ? `Open in ${fileManager}` : "Default app", icon: ExternalLink },
-    { mode: "reveal", label: directory ? "Show in enclosing folder" : `Show in ${fileManager}`, icon: FolderOpen },
-    { mode: "vscode", label: directory ? "Open folder in VS Code" : "Open in VS Code", icon: Code2 },
-    { mode: "zed", label: directory ? "Open folder in Zed" : "Open in Zed", icon: Code2 },
+    { mode: "default", label: directory ? `使用以下应用打开：${fileManager}` : "默认应用", icon: ExternalLink },
+    { mode: "reveal", label: directory ? "打开所在文件夹" : `在以下位置显示：${fileManager}`, icon: FolderOpen },
+    { mode: "vscode", label: directory ? "用 VS Code 打开文件夹" : "用 VS Code 打开", icon: Code2 },
+    { mode: "zed", label: directory ? "用 Zed 打开文件夹" : "用 Zed 打开", icon: Code2 },
     ...(!directory && (platform === "darwin" || platform === "win32") ? [{
       mode: "text-editor" as const,
-      label: platform === "darwin" ? "Open in TextEdit" : "Open in Notepad",
+      label: platform === "darwin" ? "用文本编辑打开" : "用记事本打开",
       icon: FileText,
     }] : []),
   ];
@@ -1214,7 +1214,7 @@ function WorkspaceMediaPreview({ projectId, file, revision }: {
   const preview = useWorkspaceAssetUrl(projectId, file.path, revision);
   return (
     <div className="workspace-media-preview">
-      {!preview.url && !preview.error ? <span className="workspace-media-state"><LoaderCircle className="spin" size={16} />Loading preview</span> : null}
+      {!preview.url && !preview.error ? <span className="workspace-media-state"><LoaderCircle className="spin" size={16} />正在加载预览</span> : null}
       {preview.error ? <span className="workspace-media-state workspace-media-error" role="alert"><X size={16} />{preview.error}</span> : null}
       {preview.url ? <AssetMedia type={file.mediaType} url={preview.url} label={fileName(file.path)} /> : null}
     </div>
@@ -1223,7 +1223,7 @@ function WorkspaceMediaPreview({ projectId, file, revision }: {
 
 function loadWorkspaceFile(projectId: string, filePath: string, files: WorkspaceFile[]): Promise<WorkspaceFileContent> {
   const file = files.find((candidate) => candidate.path === filePath);
-  if (file?.directory) return Promise.reject(new Error("Path is a directory"));
+  if (file?.directory) return Promise.reject(new Error("此路径是文件夹"));
   if (file && hasMediaType(file)) {
     return Promise.resolve({ path: file.path, size: file.size, binary: true });
   }
@@ -1292,7 +1292,7 @@ function WorkspaceTreeNode({ node, style, onContextMenu }: NodeRendererProps<Wor
         className={`file-tree-toggle${node.isOpen ? " file-tree-toggle-open" : ""}`}
         type="button"
         tabIndex={-1}
-        aria-label={node.isOpen ? `Collapse ${node.data.name}` : `Expand ${node.data.name}`}
+        aria-label={node.isOpen ? `折叠 ${node.data.name}` : `展开 ${node.data.name}`}
         onClick={(event) => {
           event.stopPropagation();
           node.toggle();
@@ -1350,9 +1350,9 @@ export function AssetsView({
   const visibleAssets = useMemo(() => filterAssets(assets, mediaFilter, query, filters), [assets, mediaFilter, query, filters]);
   const selectedAsset = assets.find((asset) => asset.path === selectedPath);
 
-  if (loading && files.length === 0) return <WorkspaceState loading label="Loading assets" />;
+  if (loading && files.length === 0) return <WorkspaceState loading label="正在加载素材" />;
   if (error) return <WorkspaceState error={error} />;
-  if (!projectId || files.length === 0) return <WorkspaceState icon={<ImageIcon size={20} />} label="No media assets" />;
+  if (!projectId || files.length === 0) return <WorkspaceState icon={<ImageIcon size={20} />} label="没有媒体素材" />;
   return (
     <div className="assets-view">
       <div className="assets-toolbar">
@@ -1362,7 +1362,7 @@ export function AssetsView({
       </div>
       {visibleAssets.length ? <div className="library-grid assets-grid">{visibleAssets.map((asset) => (
         <WorkspaceAssetCard key={asset.path} title={fileName(asset.path)} asset={asset} onOpen={() => setSelectedPath(asset.path)} />
-      ))}</div> : <WorkspaceState icon={<ImageIcon size={20} />} label="No assets match these filters" />}
+      ))}</div> : <WorkspaceState icon={<ImageIcon size={20} />} label="没有符合筛选条件的素材" />}
       {selectedAsset ? <WorkspaceAssetDialog
         asset={selectedAsset}
         onClose={() => setSelectedPath(undefined)}
@@ -1384,12 +1384,12 @@ function WorkspaceState({ label, error, loading, icon }: { label?: string; error
 function PreviewState({ status, error }: { status?: ProjectState["preview"]["status"]; error?: string }) {
   switch (status) {
     case "error":
-      return <WorkspaceState error={error ?? "The preview process stopped."} />;
+      return <WorkspaceState error={error ?? "预览进程已停止。"} />;
     case "starting":
       return (
         <div className="preview-starting" role="status">
           <LoaderCircle className="spin" size={14} />
-          <span>Starting preview</span>
+          <span>正在启动预览</span>
         </div>
       );
     case "waiting":
@@ -1410,8 +1410,8 @@ function PreviewEmptyState() {
       <div className="preview-empty-mark" aria-hidden="true">
         <LaptopMinimalistic size={20} />
       </div>
-      <p className="preview-empty-title">Preview will appear here</p>
-      <p className="preview-empty-description">Describe your game in the agent panel to create a playable build.</p>
+      <p className="preview-empty-title">预览将在此处显示</p>
+      <p className="preview-empty-description">在 AI 面板中描述你的游戏，生成可玩的版本。</p>
     </div>
   );
 }

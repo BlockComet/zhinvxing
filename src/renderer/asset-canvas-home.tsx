@@ -83,11 +83,11 @@ export function AssetCanvasHome({ onNavigate, onOpenProject }: {
       <div className="asset-canvas-home-inner">
         <button className="asset-canvas-primary-create" type="button" disabled={creatingStarter !== undefined} onClick={() => setCreateOpen(true)}>
           <span className="asset-canvas-primary-icon"><Plus size={24} /></span>
-          <span><strong>New asset canvas</strong><small>Start with an empty workflow</small></span>
+          <span><strong>新建素材画布</strong><small>从空白工作流开始</small></span>
         </button>
 
         <section className="asset-canvas-quick-start" aria-labelledby="asset-canvas-quick-start-heading">
-          <h2 id="asset-canvas-quick-start-heading">Quick start</h2>
+          <h2 id="asset-canvas-quick-start-heading">快速开始</h2>
           <div className="asset-canvas-quick-grid">
             {ASSET_CANVAS_QUICK_STARTS.map((item) => {
               const Icon = QUICK_START_ICONS[item.type];
@@ -100,18 +100,18 @@ export function AssetCanvasHome({ onNavigate, onOpenProject }: {
           </div>
           {quickStartError ? <p className="home-notice" role="alert">
             {quickStartError.message}
-            {quickStartError.manageProviders ? <button type="button" onClick={() => onNavigate("settings")}>Manage providers</button> : null}
+            {quickStartError.manageProviders ? <button type="button" onClick={() => onNavigate("settings")}>管理服务商</button> : null}
           </p> : null}
         </section>
 
         <section className="home-discover asset-canvas-recent" aria-labelledby="recent-asset-canvases-heading">
           <div className="home-section-heading">
-            <h2 id="recent-asset-canvases-heading">Recent canvases</h2>
-            {phase === "error" ? <button type="button" onClick={() => void load()}><RefreshCw size={14} />Retry</button> : null}
+            <h2 id="recent-asset-canvases-heading">最近的画布</h2>
+            {phase === "error" ? <button type="button" onClick={() => void load()}><RefreshCw size={14} />重试</button> : null}
           </div>
           {phase === "loading" ? <AssetCanvasRecentSkeleton /> : null}
           {phase === "error" ? <p className="home-project-state" role="alert">{error}</p> : null}
-          {phase === "ready" && !projects.length ? <div className="asset-canvas-empty"><Image size={18} /><span>No asset canvases yet</span></div> : null}
+          {phase === "ready" && !projects.length ? <div className="asset-canvas-empty"><Image size={18} /><span>暂无素材画布</span></div> : null}
           {phase === "ready" && projects.length ? <div className="home-project-grid">
             {projects.map((project, index) => <ProjectCard
               key={project.id}
@@ -145,7 +145,7 @@ export function AssetCanvasHome({ onNavigate, onOpenProject }: {
 }
 
 function AssetCanvasRecentSkeleton() {
-  return <div className="home-project-grid" aria-label="Loading asset canvases">
+  return <div className="home-project-grid" aria-label="正在加载素材画布">
     {Array.from({ length: 4 }, (_, index) => <div className="project-card home-project-skeleton" key={index} />)}
   </div>;
 }

@@ -41,16 +41,16 @@ export function GamesPage({
 
   return (
     <SidebarPageLayout active="community" onNavigate={onNavigate}>
-      <SidebarPageHeader title="Community" actions={(
-        <button className="projects-icon-button" type="button" onClick={() => void load()} disabled={phase === "loading"} title="Refresh" aria-label="Refresh">
+      <SidebarPageHeader title="社区" actions={(
+        <button className="projects-icon-button" type="button" onClick={() => void load()} disabled={phase === "loading"} title="刷新" aria-label="刷新">
           <RefreshCw className={phase === "loading" ? "spin" : undefined} size={15} />
         </button>
       )} />
 
       <section className="explore-content">
-        {phase === "loading" ? <div className="explore-state"><LoaderCircle className="spin" size={20} />Loading games</div> : null}
+        {phase === "loading" ? <div className="explore-state"><LoaderCircle className="spin" size={20} />正在加载游戏</div> : null}
         {phase === "error" ? <div className="explore-state explore-error"><X size={20} />{error}</div> : null}
-        {phase === "ready" && games.length === 0 ? <div className="explore-state">No published games yet</div> : null}
+        {phase === "ready" && games.length === 0 ? <div className="explore-state">暂无已发布的游戏</div> : null}
         {phase === "ready" && games.length > 0 ? (
           <GameMosaic games={games.slice(0, HOME_GAME_MOSAIC_SLOTS.length)} onOhMyGame={onOhMyGame} />
         ) : null}
@@ -102,7 +102,7 @@ function GameTile({ className = "", game, onOpen, slot, useFixedSlot = false }: 
       {coverUrl
         ? <img className="explore-game-cover" src={coverUrl} alt="" />
         : <span className="explore-game-cover-placeholder" aria-hidden="true"><img src={brandMark} alt="" /></span>}
-      <button type="button" onClick={onOpen} aria-label={`Play ${game.title}`}>
+      <button type="button" onClick={onOpen} aria-label={`播放 ${game.title}`}>
         <span className="explore-game-overlay">
           <span className="explore-game-overlay-copy">
             <strong>{game.title}</strong>
@@ -182,14 +182,14 @@ export function GamePlayer({ gameId, onBack, onNavigate, onOhMyGame }: {
 
   return (
     <SidebarPageLayout active="community" onNavigate={onNavigate}>
-      <SidebarPageHeader title={game?.title ?? "Game"} breadcrumb={{ label: "Games", onClick: onBack }} />
+      <SidebarPageHeader title={game?.title ?? "游戏"} breadcrumb={{ label: "游戏", onClick: onBack }} />
       <section className="game-detail-scroll">
-        {!game && !error ? <div className="explore-state"><LoaderCircle className="spin" size={20} />Loading game</div> : null}
+        {!game && !error ? <div className="explore-state"><LoaderCircle className="spin" size={20} />正在加载游戏</div> : null}
         {error ? (
           <div className="explore-state explore-error">
             <X size={20} />
             <span>{error}</span>
-            <button className="quiet-button" type="button" onClick={() => void load()}>Retry</button>
+            <button className="quiet-button" type="button" onClick={() => void load()}>重试</button>
           </div>
         ) : null}
         {game ? <GameDetail game={game} relatedGames={relatedGames} onOhMyGame={onOhMyGame} /> : null}
@@ -250,15 +250,15 @@ function GameDetail({ game, relatedGames, onOhMyGame }: {
             </div>
           </div>
           <div className="electron-game-toolbar-actions">
-            <button type="button" onClick={() => void shareGame()} title={shared ? "Link copied" : "Share game"} aria-label="Share game"><Share2 size={17} /></button>
-            <button type="button" onClick={() => void toggleFullscreen()} title="Fullscreen" aria-label="Fullscreen"><Maximize size={17} /></button>
+            <button type="button" onClick={() => void shareGame()} title={shared ? "链接已复制" : "分享游戏"} aria-label="分享游戏"><Share2 size={17} /></button>
+            <button type="button" onClick={() => void toggleFullscreen()} title="全屏" aria-label="全屏"><Maximize size={17} /></button>
           </div>
         </div>
       </div>
 
       {relatedGames.length ? (
-        <section className="electron-game-related" aria-label="More games">
-          <h2>More games</h2>
+        <section className="electron-game-related" aria-label="更多游戏">
+          <h2>更多游戏</h2>
           <div className="electron-game-related-grid">
             {relatedGames.map((relatedGame) => (
               <GameTile

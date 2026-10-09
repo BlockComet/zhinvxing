@@ -104,9 +104,9 @@ export function ModelSelector({ models, status = "ready", value, reasoningLevel,
     if (!supportsReasoning) setPanel((current) => current === "reasoning" ? undefined : current);
   }, [supportsReasoning]);
 
-  const unavailableLabel = status === "loading" ? "Loading models..."
-    : status === "error" ? "Could not load models"
-    : "No language model";
+  const unavailableLabel = status === "loading" ? "正在加载模型…"
+    : status === "error" ? "无法加载模型"
+    : "尚未配置语言模型";
 
   return (
     <div className={`model-selector${canvas ? " model-selector-canvas" : ""}`} ref={root}>
@@ -114,13 +114,13 @@ export function ModelSelector({ models, status = "ready", value, reasoningLevel,
         ref={trigger}
         className={canvas ? "canvas-chip is-wide" : "model-selector-trigger"}
         type="button"
-        aria-label={canvas ? `Text model: ${current?.name ?? unavailableLabel}` : "Model"}
+        aria-label={canvas ? `语言模型：${current?.name ?? unavailableLabel}` : "模型"}
         aria-controls={menuId}
         aria-expanded={open}
         aria-haspopup="menu"
         disabled={disabled || (!canvas && !canSelect)}
         onClick={toggle}
-        title={canvas && current ? `Text model: ${current.providerName} · ${current.name}${supportsReasoning ? ` · Reasoning: ${reasoningLabel(effectiveReasoning)}` : ""}` : "Model"}
+        title={canvas && current ? `语言模型：${current.providerName} · ${current.name}${supportsReasoning ? ` · 推理：${reasoningLabel(effectiveReasoning)}` : ""}` : "模型"}
       >
         {canvas ? <span>{current?.name ?? unavailableLabel}</span> : <span className="model-selector-current">
           <span className="model-selector-name">{current?.name ?? unavailableLabel}</span>
@@ -140,11 +140,11 @@ export function ModelSelector({ models, status = "ready", value, reasoningLevel,
           } else moveModelFocus(event, popover.current, showReasoning ? undefined : search.current);
         }}>
           {!showReasoning ? (
-            <div className="model-selector-menu" role="menu" aria-label="Models">
+            <div className="model-selector-menu" role="menu" aria-label="模型">
               <div className="model-selector-search-row">
                 <label className="model-selector-search">
                   <Search size={13} aria-hidden="true" />
-                  <input ref={search} value={query} placeholder="Search models" aria-label="Search models" onChange={(event) => setQuery(event.target.value)} onKeyDown={(event) => {
+                  <input ref={search} value={query} placeholder="搜索模型" aria-label="搜索模型" onChange={(event) => setQuery(event.target.value)} onKeyDown={(event) => {
                     if (event.key !== "Enter" || event.nativeEvent.isComposing || event.keyCode === 229) return;
                     event.preventDefault();
                     event.stopPropagation();
@@ -153,7 +153,7 @@ export function ModelSelector({ models, status = "ready", value, reasoningLevel,
                     select(first);
                   }} />
                 </label>
-                <button className="model-selector-manage" type="button" aria-label="Manage providers" title="Manage providers" onClick={() => {
+                <button className="model-selector-manage" type="button" aria-label="管理服务商" title="管理服务商" onClick={() => {
                   close(true);
                   window.location.hash = settingsHash("providers");
                 }}><Settings aria-hidden="true" size={13} /></button>
@@ -181,11 +181,11 @@ export function ModelSelector({ models, status = "ready", value, reasoningLevel,
                     })}
                   </div>
                 ))}
-                {visibleModels.length === 0 ? <p className="model-selector-empty" role="status">{status !== "ready" || !query.trim() ? unavailableLabel : "No matching models"}</p> : null}
+                {visibleModels.length === 0 ? <p className="model-selector-empty" role="status">{status !== "ready" || !query.trim() ? unavailableLabel : "没有匹配的模型"}</p> : null}
               </div>
               {supportsReasoning && canSelect ? (
                 <button className="model-selector-reasoning" type="button" role="menuitem" onClick={() => setPanel("reasoning")}>
-                  <span>Reasoning</span>
+                  <span>推理</span>
                   <span className="model-selector-setting-value">{reasoningLabel(effectiveReasoning)}<ChevronRight size={12} /></span>
                 </button>
               ) : null}
@@ -193,10 +193,10 @@ export function ModelSelector({ models, status = "ready", value, reasoningLevel,
           ) : null}
 
           {showReasoning ? (
-            <div className="model-selector-submenu" role="menu" aria-label="Reasoning levels">
+            <div className="model-selector-submenu" role="menu" aria-label="推理级别">
               <button className="model-selector-back" type="button" role="menuitem" onClick={() => setPanel("models")}>
                 <ChevronLeft size={12} />
-                <span>Reasoning</span>
+                <span>推理</span>
               </button>
               {(current?.reasoningLevels ?? []).map((level) => {
                 const selected = level === effectiveReasoning;

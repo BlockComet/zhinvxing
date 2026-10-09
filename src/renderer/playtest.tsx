@@ -31,7 +31,7 @@ export function PlaytestPage({ projectId }: { projectId: string }) {
     setStart(takePlaytestStart(projectId));
     history.current.reset();
     void getNodeRuntime(projectId).then(async (result) => {
-      if (!result.available) throw new Error("This project has no Scenes yet.");
+      if (!result.available) throw new Error("此项目尚无场景。");
       const assets = await loadPlayableAssets(projectId, result.definition.graph);
       if (disposed) return;
       document.title = `${result.definition.graph.title} - Playtest`;
@@ -102,7 +102,7 @@ export function PlaytestPage({ projectId }: { projectId: string }) {
     <main className="playable-player-page">
       <WindowDragRegion />
       <div className="playable-player-page-state" role={playable.status === "error" ? "alert" : undefined}>
-        {playable.status === "error" ? playable.error : "Loading playtest..."}
+        {playable.status === "error" ? playable.error : "正在加载试玩…"}
       </div>
     </main>
   );

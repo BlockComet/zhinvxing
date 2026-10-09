@@ -1,6 +1,8 @@
 import { isUtf8 } from "node:buffer";
 import { createHash, randomUUID } from "node:crypto";
-import { createReadStream } from "node:fs";
+import { createReadStream, existsSync } from "node:fs";
+import { RestorationStore } from "./restoration.js";
+import { registerStudioRoutes } from "./studio-routes.js";
 import { readFile } from "node:fs/promises";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
@@ -525,6 +527,8 @@ export function createApp(options: AppOptions = {}) {
   const events = new RuntimeEventBus(1_000, (event) => conversationImages.event(event));
   const library = new AssetLibrary(dataDirectory);
   const projects = new ProjectManager(dataDirectory, library);
+  const studio = new RestorationStore(dataDirectory, projects);
+  const isRestoration = (id: string) => existsSync(path.join(studio.root, id, "restoration.json"));
   const attachments = new AgentAttachmentStore();
   const conversations = new ConversationManager(conversationImages);
   const agentPlaytests = new Map<string, OwnedPlaytestDriver>();
@@ -670,7 +674,7 @@ export function createApp(options: AppOptions = {}) {
         agentPlaytests.set(playtestKey, playtest);
       }
       return createPiSession(
-        project,
+        { ...project, restoration: isRestoration(project.id) },
         conversations.open(project, conversation),
         createAgentTools(
           project,
@@ -702,12 +706,14 @@ export function createApp(options: AppOptions = {}) {
     }),
     activeToolNames: (project, mode, session) => {
       const registered = session.getAllTools?.().map((tool) => tool.name) ?? [];
+      if (isRestoration(project.id)) return mode === "planning" ? ["read", "questionnaire", "update_plan"] : ["read", "write", "edit", "questionnaire", "update_plan"];
       return projectPiToolNames(mode, TOOL_IDS, registered, webSearch.enabled());
     },
     onRunFinished: async (project, conversationId) => {
       await agentPlaytests.get(`${project.id}:${conversationId}`)?.cleanup();
     },
     onRunCompleted: (project) => {
+      if (isRestoration(project.id)) return;
       if (project.preview.status === "ready" || project.preview.status === "starting") return;
       void resolveStartupDirectory(project.workspacePath, project.startupDirectory ?? ".")
         .then(({ absolutePath }) => isRunnableWorkspace(absolutePath, project.startupScript ?? "dev"))
@@ -725,6 +731,14 @@ export function createApp(options: AppOptions = {}) {
     ajv: { customOptions: { coerceTypes: false } },
   });
   const canvasStore = registerCanvasRoutes(app, { projects, library, tools });
+  registerStudioRoutes(app, projects, studio, [path.join(repositoryRoot, ".runtime", "electron"), path.dirname(process.execPath), path.resolve(path.dirname(process.execPath), "../../..")], id => agents.projectActivity().some(activity => activity.projectId === id), [path.join(repositoryRoot, ".runtime", "capacitor-tools"), path.join(path.dirname(process.execPath), "resources", "capacitor-tools"), path.resolve(path.dirname(process.execPath), "../../capacitor-tools")]);
+  app.addHook("preHandler", async (request, reply) => {
+    const id = (request.params as { projectId?: string })?.projectId;
+    if (!id || !isRestoration(id)) return;
+    const route = request.routeOptions.url ?? "";
+    if (request.method === "POST" && /\/(preview|publish|playable\/validation|tools)$/.test(route)) return reply.code(409).send({ error: "复原项目尚未接入隔离运行器，不能直接执行导入工程。已整理的静态成果可从发布中心导出。" });
+    if (request.method === "POST" && /\/(turns|approve|revise|steer)$/.test(route) && (await studio.state(id)).restoration?.state === "paused") return reply.code(409).send({ error: "复原任务已暂停，请在复原与发布中心恢复。" });
+  });
 
   app.addContentTypeParser("image/webp", { parseAs: "buffer", bodyLimit: MAX_PROJECT_COVER_BYTES }, (_request, body, done) => {
     done(null, body);

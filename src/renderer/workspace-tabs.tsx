@@ -7,7 +7,7 @@ export interface WorkspaceTabOption<Id extends string> {
   icon: IconComponent;
 }
 
-export function WorkspaceTabs<Id extends string>({ tabs, active, onChange, label = "Workspace views" }: {
+export function WorkspaceTabs<Id extends string>({ tabs, active, onChange, label = "工作区视图" }: {
   tabs: WorkspaceTabOption<Id>[];
   active: Id;
   onChange: (id: Id) => void;

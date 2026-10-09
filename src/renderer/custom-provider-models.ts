@@ -32,7 +32,7 @@ export function initialCustomThinkingLevelMap(model: CustomProviderModel): Custo
 }
 
 export function modelError(model: CustomProviderModel): string | undefined {
-  if (!model.id.trim() || /[\s\x00-\x1f]/.test(model.id) || model.id.length > 200) return "Enter a model ID without spaces (up to 200 characters).";
+  if (!model.id.trim() || /[\s\x00-\x1f]/.test(model.id) || model.id.length > 200) return "请输入不含空格的模型 ID（最多 200 个字符）。";
   if (!Number.isSafeInteger(model.contextWindow) || model.contextWindow < 1 || model.contextWindow > 100_000_000 || !Number.isSafeInteger(model.maxTokens) || model.maxTokens < 1 || model.maxTokens > model.contextWindow) return `Check the token limits for ${model.name || model.id}. Output tokens must not exceed the context window.`;
   if (model.thinkingLevelMap) {
     if (!supportedReasoningLevels({ reasoning: model.reasoning, thinkingLevelMap: { ...model.reasoningCapabilities?.thinkingLevelMap, ...model.thinkingLevelMap } }).length) return `Enable at least one reasoning level for ${model.name || model.id}.`;

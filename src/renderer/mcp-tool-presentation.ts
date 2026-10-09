@@ -32,7 +32,7 @@ function humanizeIdentifier(value: string): string {
     .toLowerCase()
     .split(/\s+/)
     .filter(Boolean);
-  if (words.length === 0) return "Tool";
+  if (words.length === 0) return "工具";
   return words.map((word, index) => {
     if (DISPLAY_WORDS[word]) return DISPLAY_WORDS[word];
     return index === 0 ? word[0].toUpperCase() + word.slice(1) : word;

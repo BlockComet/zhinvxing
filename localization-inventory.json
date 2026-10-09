@@ -1,0 +1,7834 @@
+[
+  {
+    "text": "Waiting to steer",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Copy response",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Copy",
+    "files": [
+      "agent-timeline.tsx",
+      "canvas-document-node.tsx",
+      "markdown-content.tsx"
+    ]
+  },
+  {
+    "text": "Enter",
+    "files": [
+      "agent-timeline.tsx",
+      "canvas-chip-select.tsx",
+      "coding-workspace.tsx",
+      "composer.tsx",
+      "inline-answer.tsx",
+      "model-selector.tsx",
+      "node-workbench.tsx",
+      "playable-node-card.tsx",
+      "project-prompt-creator.tsx",
+      "project-rename-dialog.tsx",
+      "prompt-box.tsx",
+      "prompt-lists.ts",
+      "video-reference-prompt.tsx"
+    ]
+  },
+  {
+    "text": "Edit message",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Cancel",
+    "files": [
+      "agent-timeline.tsx",
+      "asset-canvas-workspace.tsx",
+      "canvas-workspace.tsx",
+      "connections-settings.tsx",
+      "custom-provider-dialog.tsx",
+      "library.tsx",
+      "models-settings.tsx",
+      "playable-project-settings-dialog.tsx",
+      "plugins.tsx",
+      "project-create-dialog.tsx",
+      "project-rename-dialog.tsx",
+      "project-settings-dialog.tsx",
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Send",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Copy message",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Edit",
+    "files": [
+      "agent-timeline.tsx",
+      "desktop-window-frame.tsx",
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Editor context",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Attached files",
+    "files": [
+      "agent-timeline.tsx",
+      "composer-attachments.tsx"
+    ]
+  },
+  {
+    "text": "Thinking",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "work-activity work-activity-active",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Stopped while thinking",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Stopped before work began",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Worked for",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Connection error",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Context compacted",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Context compaction stopped",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Context compaction failed",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Compacting context",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Switched to",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Viewed an image",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "timeline-event timeline-event-expandable",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Stopped",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Interrupted",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "tool-activity tool-row tool-row-expandable timeline-activity connection-activity",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Model setup required",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "The selected model isn't configured. Choose an available model or connect its provider in Settings, then try again.",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Query",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Provider",
+    "files": [
+      "agent-timeline.tsx",
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Fallback used after",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "was unavailable.",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Results",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Results truncated",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Web search failed without output.",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "tool-details tool-shell-details",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Shell",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Output truncated",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Command failed without output.",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Result",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Result truncated",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Operation failed without output.",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "File",
+    "files": [
+      "agent-timeline.tsx",
+      "desktop-window-frame.tsx"
+    ]
+  },
+  {
+    "text": "Unknown file",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "File change failed without output.",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Input",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Output",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "The tool call failed without output.",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Tool result image",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Search",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Path",
+    "files": [
+      "agent-timeline.tsx",
+      "asset-browser.tsx"
+    ]
+  },
+  {
+    "text": "Generated 3D model",
+    "files": [
+      "agent-timeline.tsx",
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Generated image",
+    "files": [
+      "agent-timeline.tsx",
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Preparing command",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Preparing read",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Preparing file",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Preparing edit",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Preparing web search",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Preparing MCP",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Preparing game use",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Preparing",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Edit Files",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Read Files",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Search Files",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "List Files",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Search Web",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Editing",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Writing",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Reading",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Searching for",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Finding",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Listing",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Searching the web for",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Generating image",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Edited",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Read",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Searched for",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Listed",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Searched the web for",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Opened game preview",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Opening game preview",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Inspected game state",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Inspecting game state",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "a playtest action",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "playtest actions",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Captured game screenshot",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Capturing game screenshot",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Closed game preview",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Closing game preview",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Used game playtest",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Running game playtest",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Exa",
+    "files": [
+      "agent-timeline.tsx",
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Parallel",
+    "files": [
+      "agent-timeline.tsx",
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "the custom provider",
+    "files": [
+      "agent-timeline.tsx"
+    ]
+  },
+  {
+    "text": "Could not reach the local runtime",
+    "files": [
+      "api.ts"
+    ]
+  },
+  {
+    "text": "Invalid conversation image reference",
+    "files": [
+      "api.ts"
+    ]
+  },
+  {
+    "text": "(max-width: 720px)",
+    "files": [
+      "app-sidebar.tsx",
+      "project-shell.tsx",
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Update",
+    "files": [
+      "app-sidebar.tsx"
+    ]
+  },
+  {
+    "text": "Restart",
+    "files": [
+      "app-sidebar.tsx"
+    ]
+  },
+  {
+    "text": "ArrowLeft",
+    "files": [
+      "app-sidebar.tsx",
+      "model-selector.tsx",
+      "project-shell.tsx"
+    ]
+  },
+  {
+    "text": "ArrowRight",
+    "files": [
+      "app-sidebar.tsx",
+      "project-shell.tsx"
+    ]
+  },
+  {
+    "text": "OhMyGame",
+    "files": [
+      "app-sidebar.tsx"
+    ]
+  },
+  {
+    "text": "Main navigation",
+    "files": [
+      "app-sidebar.tsx"
+    ]
+  },
+  {
+    "text": "Home",
+    "files": [
+      "app-sidebar.tsx",
+      "canvas-workspace.tsx",
+      "coding-workspace.tsx",
+      "playable-editor-workspace.tsx",
+      "project-prompt-creator.tsx",
+      "project-shell.tsx"
+    ]
+  },
+  {
+    "text": "Projects",
+    "files": [
+      "app-sidebar.tsx",
+      "asset-browser.tsx",
+      "projects.tsx"
+    ]
+  },
+  {
+    "text": "Library",
+    "files": [
+      "app-sidebar.tsx",
+      "asset-canvas-workspace.tsx",
+      "library-filters.tsx",
+      "library.tsx"
+    ]
+  },
+  {
+    "text": "Community",
+    "files": [
+      "app-sidebar.tsx",
+      "games.tsx"
+    ]
+  },
+  {
+    "text": "home-nav-label home-nav-label-spaced",
+    "files": [
+      "app-sidebar.tsx"
+    ]
+  },
+  {
+    "text": "Web Game",
+    "files": [
+      "app-sidebar.tsx",
+      "project-types.tsx"
+    ]
+  },
+  {
+    "text": "Interactive Story",
+    "files": [
+      "app-sidebar.tsx",
+      "project-types.tsx"
+    ]
+  },
+  {
+    "text": "Godot",
+    "files": [
+      "app-sidebar.tsx",
+      "mcp-tool-presentation.ts",
+      "project-types.tsx"
+    ]
+  },
+  {
+    "text": "Asset Canvas",
+    "files": [
+      "app-sidebar.tsx",
+      "project-types.tsx"
+    ]
+  },
+  {
+    "text": "Open account menu",
+    "files": [
+      "app-sidebar.tsx"
+    ]
+  },
+  {
+    "text": "Settings",
+    "files": [
+      "app-sidebar.tsx"
+    ]
+  },
+  {
+    "text": "Loading account",
+    "files": [
+      "app-sidebar.tsx"
+    ]
+  },
+  {
+    "text": "Sign in",
+    "files": [
+      "app-sidebar.tsx",
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Application menu",
+    "files": [
+      "app-sidebar.tsx",
+      "desktop-window-frame.tsx"
+    ]
+  },
+  {
+    "text": "Resize sidebar",
+    "files": [
+      "app-sidebar.tsx"
+    ]
+  },
+  {
+    "text": "$plugin-creator Create an OhMyGame plugin that",
+    "files": [
+      "app.tsx"
+    ]
+  },
+  {
+    "text": "(prefers-color-scheme: dark)",
+    "files": [
+      "appearance.ts"
+    ]
+  },
+  {
+    "text": "Generated",
+    "files": [
+      "asset-browser.tsx",
+      "library-filters.tsx"
+    ]
+  },
+  {
+    "text": "Uploaded",
+    "files": [
+      "asset-browser.tsx",
+      "library-filters.tsx"
+    ]
+  },
+  {
+    "text": "Project file",
+    "files": [
+      "asset-browser.tsx"
+    ]
+  },
+  {
+    "text": "Built-in",
+    "files": [
+      "asset-browser.tsx",
+      "connections-settings.tsx",
+      "library-filters.tsx"
+    ]
+  },
+  {
+    "text": "Unknown source",
+    "files": [
+      "asset-browser.tsx"
+    ]
+  },
+  {
+    "text": "All assets",
+    "files": [
+      "asset-browser.tsx"
+    ]
+  },
+  {
+    "text": "Images",
+    "files": [
+      "asset-browser.tsx"
+    ]
+  },
+  {
+    "text": "Videos",
+    "files": [
+      "asset-browser.tsx"
+    ]
+  },
+  {
+    "text": "Audio",
+    "files": [
+      "asset-browser.tsx",
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "3D models",
+    "files": [
+      "asset-browser.tsx"
+    ]
+  },
+  {
+    "text": "Media types",
+    "files": [
+      "asset-browser.tsx"
+    ]
+  },
+  {
+    "text": "Search assets",
+    "files": [
+      "asset-browser.tsx"
+    ]
+  },
+  {
+    "text": "Escape",
+    "files": [
+      "asset-browser.tsx",
+      "asset-canvas-workspace.tsx",
+      "asset-gallery.tsx",
+      "canvas-chip-select.tsx",
+      "canvas-workspace.tsx",
+      "coding-workspace.tsx",
+      "composer-attachments.tsx",
+      "composer.tsx",
+      "connections-settings.tsx",
+      "conversation-menu.tsx",
+      "custom-provider-dialog.tsx",
+      "editor-canvas.tsx",
+      "examples.tsx",
+      "inline-answer.tsx",
+      "library-filters.tsx",
+      "library.tsx",
+      "model-selector.tsx",
+      "node-workbench.tsx",
+      "playable-node-card.tsx",
+      "playable-node-workbench.tsx",
+      "playable-template-dialog.tsx",
+      "plugins.tsx",
+      "project-card.tsx",
+      "project-create-dialog.tsx",
+      "project-prompt-creator.tsx",
+      "project-rename-dialog.tsx",
+      "project-settings-dialog.tsx",
+      "publish-dialog.tsx",
+      "send-to-project-dialog.tsx",
+      "sign-in-dialog.tsx",
+      "video-reference-prompt.tsx"
+    ]
+  },
+  {
+    "text": "· Reference",
+    "files": [
+      "asset-browser.tsx"
+    ]
+  },
+  {
+    "text": "Save to Library",
+    "files": [
+      "asset-browser.tsx",
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Rename",
+    "files": [
+      "asset-browser.tsx",
+      "canvas-workspace.tsx",
+      "coding-workspace.tsx",
+      "node-workbench.tsx",
+      "project-card.tsx"
+    ]
+  },
+  {
+    "text": "Delete",
+    "files": [
+      "asset-browser.tsx",
+      "asset-canvas-workspace.tsx",
+      "canvas-workspace.tsx",
+      "coding-workspace.tsx",
+      "playable-canvas-menus.tsx",
+      "playable-editor-workspace.tsx",
+      "project-card.tsx",
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Video",
+    "files": [
+      "asset-browser.tsx",
+      "asset-canvas-quick-start.ts",
+      "asset-canvas-workspace.tsx",
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Loading asset",
+    "files": [
+      "asset-browser.tsx"
+    ]
+  },
+  {
+    "text": "library-dialog-state library-dialog-error",
+    "files": [
+      "asset-browser.tsx"
+    ]
+  },
+  {
+    "text": "Type",
+    "files": [
+      "asset-browser.tsx",
+      "connections-settings.tsx",
+      "project-create-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Size",
+    "files": [
+      "asset-browser.tsx"
+    ]
+  },
+  {
+    "text": "Source",
+    "files": [
+      "asset-browser.tsx",
+      "library-filters.tsx",
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Use",
+    "files": [
+      "asset-browser.tsx",
+      "library-filters.tsx"
+    ]
+  },
+  {
+    "text": "Reference",
+    "files": [
+      "asset-browser.tsx",
+      "node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Project",
+    "files": [
+      "asset-browser.tsx",
+      "asset-canvas-workspace.tsx",
+      "coding-workspace.tsx",
+      "library-filters.tsx",
+      "playable-project-settings-dialog.tsx",
+      "project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Open project",
+    "files": [
+      "asset-browser.tsx",
+      "project-prompt-creator.tsx"
+    ]
+  },
+  {
+    "text": "Show in Code",
+    "files": [
+      "asset-browser.tsx"
+    ]
+  },
+  {
+    "text": "3D model",
+    "files": [
+      "asset-browser.tsx",
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "home-content asset-canvas-home",
+    "files": [
+      "asset-canvas-home.tsx"
+    ]
+  },
+  {
+    "text": "New asset canvas",
+    "files": [
+      "asset-canvas-home.tsx"
+    ]
+  },
+  {
+    "text": "Start with an empty workflow",
+    "files": [
+      "asset-canvas-home.tsx"
+    ]
+  },
+  {
+    "text": "Quick start",
+    "files": [
+      "asset-canvas-home.tsx"
+    ]
+  },
+  {
+    "text": "Manage providers",
+    "files": [
+      "asset-canvas-home.tsx",
+      "asset-canvas-workspace.tsx",
+      "model-selector.tsx"
+    ]
+  },
+  {
+    "text": "home-discover asset-canvas-recent",
+    "files": [
+      "asset-canvas-home.tsx"
+    ]
+  },
+  {
+    "text": "Recent canvases",
+    "files": [
+      "asset-canvas-home.tsx"
+    ]
+  },
+  {
+    "text": "Retry",
+    "files": [
+      "asset-canvas-home.tsx",
+      "connections-settings.tsx",
+      "game-studio-home.tsx",
+      "games.tsx",
+      "home.tsx",
+      "library.tsx",
+      "models-settings.tsx",
+      "plugins.tsx",
+      "projects.tsx",
+      "send-to-project-dialog.tsx"
+    ]
+  },
+  {
+    "text": "No asset canvases yet",
+    "files": [
+      "asset-canvas-home.tsx"
+    ]
+  },
+  {
+    "text": "Loading asset canvases",
+    "files": [
+      "asset-canvas-home.tsx"
+    ]
+  },
+  {
+    "text": "project-card home-project-skeleton",
+    "files": [
+      "asset-canvas-home.tsx"
+    ]
+  },
+  {
+    "text": "Image",
+    "files": [
+      "asset-canvas-quick-start.ts",
+      "asset-canvas-workspace.tsx",
+      "canvas-document-node.tsx",
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "GPT Image 2.5",
+    "files": [
+      "asset-canvas-quick-start.ts"
+    ]
+  },
+  {
+    "text": "Nano Banana 2",
+    "files": [
+      "asset-canvas-quick-start.ts"
+    ]
+  },
+  {
+    "text": "Seedance 2.0",
+    "files": [
+      "asset-canvas-quick-start.ts"
+    ]
+  },
+  {
+    "text": "Seedance 2.5",
+    "files": [
+      "asset-canvas-quick-start.ts"
+    ]
+  },
+  {
+    "text": "QuickStartModelUnavailableError",
+    "files": [
+      "asset-canvas-quick-start.ts"
+    ]
+  },
+  {
+    "text": "Assets",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "coding-workspace.tsx",
+      "library-filters.tsx"
+    ]
+  },
+  {
+    "text": "Text",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Write a reusable prompt",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Generate an image on canvas",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Generate a video on canvas",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Model 3D",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Generate a 3D model on canvas",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Animate 3D",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Rig a 3D character and add moves",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Document",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Markdown document",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Existing document",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Add a document reference",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Untitled document",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "use-canvas-documents.ts"
+    ]
+  },
+  {
+    "text": "Documents",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "The canvas changed while saving. Review the current board before saving again.",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Upload a PNG, JPEG, SVG, WebP, MP4, MOV, WebM, MP3, or WAV file.",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "The upload must be no larger than 200 MB.",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "A file import is already running.",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Import at most 1,000 files at a time.",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "A canvas can contain at most 2,000 nodes.",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Text documents cannot exceed 1 MB.",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Could not create a document.",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "The canvas filled up during import. Add the uploaded assets from Library.",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Document references can only be pasted into boards in the same project.",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Add an instruction before generating.",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "This node cannot accept more reference images.",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Missing asset",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Add reference images",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Model",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "model-selector.tsx"
+    ]
+  },
+  {
+    "text": "Connect a 3D model",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "viewer-pane interactive-story-workspace",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Asset Canvas workspace",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "button, a, .nokey",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Drop files",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Importing files",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Loading canvas...",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "story-canvas-state story-canvas-state-error",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "playable-editor-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Could not load canvas.",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Reload canvas",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Backspace",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "composer.tsx",
+      "playable-editor-workspace.tsx",
+      "project-prompt-creator.tsx",
+      "prompt-lists.ts"
+    ]
+  },
+  {
+    "text": "Dismiss",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "canvas-workspace.tsx",
+      "playable-node-workbench.tsx",
+      "playable-playtest.tsx"
+    ]
+  },
+  {
+    "text": "Retrying…",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Retry save",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Reload changes",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "story-save-notice canvas-transfer-error",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Dismiss error",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "design-modal-backdrop nokey",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Node details",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "canvas-node-label.tsx"
+    ]
+  },
+  {
+    "text": "Close",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "canvas-workspace.tsx",
+      "connections-settings.tsx",
+      "custom-provider-dialog.tsx",
+      "examples.tsx",
+      "playable-template-dialog.tsx",
+      "project-create-dialog.tsx",
+      "project-settings-dialog.tsx",
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Name",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "canvas-workspace.tsx",
+      "project-create-dialog.tsx",
+      "project-rename-dialog.tsx",
+      "projects.tsx",
+      "publish-dialog.tsx",
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Automatic name",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Description",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Save",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "canvas-workspace.tsx",
+      "models-settings.tsx",
+      "playable-project-settings-dialog.tsx",
+      "project-rename-dialog.tsx",
+      "project-settings-dialog.tsx",
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "nodrag nowheel",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Text output",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Generated or manually written text",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Image model",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Unavailable model",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Select model",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "No image model",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Image aspect ratio",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Image resolution",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "First frame",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Last frame",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Video model",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "No video model",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Video reference mode",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Image references",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "First / last frame",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Video aspect ratio",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Video resolution",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Video duration",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "No 3D model",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Polycount",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Texture",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Library image",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Asset unavailable",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Loading asset...",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "1 move",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Character height",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "story-video-picker-backdrop nokey",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "story-video-picker story-animation-picker",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Choose moves",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Close move picker",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Search moves",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Move categories",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "canvas-chip is-toggle",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "All",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "models-settings.tsx",
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Set up Meshy in",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "to browse moves.",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Loading moves...",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Could not load moves.",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Try again",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "No moves match your search",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "selected · Meshy bills each move",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Selected moves, in clip order",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "No moves selected",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Remove move",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Done",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "References",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "library-filters.tsx"
+    ]
+  },
+  {
+    "text": "story-media-reference story-text-reference",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Connected Text node is empty",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Disconnect text",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Animated 3D model",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Add a reference image below, then generate",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Connect a humanoid 3D model, pick moves, then animate",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "story-media-empty story-media-generation",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Rigging and animating...",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "This can take a few minutes",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "This can take a moment",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "story-media-composer nodrag nowheel",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "canvas-asset-retry nodrag",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Checking…",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Check again",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "canvas-document-node.tsx",
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "story-inline-video-controls nodrag nowheel",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Animate again",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Animate",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Cancel generation",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Add node",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Uploading...",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Upload",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Add files from this device",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "From Library",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Use an existing asset",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Add from Library",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "story-media-view-button nodrag",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "View",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "desktop-window-frame.tsx"
+    ]
+  },
+  {
+    "text": "Add to project",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Download",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Canvas actions",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "playable-canvas-menus.tsx"
+    ]
+  },
+  {
+    "text": "Node actions",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Add to document",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Undo",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "playable-canvas-menus.tsx"
+    ]
+  },
+  {
+    "text": "Redo",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "playable-canvas-menus.tsx"
+    ]
+  },
+  {
+    "text": "Paste",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "playable-canvas-menus.tsx"
+    ]
+  },
+  {
+    "text": "Add to project…",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Copy node",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Duplicate",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "playable-canvas-menus.tsx",
+      "project-card.tsx"
+    ]
+  },
+  {
+    "text": "Unsupported Asset Canvas Node type",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Missing image",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Connected image",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Missing image node",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Missing model",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Connected 3D model",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Missing model node",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Front",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Side",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Back",
+    "files": [
+      "asset-canvas-workspace.tsx",
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Other angle",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Connected images must be PNG, JPEG, or WebP.",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Could not read the connected image.",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Use PNG, JPEG, or WebP reference images.",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Each reference image must be no larger than 10 MB.",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Could not read video cover",
+    "files": [
+      "asset-canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Tab",
+    "files": [
+      "asset-gallery.tsx",
+      "composer.tsx",
+      "connections-settings.tsx",
+      "custom-provider-dialog.tsx",
+      "playable-template-dialog.tsx",
+      "project-create-dialog.tsx",
+      "project-prompt-creator.tsx",
+      "project-rename-dialog.tsx",
+      "project-settings-dialog.tsx",
+      "prompt-lists.ts",
+      "publish-dialog.tsx",
+      "sign-in-dialog.tsx",
+      "video-reference-prompt.tsx"
+    ]
+  },
+  {
+    "text": "button:not(:disabled), [href], audio[controls], video[controls], [tabindex]:not([tabindex='-1'])",
+    "files": [
+      "asset-gallery.tsx"
+    ]
+  },
+  {
+    "text": "Close asset preview",
+    "files": [
+      "asset-gallery.tsx"
+    ]
+  },
+  {
+    "text": "Sign-in did not create a session",
+    "files": [
+      "auth.tsx"
+    ]
+  },
+  {
+    "text": "Supabase Auth is not configured.",
+    "files": [
+      "auth.tsx"
+    ]
+  },
+  {
+    "text": "Your session expired. Sign in again.",
+    "files": [
+      "auth.tsx"
+    ]
+  },
+  {
+    "text": "useAuth must be used inside AuthProvider",
+    "files": [
+      "auth.tsx"
+    ]
+  },
+  {
+    "text": "OhMyGame creator",
+    "files": [
+      "auth.tsx"
+    ]
+  },
+  {
+    "text": "Supabase did not return an OAuth authorization URL",
+    "files": [
+      "auth.tsx"
+    ]
+  },
+  {
+    "text": "Invalid OAuth callback",
+    "files": [
+      "auth.tsx"
+    ]
+  },
+  {
+    "text": "OAuth callback did not include an authorization code",
+    "files": [
+      "auth.tsx"
+    ]
+  },
+  {
+    "text": "The board was edited elsewhere. Choose a version before saving.",
+    "files": [
+      "canvas-board-storage.ts"
+    ]
+  },
+  {
+    "text": "Reload the canvas before saving. Your edits are kept in this session.",
+    "files": [
+      "canvas-board-storage.ts"
+    ]
+  },
+  {
+    "text": "The board keeps changing. Try saving again.",
+    "files": [
+      "canvas-board-storage.ts"
+    ]
+  },
+  {
+    "text": "The board changed again. Review the latest version before choosing.",
+    "files": [
+      "canvas-board-storage.ts"
+    ]
+  },
+  {
+    "text": "Select",
+    "files": [
+      "canvas-chip-select.tsx",
+      "editor-canvas.tsx",
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "[aria-selected=\"true\"], [aria-checked=\"true\"]",
+    "files": [
+      "canvas-chip-select.tsx"
+    ]
+  },
+  {
+    "text": "canvas-chip-menu nodrag nowheel",
+    "files": [
+      "canvas-chip-select.tsx"
+    ]
+  },
+  {
+    "text": "No matches",
+    "files": [
+      "canvas-chip-select.tsx"
+    ]
+  },
+  {
+    "text": "Nothing to choose",
+    "files": [
+      "canvas-chip-select.tsx"
+    ]
+  },
+  {
+    "text": "ArrowDown",
+    "files": [
+      "canvas-chip-select.tsx",
+      "coding-workspace.tsx",
+      "composer-attachments.tsx",
+      "composer.tsx",
+      "model-selector.tsx",
+      "project-prompt-creator.tsx",
+      "prompt-history.ts",
+      "video-reference-prompt.tsx"
+    ]
+  },
+  {
+    "text": "ArrowUp",
+    "files": [
+      "canvas-chip-select.tsx",
+      "coding-workspace.tsx",
+      "composer-attachments.tsx",
+      "composer.tsx",
+      "model-selector.tsx",
+      "project-prompt-creator.tsx",
+      "prompt-history.ts",
+      "video-reference-prompt.tsx"
+    ]
+  },
+  {
+    "text": "[role=\"option\"], [role=\"menuitemradio\"], [role=\"menuitem\"], .canvas-chip-menu-action",
+    "files": [
+      "canvas-chip-select.tsx"
+    ]
+  },
+  {
+    "text": "Missing document",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Document title",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Document unavailable:",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": ". Your unsaved draft is kept.",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": ". Restore the file to load it again.",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "a, button, input",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Document Markdown",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Document not found",
+    "files": [
+      "canvas-document-node.tsx",
+      "canvas-workspace.tsx",
+      "use-canvas-documents.ts"
+    ]
+  },
+  {
+    "text": "design-document-node-footer nodrag nowheel",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Document view",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Edit Markdown",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Preview document",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Insert image from Library",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Expand document",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Document generation instruction",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Describe what to write or change",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Retry document generation",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Generate document",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "design-ai-result nodrag nowheel",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "AI candidate draft",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Incomplete draft — review before replacing the document.",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Candidate draft — review before replacing the document.",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Candidate draft view",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Edit candidate draft",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Preview candidate draft",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Candidate draft Markdown",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Copy candidate draft",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Draft copied.",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Could not copy. Select the draft text and copy it manually.",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Discard candidate draft",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Discard",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Replace document with draft",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Saving…",
+    "files": [
+      "canvas-document-node.tsx",
+      "connections-settings.tsx",
+      "custom-provider-dialog.tsx",
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Use draft",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Expanded document title",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Split view",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Download Markdown",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Document options",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Expanded document Markdown",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Main design document",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Set as main design document",
+    "files": [
+      "canvas-document-node.tsx"
+    ]
+  },
+  {
+    "text": "Canvas format",
+    "files": [
+      "canvas-format-options.tsx"
+    ]
+  },
+  {
+    "text": "canvas-node-details nodrag",
+    "files": [
+      "canvas-node-label.tsx"
+    ]
+  },
+  {
+    "text": "Text generation instruction",
+    "files": [
+      "canvas-text-composer.tsx"
+    ]
+  },
+  {
+    "text": "Describe the text you want to generate",
+    "files": [
+      "canvas-text-composer.tsx"
+    ]
+  },
+  {
+    "text": "Generate text",
+    "files": [
+      "canvas-text-composer.tsx"
+    ]
+  },
+  {
+    "text": "story-text-composer nodrag nowheel",
+    "files": [
+      "canvas-text-composer.tsx"
+    ]
+  },
+  {
+    "text": "Saved",
+    "files": [
+      "canvas-workspace.tsx",
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Saving",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Save failed",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Sync paused",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Could not load",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Review changes",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Draft kept locally",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Loading",
+    "files": [
+      "canvas-workspace.tsx",
+      "examples.tsx"
+    ]
+  },
+  {
+    "text": "Board",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "New board",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "viewer-pane design-workspace",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Design workspace",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "pane-header viewer-header interactive-story-header window-drag-handle",
+    "files": [
+      "canvas-workspace.tsx",
+      "playable-editor-workspace.tsx"
+    ]
+  },
+  {
+    "text": "icon-button pane-header-action workspace-home-button",
+    "files": [
+      "canvas-workspace.tsx",
+      "coding-workspace.tsx",
+      "playable-editor-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Canvas",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Code",
+    "files": [
+      "canvas-workspace.tsx",
+      "coding-workspace.tsx",
+      "markdown-content.tsx",
+      "playable-editor-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Workspace mode",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "viewer-publish design-header-actions",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "icon-button pane-header-action",
+    "files": [
+      "canvas-workspace.tsx",
+      "coding-workspace.tsx",
+      "playable-editor-workspace.tsx",
+      "playable-node-workbench.tsx",
+      "project-shell.tsx"
+    ]
+  },
+  {
+    "text": "Show chat",
+    "files": [
+      "canvas-workspace.tsx",
+      "coding-workspace.tsx",
+      "playable-editor-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Could not sync workspace. Your canvas is kept open.",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Could not load workspace.",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Reload workspace",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Document “",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "” changed elsewhere. Your draft is kept; choose a version to resume saving.",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Use disk version",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Keep my version",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "The board changed elsewhere. Your draft is kept; choose a version to resume saving.",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Load the canvas before resolving its changes.",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Restore the workspace files, then reload.",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Move up",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Move down",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Delete board",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Back to canvas",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Rename board",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Delete \"",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "\"? Documents and Library assets will be kept.",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Insert image",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Add text to document",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Select document",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Insert",
+    "files": [
+      "canvas-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Godot publishing is not available yet",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Publishing",
+    "files": [
+      "coding-workspace.tsx",
+      "playable-editor-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Publish",
+    "files": [
+      "coding-workspace.tsx",
+      "playable-editor-workspace.tsx",
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Preview",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Design",
+    "files": [
+      "coding-workspace.tsx",
+      "playable-editor-workspace.tsx"
+    ]
+  },
+  {
+    "text": "viewer-pane coding-workspace",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Coding workspace",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "pane-header viewer-header window-drag-handle",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Reload preview",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Restart preview",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Return to game",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Play",
+    "files": [
+      "coding-workspace.tsx",
+      "examples.tsx",
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Opening game...",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Play in a new window",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "publish-button workspace-publish-button",
+    "files": [
+      "coding-workspace.tsx",
+      "playable-editor-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Hide workspace",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Hide Agent playtest window",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Show Agent playtests when they run",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "icon-button quiet-button preview-settings-button",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Project settings",
+    "files": [
+      "coding-workspace.tsx",
+      "playable-editor-workspace.tsx",
+      "project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Preview pages",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Find page or enter path",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Preview viewport",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Tablet · 768px",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Mobile · 375px",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Fit",
+    "files": [
+      "coding-workspace.tsx",
+      "project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Game is running in its own window",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Close the game window to return to the preview.",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "allow-forms allow-modals allow-pointer-lock allow-same-origin allow-scripts",
+    "files": [
+      "coding-workspace.tsx",
+      "examples.tsx",
+      "games.tsx"
+    ]
+  },
+  {
+    "text": "and all its contents",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Loading code",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Filter files…",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Filter workspace files",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Workspace files",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Resize file explorer",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Loading file",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Binary file preview is unavailable",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Select a file from the workspace tree",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Open in default app",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Open file in default app",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Choose how to open",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Choose how to open file",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Folder actions",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "File actions",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "End",
+    "files": [
+      "coding-workspace.tsx",
+      "project-prompt-creator.tsx"
+    ]
+  },
+  {
+    "text": "New file",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "New folder",
+    "files": [
+      "coding-workspace.tsx",
+      "project-prompt-creator.tsx"
+    ]
+  },
+  {
+    "text": "Copy relative path",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Finder",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "File Explorer",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "file manager",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Default app",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Show in enclosing folder",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Open folder in VS Code",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Open in VS Code",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Open folder in Zed",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Open in Zed",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Open in TextEdit",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Open in Notepad",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Loading preview",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "workspace-media-state workspace-media-error",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Path is a directory",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Loading assets",
+    "files": [
+      "coding-workspace.tsx",
+      "library.tsx"
+    ]
+  },
+  {
+    "text": "No media assets",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "library-grid assets-grid",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "No assets match these filters",
+    "files": [
+      "coding-workspace.tsx",
+      "library.tsx"
+    ]
+  },
+  {
+    "text": "The preview process stopped.",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Starting preview",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Preview will appear here",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Describe your game in the agent panel to create a playable build.",
+    "files": [
+      "coding-workspace.tsx"
+    ]
+  },
+  {
+    "text": "An attachment cannot exceed 500 MB",
+    "files": [
+      "composer-attachments.tsx"
+    ]
+  },
+  {
+    "text": "Attach at most 1,000 files at a time",
+    "files": [
+      "composer-attachments.tsx"
+    ]
+  },
+  {
+    "text": "Attached files cannot exceed 1 GB in total",
+    "files": [
+      "composer-attachments.tsx"
+    ]
+  },
+  {
+    "text": "icon-button composer-attach-button",
+    "files": [
+      "composer-attachments.tsx",
+      "image-attachments.tsx"
+    ]
+  },
+  {
+    "text": "Add context or attach files",
+    "files": [
+      "composer-attachments.tsx"
+    ]
+  },
+  {
+    "text": "Attach files",
+    "files": [
+      "composer-attachments.tsx"
+    ]
+  },
+  {
+    "text": "Reference game design",
+    "files": [
+      "composer-attachments.tsx"
+    ]
+  },
+  {
+    "text": "Attached images",
+    "files": [
+      "composer-attachments.tsx",
+      "image-attachments.tsx"
+    ]
+  },
+  {
+    "text": "Remove skill",
+    "files": [
+      "composer-capability-references.tsx"
+    ]
+  },
+  {
+    "text": "Remove plugin",
+    "files": [
+      "composer-capability-references.tsx"
+    ]
+  },
+  {
+    "text": "composer-command-menu composer-mention-menu",
+    "files": [
+      "composer-mention-menu.tsx"
+    ]
+  },
+  {
+    "text": "Composer mentions",
+    "files": [
+      "composer-mention-menu.tsx"
+    ]
+  },
+  {
+    "text": "This project does not have a game design document yet",
+    "files": [
+      "composer.tsx"
+    ]
+  },
+  {
+    "text": "Game design",
+    "files": [
+      "composer.tsx",
+      "project-card.tsx"
+    ]
+  },
+  {
+    "text": "Reference the saved game design document for this message.",
+    "files": [
+      "composer.tsx"
+    ]
+  },
+  {
+    "text": "The user explicitly referenced this saved design document.",
+    "files": [
+      "composer.tsx"
+    ]
+  },
+  {
+    "text": "icon-button stop-button",
+    "files": [
+      "composer.tsx"
+    ]
+  },
+  {
+    "text": "Stop agent",
+    "files": [
+      "composer.tsx"
+    ]
+  },
+  {
+    "text": "icon-button send-button",
+    "files": [
+      "composer.tsx",
+      "project-prompt-creator.tsx"
+    ]
+  },
+  {
+    "text": "Queue follow-up",
+    "files": [
+      "composer.tsx"
+    ]
+  },
+  {
+    "text": "Send prompt",
+    "files": [
+      "composer.tsx"
+    ]
+  },
+  {
+    "text": "Context for the next message",
+    "files": [
+      "composer.tsx"
+    ]
+  },
+  {
+    "text": "Selected text",
+    "files": [
+      "composer.tsx"
+    ]
+  },
+  {
+    "text": "Remove selected text",
+    "files": [
+      "composer.tsx"
+    ]
+  },
+  {
+    "text": "Referenced game design",
+    "files": [
+      "composer.tsx"
+    ]
+  },
+  {
+    "text": "composer-context is-design-document",
+    "files": [
+      "composer.tsx"
+    ]
+  },
+  {
+    "text": "Remove game design reference",
+    "files": [
+      "composer.tsx"
+    ]
+  },
+  {
+    "text": "Review the plan above",
+    "files": [
+      "composer.tsx"
+    ]
+  },
+  {
+    "text": "Executing plan",
+    "files": [
+      "composer.tsx"
+    ]
+  },
+  {
+    "text": "Describe what to plan",
+    "files": [
+      "composer.tsx",
+      "project-prompt-creator.tsx"
+    ]
+  },
+  {
+    "text": "Add a follow-up",
+    "files": [
+      "composer.tsx"
+    ]
+  },
+  {
+    "text": "Ask for a change",
+    "files": [
+      "composer.tsx"
+    ]
+  },
+  {
+    "text": "settings-panel settings-overview-panel",
+    "files": [
+      "connections-settings.tsx",
+      "models-settings.tsx",
+      "settings-page.tsx",
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Connections",
+    "files": [
+      "connections-settings.tsx",
+      "plugins.tsx",
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Add connection",
+    "files": [
+      "connections-settings.tsx"
+    ]
+  },
+  {
+    "text": "Loading connections",
+    "files": [
+      "connections-settings.tsx"
+    ]
+  },
+  {
+    "text": "Local · STDIO",
+    "files": [
+      "connections-settings.tsx"
+    ]
+  },
+  {
+    "text": "Remote · HTTP",
+    "files": [
+      "connections-settings.tsx"
+    ]
+  },
+  {
+    "text": "settings-connection-action is-danger",
+    "files": [
+      "connections-settings.tsx"
+    ]
+  },
+  {
+    "text": "Disable",
+    "files": [
+      "connections-settings.tsx",
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Enable",
+    "files": [
+      "connections-settings.tsx",
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "No connections configured.",
+    "files": [
+      "connections-settings.tsx"
+    ]
+  },
+  {
+    "text": "button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), summary",
+    "files": [
+      "connections-settings.tsx"
+    ]
+  },
+  {
+    "text": "project-settings-dialog connection-dialog",
+    "files": [
+      "connections-settings.tsx"
+    ]
+  },
+  {
+    "text": "Edit connection",
+    "files": [
+      "connections-settings.tsx"
+    ]
+  },
+  {
+    "text": "Connection ID",
+    "files": [
+      "connections-settings.tsx"
+    ]
+  },
+  {
+    "text": "Local command",
+    "files": [
+      "connections-settings.tsx"
+    ]
+  },
+  {
+    "text": "Command",
+    "files": [
+      "connections-settings.tsx"
+    ]
+  },
+  {
+    "text": "Arguments",
+    "files": [
+      "connections-settings.tsx"
+    ]
+  },
+  {
+    "text": "One per line",
+    "files": [
+      "connections-settings.tsx"
+    ]
+  },
+  {
+    "text": "-y @package/mcp",
+    "files": [
+      "connections-settings.tsx"
+    ]
+  },
+  {
+    "text": "Advanced",
+    "files": [
+      "connections-settings.tsx",
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Working directory",
+    "files": [
+      "connections-settings.tsx"
+    ]
+  },
+  {
+    "text": "Optional",
+    "files": [
+      "connections-settings.tsx",
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Environment variables",
+    "files": [
+      "connections-settings.tsx"
+    ]
+  },
+  {
+    "text": "{ \"TOKEN\": \"value\" }",
+    "files": [
+      "connections-settings.tsx"
+    ]
+  },
+  {
+    "text": "Headers",
+    "files": [
+      "connections-settings.tsx"
+    ]
+  },
+  {
+    "text": "{ \"Authorization\": \"Bearer token\" }",
+    "files": [
+      "connections-settings.tsx"
+    ]
+  },
+  {
+    "text": "Save changes",
+    "files": [
+      "connections-settings.tsx",
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Enter a JSON object containing string values",
+    "files": [
+      "connections-settings.tsx"
+    ]
+  },
+  {
+    "text": "icon-button pane-header-action conversation-trigger",
+    "files": [
+      "conversation-menu.tsx"
+    ]
+  },
+  {
+    "text": "Conversation history",
+    "files": [
+      "conversation-menu.tsx"
+    ]
+  },
+  {
+    "text": "Conversations",
+    "files": [
+      "conversation-menu.tsx"
+    ]
+  },
+  {
+    "text": "Search conversations",
+    "files": [
+      "conversation-menu.tsx"
+    ]
+  },
+  {
+    "text": "Conversation title",
+    "files": [
+      "conversation-menu.tsx"
+    ]
+  },
+  {
+    "text": "Save title",
+    "files": [
+      "conversation-menu.tsx"
+    ]
+  },
+  {
+    "text": "Cancel rename",
+    "files": [
+      "conversation-menu.tsx"
+    ]
+  },
+  {
+    "text": "Running",
+    "files": [
+      "conversation-menu.tsx"
+    ]
+  },
+  {
+    "text": "Empty",
+    "files": [
+      "conversation-menu.tsx"
+    ]
+  },
+  {
+    "text": "Rename conversation",
+    "files": [
+      "conversation-menu.tsx"
+    ]
+  },
+  {
+    "text": "No matching conversations",
+    "files": [
+      "conversation-menu.tsx"
+    ]
+  },
+  {
+    "text": "Ollama",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "LM Studio",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "OpenAI Chat Completions",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "OpenAI Responses",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Anthropic Messages",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Google Generative AI",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Google Vertex AI",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "button:not(:disabled), input:not(:disabled), select:not(:disabled), summary, [tabindex='0']",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "A model with this ID is already in the list.",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "project-settings-dialog custom-provider-dialog",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Edit custom provider",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Add provider",
+    "files": [
+      "custom-provider-dialog.tsx",
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Connect a gateway or a local model service with its own endpoint and models.",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Preset",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Custom gateway",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Display name",
+    "files": [
+      "custom-provider-dialog.tsx",
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "My provider",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Base URL",
+    "files": [
+      "custom-provider-dialog.tsx",
+      "models-settings.tsx",
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Use the API endpoint, including /v1 when your service requires it.",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "API protocol",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Authentication",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "API key",
+    "files": [
+      "custom-provider-dialog.tsx",
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "No API key",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Leave blank to keep the current key",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Paste your API key",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "For local services that do not require an API key.",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Model settings",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Language models",
+    "files": [
+      "custom-provider-dialog.tsx",
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Fetching…",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Fetch",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Fetch models or add them manually. You can save this provider without any models.",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Search models",
+    "files": [
+      "custom-provider-dialog.tsx",
+      "model-selector.tsx",
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Enable matching models",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Enable all models",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Available models",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "No models match your search.",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "No models added yet.",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Add a model manually",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Model ID",
+    "files": [
+      "custom-provider-dialog.tsx",
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Model ID from your provider",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Advanced model settings",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "settings-secondary-button custom-provider-manual-add",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Add model",
+    "files": [
+      "custom-provider-dialog.tsx",
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Model display name",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Same as model ID",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Context window",
+    "files": [
+      "custom-provider-dialog.tsx",
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Max output tokens",
+    "files": [
+      "custom-provider-dialog.tsx",
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Reasoning",
+    "files": [
+      "custom-provider-dialog.tsx",
+      "model-selector.tsx",
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Image input",
+    "files": [
+      "custom-provider-dialog.tsx",
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Reasoning settings",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Reasoning levels",
+    "files": [
+      "custom-provider-dialog.tsx",
+      "model-selector.tsx"
+    ]
+  },
+  {
+    "text": "Automatic",
+    "files": [
+      "custom-provider-dialog.tsx",
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Custom",
+    "files": [
+      "custom-provider-dialog.tsx",
+      "models-settings.tsx",
+      "provider-models.tsx",
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Enable the supported levels and set the parameter sent to your provider.",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "— reported by your provider",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "— from the model catalog",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "— default levels; customize if needed",
+    "files": [
+      "custom-provider-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Enter a model ID without spaces (up to 200 characters).",
+    "files": [
+      "custom-provider-models.ts"
+    ]
+  },
+  {
+    "text": "Window",
+    "files": [
+      "desktop-window-frame.tsx"
+    ]
+  },
+  {
+    "text": "Pan canvas",
+    "files": [
+      "editor-canvas.tsx"
+    ]
+  },
+  {
+    "text": "Fit view",
+    "files": [
+      "editor-canvas.tsx"
+    ]
+  },
+  {
+    "text": "story-canvas-alignment-guide is-vertical",
+    "files": [
+      "editor-canvas.tsx"
+    ]
+  },
+  {
+    "text": "story-canvas-alignment-guide is-horizontal",
+    "files": [
+      "editor-canvas.tsx"
+    ]
+  },
+  {
+    "text": "Zoom out",
+    "files": [
+      "editor-canvas.tsx"
+    ]
+  },
+  {
+    "text": "Reset zoom",
+    "files": [
+      "editor-canvas.tsx"
+    ]
+  },
+  {
+    "text": "Zoom in",
+    "files": [
+      "editor-canvas.tsx"
+    ]
+  },
+  {
+    "text": "home-whats-new-icon home-explore-cover",
+    "files": [
+      "examples.tsx"
+    ]
+  },
+  {
+    "text": "Example",
+    "files": [
+      "examples.tsx"
+    ]
+  },
+  {
+    "text": "Copy this example into a new project you can change",
+    "files": [
+      "examples.tsx"
+    ]
+  },
+  {
+    "text": "Remix",
+    "files": [
+      "examples.tsx"
+    ]
+  },
+  {
+    "text": "autoplay; fullscreen",
+    "files": [
+      "examples.tsx",
+      "games.tsx"
+    ]
+  },
+  {
+    "text": "Example ·",
+    "files": [
+      "examples.tsx"
+    ]
+  },
+  {
+    "text": "Fullscreen",
+    "files": [
+      "examples.tsx",
+      "games.tsx"
+    ]
+  },
+  {
+    "text": "Files",
+    "files": [
+      "file-transfer.ts"
+    ]
+  },
+  {
+    "text": "home-recent studio-projects",
+    "files": [
+      "game-studio-home.tsx",
+      "home.tsx"
+    ]
+  },
+  {
+    "text": "Recent projects",
+    "files": [
+      "game-studio-home.tsx",
+      "home.tsx"
+    ]
+  },
+  {
+    "text": "View all",
+    "files": [
+      "game-studio-home.tsx"
+    ]
+  },
+  {
+    "text": "Loading projects",
+    "files": [
+      "game-studio-home.tsx",
+      "home.tsx",
+      "plugins.tsx",
+      "projects.tsx",
+      "send-to-project-dialog.tsx"
+    ]
+  },
+  {
+    "text": "No projects yet",
+    "files": [
+      "game-studio-home.tsx",
+      "home.tsx"
+    ]
+  },
+  {
+    "text": "home-discover home-explore studio-examples",
+    "files": [
+      "game-studio-home.tsx",
+      "home.tsx"
+    ]
+  },
+  {
+    "text": "Examples",
+    "files": [
+      "game-studio-home.tsx"
+    ]
+  },
+  {
+    "text": "Refresh",
+    "files": [
+      "games.tsx"
+    ]
+  },
+  {
+    "text": "Loading games",
+    "files": [
+      "games.tsx"
+    ]
+  },
+  {
+    "text": "explore-state explore-error",
+    "files": [
+      "games.tsx"
+    ]
+  },
+  {
+    "text": "No published games yet",
+    "files": [
+      "games.tsx"
+    ]
+  },
+  {
+    "text": "Game",
+    "files": [
+      "games.tsx"
+    ]
+  },
+  {
+    "text": "Games",
+    "files": [
+      "games.tsx"
+    ]
+  },
+  {
+    "text": "Loading game",
+    "files": [
+      "games.tsx"
+    ]
+  },
+  {
+    "text": "AbortError",
+    "files": [
+      "games.tsx"
+    ]
+  },
+  {
+    "text": "Link copied",
+    "files": [
+      "games.tsx",
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Share game",
+    "files": [
+      "games.tsx"
+    ]
+  },
+  {
+    "text": "More games",
+    "files": [
+      "games.tsx"
+    ]
+  },
+  {
+    "text": "tool-brand-icon tool-brand-godot",
+    "files": [
+      "godot-icon.tsx"
+    ]
+  },
+  {
+    "text": "Workspace code highlighting failed.",
+    "files": [
+      "highlighted-code.tsx"
+    ]
+  },
+  {
+    "text": "workspace-code workspace-code-highlighted",
+    "files": [
+      "highlighted-code.tsx"
+    ]
+  },
+  {
+    "text": "home-content home-content-fitted",
+    "files": [
+      "home.tsx"
+    ]
+  },
+  {
+    "text": "What are we making today?",
+    "files": [
+      "home.tsx"
+    ]
+  },
+  {
+    "text": "Describe the game you want to create...",
+    "files": [
+      "home.tsx"
+    ]
+  },
+  {
+    "text": "Start blank",
+    "files": [
+      "home.tsx"
+    ]
+  },
+  {
+    "text": "Show all",
+    "files": [
+      "home.tsx",
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Explore",
+    "files": [
+      "home.tsx"
+    ]
+  },
+  {
+    "text": "M5 12.5L9.2 16.5L19 7",
+    "files": [
+      "icons.ts"
+    ]
+  },
+  {
+    "text": "M12 18V6M7.5 10.5L12 6L16.5 10.5",
+    "files": [
+      "icons.ts"
+    ]
+  },
+  {
+    "text": "M18 11V7.5a1.5 1.5 0 0 0-3 0V10m0-2.5V6a1.5 1.5 0 0 0-3 0v4m0-3V5.5a1.5 1.5 0 0 0-3 0V11m0-3.5a1.5 1.5 0 0 0-3 0V13l-1.2-1.2a1.7 1.7 0 0 0-2.4 2.4l4 4A6 6 0 0 0 10.6 20H13a5 5 0 0 0 5-5v-4Z",
+    "files": [
+      "icons.ts"
+    ]
+  },
+  {
+    "text": "M12 3v18M3 12h18M9.5 5.5 12 3l2.5 2.5M9.5 18.5 12 21l2.5-2.5M5.5 9.5 3 12l2.5 2.5M18.5 9.5 21 12l-2.5 2.5",
+    "files": [
+      "icons.ts"
+    ]
+  },
+  {
+    "text": "Attach images",
+    "files": [
+      "image-attachments.tsx"
+    ]
+  },
+  {
+    "text": "Use PNG, JPEG, WebP, or GIF images",
+    "files": [
+      "image-attachments.tsx"
+    ]
+  },
+  {
+    "text": "Could not process this cover image",
+    "files": [
+      "image.ts"
+    ]
+  },
+  {
+    "text": "inline-answer inline-answer-editing",
+    "files": [
+      "inline-answer.tsx"
+    ]
+  },
+  {
+    "text": "Type another answer",
+    "files": [
+      "inline-answer.tsx",
+      "questionnaire-card.tsx"
+    ]
+  },
+  {
+    "text": "Submit answer",
+    "files": [
+      "inline-answer.tsx"
+    ]
+  },
+  {
+    "text": "From projects",
+    "files": [
+      "library-filters.tsx"
+    ]
+  },
+  {
+    "text": "All sources",
+    "files": [
+      "library-filters.tsx"
+    ]
+  },
+  {
+    "text": "All projects",
+    "files": [
+      "library-filters.tsx"
+    ]
+  },
+  {
+    "text": "No project",
+    "files": [
+      "library-filters.tsx"
+    ]
+  },
+  {
+    "text": "Include references",
+    "files": [
+      "library-filters.tsx"
+    ]
+  },
+  {
+    "text": "Project files",
+    "files": [
+      "library-filters.tsx"
+    ]
+  },
+  {
+    "text": "All uses",
+    "files": [
+      "library-filters.tsx"
+    ]
+  },
+  {
+    "text": "Filter assets",
+    "files": [
+      "library-filters.tsx"
+    ]
+  },
+  {
+    "text": "Filters",
+    "files": [
+      "library-filters.tsx"
+    ]
+  },
+  {
+    "text": "Close filters",
+    "files": [
+      "library-filters.tsx"
+    ]
+  },
+  {
+    "text": "Reset filters",
+    "files": [
+      "library-filters.tsx"
+    ]
+  },
+  {
+    "text": "No media assets yet",
+    "files": [
+      "library.tsx"
+    ]
+  },
+  {
+    "text": "Delete asset everywhere?",
+    "files": [
+      "library.tsx"
+    ]
+  },
+  {
+    "text": "is used by",
+    "files": [
+      "library.tsx"
+    ]
+  },
+  {
+    "text": "this project",
+    "files": [
+      "library.tsx"
+    ]
+  },
+  {
+    "text": "Deleting it removes it from these projects. Code that still uses it will need a new asset. This cannot be undone.",
+    "files": [
+      "library.tsx"
+    ]
+  },
+  {
+    "text": "Deleting...",
+    "files": [
+      "library.tsx"
+    ]
+  },
+  {
+    "text": "Delete everywhere",
+    "files": [
+      "library.tsx"
+    ]
+  },
+  {
+    "text": "Rename asset",
+    "files": [
+      "library.tsx"
+    ]
+  },
+  {
+    "text": "Renderer root was not found",
+    "files": [
+      "main.tsx"
+    ]
+  },
+  {
+    "text": "Copied",
+    "files": [
+      "markdown-content.tsx"
+    ]
+  },
+  {
+    "text": "Tool",
+    "files": [
+      "mcp-tool-presentation.ts"
+    ]
+  },
+  {
+    "text": "Queued messages",
+    "files": [
+      "message-queue.tsx"
+    ]
+  },
+  {
+    "text": "Edit queued message",
+    "files": [
+      "message-queue.tsx"
+    ]
+  },
+  {
+    "text": "Remove and resend messages with attachments",
+    "files": [
+      "message-queue.tsx"
+    ]
+  },
+  {
+    "text": "Steer current run",
+    "files": [
+      "message-queue.tsx"
+    ]
+  },
+  {
+    "text": "Steer",
+    "files": [
+      "message-queue.tsx"
+    ]
+  },
+  {
+    "text": "Remove queued message",
+    "files": [
+      "message-queue.tsx"
+    ]
+  },
+  {
+    "text": "3D preview failed",
+    "files": [
+      "model-preview.tsx"
+    ]
+  },
+  {
+    "text": "The 3D preview lost its graphics context",
+    "files": [
+      "model-preview.tsx"
+    ]
+  },
+  {
+    "text": "Could not display this 3D model",
+    "files": [
+      "model-preview.tsx"
+    ]
+  },
+  {
+    "text": "Could not load the 3D viewer",
+    "files": [
+      "model-preview.tsx"
+    ]
+  },
+  {
+    "text": "Loading 3D viewer",
+    "files": [
+      "model-preview.tsx"
+    ]
+  },
+  {
+    "text": "Loading 3D model",
+    "files": [
+      "model-preview.tsx"
+    ]
+  },
+  {
+    "text": "model-preview-state model-preview-error",
+    "files": [
+      "model-preview.tsx"
+    ]
+  },
+  {
+    "text": "model-preview-clips nodrag nowheel",
+    "files": [
+      "model-preview.tsx"
+    ]
+  },
+  {
+    "text": "Animation clip",
+    "files": [
+      "model-preview.tsx"
+    ]
+  },
+  {
+    "text": "Loading models...",
+    "files": [
+      "model-selector.tsx"
+    ]
+  },
+  {
+    "text": "Could not load models",
+    "files": [
+      "model-selector.tsx"
+    ]
+  },
+  {
+    "text": "No language model",
+    "files": [
+      "model-selector.tsx"
+    ]
+  },
+  {
+    "text": "canvas-chip is-wide",
+    "files": [
+      "model-selector.tsx"
+    ]
+  },
+  {
+    "text": "Models",
+    "files": [
+      "model-selector.tsx"
+    ]
+  },
+  {
+    "text": "No matching models",
+    "files": [
+      "model-selector.tsx"
+    ]
+  },
+  {
+    "text": "Language",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Providers &amp; Models",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Search providers",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Filter providers by capability",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "settings-secondary-button settings-provider-add",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Loading providers",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "No configurable providers are available.",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "No providers match these filters.",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Providers",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Connected providers",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Popular providers",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "More providers",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Recommended",
+    "files": [
+      "models-settings.tsx",
+      "questionnaire-card.tsx"
+    ]
+  },
+  {
+    "text": "settings-toggle settings-provider-toggle",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Enabled",
+    "files": [
+      "models-settings.tsx",
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Disabled",
+    "files": [
+      "models-settings.tsx",
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "icon-button settings-provider-action",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "settings-panel settings-provider-detail",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Paste a new key to replace the current one",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "No image models are available.",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "settings-detail-section provider-models",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Image models",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Choose the default for AI image generation. Existing canvas nodes keep their selected model.",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Default",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Loading models",
+    "files": [
+      "models-settings.tsx",
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Video models",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "No video models are available.",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Not required",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "icon-button settings-provider-setting-edit settings-provider-delete",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Delete provider",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "icon-button settings-provider-setting-edit",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Loading configuration",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Delete provider confirmation",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Delete this provider, its key and model settings?",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Deleting…",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Paste your Meshy API key",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Connect",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Choose how OhMyGame should connect to this provider.",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Sign in with your account in the browser",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Paste a key from your provider dashboard",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Browser sign-in connected.",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "API key updated.",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Base URL saved.",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "settings-provider-setting-row settings-provider-auth-row",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Sign-in",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Browser sign-in",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Use browser sign-in",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Use API key",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "API key settings",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "API key is configured",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Edit API key",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Base URL settings",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Loading…",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Unavailable",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Edit Base URL",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "settings-provider-setting-editor settings-detail-section",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Connection to the authentication flow was interrupted.",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "New API key",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Save key",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Continue",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "settings-detail-status settings-detail-waiting",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Waiting for sign-in",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Preparing configuration",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Finish signing in in your browser, then come back here.",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Open browser again",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Open browser",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "settings-detail-field settings-auth-fallback",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Browser didn't return here? Paste the address it ended on.",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Available for new requests",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Disabled · Your credentials and models are kept",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Requests go to this OpenAI-compatible URL. Change it to use a proxy.",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Custom endpoint",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Browser sign-in or API key",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Connected",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Connection failed",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Not configured",
+    "files": [
+      "models-settings.tsx",
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Manage",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Starting authentication…",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Enter the code in your browser.",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Complete authentication in your browser.",
+    "files": [
+      "models-settings.tsx"
+    ]
+  },
+  {
+    "text": "Breadcrumb",
+    "files": [
+      "node-workbench.tsx",
+      "sidebar-page.tsx"
+    ]
+  },
+  {
+    "text": "Story",
+    "files": [
+      "node-workbench.tsx",
+      "playable-editor-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Title",
+    "files": [
+      "node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Close Library picker",
+    "files": [
+      "node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Search Library",
+    "files": [
+      "node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "No assets match your search",
+    "files": [
+      "node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "No assets in Library",
+    "files": [
+      "node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Upload a PNG, JPEG, WebP, MP4, MOV, WebM, MP3, or WAV file.",
+    "files": [
+      "node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Plan approval",
+    "files": [
+      "plan-approval-card.tsx"
+    ]
+  },
+  {
+    "text": "Implement this plan?",
+    "files": [
+      "plan-approval-card.tsx"
+    ]
+  },
+  {
+    "text": "Cancel plan",
+    "files": [
+      "plan-approval-card.tsx"
+    ]
+  },
+  {
+    "text": "Yes, implement this plan",
+    "files": [
+      "plan-approval-card.tsx"
+    ]
+  },
+  {
+    "text": "No, and tell OhMyGame what to do differently",
+    "files": [
+      "plan-approval-card.tsx"
+    ]
+  },
+  {
+    "text": "Tell OhMyGame what to do differently",
+    "files": [
+      "plan-approval-card.tsx"
+    ]
+  },
+  {
+    "text": "Skip",
+    "files": [
+      "plan-approval-card.tsx",
+      "questionnaire-card.tsx"
+    ]
+  },
+  {
+    "text": "Plan mode active",
+    "files": [
+      "plan-mode-control.tsx"
+    ]
+  },
+  {
+    "text": "Exit plan mode",
+    "files": [
+      "plan-mode-control.tsx"
+    ]
+  },
+  {
+    "text": "Plan",
+    "files": [
+      "plan-mode-control.tsx"
+    ]
+  },
+  {
+    "text": "Composer commands",
+    "files": [
+      "plan-mode-control.tsx"
+    ]
+  },
+  {
+    "text": "Plan mode",
+    "files": [
+      "plan-mode-control.tsx"
+    ]
+  },
+  {
+    "text": "Turn plan mode off",
+    "files": [
+      "plan-mode-control.tsx"
+    ]
+  },
+  {
+    "text": "Turn plan mode on",
+    "files": [
+      "plan-mode-control.tsx"
+    ]
+  },
+  {
+    "text": "Compact",
+    "files": [
+      "plan-mode-control.tsx"
+    ]
+  },
+  {
+    "text": "Compact this chat's context",
+    "files": [
+      "plan-mode-control.tsx"
+    ]
+  },
+  {
+    "text": "Add Scene",
+    "files": [
+      "playable-canvas-menus.tsx"
+    ]
+  },
+  {
+    "text": "No Scenes yet",
+    "files": [
+      "playable-canvas-menus.tsx"
+    ]
+  },
+  {
+    "text": "Start from a Template, or describe your story in the chat.",
+    "files": [
+      "playable-canvas-menus.tsx"
+    ]
+  },
+  {
+    "text": "Add a Scene",
+    "files": [
+      "playable-canvas-menus.tsx",
+      "playable-template-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Scene actions",
+    "files": [
+      "playable-canvas-menus.tsx"
+    ]
+  },
+  {
+    "text": "Open",
+    "files": [
+      "playable-canvas-menus.tsx",
+      "playable-node-workbench.tsx",
+      "send-to-project-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Copy Scene",
+    "files": [
+      "playable-canvas-menus.tsx"
+    ]
+  },
+  {
+    "text": "Start Scene",
+    "files": [
+      "playable-canvas-menus.tsx"
+    ]
+  },
+  {
+    "text": "Set as Start",
+    "files": [
+      "playable-canvas-menus.tsx"
+    ]
+  },
+  {
+    "text": "Players see this Scene on the Story map. Turn it off for menus and other Scenes that are not steps in the story.",
+    "files": [
+      "playable-canvas-menus.tsx"
+    ]
+  },
+  {
+    "text": "On Story map",
+    "files": [
+      "playable-canvas-menus.tsx"
+    ]
+  },
+  {
+    "text": "The Story map counts this Scene as an ending",
+    "files": [
+      "playable-canvas-menus.tsx"
+    ]
+  },
+  {
+    "text": "Ending",
+    "files": [
+      "playable-canvas-menus.tsx",
+      "playable-node-card.tsx"
+    ]
+  },
+  {
+    "text": "Scene",
+    "files": [
+      "playable-chat.ts"
+    ]
+  },
+  {
+    "text": "The game is still loading. Try publishing again when it is ready.",
+    "files": [
+      "playable-editor-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Playable Nodes workspace",
+    "files": [
+      "playable-editor-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Opening playtest...",
+    "files": [
+      "playable-editor-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Playtest in a new window",
+    "files": [
+      "playable-editor-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Playtest",
+    "files": [
+      "playable-editor-workspace.tsx",
+      "project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Loading Scenes...",
+    "files": [
+      "playable-editor-workspace.tsx"
+    ]
+  },
+  {
+    "text": "The project does not compile",
+    "files": [
+      "playable-editor-workspace.tsx"
+    ]
+  },
+  {
+    "text": "Playable Nodes code",
+    "files": [
+      "playable-editor-workspace.tsx"
+    ]
+  },
+  {
+    "text": "story-save-notice is-over-workbench",
+    "files": [
+      "playable-editor-workspace.tsx"
+    ]
+  },
+  {
+    "text": "↩ Back",
+    "files": [
+      "playable-flow.ts"
+    ]
+  },
+  {
+    "text": "var(--story-canvas-stage-width, 440px)",
+    "files": [
+      "playable-node-card.tsx"
+    ]
+  },
+  {
+    "text": "var(--story-canvas-stage-height, 248px)",
+    "files": [
+      "playable-node-card.tsx"
+    ]
+  },
+  {
+    "text": "story-media-node-label story-scene-node-label",
+    "files": [
+      "playable-node-card.tsx"
+    ]
+  },
+  {
+    "text": "playable-node-badge is-entry",
+    "files": [
+      "playable-node-card.tsx"
+    ]
+  },
+  {
+    "text": "The player starts here",
+    "files": [
+      "playable-node-card.tsx"
+    ]
+  },
+  {
+    "text": "Start",
+    "files": [
+      "playable-node-card.tsx"
+    ]
+  },
+  {
+    "text": "Not shown on the Story map, and the Scenes before and after it are joined there",
+    "files": [
+      "playable-node-card.tsx"
+    ]
+  },
+  {
+    "text": "Off map",
+    "files": [
+      "playable-node-card.tsx"
+    ]
+  },
+  {
+    "text": "Counted as an ending on the Story map",
+    "files": [
+      "playable-node-card.tsx"
+    ]
+  },
+  {
+    "text": "The Scene changed since this picture was taken.",
+    "files": [
+      "playable-node-card.tsx"
+    ]
+  },
+  {
+    "text": "Stale",
+    "files": [
+      "playable-node-card.tsx"
+    ]
+  },
+  {
+    "text": "playable-node-open-button nodrag",
+    "files": [
+      "playable-node-card.tsx"
+    ]
+  },
+  {
+    "text": "Open Scene editor",
+    "files": [
+      "playable-node-card.tsx"
+    ]
+  },
+  {
+    "text": "story-node-outputs playable-node-outputs-empty",
+    "files": [
+      "playable-node-card.tsx"
+    ]
+  },
+  {
+    "text": "No exits yet",
+    "files": [
+      "playable-node-card.tsx"
+    ]
+  },
+  {
+    "text": "Scene title",
+    "files": [
+      "playable-node-card.tsx"
+    ]
+  },
+  {
+    "text": "This Scene has no background to remove",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Play this Scene again from the start",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Replay",
+    "files": [
+      "playable-node-workbench.tsx",
+      "playable-playtest.tsx"
+    ]
+  },
+  {
+    "text": "Playtest from this Scene",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Play from here",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Fixing the errors",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Loading preview...",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "story-node-editor-page playable-workbench-page",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "pane-header story-node-editor-header window-drag-handle",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "story-node-workbench playable-node-workbench",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Play the preview",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Pick things to talk about with the AI. Shift-click to pick more.",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Click text to change it",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Move",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Drag things to move them",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Draw",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Draw on the preview to show the AI what you mean",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Click to pick · Shift-click for more · Esc to play",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Click text to change it · Enter to keep · Esc to play",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Drag to move · Esc to play",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Draw, then say what you want in the chat · Esc to play",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Preview tools",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Undo the last stroke",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Undo stroke",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Clear the drawing",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Clear drawing",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Drawing",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Choose a background",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Add to chat",
+    "files": [
+      "playable-node-workbench.tsx",
+      "selected-text-menu.tsx"
+    ]
+  },
+  {
+    "text": "Add an image or a video",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Media",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "playable-preview-popover is-media",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Show it behind this Scene",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "This Scene has no background to set; add it to the chat instead",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "As background",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Take the background off this Scene",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Remove background",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "What happened in the preview",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "playable-preview-toast is-error",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Ask the AI to fix this",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Fix",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Nowhere to go back to",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "Doesn't open anything yet",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "this error",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "these errors",
+    "files": [
+      "playable-node-workbench.tsx"
+    ]
+  },
+  {
+    "text": "This project has no Scenes yet.",
+    "files": [
+      "playable-node-workbench.tsx",
+      "playtest.tsx"
+    ]
+  },
+  {
+    "text": "Loading...",
+    "files": [
+      "playable-player.tsx"
+    ]
+  },
+  {
+    "text": "playable-player-status is-error",
+    "files": [
+      "playable-player.tsx"
+    ]
+  },
+  {
+    "text": "Forget which Scenes were seen, so the Story map starts over",
+    "files": [
+      "playable-playtest.tsx"
+    ]
+  },
+  {
+    "text": "Forget seen Scenes",
+    "files": [
+      "playable-playtest.tsx"
+    ]
+  },
+  {
+    "text": "Replay from the start with a new game",
+    "files": [
+      "playable-playtest.tsx"
+    ]
+  },
+  {
+    "text": "Added to the chat in the editor",
+    "files": [
+      "playable-playtest.tsx"
+    ]
+  },
+  {
+    "text": "Something broke",
+    "files": [
+      "playable-playtest.tsx"
+    ]
+  },
+  {
+    "text": "Ask AI to fix",
+    "files": [
+      "playable-playtest.tsx"
+    ]
+  },
+  {
+    "text": "Something broke while I was playtesting. Find the cause and fix it.",
+    "files": [
+      "playable-playtest.tsx"
+    ]
+  },
+  {
+    "text": "What I did:",
+    "files": [
+      "playable-playtest.tsx"
+    ]
+  },
+  {
+    "text": "goes nowhere",
+    "files": [
+      "playable-playtest.tsx"
+    ]
+  },
+  {
+    "text": "Errors:",
+    "files": [
+      "playable-playtest.tsx"
+    ]
+  },
+  {
+    "text": "What the game remembers between Scenes. Ask the AI to add or change these values.",
+    "files": [
+      "playable-project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Screen size",
+    "files": [
+      "playable-project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Review each Scene after changing screen size.",
+    "files": [
+      "playable-project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Variables",
+    "files": [
+      "playable-project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "icon-button project-settings-help",
+    "files": [
+      "playable-project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "About variables",
+    "files": [
+      "playable-project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Starts",
+    "files": [
+      "playable-project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Nothing yet. The game doesn't remember anything between Scenes.",
+    "files": [
+      "playable-project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Export",
+    "files": [
+      "playable-project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Save screen size changes before exporting.",
+    "files": [
+      "playable-project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Exporting...",
+    "files": [
+      "playable-project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Export game",
+    "files": [
+      "playable-project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Published Player closed before the save completed.",
+    "files": [
+      "playable-sandbox-entry.ts"
+    ]
+  },
+  {
+    "text": "project-create-dialog playable-template-dialog",
+    "files": [
+      "playable-template-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Pick a starting point, then describe the Scene in chat.",
+    "files": [
+      "playable-template-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Loading playtest...",
+    "files": [
+      "playtest.tsx"
+    ]
+  },
+  {
+    "text": "Plugin",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Plugins",
+    "files": [
+      "plugins.tsx",
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Search plugins...",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Search plugins",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Opening...",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Installing...",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Add plugin",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Create with AI",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Build a plugin with the agent",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Install from folder...",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Choose a local plugin directory",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Install from Git...",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Clone a public HTTPS repository",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Loading plugins",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Choose a plugin",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Install from Git",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Enter a public HTTPS repository or marketplace URL.",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Repository or marketplace URL",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Install",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Installed",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "No installed plugins match your search.",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Show less",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Install this plugin to try an example.",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Enable this plugin to try an example.",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "No matching projects",
+    "files": [
+      "plugins.tsx",
+      "send-to-project-dialog.tsx"
+    ]
+  },
+  {
+    "text": "No compatible projects yet",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Loading plugin",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Included",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Try now",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "plugin-try-popover project-switcher-popover",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Choose a project",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "The prompt will be added to a new conversation.",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Search projects",
+    "files": [
+      "plugins.tsx",
+      "projects.tsx",
+      "send-to-project-dialog.tsx"
+    ]
+  },
+  {
+    "text": "project-switcher-state is-error",
+    "files": [
+      "plugins.tsx",
+      "send-to-project-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Starting conversation",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "New",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "About",
+    "files": [
+      "plugins.tsx",
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Try it",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Disabled in Settings",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Available",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Set up in Settings",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Manage in Settings",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "plugin-components plugin-skills",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Skills",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "plugin-component-row plugin-skill-row",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Show in Finder",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Loading skill",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "plugin-skill-state is-error",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "plugins-state plugins-state-error",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Included with OhMyGame",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Local folder",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Git repository",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Management",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Status",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Not installed",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Version",
+    "files": [
+      "plugins.tsx",
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Repository",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Uninstall",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Open folder",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "GitHub ·",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Something went wrong",
+    "files": [
+      "plugins.tsx"
+    ]
+  },
+  {
+    "text": "Stopping",
+    "files": [
+      "project-card.tsx"
+    ]
+  },
+  {
+    "text": "Working",
+    "files": [
+      "project-card.tsx"
+    ]
+  },
+  {
+    "text": "Remove from OhMyGame",
+    "files": [
+      "project-card.tsx"
+    ]
+  },
+  {
+    "text": "Edited just now",
+    "files": [
+      "project-card.tsx"
+    ]
+  },
+  {
+    "text": "button:not(:disabled), input:not(:disabled), [tabindex]:not([tabindex='-1'])",
+    "files": [
+      "project-create-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Restart the OhMyGame desktop app to enable folder selection.",
+    "files": [
+      "project-create-dialog.tsx"
+    ]
+  },
+  {
+    "text": "New project",
+    "files": [
+      "project-create-dialog.tsx",
+      "projects.tsx"
+    ]
+  },
+  {
+    "text": "Workspace",
+    "files": [
+      "project-create-dialog.tsx",
+      "project-prompt-creator.tsx",
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Opening…",
+    "files": [
+      "project-create-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Choose another…",
+    "files": [
+      "project-create-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Choose folder…",
+    "files": [
+      "project-create-dialog.tsx",
+      "project-prompt-creator.tsx"
+    ]
+  },
+  {
+    "text": "Clear",
+    "files": [
+      "project-create-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Create",
+    "files": [
+      "project-create-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Create project",
+    "files": [
+      "project-prompt-creator.tsx"
+    ]
+  },
+  {
+    "text": "This folder is already the workspace of “",
+    "files": [
+      "project-prompt-creator.tsx"
+    ]
+  },
+  {
+    "text": "home-project-type-trigger home-workspace-trigger",
+    "files": [
+      "project-prompt-creator.tsx"
+    ]
+  },
+  {
+    "text": "Workspace: new folder in OhMyGame storage",
+    "files": [
+      "project-prompt-creator.tsx"
+    ]
+  },
+  {
+    "text": "Creates a new folder in OhMyGame's project storage",
+    "files": [
+      "project-prompt-creator.tsx"
+    ]
+  },
+  {
+    "text": "home-project-type-menu home-workspace-menu",
+    "files": [
+      "project-prompt-creator.tsx"
+    ]
+  },
+  {
+    "text": "Choose another folder…",
+    "files": [
+      "project-prompt-creator.tsx"
+    ]
+  },
+  {
+    "text": "Project type",
+    "files": [
+      "project-prompt-creator.tsx",
+      "projects.tsx"
+    ]
+  },
+  {
+    "text": "Rename project",
+    "files": [
+      "project-rename-dialog.tsx"
+    ]
+  },
+  {
+    "text": "button, input",
+    "files": [
+      "project-rename-dialog.tsx"
+    ]
+  },
+  {
+    "text": "button:not(:disabled), input:not(:disabled), select:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex='-1'])",
+    "files": [
+      "project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Run",
+    "files": [
+      "project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Startup directory",
+    "files": [
+      "project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Startup script",
+    "files": [
+      "project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Package manager",
+    "files": [
+      "project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Auto",
+    "files": [
+      "project-settings-dialog.tsx",
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Default route",
+    "files": [
+      "project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Device",
+    "files": [
+      "project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Tablet",
+    "files": [
+      "project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Mobile",
+    "files": [
+      "project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Open preview in browser",
+    "files": [
+      "project-settings-dialog.tsx"
+    ]
+  },
+  {
+    "text": "The selected workspace folder is no longer available.",
+    "files": [
+      "project-shell.tsx"
+    ]
+  },
+  {
+    "text": "Could not reach the local runtime.",
+    "files": [
+      "project-shell.tsx"
+    ]
+  },
+  {
+    "text": "Discard the message you are composing?",
+    "files": [
+      "project-shell.tsx"
+    ]
+  },
+  {
+    "text": "Agent",
+    "files": [
+      "project-shell.tsx"
+    ]
+  },
+  {
+    "text": "pane-header window-drag-handle",
+    "files": [
+      "project-shell.tsx"
+    ]
+  },
+  {
+    "text": "New conversation",
+    "files": [
+      "project-shell.tsx"
+    ]
+  },
+  {
+    "text": "Show workspace",
+    "files": [
+      "project-shell.tsx"
+    ]
+  },
+  {
+    "text": "Hide agent",
+    "files": [
+      "project-shell.tsx"
+    ]
+  },
+  {
+    "text": "Connection lost. Reconnecting...",
+    "files": [
+      "project-shell.tsx"
+    ]
+  },
+  {
+    "text": "Resize agent panel",
+    "files": [
+      "project-shell.tsx"
+    ]
+  },
+  {
+    "text": "Workspace navigation",
+    "files": [
+      "project-shell.tsx"
+    ]
+  },
+  {
+    "text": "icon-button workspace-home-button",
+    "files": [
+      "project-shell.tsx"
+    ]
+  },
+  {
+    "text": "Show agent",
+    "files": [
+      "project-shell.tsx"
+    ]
+  },
+  {
+    "text": "Loading project",
+    "files": [
+      "project-shell.tsx"
+    ]
+  },
+  {
+    "text": "Workspace unavailable",
+    "files": [
+      "project-shell.tsx"
+    ]
+  },
+  {
+    "text": "Reload",
+    "files": [
+      "project-shell.tsx"
+    ]
+  },
+  {
+    "text": "All types",
+    "files": [
+      "projects.tsx"
+    ]
+  },
+  {
+    "text": "Sort projects",
+    "files": [
+      "projects.tsx"
+    ]
+  },
+  {
+    "text": "Recently updated",
+    "files": [
+      "projects.tsx"
+    ]
+  },
+  {
+    "text": "project-card project-card-new",
+    "files": [
+      "projects.tsx"
+    ]
+  },
+  {
+    "text": "Start from an idea",
+    "files": [
+      "projects.tsx"
+    ]
+  },
+  {
+    "text": "No projects match your search",
+    "files": [
+      "projects.tsx"
+    ]
+  },
+  {
+    "text": "Drop files to attach",
+    "files": [
+      "prompt-box.tsx"
+    ]
+  },
+  {
+    "text": "Prompt",
+    "files": [
+      "prompt-box.tsx"
+    ]
+  },
+  {
+    "text": "Shown",
+    "files": [
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Done editing models",
+    "files": [
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Edit models",
+    "files": [
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Filter models",
+    "files": [
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Hide all",
+    "files": [
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Provider models",
+    "files": [
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Shown provider models",
+    "files": [
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Cancel deletion",
+    "files": [
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "icon-button provider-model-delete",
+    "files": [
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "No language models are available.",
+    "files": [
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "No models shown.",
+    "files": [
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "No models match these filters.",
+    "files": [
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "settings-detail-field provider-model-url-field",
+    "files": [
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Add",
+    "files": [
+      "provider-models.tsx"
+    ]
+  },
+  {
+    "text": "Processing cover...",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Saving cover...",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Publishing...",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Publish update",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "button:not(:disabled), a[href], input:not(:disabled), textarea:not(:disabled), [tabindex]:not([tabindex='-1'])",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Cover applied. Automatic replacement is off.",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Automatic cover restored.",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Apply or cancel the selected cover before publishing.",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Publishing did not complete. Please try again.",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Game published",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Published game",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Publish game",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Cover",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Not applied",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Game cover preview",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Loading cover...",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "The preview is captured automatically",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Replace cover",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Cancel selection",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Apply cover",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Restore automatic cover",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Automatic replacement is off.",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "The cover updates automatically with your project preview.",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "This is your local project cover. Publish an update to change the Community cover.",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Describe what makes this game worth playing",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Game cover",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Published successfully",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Last published",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Game link",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Copy game link",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "noopener noreferrer",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Open game",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Could not copy the link.",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "View in Community",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Local debug publish. This link only works on this computer until the local runtime stops or restarts.",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Unknown publication time",
+    "files": [
+      "publish-dialog.tsx"
+    ]
+  },
+  {
+    "text": "The Published Player manifest is invalid.",
+    "files": [
+      "published-player.tsx"
+    ]
+  },
+  {
+    "text": "Published Node definition",
+    "files": [
+      "published-player.tsx"
+    ]
+  },
+  {
+    "text": "The Published Node definition does not match its manifest.",
+    "files": [
+      "published-player.tsx"
+    ]
+  },
+  {
+    "text": "Loading game...",
+    "files": [
+      "published-player.tsx"
+    ]
+  },
+  {
+    "text": "The published game could not be loaded.",
+    "files": [
+      "published-player.tsx"
+    ]
+  },
+  {
+    "text": "Planning questions",
+    "files": [
+      "questionnaire-card.tsx"
+    ]
+  },
+  {
+    "text": "Previous question",
+    "files": [
+      "questionnaire-card.tsx"
+    ]
+  },
+  {
+    "text": "Next question",
+    "files": [
+      "questionnaire-card.tsx"
+    ]
+  },
+  {
+    "text": "Skip questions",
+    "files": [
+      "questionnaire-card.tsx"
+    ]
+  },
+  {
+    "text": "Selected text actions",
+    "files": [
+      "selected-text-menu.tsx"
+    ]
+  },
+  {
+    "text": "library-dialog-backdrop nokey",
+    "files": [
+      "send-to-project-dialog.tsx"
+    ]
+  },
+  {
+    "text": "project-switcher-popover send-to-project-dialog",
+    "files": [
+      "send-to-project-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Add “",
+    "files": [
+      "send-to-project-dialog.tsx"
+    ]
+  },
+  {
+    "text": "” to a project",
+    "files": [
+      "send-to-project-dialog.tsx"
+    ]
+  },
+  {
+    "text": "The file is copied into the project’s assets folder.",
+    "files": [
+      "send-to-project-dialog.tsx"
+    ]
+  },
+  {
+    "text": "project-switcher-state send-to-project-result",
+    "files": [
+      "send-to-project-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Added to",
+    "files": [
+      "send-to-project-dialog.tsx"
+    ]
+  },
+  {
+    "text": "No game projects yet",
+    "files": [
+      "send-to-project-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Left",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Right",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Providers & Models",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Account",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Appearance",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Web Search",
+    "files": [
+      "settings-page.tsx",
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "home-shell settings-page-shell",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "home-sidebar settings-page-sidebar",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Back to app",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Settings sections",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "settings-panel settings-overview-panel settings-billing-panel",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Billing",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Manage your OhMyGame Cloud plan, usage, and payment details on the web.",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Open billing dashboard",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "settings-panel settings-overview-panel settings-appearance-panel",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Theme",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Chat position",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Chat panel position",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "System",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Light",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Dark",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "settings-theme-preview is-system",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "settings-theme-system-layer is-dark",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "settings-panel settings-overview-panel settings-account-panel",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Signed in as",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Sign out",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "You're up to date",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Checking for updates...",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Not checked yet",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Updates",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Download update",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Restart to update",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "Check for updates",
+    "files": [
+      "settings-page.tsx"
+    ]
+  },
+  {
+    "text": "button:not(:disabled), [href], input:not(:disabled), [tabindex]:not([tabindex='-1'])",
+    "files": [
+      "sign-in-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Sign-in is currently unavailable.",
+    "files": [
+      "sign-in-dialog.tsx"
+    ]
+  },
+  {
+    "text": "project-settings-dialog sign-in-dialog",
+    "files": [
+      "sign-in-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Join the community",
+    "files": [
+      "sign-in-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Close sign in",
+    "files": [
+      "sign-in-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Create games with or without an account.",
+    "files": [
+      "sign-in-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Complete",
+    "files": [
+      "sign-in-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Google",
+    "files": [
+      "sign-in-dialog.tsx"
+    ]
+  },
+  {
+    "text": "GitHub",
+    "files": [
+      "sign-in-dialog.tsx"
+    ]
+  },
+  {
+    "text": "sign-in in your browser.",
+    "files": [
+      "sign-in-dialog.tsx"
+    ]
+  },
+  {
+    "text": "settings-secondary-button sign-in-provider",
+    "files": [
+      "sign-in-dialog.tsx"
+    ]
+  },
+  {
+    "text": "Continue with",
+    "files": [
+      "sign-in-dialog.tsx"
+    ]
+  },
+  {
+    "text": "M17.64 9.205c0-.638-.057-1.252-.164-1.841H9v3.482h4.844a4.14 4.14 0 0 1-1.797 2.715v2.258h2.909c1.702-1.567 2.684-3.874 2.684-6.614Z",
+    "files": [
+      "sign-in-dialog.tsx"
+    ]
+  },
+  {
+    "text": "M9 18c2.43 0 4.467-.806 5.956-2.181l-2.909-2.258c-.806.54-1.835.859-3.047.859-2.344 0-4.328-1.585-5.037-3.714H.956v2.332A9 9 0 0 0 9 18Z",
+    "files": [
+      "sign-in-dialog.tsx"
+    ]
+  },
+  {
+    "text": "M3.963 10.706A5.414 5.414 0 0 1 3.682 9c0-.592.102-1.167.281-1.706V4.962H.956A9 9 0 0 0 0 9c0 1.452.347 2.827.956 4.038l3.007-2.332Z",
+    "files": [
+      "sign-in-dialog.tsx"
+    ]
+  },
+  {
+    "text": "M9 3.58c1.321 0 2.507.454 3.441 1.346l2.581-2.581C13.463.892 11.426 0 9 0A9 9 0 0 0 .956 4.962l3.007 2.332C4.672 5.165 6.656 3.58 9 3.58Z",
+    "files": [
+      "sign-in-dialog.tsx"
+    ]
+  },
+  {
+    "text": "M12 .7a11.5 11.5 0 0 0-3.64 22.41c.58.1.79-.25.79-.56v-2.02c-3.22.7-3.9-1.37-3.9-1.37-.53-1.34-1.29-1.7-1.29-1.7-1.05-.72.08-.71.08-.71 1.16.08 1.77 1.2 1.77 1.2 1.04 1.77 2.71 1.26 3.37.96.1-.75.4-1.26.74-1.55-2.57-.29-5.27-1.29-5.27-5.68 0-1.26.45-2.28 1.19-3.09-.12-.29-.52-1.47.11-3.05 0 0 .97-.31 3.16 1.18a10.9 10.9 0 0 1 5.76 0c2.19-1.49 3.16-1.18 3.16-1.18.63 1.58.23 2.76.11 3.05.74.81 1.19 1.83 1.19 3.09 0 4.4-2.71 5.38-5.29 5.67.42.36.79 1.06.79 2.14v3.18c0 .31.21.67.8.56A11.5 11.5 0 0 0 12 .7Z",
+    "files": [
+      "sign-in-dialog.tsx"
+    ]
+  },
+  {
+    "text": "What game are we making today?",
+    "files": [
+      "studios.ts"
+    ]
+  },
+  {
+    "text": "Describe the browser game you want to create...",
+    "files": [
+      "studios.ts"
+    ]
+  },
+  {
+    "text": "New game",
+    "files": [
+      "studios.ts"
+    ]
+  },
+  {
+    "text": "What story are we telling today?",
+    "files": [
+      "studios.ts"
+    ]
+  },
+  {
+    "text": "Describe the interactive story you want to create...",
+    "files": [
+      "studios.ts"
+    ]
+  },
+  {
+    "text": "New story",
+    "files": [
+      "studios.ts"
+    ]
+  },
+  {
+    "text": "What are we building in Godot?",
+    "files": [
+      "studios.ts"
+    ]
+  },
+  {
+    "text": "Describe the Godot game you want to create...",
+    "files": [
+      "studios.ts"
+    ]
+  },
+  {
+    "text": "New Godot project",
+    "files": [
+      "studios.ts"
+    ]
+  },
+  {
+    "text": "The same document was edited elsewhere. Choose a version before saving.",
+    "files": [
+      "use-canvas-documents.ts"
+    ]
+  },
+  {
+    "text": "Document was removed from the workspace index",
+    "files": [
+      "use-canvas-documents.ts"
+    ]
+  },
+  {
+    "text": "Resolve the document conflict before saving.",
+    "files": [
+      "use-canvas-documents.ts"
+    ]
+  },
+  {
+    "text": "The document keeps changing. Try saving again.",
+    "files": [
+      "use-canvas-documents.ts"
+    ]
+  },
+  {
+    "text": "Review the document changes before saving.",
+    "files": [
+      "use-canvas-documents.ts"
+    ]
+  },
+  {
+    "text": "Resolve the document conflict before adopting this draft.",
+    "files": [
+      "use-canvas-documents.ts"
+    ]
+  },
+  {
+    "text": "Restore the document file before adopting this draft. You can still edit or copy it.",
+    "files": [
+      "use-canvas-documents.ts"
+    ]
+  },
+  {
+    "text": "The document changed during generation. Review the AI result before replacing it.",
+    "files": [
+      "use-canvas-documents.ts"
+    ]
+  },
+  {
+    "text": "Document generation was interrupted. Your instruction and candidate draft are kept. Try again.",
+    "files": [
+      "use-canvas-documents.ts"
+    ]
+  },
+  {
+    "text": "Saving was interrupted. Review the document before adopting the candidate draft again.",
+    "files": [
+      "use-canvas-documents.ts"
+    ]
+  },
+  {
+    "text": "Allow popups to play this game in a new window.",
+    "files": [
+      "use-web-game-player.ts"
+    ]
+  },
+  {
+    "text": "The game window was closed.",
+    "files": [
+      "use-web-game-player.ts"
+    ]
+  },
+  {
+    "text": "File missing",
+    "files": [
+      "use-workspace-asset-url.ts"
+    ]
+  },
+  {
+    "text": "File unavailable",
+    "files": [
+      "use-workspace-asset-url.ts"
+    ]
+  },
+  {
+    "text": "Use PNG, JPEG, or WebP references",
+    "files": [
+      "video-reference-files.ts"
+    ]
+  },
+  {
+    "text": "Image references must be no larger than 30 MB",
+    "files": [
+      "video-reference-files.ts"
+    ]
+  },
+  {
+    "text": "Video prompt",
+    "files": [
+      "video-reference-prompt.tsx"
+    ]
+  },
+  {
+    "text": "Describe the video. Type @ to reference an image.",
+    "files": [
+      "video-reference-prompt.tsx"
+    ]
+  },
+  {
+    "text": "video-mention-menu nowheel",
+    "files": [
+      "video-reference-prompt.tsx"
+    ]
+  },
+  {
+    "text": "Reference images",
+    "files": [
+      "video-reference-prompt.tsx"
+    ]
+  },
+  {
+    "text": "No matching images",
+    "files": [
+      "video-reference-prompt.tsx"
+    ]
+  },
+  {
+    "text": "Add or connect an image first",
+    "files": [
+      "video-reference-prompt.tsx"
+    ]
+  },
+  {
+    "text": "Loading web search settings...",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "settings-panel settings-overview-panel settings-web-search-panel",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Web search",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Choose the service that runs web searches.",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Web search provider",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Select Exa or Parallel automatically",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Always use Exa",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Always use Parallel",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Custom MCP",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Use a compatible MCP server",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Use fallback provider",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Retry with the other public provider when automatic search fails.",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "API keys",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Add credentials for the public providers you use.",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Exa API key",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Parallel API key",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "settings-search-section settings-custom-search-section",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Connect a compatible server for web search.",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Endpoint",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Tool name",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Bearer token",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Web search settings saved.",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Saving...",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Saved - enter a new value to replace",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "Remove saved key",
+    "files": [
+      "web-search-settings.tsx"
+    ]
+  },
+  {
+    "text": "an action failed",
+    "files": [
+      "work-items.ts"
+    ]
+  },
+  {
+    "text": "actions failed",
+    "files": [
+      "work-items.ts"
+    ]
+  },
+  {
+    "text": "Used tools",
+    "files": [
+      "work-items.ts"
+    ]
+  },
+  {
+    "text": "read a file",
+    "files": [
+      "work-items.ts"
+    ]
+  },
+  {
+    "text": "read files",
+    "files": [
+      "work-items.ts"
+    ]
+  },
+  {
+    "text": "ran a command",
+    "files": [
+      "work-items.ts"
+    ]
+  },
+  {
+    "text": "ran commands",
+    "files": [
+      "work-items.ts"
+    ]
+  },
+  {
+    "text": "searched the web",
+    "files": [
+      "work-items.ts"
+    ]
+  },
+  {
+    "text": "searched the web multiple times",
+    "files": [
+      "work-items.ts"
+    ]
+  },
+  {
+    "text": "playtested the game",
+    "files": [
+      "work-items.ts"
+    ]
+  },
+  {
+    "text": "Workspace views",
+    "files": [
+      "workspace-tabs.tsx"
+    ]
+  }
+]

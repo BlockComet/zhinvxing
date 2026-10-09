@@ -42,7 +42,7 @@ export const MarkdownContent = memo(function MarkdownContent({ text, className =
             if (filePath) {
               const iconKind = workspaceFileIconKind(filePath);
               const FileIcon = FILE_ICON_COMPONENTS[iconKind];
-              return <a className="workspace-file-link" data-file-kind={iconKind} href={href} title={`Open ${filePath} in Code`} onClick={(event) => {
+              return <a className="workspace-file-link" data-file-kind={iconKind} href={href} title={`打开 ${filePath} in Code`} onClick={(event) => {
                 event.preventDefault();
                 onOpenWorkspaceFile?.(filePath);
               }}><FileIcon size={13} aria-hidden="true" />{children}</a>;
@@ -131,12 +131,12 @@ function MarkdownCodeBlock({ children }: { children?: ReactNode }) {
   return (
     <div className="markdown-code-block">
       <div className="markdown-code-header">
-        <span>{language ?? "Code"}</span>
+        <span>{language ?? "代码"}</span>
         <button type="button" onClick={() => {
           void navigator.clipboard.writeText(code).then(() => setCopied(true));
         }}>
           {copied ? <Check size={12} /> : <Copy size={12} />}
-          <span>{copied ? "Copied" : "Copy"}</span>
+          <span>{copied ? "已复制" : "复制"}</span>
         </button>
       </div>
       <pre>{children}</pre>

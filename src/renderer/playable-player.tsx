@@ -95,7 +95,7 @@ export function NodePlayer({
         try {
           seenStorage.setItem(seenKey, JSON.stringify(message.seen));
         } catch (cause) {
-          onDiagnostic(`Could not keep which Scenes were seen: ${errorMessage(cause)}`);
+          onDiagnostic(`无法保存场景访问记录：${errorMessage(cause)}`);
         }
       } else if (message.kind === "ohmygame:playable:snapshot") {
         setReady(true);
@@ -212,7 +212,7 @@ export function NodePlayer({
           />
         </div>
         {!ready && !error ? (
-          <div className="playable-player-status">Loading...</div>
+          <div className="playable-player-status">正在加载…</div>
         ) : null}
         {error ? (
           <div className="playable-player-status is-error" role="alert">

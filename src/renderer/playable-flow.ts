@@ -77,7 +77,7 @@ export function toFlowEdge(edge: PlayableEdge): Edge {
     sourceHandle: edge.source.signal,
     target: edge.targetNodeId,
     data: { mode: edge.mode },
-    ...(edge.mode === "push" ? { label: "↩ Back", className: "playable-edge-push" } : {}),
+    ...(edge.mode === "push" ? { label: "↩ 返回", className: "playable-edge-push" } : {}),
   };
 }
 

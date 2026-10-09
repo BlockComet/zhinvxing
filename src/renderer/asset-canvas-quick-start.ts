@@ -12,8 +12,8 @@ export interface AssetCanvasQuickStart {
 }
 
 export const ASSET_CANVAS_QUICK_STARTS: readonly AssetCanvasQuickStart[] = [
-  { key: "image", type: "image", label: "Image" },
-  { key: "video", type: "video", label: "Video" },
+  { key: "image", type: "image", label: "图片" },
+  { key: "video", type: "video", label: "视频" },
   { key: "model-3d", type: "model-3d", label: "3D" },
   { key: "gpt-image-2.5", type: "image", label: "GPT Image 2.5", modelId: "gpt-image-2.5-flare" },
   { key: "nano-banana-2", type: "image", label: "Nano Banana 2", modelId: "gemini-3.1-flash-image" },

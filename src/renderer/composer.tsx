@@ -205,13 +205,13 @@ export function Composer({
     setReferencingDesign(true);
     try {
       const result = await getCanvasDocument(projectId);
-      if (!result) throw new Error("This project does not have a game design document yet");
+      if (!result) throw new Error("此项目尚无游戏设计文档");
       setDesignReference({
         references: [{ type: "workspace-file", path: canvasDocumentPath(result.document.id) }],
         context: {
           kind: "design-document",
-          label: result.document.title || "Game design",
-          text: "Reference the saved game design document for this message.",
+          label: result.document.title || "游戏设计",
+          text: "在此消息中引用已保存的游戏设计文档。",
         },
       });
       textarea.current?.focus();
@@ -394,7 +394,7 @@ export function Composer({
       references: [referencedDesign],
       context: {
         kind: "design-document",
-        label: "Game design",
+        label: "游戏设计",
         text: "The user explicitly referenced this saved design document.",
       },
     } : undefined);
@@ -486,36 +486,36 @@ export function Composer({
               onReasoningChange={onReasoningChange}
             />
             {showStop ? (
-              <button className="icon-button stop-button" type="button" onClick={onStop} disabled={stopping} title="Stop agent" aria-label="Stop agent">
+              <button className="icon-button stop-button" type="button" onClick={onStop} disabled={stopping} title="停止 AI" aria-label="停止 AI">
                 <Square size={14} fill="currentColor" />
               </button>
             ) : (
-              <button className="icon-button send-button" type="submit" disabled={inputDisabled || (!selectedSkill && !selectedPlugin && !prompt.trim() && attachments.length === 0) || stopping} title={running ? "Queue follow-up" : "Send prompt"} aria-label={running ? "Queue follow-up" : "Send prompt"}>
+              <button className="icon-button send-button" type="submit" disabled={inputDisabled || (!selectedSkill && !selectedPlugin && !prompt.trim() && attachments.length === 0) || stopping} title={running ? "将后续消息加入队列" : "发送提示词"} aria-label={running ? "将后续消息加入队列" : "发送提示词"}>
                 <SendArrow size={15} />
               </button>
             )}
           </>
         )}
         content={<>
-          {contexts.length ? <div className="composer-contexts" aria-label="Context for the next message">
+          {contexts.length ? <div className="composer-contexts" aria-label="下一条消息的上下文">
             {contexts.map((context) => <div className={`composer-context is-${context.kind}`} key={context.key} title={context.detail ?? context.label}>
               <PromptContextIcon kind={context.kind} />
               <span>{context.label}</span>
               {context.detail ? <small>{context.detail}</small> : null}
-              <button type="button" onClick={() => onRemoveContext?.(context.key)} aria-label={`Remove ${context.label} from the message`}><X size={11} /></button>
+              <button type="button" onClick={() => onRemoveContext?.(context.key)} aria-label={`移除 ${context.label} from the message`}><X size={11} /></button>
             </div>)}
           </div> : null}
           {reference ? <div className="composer-reference">
-            <div className="composer-reference-label">Selected text</div>
+            <div className="composer-reference-label">已选文本</div>
             <div className="composer-reference-text">{reference.text}</div>
-            <button type="button" className="composer-reference-remove" onClick={onClearReference} aria-label="Remove selected text">×</button>
+            <button type="button" className="composer-reference-remove" onClick={onClearReference} aria-label="移除已选文本">×</button>
           </div> : null}
-          {designReference ? <div className="composer-contexts" aria-label="Referenced game design">
+          {designReference ? <div className="composer-contexts" aria-label="引用的游戏设计">
             <div className="composer-context is-design-document" title={designReference.context.label}>
               <FileText size={12} />
               <span>{designReference.context.label}</span>
-              <small>Game design</small>
-              <button type="button" onClick={() => setDesignReference(undefined)} aria-label="Remove game design reference"><X size={11} /></button>
+              <small>游戏设计</small>
+              <button type="button" onClick={() => setDesignReference(undefined)} aria-label="移除游戏设计引用"><X size={11} /></button>
             </div>
           </div> : null}
           <AttachmentStrip items={attachments} onRemove={(id) => setAttachments((items) => items.filter((attachment) => attachment.id !== id))} />
@@ -551,7 +551,7 @@ export function Composer({
         onHistoryNext={() => browseHistory("next")}
         onHistoryPrevious={() => browseHistory("previous")}
         onDropFiles={inputDisabled ? undefined : addFiles}
-        onDropError={(error) => setAttachmentError(`Could not read dropped folder: ${error.message}`)}
+        onDropError={(error) => setAttachmentError(`无法读取拖入的文件夹：${error.message}`)}
         onSubmit={submitOrRunCommand}
         overlay={mentions.length ? (
           <ComposerMentionMenu items={mentions} selected={selectedMention} onSelect={selectMention} />
@@ -569,7 +569,7 @@ export function Composer({
             }}
           />
         ) : null}
-        placeholder={selectedSkill || selectedPlugin ? "" : awaitingApproval ? "Review the plan above" : planMode === "executing" ? "Executing plan" : planning ? "Describe what to plan" : running ? "Add a follow-up" : "Ask for a change"}
+        placeholder={selectedSkill || selectedPlugin ? "" : awaitingApproval ? "检查上方计划" : planMode === "executing" ? "正在执行计划" : planning ? "描述要规划的内容" : running ? "添加后续消息" : "描述想要的修改"}
         textareaRef={textarea}
         onSelectionChange={setMentionCursor}
         value={prompt}

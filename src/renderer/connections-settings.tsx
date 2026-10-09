@@ -47,7 +47,7 @@ export function ConnectionsSettings() {
   }
 
   async function remove(connection: Connection): Promise<void> {
-    if (!window.confirm(`Delete “${connection.displayName}”?`)) return;
+    if (!window.confirm(`删除「${connection.displayName}」？`)) return;
     setBusy(connection.id);
     setError(undefined);
     try {
@@ -75,24 +75,24 @@ export function ConnectionsSettings() {
 
   return <section className="settings-panel settings-overview-panel">
     <header className="settings-panel-header">
-      <h3>Connections</h3>
-      <button className="settings-add-button" type="button" onClick={() => setEditor({ mode: "create" })}><Plus size={13} />Add connection</button>
+      <h3>连接</h3>
+      <button className="settings-add-button" type="button" onClick={() => setEditor({ mode: "create" })}><Plus size={13} />添加连接</button>
     </header>
     {error ? <p className="settings-error" role="alert">{error}</p> : null}
-    {phase === "loading" ? <div className="settings-loading"><LoaderCircle className="spin" size={15} />Loading connections</div> : null}
-    {phase === "error" ? <button className="settings-secondary-button" type="button" onClick={() => void load()}>Retry</button> : null}
+    {phase === "loading" ? <div className="settings-loading"><LoaderCircle className="spin" size={15} />正在加载连接</div> : null}
+    {phase === "error" ? <button className="settings-secondary-button" type="button" onClick={() => void load()}>重试</button> : null}
     {phase === "ready" ? <div className="settings-connection-list">
       {connections.map((connection) => <article className={`settings-connection-row${connection.enabled ? "" : " is-disabled"}`} key={connection.id}>
         <span className="settings-connection-icon">{connection.id === "ohmygame-godot" ? <GodotIcon size={20} /> : <Plug size={17} />}</span>
         <span className="settings-connection-copy">
-          <span><strong>{connection.displayName}</strong>{connection.source === "preset" ? <small>Built-in</small> : null}</span>
-          <span className="settings-connection-transport" title={connectionDefinition(connection)}>{connection.transport.type === "stdio" ? "Local · STDIO" : "Remote · HTTP"}</span>
+          <span><strong>{connection.displayName}</strong>{connection.source === "preset" ? <small>内置</small> : null}</span>
+          <span className="settings-connection-transport" title={connectionDefinition(connection)}>{connection.transport.type === "stdio" ? "本地 · STDIO" : "远程 · HTTP"}</span>
         </span>
-        {connection.editable ? <button className="settings-connection-action" type="button" disabled={Boolean(busy)} aria-label={`Edit ${connection.displayName}`} onClick={() => setEditor({ mode: "edit", connection })}><Pencil size={14} /></button> : null}
-        {connection.removable ? <button className="settings-connection-action is-danger" type="button" disabled={Boolean(busy)} aria-label={`Delete ${connection.displayName}`} onClick={() => void remove(connection)}><Trash2 size={14} /></button> : null}
-        <button className="plugin-switch" type="button" role="switch" aria-checked={connection.enabled} disabled={Boolean(busy)} aria-label={`${connection.enabled ? "Disable" : "Enable"} ${connection.displayName}`} onClick={() => void toggle(connection)}><span /></button>
+        {connection.editable ? <button className="settings-connection-action" type="button" disabled={Boolean(busy)} aria-label={`编辑 ${connection.displayName}`} onClick={() => setEditor({ mode: "edit", connection })}><Pencil size={14} /></button> : null}
+        {connection.removable ? <button className="settings-connection-action is-danger" type="button" disabled={Boolean(busy)} aria-label={`删除 ${connection.displayName}`} onClick={() => void remove(connection)}><Trash2 size={14} /></button> : null}
+        <button className="plugin-switch" type="button" role="switch" aria-checked={connection.enabled} disabled={Boolean(busy)} aria-label={`${connection.enabled ? "停用" : "启用"} ${connection.displayName}`} onClick={() => void toggle(connection)}><span /></button>
       </article>)}
-      {!connections.length ? <p className="settings-empty">No connections configured.</p> : null}
+      {!connections.length ? <p className="settings-empty">尚未配置连接。</p> : null}
     </div> : null}
     {editor ? <ConnectionEditor state={editor} saving={Boolean(busy)} onClose={() => setEditor(undefined)} onSave={save} /> : null}
   </section>;
@@ -164,31 +164,31 @@ function ConnectionEditor({ state, saving, onClose, onSave }: {
 
   return createPortal(<div className="project-settings-backdrop" onMouseDown={(event) => { if (event.target === event.currentTarget && !saving) onClose(); }}>
     <section ref={dialog} className="project-settings-dialog connection-dialog" role="dialog" aria-modal="true" aria-labelledby={titleId} tabIndex={-1}>
-      <header><h2 id={titleId}>{state.mode === "edit" ? "Edit connection" : "Add connection"}</h2><button type="button" disabled={saving} aria-label="Close" onClick={onClose}><X size={16} /></button></header>
+      <header><h2 id={titleId}>{state.mode === "edit" ? "编辑连接" : "添加连接"}</h2><button type="button" disabled={saving} aria-label="关闭" onClick={onClose}><X size={16} /></button></header>
       <form onSubmit={(event) => void submit(event)}>
         <div className="connection-dialog-body">
           <fieldset className="project-settings-section" disabled={saving}>
             <div className="project-settings-field-row">
-              <label><span>Connection ID</span><input ref={idInput} required value={id} placeholder="context7" onChange={(event) => setId(event.target.value)} autoComplete="off" spellCheck={false} /></label>
-              <label><span>Type</span><select value={type} onChange={(event) => { setType(event.target.value as ConnectionTransport["type"]); setFormError(undefined); }}><option value="stdio">Local command</option><option value="http">HTTP</option></select></label>
+              <label><span>连接 ID</span><input ref={idInput} required value={id} placeholder="context7" onChange={(event) => setId(event.target.value)} autoComplete="off" spellCheck={false} /></label>
+              <label><span>类型</span><select value={type} onChange={(event) => { setType(event.target.value as ConnectionTransport["type"]); setFormError(undefined); }}><option value="stdio">本地命令</option><option value="http">HTTP</option></select></label>
             </div>
             {type === "stdio" ? <>
-              <label><span>Command</span><input required value={command} placeholder="npx" onChange={(event) => setCommand(event.target.value)} autoComplete="off" spellCheck={false} /></label>
-              <label><span>Arguments <small>One per line</small></span><textarea rows={2} value={args} placeholder={"-y\n@package/mcp"} onChange={(event) => setArgs(event.target.value)} autoComplete="off" spellCheck={false} /></label>
+              <label><span>命令</span><input required value={command} placeholder="npx" onChange={(event) => setCommand(event.target.value)} autoComplete="off" spellCheck={false} /></label>
+              <label><span>参数 <small>每行一个</small></span><textarea rows={2} value={args} placeholder={"-y\n@package/mcp"} onChange={(event) => setArgs(event.target.value)} autoComplete="off" spellCheck={false} /></label>
             </> : <label><span>URL</span><input required type="url" value={url} placeholder="https://example.com/mcp" onChange={(event) => setUrl(event.target.value)} autoComplete="off" spellCheck={false} /></label>}
             <details className="connection-dialog-advanced" open={advancedOpen} onToggle={(event) => setAdvancedOpen(event.currentTarget.open)}>
-              <summary>Advanced</summary>
+              <summary>高级</summary>
               <div className="project-settings-section">
                 {type === "stdio" ? <>
-                  <label><span>Working directory <small>Optional</small></span><input value={cwd} placeholder="/path/to/project" onChange={(event) => setCwd(event.target.value)} autoComplete="off" spellCheck={false} /></label>
-                  <label><span>Environment variables <small>JSON</small></span><textarea rows={3} value={env} placeholder={'{ "TOKEN": "value" }'} onChange={(event) => setEnv(event.target.value)} autoComplete="off" spellCheck={false} /></label>
-                </> : <label><span>Headers <small>JSON</small></span><textarea rows={3} value={headers} placeholder={'{ "Authorization": "Bearer token" }'} onChange={(event) => setHeaders(event.target.value)} autoComplete="off" spellCheck={false} /></label>}
+                  <label><span>工作目录 <small>可选</small></span><input value={cwd} placeholder="/path/to/project" onChange={(event) => setCwd(event.target.value)} autoComplete="off" spellCheck={false} /></label>
+                  <label><span>环境变量 <small>JSON</small></span><textarea rows={3} value={env} placeholder={'{ "TOKEN": "value" }'} onChange={(event) => setEnv(event.target.value)} autoComplete="off" spellCheck={false} /></label>
+                </> : <label><span>请求头 <small>JSON</small></span><textarea rows={3} value={headers} placeholder={'{ "Authorization": "Bearer token" }'} onChange={(event) => setHeaders(event.target.value)} autoComplete="off" spellCheck={false} /></label>}
               </div>
             </details>
           </fieldset>
           {formError ? <p className="project-settings-error" role="alert">{formError}</p> : null}
         </div>
-        <footer><button type="button" disabled={saving} onClick={onClose}>Cancel</button><button className="project-settings-submit" type="submit" disabled={saving || !id.trim() || !(type === "stdio" ? command.trim() : url.trim())}>{saving ? <LoaderCircle className="spin" size={14} /> : null}{saving ? "Saving…" : state.mode === "edit" ? "Save changes" : "Add connection"}</button></footer>
+        <footer><button type="button" disabled={saving} onClick={onClose}>取消</button><button className="project-settings-submit" type="submit" disabled={saving || !id.trim() || !(type === "stdio" ? command.trim() : url.trim())}>{saving ? <LoaderCircle className="spin" size={14} /> : null}{saving ? "正在保存…" : state.mode === "edit" ? "保存更改" : "添加连接"}</button></footer>
       </form>
     </section>
   </div>, document.body);
@@ -197,7 +197,7 @@ function ConnectionEditor({ state, saving, onClose, onSave }: {
 function parseStringMap(value: string): Record<string, string> {
   if (!value.trim()) return {};
   const parsed = JSON.parse(value) as unknown;
-  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed) || !Object.values(parsed).every((item) => typeof item === "string")) throw new Error("Enter a JSON object containing string values");
+  if (!parsed || typeof parsed !== "object" || Array.isArray(parsed) || !Object.values(parsed).every((item) => typeof item === "string")) throw new Error("请输入值为字符串的 JSON 对象");
   return parsed as Record<string, string>;
 }
 

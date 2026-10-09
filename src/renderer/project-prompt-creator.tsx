@@ -302,8 +302,8 @@ export function ProjectPromptCreator({ projectType, projectTypes = PROJECT_TYPES
               className="icon-button send-button"
               type="submit"
               disabled={(!selectedSkill && !selectedPlugin && !prompt.trim() && attachments.length === 0) || creating}
-              title="Create project"
-              aria-label="Create project"
+              title="创建项目"
+              aria-label="创建项目"
             >
               {creating ? <LoaderCircle className="spin" size={15} /> : <SendArrow size={15} />}
             </button>
@@ -346,7 +346,7 @@ export function ProjectPromptCreator({ projectType, projectTypes = PROJECT_TYPES
         overlay={mentions.length
           ? <ComposerMentionMenu items={mentions} selected={selectedMention} onSelect={selectMention} />
           : matchesPlanCommand(prompt) ? <PlanCommandMenu planning={planning} onToggle={togglePlanning} /> : null}
-        placeholder={selectedSkill || selectedPlugin ? "" : planning ? "Describe what to plan" : placeholder}
+        placeholder={selectedSkill || selectedPlugin ? "" : planning ? "描述要规划的内容" : placeholder}
         textareaRef={promptRef}
         onSelectionChange={setMentionCursor}
         value={prompt}
@@ -356,8 +356,8 @@ export function ProjectPromptCreator({ projectType, projectTypes = PROJECT_TYPES
       />
       {existingProject ? (
         <p className="home-notice" role="alert">
-          This folder is already the workspace of “{existingProject.name}”.
-          {onOpenProject ? <button type="button" onClick={() => onOpenProject(existingProject.id)}>Open project</button> : null}
+          此文件夹已被以下项目用作工作区：「{existingProject.name}”.
+          {onOpenProject ? <button type="button" onClick={() => onOpenProject(existingProject.id)}>打开项目</button> : null}
         </p>
       ) : null}
       {error ? <p className="home-notice" role="alert">{error}</p> : null}
@@ -419,13 +419,13 @@ function WorkspaceSelector({ value, disabled, onChoose, onUseManaged }: {
         aria-controls={menuId}
         aria-expanded={open}
         aria-haspopup="menu"
-        aria-label={value ? `Workspace: ${value}` : "Workspace: new folder in OhMyGame storage"}
-        title={value ?? "Creates a new folder in OhMyGame's project storage"}
+        aria-label={value ? `工作区：${value}` : "工作区：在 OhMyGame 存储目录中新建文件夹"}
+        title={value ?? "在 OhMyGame 项目存储目录中新建文件夹"}
         disabled={disabled}
         onClick={() => setOpen((currentOpen) => !currentOpen)}
       >
         {value ? <Folder size={14} /> : <FolderPlus size={14} />}
-        <span>{folderName ?? "New folder"}</span>
+        <span>{folderName ?? "新建文件夹"}</span>
         <ChevronDown size={12} aria-hidden="true" />
       </button>
       {open ? (
@@ -434,17 +434,17 @@ function WorkspaceSelector({ value, disabled, onChoose, onUseManaged }: {
           className="home-project-type-menu home-workspace-menu"
           id={menuId}
           role="menu"
-          aria-label="Workspace"
+          aria-label="工作区"
           onKeyDown={(event) => {
             if (event.key === "Tab") {
               setOpen(false);
               return;
             }
-            if (!["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) return;
+            if (!["ArrowDown", "ArrowUp", "首页", "End"].includes(event.key)) return;
             event.preventDefault();
             const items = [...event.currentTarget.querySelectorAll<HTMLButtonElement>("button")];
             const currentIndex = items.indexOf(document.activeElement as HTMLButtonElement);
-            const nextIndex = event.key === "Home"
+            const nextIndex = event.key === "首页"
               ? 0
               : event.key === "End"
                 ? items.length - 1
@@ -463,7 +463,7 @@ function WorkspaceSelector({ value, disabled, onChoose, onUseManaged }: {
             }}
           >
             <FolderPlus size={14} aria-hidden="true" />
-            <span>New folder</span>
+            <span>新建文件夹</span>
             {value ? null : <Check size={13} aria-hidden="true" />}
           </button>
           {value ? (
@@ -482,7 +482,7 @@ function WorkspaceSelector({ value, disabled, onChoose, onUseManaged }: {
             }}
           >
             <FolderOpen size={14} aria-hidden="true" />
-            <span>{value ? "Choose another folder…" : "Choose folder…"}</span>
+            <span>{value ? "选择其他文件夹…" : "选择文件夹…"}</span>
           </button>
         </div>
       ) : null}
@@ -558,17 +558,17 @@ function ProjectTypeSelector({ value, options, disabled, onChange }: {
           className="home-project-type-menu"
           id={menuId}
           role="menu"
-          aria-label="Project type"
+          aria-label="项目类型"
           onKeyDown={(event) => {
             if (event.key === "Tab") {
               setOpen(false);
               return;
             }
-            if (!["ArrowDown", "ArrowUp", "Home", "End"].includes(event.key)) return;
+            if (!["ArrowDown", "ArrowUp", "首页", "End"].includes(event.key)) return;
             event.preventDefault();
             const items = [...event.currentTarget.querySelectorAll<HTMLButtonElement>('[role="menuitemradio"]')];
             const currentIndex = items.indexOf(document.activeElement as HTMLButtonElement);
-            const nextIndex = event.key === "Home"
+            const nextIndex = event.key === "首页"
               ? 0
               : event.key === "End"
                 ? items.length - 1

@@ -33,7 +33,7 @@ export function ComposerMentionMenu({ items, selected, onSelect }: {
 
   if (items.length === 0) return null;
   return (
-    <div className="composer-command-menu composer-mention-menu" ref={menu} role="listbox" aria-label="Composer mentions">
+    <div className="composer-command-menu composer-mention-menu" ref={menu} role="listbox" aria-label="输入框引用">
       {items.map((item, index) => {
         const skillName = item.type === "skill" ? skillDisplayName(item.value.name) : undefined;
         const name = item.type === "plugin"

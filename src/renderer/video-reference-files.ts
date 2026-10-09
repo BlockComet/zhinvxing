@@ -12,9 +12,9 @@ export function prepareVideoReferenceFile(file: File): PreparedVideoReferenceFil
     : extension === "jpg" || extension === "jpeg" ? { type: "image", mediaType: "image/jpeg" }
       : extension === "webp" ? { type: "image", mediaType: "image/webp" }
         : undefined;
-  if (!selected) throw new Error("Use PNG, JPEG, or WebP references");
+  if (!selected) throw new Error("请使用 PNG、JPEG 或 WebP 参考图片");
   const maximum = 30 * 1024 * 1024;
-  if (file.size > maximum) throw new Error("Image references must be no larger than 30 MB");
+  if (file.size > maximum) throw new Error("参考图片不能超过 30 MB");
   return {
     file,
     type: "image",
@@ -30,9 +30,9 @@ export async function readMediaFileDuration(file: File, type: "video" | "audio")
     element.src = url;
     const duration = await new Promise<number>((resolve, reject) => {
       element.onloadedmetadata = () => resolve(element.duration);
-      element.onerror = () => reject(new Error(`Could not read the duration of ${file.name}`));
+      element.onerror = () => reject(new Error(`无法读取文件时长：${file.name}`));
     });
-    if (!Number.isFinite(duration) || duration <= 0) throw new Error(`Could not read the duration of ${file.name}`);
+    if (!Number.isFinite(duration) || duration <= 0) throw new Error(`无法读取文件时长：${file.name}`);
     return duration;
   } finally {
     element.removeAttribute("src");

@@ -5,21 +5,21 @@ export type GameStudioType = Exclude<ProjectType, "asset-canvas">;
 export const GAME_STUDIOS = {
   "web-game": {
     page: "web-game",
-    title: "What game are we making today?",
-    placeholder: "Describe the browser game you want to create...",
-    newLabel: "New game",
+    title: "今天想做什么游戏？",
+    placeholder: "描述你想创作的浏览器游戏…",
+    newLabel: "新建游戏",
   },
   "interactive-story": {
     page: "interactive-story",
-    title: "What story are we telling today?",
-    placeholder: "Describe the interactive story you want to create...",
-    newLabel: "New story",
+    title: "今天想讲什么故事？",
+    placeholder: "描述你想创作的互动故事…",
+    newLabel: "新建故事",
   },
   "godot-game": {
     page: "godot",
-    title: "What are we building in Godot?",
-    placeholder: "Describe the Godot game you want to create...",
-    newLabel: "New Godot project",
+    title: "想用 Godot 创作什么？",
+    placeholder: "描述你想创作的 Godot 游戏…",
+    newLabel: "新建 Godot 项目",
   },
 } as const;
 

@@ -45,9 +45,9 @@ export function SelectedTextMenu({ root, onAdd }: { root: HTMLElement | null; on
   }, [root]);
   if (!selection) return null;
   return (
-    <div className="selected-text-menu" ref={menu} style={{ top: selection.top, left: selection.left }} role="toolbar" aria-label="Selected text actions">
+    <div className="selected-text-menu" ref={menu} style={{ top: selection.top, left: selection.left }} role="toolbar" aria-label="已选文本操作">
       <button type="button" onMouseDown={(event) => event.preventDefault()} onClick={() => { onAdd(selection.text); setSelection(undefined); }}>
-        Add to chat
+        添加到聊天
       </button>
     </div>
   );

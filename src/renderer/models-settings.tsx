@@ -42,16 +42,16 @@ export type ModelsView = { page: "providers" } | { page: "provider"; provider: P
 const POPULAR_PROVIDER_IDS = ["openrouter", "openai", "anthropic"];
 const SEEDANCE_PROVIDER_IDS = new Set(["volcengine-ark", "byteplus-modelark"]);
 const PROVIDER_CAPABILITY_FILTERS: Array<{ value: "all" | ProviderCapability; label: string }> = [
-  { value: "all", label: "All" },
-  { value: "language", label: "Language" },
-  { value: "image", label: "Image" },
-  { value: "video", label: "Video" },
+  { value: "all", label: "全部" },
+  { value: "language", label: "语言模型" },
+  { value: "image", label: "图片" },
+  { value: "video", label: "视频" },
   { value: "3d", label: "3D" },
 ];
 const PROVIDER_CAPABILITY_LABELS: Record<ProviderCapability, string> = {
-  language: "Language",
-  image: "Image",
-  video: "Video",
+  language: "语言模型",
+  image: "图片",
+  video: "视频",
   "3d": "3D",
 };
 
@@ -118,10 +118,10 @@ function ProviderList({ onProvider }: { onProvider: (provider: ProviderSummary) 
   return (
     <section className="settings-panel settings-overview-panel">
       <header className="settings-panel-header">
-        <h3>Providers &amp; Models</h3>
+        <h3>服务商与模型</h3>
         <label className="settings-provider-search">
           <Search size={14} />
-          <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search providers" aria-label="Search providers" />
+          <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索服务商" aria-label="搜索服务商" />
         </label>
       </header>
       {adding ? <CustomProviderDialog onClose={() => setAdding(false)} onSaved={() => {
@@ -132,19 +132,19 @@ function ProviderList({ onProvider }: { onProvider: (provider: ProviderSummary) 
       }} /> : null}
       <div className="settings-provider-list">
         <div className="settings-provider-toolbar">
-          <SegmentedControl className="settings-provider-filters" label="Filter providers by capability" options={PROVIDER_CAPABILITY_FILTERS} value={capability} onChange={setCapability} />
-          <button className="settings-secondary-button settings-provider-add" type="button" onClick={() => setAdding(true)}><Plus size={13} />Add provider</button>
+          <SegmentedControl className="settings-provider-filters" label="按能力筛选服务商" options={PROVIDER_CAPABILITY_FILTERS} value={capability} onChange={setCapability} />
+          <button className="settings-secondary-button settings-provider-add" type="button" onClick={() => setAdding(true)}><Plus size={13} />添加服务商</button>
         </div>
-        {loading ? <div className="settings-loading"><LoaderCircle className="spin" size={18} />Loading providers</div> : null}
-        {!loading && providers.length === 0 && !error ? <p className="settings-empty">No configurable providers are available.</p> : null}
-        {!loading && providers.length > 0 && visibleProviders.length === 0 ? <p className="settings-empty">No providers match these filters.</p> : null}
-        {filtering && filteredProviders.length ? <ProviderGroup {...rowActions} title="Providers" providers={filteredProviders} onProvider={onProvider} /> : null}
-        {!filtering && connectedProviders.length ? <ProviderGroup {...rowActions} title="Connected providers" providers={connectedProviders} onProvider={onProvider} /> : null}
-        {!filtering && popularProviders.length ? <ProviderGroup {...rowActions} title="Popular providers" providers={popularProviders} onProvider={onProvider} /> : null}
+        {loading ? <div className="settings-loading"><LoaderCircle className="spin" size={18} />正在加载服务商</div> : null}
+        {!loading && providers.length === 0 && !error ? <p className="settings-empty">没有可配置的服务商。</p> : null}
+        {!loading && providers.length > 0 && visibleProviders.length === 0 ? <p className="settings-empty">没有符合筛选条件的服务商。</p> : null}
+        {filtering && filteredProviders.length ? <ProviderGroup {...rowActions} title="服务商" providers={filteredProviders} onProvider={onProvider} /> : null}
+        {!filtering && connectedProviders.length ? <ProviderGroup {...rowActions} title="已连接的服务商" providers={connectedProviders} onProvider={onProvider} /> : null}
+        {!filtering && popularProviders.length ? <ProviderGroup {...rowActions} title="热门服务商" providers={popularProviders} onProvider={onProvider} /> : null}
         {!filtering && moreProviders.length ? (
           <section className="settings-provider-group">
             <button className="settings-provider-more" type="button" aria-expanded={moreOpen} onClick={() => setMoreOpen((open) => !open)}>
-              <span>More providers <small>({moreProviders.length})</small></span>
+              <span>更多服务商 <small>({moreProviders.length})</small></span>
               <ChevronDown size={14} />
             </button>
             {moreOpen ? moreProviders.map((provider) => <ProviderRow {...rowActions} provider={provider} onProvider={onProvider} key={provider.id} />) : null}
@@ -174,17 +174,17 @@ function ProviderRow({ detail, featured = false, onProvider, provider, onToggle,
     <div className={`settings-provider-row${featured ? " is-featured" : ""}`}>
       <ProviderMark provider={provider} />
       <span className="settings-provider-copy">
-        <strong className="settings-provider-name"><span>{provider.name}</span>{featured ? <small>Recommended</small> : null}</strong>
+        <strong className="settings-provider-name"><span>{provider.name}</span>{featured ? <small>推荐</small> : null}</strong>
         <span className="settings-provider-details">
           <span className="settings-provider-description">{providerDescription(provider)}{detail ? <><i>·</i>{detail}</> : null}</span>
-          <span className="settings-provider-capabilities" aria-label={`Provider labels: ${[...provider.capabilities.map((capability) => PROVIDER_CAPABILITY_LABELS[capability]), ...(provider.custom ? ["Custom"] : [])].join(", ")}`}>
+          <span className="settings-provider-capabilities" aria-label={`服务商标签：${[...provider.capabilities.map((capability) => PROVIDER_CAPABILITY_LABELS[capability]), ...(provider.custom ? ["自定义"] : [])].join(", ")}`}>
             {provider.capabilities.map((capability) => <small key={capability}>{PROVIDER_CAPABILITY_LABELS[capability]}</small>)}
-            {provider.custom ? <small>Custom</small> : null}
+            {provider.custom ? <small>自定义</small> : null}
           </span>
         </span>
       </span>
-      {provider.configured ? <label className="settings-toggle settings-provider-toggle" title={provider.enabled !== false ? "Enabled" : "Disabled"}>
-        <input type="checkbox" role="switch" aria-label={`Enable ${provider.name}`} checked={provider.enabled !== false} disabled={pending.has(provider.id)} onChange={(event) => onToggle(provider, event.target.checked)} /><span aria-hidden="true" />
+      {provider.configured ? <label className="settings-toggle settings-provider-toggle" title={provider.enabled !== false ? "已启用" : "已停用"}>
+        <input type="checkbox" role="switch" aria-label={`启用 ${provider.name}`} checked={provider.enabled !== false} disabled={pending.has(provider.id)} onChange={(event) => onToggle(provider, event.target.checked)} /><span aria-hidden="true" />
       </label> : provider.status === "not_configured" ? null : <em className={`settings-provider-status is-${provider.status}`}><i />{providerStatus(provider)}</em>}
       <button className="icon-button settings-provider-action" type="button" data-tooltip={actionLabel} aria-label={actionLabel} disabled={provider.status === "connecting" || pending.has(provider.id)} onClick={() => onProvider(provider)}><ActionIcon size={17} className={provider.status === "connecting" ? "spin" : undefined} aria-hidden="true" /></button>
     </div>
@@ -232,7 +232,7 @@ function SeedanceAuthView({ provider, onBack, onCompleted }: { provider: Provide
         {provider.configured ? <ProviderEnableControl provider={provider} onChanged={() => setModelsRevision((value) => value + 1)} /> : null}
       </ProviderDetailHeader>
       <form className="settings-detail-field" onSubmit={(event) => void save(event)}>
-        <label className="settings-search-field-label" htmlFor={inputId}>API key</label>
+        <label className="settings-search-field-label" htmlFor={inputId}>API 密钥</label>
         <div className="settings-detail-inline">
           <input
             id={inputId}
@@ -240,11 +240,11 @@ function SeedanceAuthView({ provider, onBack, onCompleted }: { provider: Provide
             type="password"
             value={apiKey}
             onChange={(event) => setApiKey(event.target.value)}
-            placeholder={provider.configured ? "Paste a new key to replace the current one" : `Paste your ${provider.name} API key`}
+            placeholder={provider.configured ? "粘贴新密钥以替换当前密钥" : `请粘贴 ${provider.name} API 密钥`}
             disabled={saving}
           />
           <button className="settings-primary-button" type="submit" disabled={saving || !apiKey.trim()}>
-            {saving ? "Saving…" : "Save"}
+            {saving ? "正在保存…" : "保存"}
           </button>
         </div>
       </form>
@@ -260,7 +260,7 @@ function ProviderImageModels({ providerId }: { providerId: string }) {
   const [models, setModels] = useState<ImageModel[]>();
   const [defaultModel, setDefaultModel] = useState<ImageModelRef>();
   const [busy, setBusy] = useState(false);
-  const [emptyMessage, setEmptyMessage] = useState("No image models are available.");
+  const [emptyMessage, setEmptyMessage] = useState("没有可用的图片模型。");
   const [error, setError] = useState<string>();
   useEffect(() => {
     let active = true;
@@ -269,7 +269,7 @@ function ProviderImageModels({ providerId }: { providerId: string }) {
       const status = catalog.providers.find((provider) => provider.provider === providerId);
       setModels(catalog.models.filter((model) => model.provider === providerId));
       setDefaultModel(catalog.defaultModel);
-      setEmptyMessage(status?.message ?? "No image models are available.");
+      setEmptyMessage(status?.message ?? "没有可用的图片模型。");
       setError(status?.state === "error" ? status.message : undefined);
     }).catch((cause) => {
       if (active) setError(errorMessage(cause));
@@ -290,29 +290,29 @@ function ProviderImageModels({ providerId }: { providerId: string }) {
   }
 
   return (
-    <section className="settings-detail-section provider-models" aria-label="Image models">
+    <section className="settings-detail-section provider-models" aria-label="图片模型">
       <div className="provider-models-heading">
-        <h4>Image models <small>{models?.length ?? ""}</small></h4>
+        <h4>图片模型 <small>{models?.length ?? ""}</small></h4>
       </div>
-      {models?.length ? <p className="settings-detail-hint">Choose the default for AI image generation. Existing canvas nodes keep their selected model.</p> : null}
+      {models?.length ? <p className="settings-detail-hint">选择 AI 图片生成的默认模型。现有画布节点仍使用各自选择的模型。</p> : null}
       {error ? <p className="settings-error" role="alert">{error}</p> : null}
       {models ? (
-        <div className="provider-models-list" role="list" aria-label="Image models">
+        <div className="provider-models-list" role="list" aria-label="图片模型">
           {models.map((model) => (
             <div className="provider-model-row" key={model.id} role="listitem">
               <label>
-                <input type="radio" name={groupId} checked={defaultModel?.provider === model.provider && defaultModel.id === model.id} disabled={busy} aria-label={`Use ${model.name} as the default image model`} onChange={() => void chooseDefault(model)} />
+                <input type="radio" name={groupId} checked={defaultModel?.provider === model.provider && defaultModel.id === model.id} disabled={busy} aria-label={`使用 ${model.name}作为默认图片模型`} onChange={() => void chooseDefault(model)} />
                 <span className="provider-model-copy">
                   <strong title={model.name}>{model.name}</strong>
                   <small title={model.id}>{model.id}</small>
                 </span>
               </label>
-              {defaultModel?.provider === model.provider && defaultModel.id === model.id ? <small className="provider-model-custom">Default</small> : null}
+              {defaultModel?.provider === model.provider && defaultModel.id === model.id ? <small className="provider-model-custom">默认</small> : null}
             </div>
           ))}
           {!models.length && !error ? <p className="settings-empty">{emptyMessage}</p> : null}
         </div>
-      ) : !error ? <div className="settings-loading"><LoaderCircle className="spin" size={16} />Loading models</div> : null}
+      ) : !error ? <div className="settings-loading"><LoaderCircle className="spin" size={16} />正在加载模型</div> : null}
     </section>
   );
 }
@@ -331,13 +331,13 @@ function SeedanceModels({ providerId }: { providerId: string }) {
   }, [providerId]);
 
   return (
-    <section className="settings-detail-section provider-models" aria-label="Video models">
+    <section className="settings-detail-section provider-models" aria-label="视频模型">
       <div className="provider-models-heading">
-        <h4>Video models <small>{models?.length ?? ""}</small></h4>
+        <h4>视频模型 <small>{models?.length ?? ""}</small></h4>
       </div>
       {error ? <p className="settings-error" role="alert">{error}</p> : null}
       {models ? (
-        <div className="provider-models-list" role="list" aria-label="Video models">
+        <div className="provider-models-list" role="list" aria-label="视频模型">
           {models.map((model) => (
             <div className="provider-model-row" key={model.id} role="listitem">
               <div className="provider-model-readonly">
@@ -348,9 +348,9 @@ function SeedanceModels({ providerId }: { providerId: string }) {
               </div>
             </div>
           ))}
-          {!models.length ? <p className="settings-empty">No video models are available.</p> : null}
+          {!models.length ? <p className="settings-empty">没有可用的视频模型。</p> : null}
         </div>
-      ) : !error ? <div className="settings-loading"><LoaderCircle className="spin" size={16} />Loading models</div> : null}
+      ) : !error ? <div className="settings-loading"><LoaderCircle className="spin" size={16} />正在加载模型</div> : null}
     </section>
   );
 }
@@ -386,27 +386,27 @@ function CustomProviderDetail({ provider, onBack, onRemoved }: { provider: Provi
     catch (cause) { setError(errorMessage(cause)); setDeleting(false); }
   }
   const fields: Array<{ field: CustomProviderField; label: string; value: string }> = settings ? [
-    { field: "apiKey", label: "API key", value: settings.authentication === "api_key" ? "••••••••" : "Not required" },
-    { field: "baseUrl", label: "Base URL", value: settings.baseUrl },
+    { field: "apiKey", label: "API 密钥", value: settings.authentication === "api_key" ? "••••••••" : "无需配置" },
+    { field: "baseUrl", label: "API 基础地址", value: settings.baseUrl },
     { field: "api", label: "API", value: PROVIDER_API_LABELS[settings.api] ?? settings.api },
   ] : [];
   return <section className="settings-panel settings-provider-detail">
     <ProviderDetailHeader provider={{ ...provider, name: settings?.name ?? provider.name }} onBack={onBack}>
-      <button className="icon-button settings-provider-setting-edit settings-provider-delete" type="button" aria-label="Delete provider" data-tooltip="Delete provider" aria-expanded={confirmingDelete} disabled={deleting || openingEditor || Boolean(editing)} onClick={() => setConfirmingDelete((value) => !value)}><Trash2 size={15} aria-hidden="true" /></button>
+      <button className="icon-button settings-provider-setting-edit settings-provider-delete" type="button" aria-label="删除服务商" data-tooltip="删除服务商" aria-expanded={confirmingDelete} disabled={deleting || openingEditor || Boolean(editing)} onClick={() => setConfirmingDelete((value) => !value)}><Trash2 size={15} aria-hidden="true" /></button>
       <ProviderEnableControl provider={provider} onChanged={() => setModelsRevision((value) => value + 1)} />
     </ProviderDetailHeader>
     {settings ? <div className="settings-provider-connection">
       {fields.map(({ field, label, value }) => <div className="settings-provider-setting-row" key={field}>
         <span className="settings-search-field-label">{label}</span>
         <span className="settings-provider-setting-value" title={field === "apiKey" ? undefined : value}>{value}</span>
-        <button className="icon-button settings-provider-setting-edit" type="button" aria-label={`Edit ${label}`} data-tooltip={`Edit ${label}`} disabled={deleting || openingEditor || Boolean(editing)} onClick={() => void openEditor(field)}><Pencil size={15} aria-hidden="true" /></button>
+        <button className="icon-button settings-provider-setting-edit" type="button" aria-label={`编辑 ${label}`} data-tooltip={`编辑 ${label}`} disabled={deleting || openingEditor || Boolean(editing)} onClick={() => void openEditor(field)}><Pencil size={15} aria-hidden="true" /></button>
       </div>)}
-    </div> : !error ? <div className="settings-loading"><LoaderCircle className="spin" size={16} />Loading configuration</div> : null}
+    </div> : !error ? <div className="settings-loading"><LoaderCircle className="spin" size={16} />正在加载配置</div> : null}
     {error ? <p className="settings-error" role="alert">{error}</p> : null}
     <ProviderModels key={modelsRevision} providerId={provider.id} onEditModels={() => void openEditor("models")} />
     {settings && CUSTOM_IMAGE_MODEL_APIS.some((api) => api === settings.api) ? <ProviderImageModels key={`images-${modelsRevision}`} providerId={provider.id} /> : null}
-    {confirmingDelete ? <div className="settings-custom-provider-delete" role="group" aria-label="Delete provider confirmation">
-      <span>Delete this provider, its key and model settings?</span><button className="settings-danger-button" type="button" disabled={deleting} onClick={() => void remove()}>{deleting ? "Deleting…" : "Delete provider"}</button><button className="settings-secondary-button" type="button" disabled={deleting} onClick={() => setConfirmingDelete(false)}>Cancel</button>
+    {confirmingDelete ? <div className="settings-custom-provider-delete" role="group" aria-label="确认删除服务商">
+      <span>删除此服务商及其密钥和模型设置？</span><button className="settings-danger-button" type="button" disabled={deleting} onClick={() => void remove()}>{deleting ? "正在删除…" : "删除服务商"}</button><button className="settings-secondary-button" type="button" disabled={deleting} onClick={() => setConfirmingDelete(false)}>取消</button>
     </div> : null}
     {editing && settings ? <CustomProviderDialog settings={settings} initialFocus={editing} onClose={() => setEditing(undefined)} onSaved={(value) => { setSettings(value); setEditing(undefined); setModelsRevision((revision) => revision + 1); }} /> : null}
   </section>;
@@ -436,7 +436,7 @@ function MeshyAuthView({ provider, onBack, onCompleted }: { provider: ProviderSu
         {provider.configured ? <ProviderEnableControl provider={provider} /> : null}
       </ProviderDetailHeader>
       <form className="settings-detail-field" onSubmit={(event) => void save(event)}>
-        <label className="settings-search-field-label" htmlFor="meshy-api-key">API key</label>
+        <label className="settings-search-field-label" htmlFor="meshy-api-key">API 密钥</label>
         <div className="settings-detail-inline">
           <input
             id="meshy-api-key"
@@ -444,11 +444,11 @@ function MeshyAuthView({ provider, onBack, onCompleted }: { provider: ProviderSu
             type="password"
             value={apiKey}
             onChange={(event) => setApiKey(event.target.value)}
-            placeholder={provider.configured ? "Paste a new key to replace the current one" : "Paste your Meshy API key"}
+            placeholder={provider.configured ? "粘贴新密钥以替换当前密钥" : "粘贴 Meshy API 密钥"}
             disabled={saving}
           />
           <button className="settings-primary-button" type="submit" disabled={saving || !apiKey.trim()}>
-            {saving ? "Saving…" : "Save"}
+            {saving ? "正在保存…" : "保存"}
           </button>
         </div>
       </form>
@@ -462,7 +462,7 @@ function AuthMethodChoice({ provider, onBack, onChoose }: { provider: ModelProvi
     <section className="settings-panel settings-provider-detail">
       <ProviderDetailHeader provider={provider} onBack={onBack} />
       <div className="settings-detail-section">
-        <DetailSectionHeader title="Connect" description="Choose how OhMyGame should connect to this provider." />
+        <DetailSectionHeader title="连接" description="选择 OhMyGame 连接此服务商的方式。" />
         <div className="settings-method-list">
           {provider.methods.map((method) => {
             const Icon = method.type === "oauth" ? UserRound : Code2;
@@ -471,7 +471,7 @@ function AuthMethodChoice({ provider, onBack, onChoose }: { provider: ModelProvi
                 <span className="settings-method-icon"><Icon size={15} /></span>
                 <span className="settings-method-copy">
                   <strong>{method.label}</strong>
-                  <small>{method.type === "oauth" ? "Sign in with your account in the browser" : "Paste a key from your provider dashboard"}</small>
+                  <small>{method.type === "oauth" ? "在浏览器中使用账号登录" : "粘贴服务商控制台提供的密钥"}</small>
                 </span>
                 <ChevronRight size={14} />
               </button>
@@ -499,7 +499,7 @@ function ConnectedProvider({ provider, onBack }: { provider: ProviderSummary; on
     setCredentialType(method);
     setEditing(undefined);
     setModelsRevision((value) => value + 1);
-    setNotice(method === "oauth" ? "Browser sign-in connected." : "API key updated.");
+    setNotice(method === "oauth" ? "已通过浏览器登录。" : "API 密钥已更新。");
   }
   async function saveEndpoint(event: FormEvent): Promise<void> {
     event.preventDefault();
@@ -509,7 +509,7 @@ function ConnectedProvider({ provider, onBack }: { provider: ProviderSummary; on
       await endpoint.save();
       notifyAgentModelsChanged();
       setEditing(undefined);
-      setNotice("Base URL saved.");
+      setNotice("API 基础地址已保存。");
     } catch (cause) {
       setError(errorMessage(cause));
     }
@@ -526,29 +526,29 @@ function ConnectedProvider({ provider, onBack }: { provider: ProviderSummary; on
       </ProviderDetailHeader>
       {alternateMethod || canEditKey || showsEndpoint ? <div className="settings-provider-connection">
         {alternateMethod ? <div className="settings-provider-setting-row settings-provider-auth-row">
-          <span className="settings-search-field-label">Sign-in</span>
-          <span className="settings-provider-setting-value">{credentialType === "oauth" ? "Browser sign-in" : "API key"}</span>
-          <button className="settings-secondary-button" type="button" disabled={Boolean(editing)} onClick={() => edit(alternateMethod)}>{alternateMethod === "oauth" ? "Use browser sign-in" : "Use API key"}</button>
+          <span className="settings-search-field-label">登录</span>
+          <span className="settings-provider-setting-value">{credentialType === "oauth" ? "浏览器登录" : "API 密钥"}</span>
+          <button className="settings-secondary-button" type="button" disabled={Boolean(editing)} onClick={() => edit(alternateMethod)}>{alternateMethod === "oauth" ? "使用浏览器登录" : "使用 API 密钥"}</button>
         </div> : null}
-        {canEditKey ? <section aria-label="API key settings">
+        {canEditKey ? <section aria-label="API 密钥设置">
           <div className="settings-provider-setting-row">
-            <span className="settings-search-field-label">API key</span>
-            <span className="settings-provider-setting-value" aria-label="API key is configured">••••••••</span>
-            <button className="icon-button settings-provider-setting-edit" type="button" aria-label="Edit API key" data-tooltip="Edit API key" aria-expanded={editing === "api_key"} disabled={Boolean(editing)} onClick={() => edit("api_key")}><Pencil size={15} aria-hidden="true" /></button>
+            <span className="settings-search-field-label">API 密钥</span>
+            <span className="settings-provider-setting-value" aria-label="已配置 API 密钥">••••••••</span>
+            <button className="icon-button settings-provider-setting-edit" type="button" aria-label="编辑 API 密钥" data-tooltip="编辑 API 密钥" aria-expanded={editing === "api_key"} disabled={Boolean(editing)} onClick={() => edit("api_key")}><Pencil size={15} aria-hidden="true" /></button>
           </div>
         </section> : null}
         {editing === "api_key" || editing === "oauth" ? <div className="settings-provider-setting-editor"><ActiveProviderAuth provider={provider} method={editing} inline onBack={() => setEditing(undefined)} onCompleted={() => completeAuth(editing)} onFailed={(message) => { setEditing(undefined); setError(message); }} /></div> : null}
-        {showsEndpoint ? <section aria-label="Base URL settings">
+        {showsEndpoint ? <section aria-label="API 基础地址设置">
           <div className="settings-provider-setting-row">
-            <span className="settings-search-field-label">Base URL</span>
-            <span className="settings-provider-setting-value" title={endpoint.savedBaseUrl}>{endpoint.loading ? "Loading…" : endpoint.savedBaseUrl || "Unavailable"}</span>
-            <button className="icon-button settings-provider-setting-edit" type="button" aria-label="Edit Base URL" data-tooltip="Edit Base URL" aria-expanded={editing === "endpoint"} disabled={Boolean(editing) || endpoint.loading} onClick={() => edit("endpoint")}><Pencil size={15} aria-hidden="true" /></button>
+            <span className="settings-search-field-label">API 基础地址</span>
+            <span className="settings-provider-setting-value" title={endpoint.savedBaseUrl}>{endpoint.loading ? "正在加载…" : endpoint.savedBaseUrl || "不可用"}</span>
+            <button className="icon-button settings-provider-setting-edit" type="button" aria-label="编辑 API 基础地址" data-tooltip="编辑 API 基础地址" aria-expanded={editing === "endpoint"} disabled={Boolean(editing) || endpoint.loading} onClick={() => edit("endpoint")}><Pencil size={15} aria-hidden="true" /></button>
           </div>
           {editing === "endpoint" ? <form className="settings-provider-setting-editor settings-detail-section" onSubmit={(event) => void saveEndpoint(event)}>
             <BaseUrlField endpoint={endpoint} />
             <div className="settings-form-actions">
-              <button className="settings-secondary-button" type="button" disabled={endpoint.saving} onClick={() => { endpoint.reset(); setEditing(undefined); setError(undefined); }}>Cancel</button>
-              <button className="settings-primary-button" type="submit" disabled={endpoint.loading || endpoint.saving || !endpoint.baseUrl.trim() || !endpoint.dirty}>{endpoint.saving ? "Saving…" : "Save"}</button>
+              <button className="settings-secondary-button" type="button" disabled={endpoint.saving} onClick={() => { endpoint.reset(); setEditing(undefined); setError(undefined); }}>取消</button>
+              <button className="settings-primary-button" type="submit" disabled={endpoint.loading || endpoint.saving || !endpoint.baseUrl.trim() || !endpoint.dirty}>{endpoint.saving ? "正在保存…" : "保存"}</button>
             </div>
           </form> : null}
         </section> : null}
@@ -596,7 +596,7 @@ function ActiveProviderAuth({ provider, method, inline = false, onBack, onComple
     if (!operationId) return;
     return subscribeToModelAuth(operationId, {
       onEvent: (event) => handleAuthEvent(event),
-      onError: () => setError("Connection to the authentication flow was interrupted."),
+      onError: () => setError("身份验证流程的连接已中断。"),
     });
   }, [operationId]);
 
@@ -665,18 +665,18 @@ function ActiveProviderAuth({ provider, method, inline = false, onBack, onComple
         <form className="settings-detail-section" onSubmit={(event) => void respond(event)}>
           {editsEndpoint ? <BaseUrlField endpoint={endpoint} /> : null}
           <label className="settings-detail-field">
-            <span className="settings-search-field-label">{editingKey && prompt.value.type === "secret" ? "New API key" : prompt.value.message}</span>
+            <span className="settings-search-field-label">{editingKey && prompt.value.type === "secret" ? "新 API 密钥" : prompt.value.message}</span>
             {prompt.value.type === "select" ? (
               <select className="settings-search-input" value={answer || prompt.value.options[0]?.id || ""} onChange={(event) => setAnswer(event.target.value)}>
                 {prompt.value.options.map((option) => <option value={option.id} key={option.id}>{option.label}</option>)}
               </select>
             ) : (
-              <input className="settings-search-input" type={prompt.value.type === "secret" ? "password" : "text"} value={answer} placeholder={editingKey && prompt.value.type === "secret" ? "Paste a new key to replace the current one" : prompt.value.placeholder} onChange={(event) => setAnswer(event.target.value)} autoFocus autoComplete={prompt.value.type === "secret" ? "new-password" : "off"} spellCheck={false} />
+              <input className="settings-search-input" type={prompt.value.type === "secret" ? "password" : "text"} value={answer} placeholder={editingKey && prompt.value.type === "secret" ? "粘贴新密钥以替换当前密钥" : prompt.value.placeholder} onChange={(event) => setAnswer(event.target.value)} autoFocus autoComplete={prompt.value.type === "secret" ? "new-password" : "off"} spellCheck={false} />
             )}
           </label>
           <div className="settings-form-actions">
-            <button className="settings-secondary-button" type="button" onClick={() => void cancel()}>Cancel</button>
-            <button className="settings-primary-button" type="submit" disabled={endpoint.loading || endpoint.saving || (editsEndpoint && !endpoint.baseUrl.trim()) || (prompt.value.type !== "select" && !prompt.value.optional && !answer.trim())}>{editingKey && prompt.value.type === "secret" ? "Save key" : "Continue"}</button>
+            <button className="settings-secondary-button" type="button" onClick={() => void cancel()}>取消</button>
+            <button className="settings-primary-button" type="submit" disabled={endpoint.loading || endpoint.saving || (editsEndpoint && !endpoint.baseUrl.trim()) || (prompt.value.type !== "select" && !prompt.value.optional && !answer.trim())}>{editingKey && prompt.value.type === "secret" ? "保存密钥" : "继续"}</button>
           </div>
         </form>
       ) : (
@@ -684,21 +684,21 @@ function ActiveProviderAuth({ provider, method, inline = false, onBack, onComple
           <div className="settings-detail-status settings-detail-waiting">
             <LoaderCircle className="spin" size={16} />
             <span className="settings-detail-status-copy">
-              <strong>{method === "oauth" ? "Waiting for sign-in" : "Preparing configuration"}</strong>
-              <small>{external && method === "oauth" ? "Finish signing in in your browser, then come back here." : notificationText(notification)}</small>
+              <strong>{method === "oauth" ? "等待登录" : "正在准备配置"}</strong>
+              <small>{external && method === "oauth" ? "请在浏览器中完成登录，然后返回这里。" : notificationText(notification)}</small>
             </span>
           </div>
           {notification?.type === "device_code" ? <div className="settings-device-code">{notification.userCode}</div> : null}
           <div className="settings-form-actions">
-            <button className="settings-secondary-button" type="button" onClick={() => void cancel()}>Cancel</button>
-            {external ? <button className="settings-primary-button" type="button" onClick={() => void openExternal(external)}><ExternalLink size={14} />{method === "oauth" ? "Open browser again" : "Open browser"}</button> : null}
+            <button className="settings-secondary-button" type="button" onClick={() => void cancel()}>取消</button>
+            {external ? <button className="settings-primary-button" type="button" onClick={() => void openExternal(external)}><ExternalLink size={14} />{method === "oauth" ? "重新打开浏览器" : "打开浏览器"}</button> : null}
           </div>
           {browserFallback && prompt ? (
             <form className="settings-detail-field settings-auth-fallback" onSubmit={(event) => void respond(event)}>
-              <label className="settings-detail-hint" htmlFor="model-auth-redirect">Browser didn't return here? Paste the address it ended on.</label>
+              <label className="settings-detail-hint" htmlFor="model-auth-redirect">浏览器没有自动返回？请粘贴最后停留的页面地址。</label>
               <div className="settings-detail-inline">
                 <input id="model-auth-redirect" className="settings-search-input" value={answer} placeholder={prompt.value.type === "manual_code" ? prompt.value.placeholder : undefined} onChange={(event) => setAnswer(event.target.value)} spellCheck={false} />
-                <button className="settings-secondary-button" type="submit" disabled={!answer.trim()}>Continue</button>
+                <button className="settings-secondary-button" type="submit" disabled={!answer.trim()}>继续</button>
               </div>
             </form>
           ) : null}
@@ -712,7 +712,7 @@ function ActiveProviderAuth({ provider, method, inline = false, onBack, onComple
 function ProviderDetailHeader({ provider, onBack, children }: { provider: ModelProviderSummary; onBack: () => void; children?: ReactNode }) {
   return (
     <header className="settings-provider-detail-header">
-      <button type="button" onClick={onBack} aria-label="Back"><ArrowLeft size={16} /></button>
+      <button type="button" onClick={onBack} aria-label="背面"><ArrowLeft size={16} /></button>
       <ProviderMark provider={provider} />
       <span className="settings-provider-heading">
         <h3>{provider.name}</h3>
@@ -738,9 +738,9 @@ function ProviderEnableControl({ provider, onChanged }: { provider: ProviderSumm
     finally { setBusy(false); }
   }
   return <div className="settings-provider-enable-control">
-    <label className="settings-provider-enable-label" title={enabled ? "Available for new requests" : "Disabled · Your credentials and models are kept"}>
-      <small>{enabled ? "Enabled" : "Disabled"}</small>
-      <span className="settings-toggle"><input type="checkbox" role="switch" aria-label={`Enable ${provider.name}`} checked={enabled} disabled={busy} onChange={(event) => void toggle(event.target.checked)} /><span aria-hidden="true" /></span>
+    <label className="settings-provider-enable-label" title={enabled ? "可用于新请求" : "已停用 · 凭据和模型配置已保留"}>
+      <small>{enabled ? "已启用" : "已停用"}</small>
+      <span className="settings-toggle"><input type="checkbox" role="switch" aria-label={`启用 ${provider.name}`} checked={enabled} disabled={busy} onChange={(event) => void toggle(event.target.checked)} /><span aria-hidden="true" /></span>
     </label>
     {error ? <p className="settings-error" role="alert">{error}</p> : null}
   </div>;
@@ -753,11 +753,11 @@ function DetailSectionHeader({ title, description }: { title: string; descriptio
 function BaseUrlField({ endpoint }: { endpoint: ReturnType<typeof useProviderEndpoint> }) {
   return (
     <div className="settings-detail-field">
-      <label className="settings-search-field-label" htmlFor="model-provider-base-url">Base URL</label>
+      <label className="settings-search-field-label" htmlFor="model-provider-base-url">API 基础地址</label>
       <div className="settings-detail-inline">
         <input id="model-provider-base-url" className="settings-search-input" value={endpoint.baseUrl} onChange={(event) => endpoint.setBaseUrl(event.target.value)} disabled={endpoint.loading || endpoint.saving} spellCheck={false} />
       </div>
-      <small className="settings-detail-hint">Requests go to this OpenAI-compatible URL. Change it to use a proxy.</small>
+      <small className="settings-detail-hint">请求将发送到此兼容 OpenAI 的地址。可修改为代理地址。</small>
     </div>
   );
 }
@@ -802,32 +802,32 @@ function useProviderEndpoint(providerId: string) {
 }
 
 function providerDescription(provider: Pick<ModelProviderSummary, "methods"> & { custom?: boolean }): string {
-  if (provider.custom) return "Custom endpoint";
+  if (provider.custom) return "自定义接口地址";
   const oauth = provider.methods.some((method) => method.type === "oauth");
   const apiKey = provider.methods.some((method) => method.type === "api_key");
-  if (oauth && apiKey) return "Browser sign-in or API key";
-  if (oauth) return "Browser sign-in";
-  return "API key";
+  if (oauth && apiKey) return "浏览器登录或 API 密钥";
+  if (oauth) return "浏览器登录";
+  return "API 密钥";
 }
 
 function providerStatus(provider: ProviderSummary): string {
-  if (provider.status === "connected") return "Connected";
-  if (provider.status === "connecting") return "Checking…";
-  if (provider.status === "error") return "Connection failed";
-  return "Not configured";
+  if (provider.status === "connected") return "已连接";
+  if (provider.status === "connecting") return "正在检查…";
+  if (provider.status === "error") return "连接失败";
+  return "未配置";
 }
 
 function providerAction(provider: ProviderSummary): string {
-  if (provider.status === "connected") return "Manage";
-  if (provider.status === "connecting") return "Checking…";
-  if (provider.status === "error") return "Retry";
-  return "Connect";
+  if (provider.status === "connected") return "管理";
+  if (provider.status === "connecting") return "正在检查…";
+  if (provider.status === "error") return "重试";
+  return "连接";
 }
 
 function notificationText(notification: ModelAuthNotification | undefined): string {
-  if (!notification) return "Starting authentication…";
-  if (notification.type === "device_code") return "Enter the code in your browser.";
-  if (notification.type === "auth_url") return notification.instructions ?? "Complete authentication in your browser.";
+  if (!notification) return "正在启动身份验证…";
+  if (notification.type === "device_code") return "请在浏览器中输入验证码。";
+  if (notification.type === "auth_url") return notification.instructions ?? "请在浏览器中完成身份验证。";
   return notification.message;
 }
 

@@ -51,14 +51,14 @@ export function InlineAnswer(props: InlineAnswerProps) {
         aria-label={props.label}
         onChange={(event) => props.onChange(event.target.value)}
         onKeyDown={keyDown}
-        placeholder={props.placeholder ?? "Type another answer"}
+        placeholder={props.placeholder ?? "输入其他回答"}
       />
       <button
         className="inline-answer-submit"
         type="button"
         disabled={props.disabled || !props.value.trim()}
         onClick={props.onSubmit}
-        aria-label="Submit answer"
+        aria-label="提交回答"
       >
         <ArrowRight size={15} />
       </button>

@@ -168,7 +168,7 @@ class ParentSaveStore implements PlayableSaveStore {
   dispose(): void {
     for (const pending of this.#pending.values())
       pending.reject(
-        new Error("Published Player closed before the save completed."),
+        new Error("保存完成前，游戏播放器已关闭。"),
       );
     this.#pending.clear();
   }

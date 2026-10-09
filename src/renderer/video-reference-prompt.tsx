@@ -44,8 +44,8 @@ export function VideoReferencePrompt({ value, disabled, options, onChange }: {
     requestAnimationFrame(() => { input.current?.focus(); input.current?.setSelectionRange(cursor, cursor); });
   }
   return <div className="video-reference-prompt">
-    <textarea ref={input} aria-label="Video prompt" rows={3} value={draft} disabled={disabled}
-      placeholder="Describe the video. Type @ to reference an image."
+    <textarea ref={input} aria-label="视频提示词" rows={3} value={draft} disabled={disabled}
+      placeholder="描述视频内容。输入 @ 可引用图片。"
       aria-autocomplete="list" aria-controls={open ? listId : undefined}
       aria-activedescendant={open && candidates[active] ? `${listId}-${active}` : undefined}
       onFocus={() => { editing.current = true; }}
@@ -68,14 +68,14 @@ export function VideoReferencePrompt({ value, disabled, options, onChange }: {
           event.preventDefault(); event.stopPropagation(); insert(candidates[active]!);
         }
       }} />
-    {open ? <div className="video-mention-menu nowheel" role="listbox" id={listId} aria-label="Reference images">
+    {open ? <div className="video-mention-menu nowheel" role="listbox" id={listId} aria-label="参考图片">
       {candidates.length ? candidates.map((option, index) => <button key={option.alias} id={`${listId}-${index}`}
         type="button" role="option" aria-selected={index === active} className={index === active ? "is-active" : ""}
         onPointerDown={(event) => event.preventDefault()} onMouseDown={(event) => event.preventDefault()}
         onClick={() => insert(option)} onPointerMove={() => setActive(index)}>
         <MentionThumbnail assetId={option.assetId} />
         <span><strong>@{option.alias}</strong><small>{option.name}</small></span>
-      </button>) : <p>{options.length ? "No matching images" : "Add or connect an image first"}</p>}
+      </button>) : <p>{options.length ? "没有匹配的图片" : "请先添加或连接图片"}</p>}
     </div> : null}
   </div>;
 }

@@ -57,11 +57,11 @@ export function ModelPreview({ source, label, minHeight = 320, interactive = tru
     };
     const handleError = (event: Event) => {
       const detail = (event as ModelViewerError).detail;
-      console.error("3D preview failed", detail?.sourceError);
+      console.error("3D 预览失败", detail?.sourceError);
       const type = detail?.type;
       setModelError(type === "webglcontextlost"
-        ? "The 3D preview lost its graphics context"
-        : "Could not display this 3D model");
+        ? "3D 预览的图形上下文已丢失"
+        : "无法显示此 3D 模型");
     };
 
     viewer.addEventListener("load", handleLoad);
@@ -79,7 +79,7 @@ export function ModelPreview({ source, label, minHeight = 320, interactive = tru
   if (!componentReady) {
     return <span className={`model-preview-standalone${componentError ? " model-preview-error" : ""}`} role={componentError ? "alert" : undefined}>
       {!componentError ? <LoaderCircle className="spin" size={16} /> : null}
-      {componentError ? "Could not load the 3D viewer" : "Loading 3D viewer"}
+      {componentError ? "无法加载 3D 查看器" : "正在加载 3D 查看器"}
     </span>;
   }
 
@@ -103,7 +103,7 @@ export function ModelPreview({ source, label, minHeight = 320, interactive = tru
       {!loaded && !modelError ? (
         <span className="model-preview-state">
           <LoaderCircle className="spin" size={16} />
-          {progress > 0 ? `Loading 3D model ${Math.round(progress * 100)}%` : "Loading 3D model"}
+          {progress > 0 ? `正在加载 3D 模型 ${Math.round(progress * 100)}%` : "正在加载 3D 模型"}
         </span>
       ) : null}
       {modelError ? <span className="model-preview-state model-preview-error" role="alert">{modelError}</span> : null}
@@ -111,7 +111,7 @@ export function ModelPreview({ source, label, minHeight = 320, interactive = tru
         // nodrag/nowheel keep canvas nodes from treating the picker as a drag or zoom.
         <select
           className="model-preview-clips nodrag nowheel"
-          aria-label="Animation clip"
+          aria-label="动画片段"
           value={clip ?? clips[0]}
           onChange={(event) => setClip(event.target.value)}
         >

@@ -7,11 +7,11 @@ interface PlanModeIndicatorProps {
 
 export function PlanModeIndicator({ disabled, onExit }: PlanModeIndicatorProps) {
   return (
-    <div className="composer-plan-mode" aria-label="Plan mode active">
-      <button type="button" disabled={disabled} onClick={onExit} title="Exit plan mode" aria-label="Exit plan mode">
+    <div className="composer-plan-mode" aria-label="计划模式已开启">
+      <button type="button" disabled={disabled} onClick={onExit} title="退出计划模式" aria-label="退出计划模式">
         <Lightbulb className="composer-plan-icon" size={15} aria-hidden="true" />
         <CircleX className="composer-plan-close" size={15} aria-hidden="true" />
-        <span>Plan</span>
+        <span>计划</span>
       </button>
     </div>
   );
@@ -29,16 +29,16 @@ interface PlanCommandMenuProps {
 
 export function PlanCommandMenu({ planning, onToggle, showPlan = true, showCompact = false, onCompact, selected, contextPercent }: PlanCommandMenuProps) {
   return (
-    <div className="composer-command-menu" role="listbox" aria-label="Composer commands">
+    <div className="composer-command-menu" role="listbox" aria-label="输入框命令">
       {showPlan ? <button className={selected === "plan" ? "is-selected" : ""} type="button" role="option" aria-selected={selected === "plan"} onClick={onToggle}>
         <Lightbulb size={15} aria-hidden="true" />
-        <span>Plan mode</span>
-        <small>{planning ? "Turn plan mode off" : "Turn plan mode on"}</small>
+        <span>计划模式</span>
+        <small>{planning ? "关闭计划模式" : "开启计划模式"}</small>
       </button> : null}
       {showCompact ? <button className={selected === "compact" ? "is-selected" : ""} type="button" role="option" aria-selected={selected === "compact"} onClick={onCompact}>
         <FileText size={15} aria-hidden="true" />
-        <span>Compact</span>
-        <small>Compact this chat's context{contextPercent === undefined ? "" : ` (${contextPercent}% full)`}</small>
+        <span>压缩上下文</span>
+        <small>压缩此对话的上下文{contextPercent === undefined ? "" : ` (${contextPercent}% full)`}</small>
       </button> : null}
     </div>
   );

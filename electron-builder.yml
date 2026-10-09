@@ -22,6 +22,12 @@ files:
     to: node_modules/typebox/build
 
 extraResources:
+  - from: .runtime/capacitor-tools
+    to: capacitor-tools
+  - from: .runtime/capacitor-tools/node_modules
+    to: capacitor-tools/node_modules
+    filter:
+      - "**/*"
   - from: plugins
     to: plugins
   - from: .runtime/preinstalled-plugins

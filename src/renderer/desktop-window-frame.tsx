@@ -1,6 +1,7 @@
 import { useEffect, useState, type MouseEvent, type ReactNode } from "react";
 
 const WINDOW_MENU_LABELS = ["File", "Edit", "View", "Window"] as const;
+const WINDOW_MENU_ZH = { File: "文件", Edit: "编辑", View: "视图", Window: "窗口" };
 
 export function DesktopWindowFrame({ children }: { children: ReactNode }) {
   const windowMenu = window.ohMyGameDesktop?.windowMenu;
@@ -29,7 +30,7 @@ function DesktopWindowMenu() {
     void windowMenu.popup(label, bounds.left, bounds.bottom).catch(() => undefined);
   }
 
-  return <header className="desktop-window-menu-bar" role="menubar" aria-label="Application menu">
+  return <header className="desktop-window-menu-bar" role="menubar" aria-label="应用菜单">
     <span className="desktop-window-menu-icon" aria-hidden="true">
       {icon ? <img src={icon} alt="" draggable={false} /> : null}
     </span>
@@ -39,6 +40,6 @@ function DesktopWindowMenu() {
       aria-haspopup="menu"
       key={label}
       onClick={(event) => openMenu(label, event)}
-    >{label}</button>)}
+    >{WINDOW_MENU_ZH[label]}</button>)}
   </header>;
 }

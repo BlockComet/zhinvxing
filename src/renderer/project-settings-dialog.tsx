@@ -89,12 +89,12 @@ export function ProjectSettingsDialogFrame({
         tabIndex={-1}
       >
         <header>
-          <h2 id={titleId}>Project settings</h2>
+          <h2 id={titleId}>项目设置</h2>
           <button
             type="button"
             disabled={busy}
             onClick={onClose}
-            aria-label="Close"
+            aria-label="关闭"
           >
             <X size={16} />
           </button>
@@ -164,14 +164,14 @@ export function ProjectSettingsDialog({
       onClose={onClose}
     >
       <form onSubmit={(event) => void submit(event)}>
-        <section className="project-settings-project" aria-label="Project">
-          <span>Project</span>
+        <section className="project-settings-project" aria-label="项目">
+          <span>项目</span>
           <strong title={project.name}>{project.name}</strong>
         </section>
         <fieldset className="project-settings-section">
-          <legend>Run</legend>
+          <legend>运行</legend>
           <label>
-            <span>Startup directory</span>
+            <span>启动目录</span>
             <input
               ref={directoryInput}
               value={startupDirectory}
@@ -183,7 +183,7 @@ export function ProjectSettingsDialog({
           </label>
           <div className="project-settings-field-row">
             <label>
-              <span>Startup script</span>
+              <span>启动脚本</span>
               <input
                 value={startupScript}
                 disabled={saving}
@@ -192,7 +192,7 @@ export function ProjectSettingsDialog({
               />
             </label>
             <label>
-              <span>Package manager</span>
+              <span>包管理器</span>
               <select
                 value={packageManager}
                 disabled={saving}
@@ -202,7 +202,7 @@ export function ProjectSettingsDialog({
                   )
                 }
               >
-                <option value="auto">Auto</option>
+                <option value="auto">自动</option>
                 <option value="npm">npm</option>
                 <option value="pnpm">pnpm</option>
                 <option value="yarn">yarn</option>
@@ -212,10 +212,10 @@ export function ProjectSettingsDialog({
           </div>
         </fieldset>
         <fieldset className="project-settings-section">
-          <legend>Playtest</legend>
+          <legend>试玩</legend>
           <div className="project-settings-field-row">
             <label>
-              <span>Default route</span>
+              <span>默认路由</span>
               <input
                 value={previewPath}
                 disabled={saving}
@@ -224,7 +224,7 @@ export function ProjectSettingsDialog({
               />
             </label>
             <label>
-              <span>Device</span>
+              <span>设备</span>
               <select
                 value={previewViewport}
                 disabled={saving}
@@ -232,9 +232,9 @@ export function ProjectSettingsDialog({
                   setPreviewViewport(event.target.value as PreviewViewport)
                 }
               >
-                <option value="fit">Fit</option>
-                <option value="tablet">Tablet</option>
-                <option value="mobile">Mobile</option>
+                <option value="fit">自适应</option>
+                <option value="tablet">平板</option>
+                <option value="mobile">手机</option>
               </select>
             </label>
           </div>
@@ -249,7 +249,7 @@ export function ProjectSettingsDialog({
           }
         >
           <ExternalLink size={14} />
-          Open preview in browser
+          在浏览器中打开预览
         </button>
         {error ? (
           <p className="project-settings-error" role="alert">
@@ -258,7 +258,7 @@ export function ProjectSettingsDialog({
         ) : null}
         <footer>
           <button type="button" disabled={saving} onClick={onClose}>
-            Cancel
+            取消
           </button>
           <button
             className="project-settings-submit"
@@ -266,7 +266,7 @@ export function ProjectSettingsDialog({
             disabled={saving}
           >
             {saving ? <LoaderCircle className="spin" size={14} /> : null}
-            Save
+            保存
           </button>
         </footer>
       </form>

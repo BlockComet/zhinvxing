@@ -114,49 +114,49 @@ export function CanvasWorkspace({ project, headerActionsTarget = null, onLeaveRe
   const expanded = workspace?.documents.find((doc) => doc.id === documentId);
   const hasDocumentDraft = workspace?.documentIssues?.some((issue) => workspace.documents.some((doc) => doc.id === issue.id));
   const status = docs.conflict || boardConflict ? "conflict" : docs.error || boardStatus === "error" ? "error" : docs.saving || boardStatus === "saving" ? "saving" : hasDocumentDraft ? "draft" : docs.loadError ? "sync-error" : boardStatus;
-  const saveStatus = <span className={`design-save-status is-${status}`} role="status">{status === "saving" ? <LoaderCircle size={12} className="spin" /> : status === "saved" ? <Check size={12} /> : null}{status === "saved" ? "Saved" : status === "saving" ? "Saving" : status === "error" ? "Save failed" : status === "sync-error" ? "Sync paused" : status === "load-error" ? "Could not load" : status === "conflict" ? "Review changes" : status === "draft" ? "Draft kept locally" : "Loading"}</span>;
+  const saveStatus = <span className={`design-save-status is-${status}`} role="status">{status === "saving" ? <LoaderCircle size={12} className="spin" /> : status === "saved" ? <Check size={12} /> : null}{status === "saved" ? "已保存" : status === "saving" ? "正在保存" : status === "error" ? "保存失败" : status === "sync-error" ? "同步已暂停" : status === "load-error" ? "无法加载" : status === "conflict" ? "检查更改" : status === "draft" ? "草稿已保存在本机" : "正在加载"}</span>;
   const floating = <div className="design-board-switcher">
     <Layers3 size={13} aria-hidden="true" />
-    <CanvasChipSelect label="Board" value={activeId} options={(workspace?.boards ?? []).map((board) => ({ value: board.id, label: board.name }))} disabled={busy}
-      action={{ label: "New board", icon: Plus, onSelect: () => { setName(""); setDialog({ type: "create" }); } }}
-      optionAction={{ label: (option) => `Board options: ${option.label}`, icon: MoreHorizontal, onSelect: (id, anchor) => setBoardOptions({ id, x: anchor.left, y: anchor.bottom + 5 }) }}
+    <CanvasChipSelect label="画板" value={activeId} options={(workspace?.boards ?? []).map((board) => ({ value: board.id, label: board.name }))} disabled={busy}
+      action={{ label: "新建画板", icon: Plus, onSelect: () => { setName(""); setDialog({ type: "create" }); } }}
+      optionAction={{ label: (option) => `画板选项：${option.label}`, icon: MoreHorizontal, onSelect: (id, anchor) => setBoardOptions({ id, x: anchor.left, y: anchor.bottom + 5 }) }}
       onChange={(id) => void run(async () => { await flush(); setActiveId(id); setBoardStatus("loading"); })} />
   </div>;
-  return <CanvasAssetProvider assets={assetPaths}><section className="viewer-pane design-workspace" data-active-tab={singleBoard ? workspaceView : undefined} aria-label={singleBoard ? "Asset Canvas workspace" : "Design workspace"}>
+  return <CanvasAssetProvider assets={assetPaths}><section className="viewer-pane design-workspace" data-active-tab={singleBoard ? workspaceView : undefined} aria-label={singleBoard ? "素材画布工作区" : "设计工作区"}>
     {singleBoard ? <header className="pane-header viewer-header interactive-story-header window-drag-handle">
       <span className="workspace-navigation-drag-exclusion" aria-hidden="true" />
       <div className={`viewer-navigation${chatOnRight ? " is-chat-right" : ""}`}>
-        {chatOnRight && onHome ? <button className="icon-button pane-header-action workspace-home-button" type="button" onClick={onHome} title="Home" aria-label="Home"><House size={14} /></button> : null}
-        <WorkspaceTabs tabs={[{ id: "canvas", label: "Canvas", icon: Layers3 }, { id: "code", label: "Code", icon: Code2 }]} active={workspaceView} onChange={changeView} label="Workspace mode" />
+        {chatOnRight && onHome ? <button className="icon-button pane-header-action workspace-home-button" type="button" onClick={onHome} title="首页" aria-label="首页"><House size={14} /></button> : null}
+        <WorkspaceTabs tabs={[{ id: "canvas", label: "画布", icon: Layers3 }, { id: "code", label: "代码", icon: Code2 }]} active={workspaceView} onChange={changeView} label="工作区模式" />
       </div>
       <div className="viewer-controls-slot" />
       <div className="viewer-publish design-header-actions">
         {saveStatus}
-        {chatOnRight && chatCollapsed && onToggleChat ? <button className="icon-button pane-header-action" type="button" title="Show chat" aria-label="Show chat" onClick={onToggleChat}><PanelToggle size={14} /></button> : null}
+        {chatOnRight && chatCollapsed && onToggleChat ? <button className="icon-button pane-header-action" type="button" title="显示聊天" aria-label="显示聊天" onClick={onToggleChat}><PanelToggle size={14} /></button> : null}
       </div>
     </header> : headerActionsTarget ? createPortal(saveStatus, headerActionsTarget) : null}
-    {error ? <div className="design-notice" role="alert"><span>{error}</span><button type="button" onClick={() => setError(undefined)}>Dismiss</button></div> : null}
-    {docs.loadError ? <div className="design-notice" role="alert"><span>{workspace ? "Could not sync workspace. Your canvas is kept open. " : "Could not load workspace. "}{docs.loadError}</span><button type="button" disabled={busy} onClick={() => void run(() => docsRef.current.refresh())}>Reload workspace</button></div> : null}
-    {docs.error && !docs.conflict ? <div className="design-notice" role="alert"><span>{docs.error}</span><button type="button" disabled={busy} onClick={() => void run(() => docsRef.current.flush())}>Retry save</button></div> : null}
-    {docs.conflict ? <div className="design-notice" role="alert"><span>Document “{docs.conflict.local.title}” changed elsewhere. Your draft is kept; choose a version to resume saving.</span><button type="button" onClick={() => docs.resolve("remote")}>Use disk version</button><button type="button" onClick={() => docs.resolve("local")}>Keep my version</button></div> : null}
-    {boardConflict ? <div className="design-notice" role="alert"><span>The board changed elsewhere. Your draft is kept; choose a version to resume saving.</span>{(["remote", "local"] as const).map((version) => <button type="button" key={version} disabled={busy || boardStatus === "loading" || boardStatus === "load-error"} onClick={() => void run(async () => {
+    {error ? <div className="design-notice" role="alert"><span>{error}</span><button type="button" onClick={() => setError(undefined)}>关闭提示</button></div> : null}
+    {docs.loadError ? <div className="design-notice" role="alert"><span>{workspace ? "无法同步工作区。画布仍保持打开。 " : "无法加载工作区。 "}{docs.loadError}</span><button type="button" disabled={busy} onClick={() => void run(() => docsRef.current.refresh())}>重新加载工作区</button></div> : null}
+    {docs.error && !docs.conflict ? <div className="design-notice" role="alert"><span>{docs.error}</span><button type="button" disabled={busy} onClick={() => void run(() => docsRef.current.flush())}>重新保存</button></div> : null}
+    {docs.conflict ? <div className="design-notice" role="alert"><span>文档「{docs.conflict.local.title}」已在其他位置修改。草稿已保留，请选择版本以继续保存。</span><button type="button" onClick={() => docs.resolve("remote")}>使用磁盘版本</button><button type="button" onClick={() => docs.resolve("local")}>保留我的版本</button></div> : null}
+    {boardConflict ? <div className="design-notice" role="alert"><span>画板已在其他位置修改。草稿已保留，请选择版本以继续保存。</span>{(["remote", "local"] as const).map((version) => <button type="button" key={version} disabled={busy || boardStatus === "loading" || boardStatus === "load-error"} onClick={() => void run(async () => {
       const resolve = boardResolve.current;
-      if (!resolve) throw new Error("Load the canvas before resolving its changes.");
+      if (!resolve) throw new Error("请先加载画布再解决冲突。");
       await resolve(version);
       setBoardConflict(undefined);
-    })}>{version === "remote" ? "Use disk version" : "Keep my version"}</button>)}</div> : null}
-    {workspace && adapter ? <CanvasBoardEditor key={adapter.key} project={project} hidden={singleBoard && workspaceView === "code"} storage={adapter} documents={design} assets={workspace.assets} conflicted={!!boardConflict} overlay={singleBoard ? undefined : floating} onSaveReady={registerSave} onResolveReady={registerResolve} onStatusChange={setBoardStatus} onSelectionChange={setSelectedNodes} initialNodeId={initialNodeId} onInitialNodeHandled={onInitialNodeHandled} /> : singleBoard && workspaceView === "code" ? null : <div className="design-loading">{docs.loadError ? <span>Restore the workspace files, then reload.</span> : <LoaderCircle size={22} className="spin" />}</div>}
+    })}>{version === "remote" ? "使用磁盘版本" : "保留我的版本"}</button>)}</div> : null}
+    {workspace && adapter ? <CanvasBoardEditor key={adapter.key} project={project} hidden={singleBoard && workspaceView === "code"} storage={adapter} documents={design} assets={workspace.assets} conflicted={!!boardConflict} overlay={singleBoard ? undefined : floating} onSaveReady={registerSave} onResolveReady={registerResolve} onStatusChange={setBoardStatus} onSelectionChange={setSelectedNodes} initialNodeId={initialNodeId} onInitialNodeHandled={onInitialNodeHandled} /> : singleBoard && workspaceView === "code" ? null : <div className="design-loading">{docs.loadError ? <span>请恢复工作区文件，然后重新加载。</span> : <LoaderCircle size={22} className="spin" />}</div>}
     {singleBoard && workspaceView === "code" ? <WorkspaceCodeView projectId={project.id} revision={workspaceRevision + codeRevision} openFileRequest={openFileRequest} /> : null}
-    {boardOptions && workspace && optionsBoard ? <CanvasContextMenu screenPosition={boardOptions} label={`Board options: ${optionsBoard.name}`} onClose={() => setBoardOptions(undefined)}>
-      <button type="button" role="menuitem" onClick={() => { setBoardOptions(undefined); setName(optionsBoard.name); setDialog({ type: "rename", id: optionsBoard.id }); }}><Pencil size={14} /><span>Rename</span></button>
-      {([-1, 1] as const).map((direction) => <button type="button" role="menuitem" key={direction} disabled={workspace.boards.findIndex((board) => board.id === optionsBoard.id) === (direction === -1 ? 0 : workspace.boards.length - 1)} onClick={() => { setBoardOptions(undefined); void run(async () => { await flush(); await changeCanvasBoard(project.id, optionsBoard.id, { direction }); await docsRef.current.refresh(); }); }}>{direction === -1 ? <ChevronLeft size={14} /> : <ChevronRight size={14} />}<span>{direction === -1 ? "Move up" : "Move down"}</span></button>)}
-      <button type="button" role="menuitem" disabled={workspace.boards.length === 1} onClick={() => { setBoardOptions(undefined); setDialog({ type: "delete", id: optionsBoard.id }); }}><Trash2 size={14} /><span>Delete board</span></button>
+    {boardOptions && workspace && optionsBoard ? <CanvasContextMenu screenPosition={boardOptions} label={`画板选项：${optionsBoard.name}`} onClose={() => setBoardOptions(undefined)}>
+      <button type="button" role="menuitem" onClick={() => { setBoardOptions(undefined); setName(optionsBoard.name); setDialog({ type: "rename", id: optionsBoard.id }); }}><Pencil size={14} /><span>重命名</span></button>
+      {([-1, 1] as const).map((direction) => <button type="button" role="menuitem" key={direction} disabled={workspace.boards.findIndex((board) => board.id === optionsBoard.id) === (direction === -1 ? 0 : workspace.boards.length - 1)} onClick={() => { setBoardOptions(undefined); void run(async () => { await flush(); await changeCanvasBoard(project.id, optionsBoard.id, { direction }); await docsRef.current.refresh(); }); }}>{direction === -1 ? <ChevronLeft size={14} /> : <ChevronRight size={14} />}<span>{direction === -1 ? "上移" : "下移"}</span></button>)}
+      <button type="button" role="menuitem" disabled={workspace.boards.length === 1} onClick={() => { setBoardOptions(undefined); setDialog({ type: "delete", id: optionsBoard.id }); }}><Trash2 size={14} /><span>删除画板</span></button>
     </CanvasContextMenu> : null}
     {expanded && workspaceView !== "code" ? <div className="design-expanded-document" role="dialog" aria-modal="true" aria-label={expanded.title}>
       <ExpandedCanvasDocument design={design} document={expanded} />
-      <button className="design-expanded-close" type="button" title="Back to canvas" aria-label="Back to canvas" disabled={busy} onClick={() => void run(async () => { await docsRef.current.flush(); setDocumentId(undefined); })}><X size={16} /></button>
+      <button className="design-expanded-close" type="button" title="返回画布" aria-label="返回画布" disabled={busy} onClick={() => void run(async () => { await docsRef.current.flush(); setDocumentId(undefined); })}><X size={16} /></button>
     </div> : null}
-    {dialog ? <DesignModal title={dialog.type === "create" ? "New board" : dialog.type === "rename" ? "Rename board" : "Delete board"} onClose={() => { if (!busy) setDialog(undefined); }}>
+    {dialog ? <DesignModal title={dialog.type === "create" ? "新建画板" : dialog.type === "rename" ? "重命名画板" : "删除画板"} onClose={() => { if (!busy) setDialog(undefined); }}>
       <form onSubmit={(event) => { event.preventDefault(); void run(async () => {
         await flush();
         let createdId: string | undefined;
@@ -167,25 +167,25 @@ export function CanvasWorkspace({ project, headerActionsTarget = null, onLeaveRe
         if (createdId) setActiveId(createdId);
         setDialog(undefined);
       }); }}>
-        {dialog.type === "delete" ? <p>Delete "{workspace?.boards.find((board) => board.id === dialog.id)?.name}"? Documents and Library assets will be kept.</p> : <label>Name<input autoFocus required maxLength={120} value={name} onChange={(event) => setName(event.target.value)} /></label>}
-        <footer><button type="button" disabled={busy} onClick={() => setDialog(undefined)}>Cancel</button><button type="submit" disabled={busy || (dialog.type !== "delete" && !name.trim())}>{dialog.type === "delete" ? "Delete" : "Save"}</button></footer>
+        {dialog.type === "delete" ? <p>删除「{workspace?.boards.find((board) => board.id === dialog.id)?.name}」？文档和素材库内容将保留。</p> : <label>名称<input autoFocus required maxLength={120} value={name} onChange={(event) => setName(event.target.value)} /></label>}
+        <footer><button type="button" disabled={busy} onClick={() => setDialog(undefined)}>取消</button><button type="submit" disabled={busy || (dialog.type !== "delete" && !name.trim())}>{dialog.type === "delete" ? "删除" : "保存"}</button></footer>
       </form>
     </DesignModal> : null}
-    {insertion?.documentId && !insertion.assetId && insertion.text === undefined ? <LibraryAssetPicker title="Insert image" assets={assets} onClose={() => { if (!busy) setInsertion(undefined); }} onSelect={(asset) => void run(async () => { await docsRef.current.insertImage(insertion.documentId!, asset.id); setInsertion(undefined); })} /> : insertion ? <DesignModal title={insertion.text ? "Add text to document" : "Insert image"} onClose={() => { if (!busy) setInsertion(undefined); }}>
+    {insertion?.documentId && !insertion.assetId && insertion.text === undefined ? <LibraryAssetPicker title="插入图片" assets={assets} onClose={() => { if (!busy) setInsertion(undefined); }} onSelect={(asset) => void run(async () => { await docsRef.current.insertImage(insertion.documentId!, asset.id); setInsertion(undefined); })} /> : insertion ? <DesignModal title={insertion.text ? "向文档添加文本" : "插入图片"} onClose={() => { if (!busy) setInsertion(undefined); }}>
       <form onSubmit={(event) => { event.preventDefault(); void run(async () => {
         if (!insertion.documentId) return;
-        if (insertion.text !== undefined) { const doc = docsRef.current.workspace?.documents.find((doc) => doc.id === insertion.documentId); if (!doc) throw new Error("Document not found"); docsRef.current.update(doc.id, { markdown: `${doc.markdown.trimEnd()}\n\n${insertion.text}\n` }); await docsRef.current.flush(); }
+        if (insertion.text !== undefined) { const doc = docsRef.current.workspace?.documents.find((doc) => doc.id === insertion.documentId); if (!doc) throw new Error("找不到文档"); docsRef.current.update(doc.id, { markdown: `${doc.markdown.trimEnd()}\n\n${insertion.text}\n` }); await docsRef.current.flush(); }
         else if (insertion.assetId) await docsRef.current.insertImage(insertion.documentId, insertion.assetId);
         setInsertion(undefined);
       }); }}>
-        <label>Document<select required value={insertion.documentId ?? ""} onChange={(event) => setInsertion({ ...insertion, documentId: event.target.value })}><option value="" disabled>Select document</option>{workspace?.documents.map((doc) => <option key={doc.id} value={doc.id}>{doc.title}</option>)}</select></label>
+        <label>文档<select required value={insertion.documentId ?? ""} onChange={(event) => setInsertion({ ...insertion, documentId: event.target.value })}><option value="" disabled>选择文档</option>{workspace?.documents.map((doc) => <option key={doc.id} value={doc.id}>{doc.title}</option>)}</select></label>
         {insertion.text !== undefined ? <pre className="design-insert-text">{insertion.text}</pre> : null}
-        <footer><button type="button" disabled={busy} onClick={() => setInsertion(undefined)}>Cancel</button><button type="submit" disabled={busy || !insertion.documentId || (insertion.text === undefined && !insertion.assetId)}>Insert</button></footer>
+        <footer><button type="button" disabled={busy} onClick={() => setInsertion(undefined)}>取消</button><button type="submit" disabled={busy || !insertion.documentId || (insertion.text === undefined && !insertion.assetId)}>插入</button></footer>
       </form>
     </DesignModal> : null}
   </section></CanvasAssetProvider>;
 }
 function DesignModal({ title, children, onClose }: { title: string; children: ReactNode; onClose(): void }) {
   useEffect(() => { const close = (event: KeyboardEvent) => { if (event.key === "Escape") { event.stopPropagation(); onClose(); } }; window.addEventListener("keydown", close); return () => window.removeEventListener("keydown", close); }, [onClose]);
-  return createPortal(<div className="design-modal-backdrop" onPointerDown={(event) => { if (event.target === event.currentTarget) onClose(); }}><section className="design-modal" role="dialog" aria-modal="true" aria-label={title}><header><h2>{title}</h2><button type="button" title="Close" aria-label="Close" onClick={onClose}><X size={16} /></button></header>{children}</section></div>, document.body);
+  return createPortal(<div className="design-modal-backdrop" onPointerDown={(event) => { if (event.target === event.currentTarget) onClose(); }}><section className="design-modal" role="dialog" aria-modal="true" aria-label={title}><header><h2>{title}</h2><button type="button" title="关闭" aria-label="关闭" onClick={onClose}><X size={16} /></button></header>{children}</section></div>, document.body);
 }

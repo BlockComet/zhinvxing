@@ -25,6 +25,15 @@ const TEMPLATE_PICTURES: Record<string, string> = {
   qte,
   "story-map": storyMap,
 };
+const TEMPLATE_ZH: Record<string, { label: string; summary: string }> = {
+  blank: { label: "空白场景", summary: "播放视频或展示图片，然后继续" },
+  "main-menu": { label: "主菜单", summary: "标题与可选入口列表" },
+  choice: { label: "分支选择", summary: "让玩家作出选择，进入不同剧情" },
+  qte: { label: "限时操作", summary: "在限定时间内完成操作" },
+  hotspot: { label: "热点探索", summary: "点击画面中的热点探索线索" },
+  ending: { label: "结局", summary: "展示故事的结局" },
+  "story-map": { label: "故事地图", summary: "查看剧情分支与已访问的场景" },
+};
 
 /** Add a Scene: a grid of Templates, each with a picture and one line. */
 export function PlayableTemplateDialog({ presets, busy, onChoose, onClose }: {
@@ -65,10 +74,10 @@ export function PlayableTemplateDialog({ presets, busy, onChoose, onClose }: {
     <section ref={dialog} className="project-create-dialog playable-template-dialog" role="dialog" aria-modal="true" aria-labelledby={titleId} tabIndex={-1}>
       <header>
         <div>
-          <h2 id={titleId}>Add a Scene</h2>
-          <p>Pick a starting point, then describe the Scene in chat.</p>
+          <h2 id={titleId}>添加场景</h2>
+          <p>选择起点，然后在聊天中描述场景。</p>
         </div>
-        <button type="button" aria-label="Close" onClick={onClose}><X size={16} /></button>
+        <button type="button" aria-label="关闭" onClick={onClose}><X size={16} /></button>
       </header>
       <div className="playable-template-grid">
         {presets.map((preset) => <button
@@ -81,8 +90,8 @@ export function PlayableTemplateDialog({ presets, busy, onChoose, onClose }: {
           <span className="playable-template-picture">
             {TEMPLATE_PICTURES[preset.id] ? <img src={TEMPLATE_PICTURES[preset.id]} alt="" /> : null}
           </span>
-          <strong>{preset.label}</strong>
-          <small>{preset.summary}</small>
+          <strong>{TEMPLATE_ZH[preset.id]?.label ?? preset.label}</strong>
+          <small>{TEMPLATE_ZH[preset.id]?.summary ?? preset.summary}</small>
         </button>)}
       </div>
     </section>

@@ -29,8 +29,8 @@ export function ImagePickerButton({
         type="button"
         disabled={disabled}
         onClick={() => input.current?.click()}
-        title="Attach images"
-        aria-label="Attach images"
+        title="添加图片"
+        aria-label="添加图片"
       >
         <Plus size={17} />
       </button>
@@ -55,11 +55,11 @@ export function ImagePickerButton({
 export function ImageAttachmentStrip({ images, onRemove }: { images: ComposerImage[]; onRemove: (id: string) => void }) {
   if (images.length === 0) return null;
   return (
-    <div className="composer-images" aria-label="Attached images">
+    <div className="composer-images" aria-label="图片附件">
       {images.map((image) => (
         <div className="composer-image" key={image.id} title={image.name}>
           <img src={imageSource(image)} alt={image.name} />
-          <button type="button" onClick={() => onRemove(image.id)} title={`Remove ${image.name}`} aria-label={`Remove ${image.name}`}>
+          <button type="button" onClick={() => onRemove(image.id)} title={`移除 ${image.name}`} aria-label={`移除 ${image.name}`}>
             <X size={11} />
           </button>
         </div>
@@ -73,7 +73,7 @@ export function promptImages(images: ComposerImage[]): PromptImage[] {
 }
 
 export function composerImages(images: PromptImage[]): ComposerImage[] {
-  return images.map((image, index) => ({ ...image, id: crypto.randomUUID(), name: image.name ?? `Image ${index + 1}` }));
+  return images.map((image, index) => ({ ...image, id: crypto.randomUUID(), name: image.name ?? `图片 ${index + 1}` }));
 }
 
 export function imageSource(image: PromptImage): string {
@@ -103,7 +103,7 @@ export function ConversationImage({ image, alt }: { image: PromptImage; alt: str
 
 export async function readImageFiles(files: File[]): Promise<ComposerImage[]> {
   for (const file of files) {
-    if (!ACCEPTED_IMAGE_TYPES.includes(file.type as PromptImageMediaType)) throw new Error("Use PNG, JPEG, WebP, or GIF images");
+    if (!ACCEPTED_IMAGE_TYPES.includes(file.type as PromptImageMediaType)) throw new Error("请使用 PNG、JPEG、WebP 或 GIF 图片");
   }
   return Promise.all(files.map(async (file) => ({
     id: crypto.randomUUID(),
@@ -116,7 +116,7 @@ export async function readImageFiles(files: File[]): Promise<ComposerImage[]> {
 function fileBase64(file: File): Promise<string> {
   return new Promise((resolve, reject) => {
     const reader = new FileReader();
-    reader.onerror = () => reject(new Error(`Could not read ${file.name}`));
+    reader.onerror = () => reject(new Error(`无法读取 ${file.name}`));
     reader.onload = () => resolve(String(reader.result).split(",", 2)[1] ?? "");
     reader.readAsDataURL(file);
   });

@@ -104,14 +104,14 @@ export function PlaytestOverlay({ graph, record, diagnostics, onRestart, onForge
 
   return <>
     <div className="playable-playtest-corner">
-      <button type="button" title="Forget which Scenes were seen, so the Story map starts over" aria-label="Forget seen Scenes" onClick={onForgetSeen}><History size={13} /></button>
-      <button type="button" title="Replay from the start with a new game" aria-label="Replay" onClick={onRestart}><RotateCcw size={13} /></button>
+      <button type="button" title="清除已访问场景记录，重新开始故事地图" aria-label="清除场景访问记录" onClick={onForgetSeen}><History size={13} /></button>
+      <button type="button" title="新开一局，从头开始" aria-label="重玩" onClick={onRestart}><RotateCcw size={13} /></button>
     </div>
     {shown ? <aside className="playable-playtest-problem" role="alert">
       <InfoCircle size={13} />
-      <span>{sent ? "Added to the chat in the editor" : "Something broke"}</span>
-      {onAskAgent && !sent ? <button type="button" className="is-primary" onClick={() => { onAskAgent(askToFixPlaytest(graph, record, errors)); setSent(true); }}><Sparkles size={11} /><span>Ask AI to fix</span></button> : null}
-      <button type="button" aria-label="Dismiss" title="Dismiss" onClick={() => setDismissed(errors.length)}><X size={11} /></button>
+      <span>{sent ? "已添加到编辑器中的聊天" : "出现了问题"}</span>
+      {onAskAgent && !sent ? <button type="button" className="is-primary" onClick={() => { onAskAgent(askToFixPlaytest(graph, record, errors)); setSent(true); }}><Sparkles size={11} /><span>请 AI 修复</span></button> : null}
+      <button type="button" aria-label="关闭提示" title="关闭提示" onClick={() => setDismissed(errors.length)}><X size={11} /></button>
     </aside> : null}
   </>;
 }
@@ -119,13 +119,13 @@ export function PlaytestOverlay({ graph, record, diagnostics, onRestart, onForge
 /** The chat request behind "Ask AI to fix": where the player was, what they did, and what failed. */
 export function askToFixPlaytest(graph: NodeGraph, record: PlayableDebugRecord | undefined, errors: readonly string[]): string {
   const titleOf = (nodeId?: string) => (nodeId ? playableNodeById(graph, nodeId)?.title : undefined) ?? nodeId ?? "";
-  const lines = ["Something broke while I was playtesting. Find the cause and fix it."];
+  const lines = ["我在试玩时遇到了问题。请查明原因并修复。"];
   if (record) lines.push(`I was in ${titleOf(record.currentNode.id)}.`);
   const steps = record?.recentSignals.slice(-RECENT_LIMIT) ?? [];
   if (steps.length) {
-    lines.push("", "What I did:");
-    for (const step of steps) lines.push(`- ${titleOf(step.nodeId)}: "${step.signal}" → ${step.followed ? titleOf(step.targetNodeId) : "goes nowhere"}`);
+    lines.push("", "我的操作：");
+    for (const step of steps) lines.push(`- ${titleOf(step.nodeId)}: "${step.signal}" → ${step.followed ? titleOf(step.targetNodeId) : "未连接目标"}`);
   }
-  lines.push("", "Errors:", ...errors.slice(-RECENT_LIMIT).map((error) => `- ${error}`));
+  lines.push("", "错误：", ...errors.slice(-RECENT_LIMIT).map((error) => `- ${error}`));
   return lines.join("\n");
 }

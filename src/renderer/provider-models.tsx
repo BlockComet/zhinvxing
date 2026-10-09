@@ -5,9 +5,9 @@ import { Check, ChevronDown, LoaderCircle, Pencil, Plus, Search, Trash2, X } fro
 import { SegmentedControl } from "./segmented-control.js";
 
 const MODEL_FILTER_OPTIONS = [
-  { value: "all", label: "All" },
-  { value: "shown", label: "Shown" },
-  { value: "custom", label: "Custom" },
+  { value: "all", label: "全部" },
+  { value: "shown", label: "已显示" },
+  { value: "custom", label: "自定义" },
 ] as const;
 
 export function ProviderModels({ providerId, onEditModels }: { providerId: string; onEditModels?: () => void }) {
@@ -69,15 +69,15 @@ export function ProviderModels({ providerId, onEditModels }: { providerId: strin
       models: settings.models.map((model) => selected.has(model.id) ? { ...model, visible } : model),
     } : undefined);
   }
-  return <section className={`settings-detail-section provider-models${editing ? " is-editing" : ""}`} aria-label="Language models">
+  return <section className={`settings-detail-section provider-models${editing ? " is-editing" : ""}`} aria-label="语言模型">
     <div className="provider-models-heading">
-      <h4>Language models <small>{settings ? shown : ""}</small></h4>
+      <h4>语言模型 <small>{settings ? shown : ""}</small></h4>
       {settings ? <div className="provider-models-heading-actions">
         {(editing || !settings.models.length) && settings.canAddCustomModel ? <button className="settings-secondary-button" type="button" disabled={busy || adding} onClick={onEditModels ?? (() => { setAdding(true); setError(undefined); })} aria-expanded={onEditModels ? undefined : adding}>
-          <Plus size={13} /><span>Add model</span>
+          <Plus size={13} /><span>添加模型</span>
         </button> : null}
-        <button className="settings-secondary-button" type="button" disabled={busy} onClick={onEditModels ?? toggleEditing} aria-label={editing ? "Done editing models" : "Edit models"} aria-pressed={onEditModels ? undefined : editing}>
-          {editing ? <Check size={13} /> : <Pencil size={13} />}<span>{editing ? "Done" : "Edit"}</span>
+        <button className="settings-secondary-button" type="button" disabled={busy} onClick={onEditModels ?? toggleEditing} aria-label={editing ? "完成模型编辑" : "编辑模型"} aria-pressed={onEditModels ? undefined : editing}>
+          {editing ? <Check size={13} /> : <Pencil size={13} />}<span>{editing ? "完成" : "编辑"}</span>
         </button>
       </div> : null}
     </div>
@@ -87,32 +87,32 @@ export function ProviderModels({ providerId, onEditModels }: { providerId: strin
     }} /> : null}
     {settings ? <>
       <div className="provider-models-controls">
-        <label className="settings-provider-search"><Search size={14} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search models" aria-label="Search models" /></label>
-        {editing ? <SegmentedControl className="settings-provider-filters" label="Filter models" options={MODEL_FILTER_OPTIONS} value={filter} onChange={setFilter} /> : null}
+        <label className="settings-provider-search"><Search size={14} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索模型" aria-label="搜索模型" /></label>
+        {editing ? <SegmentedControl className="settings-provider-filters" label="筛选模型" options={MODEL_FILTER_OPTIONS} value={filter} onChange={setFilter} /> : null}
       </div>
       {editing ? <div className="provider-models-list-actions">
-        <span>{shown} shown <i aria-hidden="true">/</i> {settings.models.length} total</span>
-        <button type="button" disabled={busy || !models.some((model) => !model.visible)} onClick={() => changeVisibility(models.map((model) => model.id), true)}>Show all</button>
-        <button type="button" disabled={busy || !models.some((model) => model.visible)} onClick={() => changeVisibility(models.map((model) => model.id), false)}>Hide all</button>
+        <span>已显示 {shown} <i aria-hidden="true">/</i> 共 {settings.models.length} 个</span>
+        <button type="button" disabled={busy || !models.some((model) => !model.visible)} onClick={() => changeVisibility(models.map((model) => model.id), true)}>显示全部</button>
+        <button type="button" disabled={busy || !models.some((model) => model.visible)} onClick={() => changeVisibility(models.map((model) => model.id), false)}>隐藏全部</button>
       </div> : null}
-      <div className="provider-models-list" role="list" aria-label={editing ? "Provider models" : "Shown provider models"} aria-busy={busy}>
+      <div className="provider-models-list" role="list" aria-label={editing ? "服务商模型" : "已显示的服务商模型"} aria-busy={busy}>
         {models.map((model) => {
           const copy = <span className="provider-model-copy"><strong title={model.name}>{model.name}</strong>{model.name !== model.id ? <small title={model.id}>{model.id}</small> : null}</span>;
           return <div className={`provider-model-row${model.visible ? "" : " is-hidden"}`} key={model.id} role="listitem">
             {editing ? <label>
-              <input type="checkbox" checked={model.visible} disabled={busy} onChange={(event) => changeVisibility([model.id], event.target.checked)} aria-label={`Show ${model.name}`} />
+              <input type="checkbox" checked={model.visible} disabled={busy} onChange={(event) => changeVisibility([model.id], event.target.checked)} aria-label={`显示 ${model.name}`} />
               {copy}
             </label> : <div className="provider-model-readonly">{copy}</div>}
-            {model.custom ? <small className="provider-model-custom">Custom</small> : null}
+            {model.custom ? <small className="provider-model-custom">自定义</small> : null}
             {editing && model.custom ? deleting === model.id ? <div className="provider-model-delete-confirm">
-              <button type="button" className="settings-danger-button" disabled={busy} onClick={() => void update(() => removeCustomProviderModel(providerId, model.id)).then((removed) => { if (removed) setDeleting(undefined); })}>Delete</button>
-              <button type="button" className="icon-button" title="Cancel deletion" aria-label="Cancel deletion" disabled={busy} onClick={() => setDeleting(undefined)}><X size={13} /></button>
-            </div> : <button className="icon-button provider-model-delete" type="button" disabled={busy} title={`Delete ${model.name}`} aria-label={`Delete ${model.name}`} onClick={() => setDeleting(model.id)}><Trash2 size={14} /></button> : null}
+              <button type="button" className="settings-danger-button" disabled={busy} onClick={() => void update(() => removeCustomProviderModel(providerId, model.id)).then((removed) => { if (removed) setDeleting(undefined); })}>删除</button>
+              <button type="button" className="icon-button" title="取消删除" aria-label="取消删除" disabled={busy} onClick={() => setDeleting(undefined)}><X size={13} /></button>
+            </div> : <button className="icon-button provider-model-delete" type="button" disabled={busy} title={`删除 ${model.name}`} aria-label={`删除 ${model.name}`} onClick={() => setDeleting(model.id)}><Trash2 size={14} /></button> : null}
           </div>;
         })}
-        {!models.length ? <p className="settings-empty">{!settings.models.length ? "No language models are available." : !editing && !shown ? "No models shown." : "No models match these filters."}</p> : null}
+        {!models.length ? <p className="settings-empty">{!settings.models.length ? "没有可用的语言模型。" : !editing && !shown ? "未显示任何模型。" : "没有符合筛选条件的模型。"}</p> : null}
       </div>
-    </> : !error ? <div className="settings-loading"><LoaderCircle className="spin" size={16} />Loading models</div> : null}
+    </> : !error ? <div className="settings-loading"><LoaderCircle className="spin" size={16} />正在加载模型</div> : null}
   </section>;
 }
 
@@ -126,26 +126,26 @@ function CustomModelForm({ settings, busy, onAdd, onCancel }: { settings: Provid
     event.preventDefault();
     void onAdd({ ...model, id: model.id.trim(), name: model.name.trim() || model.id.trim() });
   }
-  return <form className="provider-model-form" aria-label="Add model" onSubmit={submit}>
-    <label className="settings-detail-field" htmlFor={`${fieldId}-id`}><span className="settings-search-field-label">Model ID</span><input id={`${fieldId}-id`} className="settings-search-input" value={model.id} onChange={(event) => field("id", event.target.value)} placeholder="Model ID" maxLength={200} required disabled={busy} autoFocus autoComplete="off" spellCheck={false} /></label>
+  return <form className="provider-model-form" aria-label="添加模型" onSubmit={submit}>
+    <label className="settings-detail-field" htmlFor={`${fieldId}-id`}><span className="settings-search-field-label">模型 ID</span><input id={`${fieldId}-id`} className="settings-search-input" value={model.id} onChange={(event) => field("id", event.target.value)} placeholder="模型 ID" maxLength={200} required disabled={busy} autoFocus autoComplete="off" spellCheck={false} /></label>
     {advanced ? <div className="provider-model-form-advanced" id={`${fieldId}-advanced`}>
       <div className="provider-model-form-grid">
-        <label className="settings-detail-field" htmlFor={`${fieldId}-name`}><span className="settings-search-field-label">Display name</span><input id={`${fieldId}-name`} className="settings-search-input" value={model.name} onChange={(event) => field("name", event.target.value)} placeholder={model.id || "Display name"} maxLength={200} disabled={busy} /></label>
+        <label className="settings-detail-field" htmlFor={`${fieldId}-name`}><span className="settings-search-field-label">显示名称</span><input id={`${fieldId}-name`} className="settings-search-input" value={model.name} onChange={(event) => field("name", event.target.value)} placeholder={model.id || "显示名称"} maxLength={200} disabled={busy} /></label>
         <label className="settings-detail-field" htmlFor={`${fieldId}-api`}><span className="settings-search-field-label">API</span><select id={`${fieldId}-api`} className="settings-search-input" value={model.api} onChange={(event) => field("api", event.target.value)} disabled={busy}>{apis.map((api) => <option key={api} value={api}>{api}</option>)}</select></label>
-        <label className="settings-detail-field provider-model-url-field" htmlFor={`${fieldId}-url`}><span className="settings-search-field-label">Base URL</span><input id={`${fieldId}-url`} className="settings-search-input" type="url" value={model.baseUrl} onChange={(event) => field("baseUrl", event.target.value)} placeholder={settings.defaultBaseUrl ?? "https://api.example.com/v1"} required={!settings.defaultBaseUrl} disabled={busy} /></label>
-        <label className="settings-detail-field" htmlFor={`${fieldId}-context`}><span className="settings-search-field-label">Context window</span><input id={`${fieldId}-context`} className="settings-search-input" type="number" min={1} max={100_000_000} step={1} value={model.contextWindow} onChange={(event) => field("contextWindow", Number(event.target.value))} required disabled={busy} /></label>
-        <label className="settings-detail-field" htmlFor={`${fieldId}-tokens`}><span className="settings-search-field-label">Max output tokens</span><input id={`${fieldId}-tokens`} className="settings-search-input" type="number" min={1} max={model.contextWindow} step={1} value={model.maxTokens} onChange={(event) => field("maxTokens", Number(event.target.value))} required disabled={busy} /></label>
+        <label className="settings-detail-field provider-model-url-field" htmlFor={`${fieldId}-url`}><span className="settings-search-field-label">API 基础地址</span><input id={`${fieldId}-url`} className="settings-search-input" type="url" value={model.baseUrl} onChange={(event) => field("baseUrl", event.target.value)} placeholder={settings.defaultBaseUrl ?? "https://api.example.com/v1"} required={!settings.defaultBaseUrl} disabled={busy} /></label>
+        <label className="settings-detail-field" htmlFor={`${fieldId}-context`}><span className="settings-search-field-label">上下文长度</span><input id={`${fieldId}-context`} className="settings-search-input" type="number" min={1} max={100_000_000} step={1} value={model.contextWindow} onChange={(event) => field("contextWindow", Number(event.target.value))} required disabled={busy} /></label>
+        <label className="settings-detail-field" htmlFor={`${fieldId}-tokens`}><span className="settings-search-field-label">最大输出 Token 数</span><input id={`${fieldId}-tokens`} className="settings-search-input" type="number" min={1} max={model.contextWindow} step={1} value={model.maxTokens} onChange={(event) => field("maxTokens", Number(event.target.value))} required disabled={busy} /></label>
       </div>
       <div className="provider-model-capabilities">
-        <label><input type="checkbox" checked={model.reasoning} onChange={(event) => field("reasoning", event.target.checked)} disabled={busy} />Reasoning</label>
-        <label><input type="checkbox" checked={model.supportsImages} onChange={(event) => field("supportsImages", event.target.checked)} disabled={busy} />Image input</label>
+        <label><input type="checkbox" checked={model.reasoning} onChange={(event) => field("reasoning", event.target.checked)} disabled={busy} />推理</label>
+        <label><input type="checkbox" checked={model.supportsImages} onChange={(event) => field("supportsImages", event.target.checked)} disabled={busy} />图片输入</label>
       </div>
     </div> : null}
     <div className="provider-model-form-footer">
-      <button className="provider-model-advanced-toggle" type="button" aria-expanded={advanced} aria-controls={advanced ? `${fieldId}-advanced` : undefined} disabled={busy} onClick={() => setAdvanced((value) => !value)}><ChevronDown size={12} /><span>Advanced</span></button>
+      <button className="provider-model-advanced-toggle" type="button" aria-expanded={advanced} aria-controls={advanced ? `${fieldId}-advanced` : undefined} disabled={busy} onClick={() => setAdvanced((value) => !value)}><ChevronDown size={12} /><span>高级</span></button>
       <div className="provider-model-form-actions">
-        <button className="settings-secondary-button" type="button" disabled={busy} onClick={onCancel}>Cancel</button>
-        <button className="settings-primary-button" type="submit" disabled={busy || !model.id.trim()}>{busy ? <LoaderCircle className="spin" size={13} /> : <Plus size={13} />}<span>Add</span></button>
+        <button className="settings-secondary-button" type="button" disabled={busy} onClick={onCancel}>取消</button>
+        <button className="settings-primary-button" type="submit" disabled={busy || !model.id.trim()}>{busy ? <LoaderCircle className="spin" size={13} /> : <Plus size={13} />}<span>添加</span></button>
       </div>
     </div>
   </form>;

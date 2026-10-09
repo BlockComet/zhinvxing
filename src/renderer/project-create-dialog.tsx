@@ -72,7 +72,7 @@ export function ProjectCreateDialog({ initialType = "web-game", fixedType, proje
     if (creating || selectingWorkspace) return;
     const selectDirectory = window.ohMyGameDesktop?.selectProjectDirectory;
     if (!selectDirectory) {
-      setError("Restart the OhMyGame desktop app to enable folder selection.");
+      setError("请重启 OhMyGame 桌面应用以启用文件夹选择功能。");
       return;
     }
     setSelectingWorkspace(true);
@@ -99,29 +99,29 @@ export function ProjectCreateDialog({ initialType = "web-game", fixedType, proje
     }}>
       <section ref={dialog} className="project-create-dialog" role="dialog" aria-modal="true" aria-labelledby={titleId} tabIndex={-1}>
         <header>
-          <h2 id={titleId}>{fixedType ? `New ${projectTypeLabel(fixedType)}` : "New project"}</h2>
-          <button type="button" disabled={creating} onClick={onClose} aria-label="Close"><X size={16} /></button>
+          <h2 id={titleId}>{fixedType ? `New ${projectTypeLabel(fixedType)}` : "新建项目"}</h2>
+          <button type="button" disabled={creating} onClick={onClose} aria-label="关闭"><X size={16} /></button>
         </header>
         <form onSubmit={(event) => void submit(event)}>
           <label className="project-create-name">
-            <span>Name</span>
+            <span>名称</span>
             <input ref={nameInput} value={name} maxLength={120} disabled={creating} placeholder={defaultProjectName(type)} onChange={(event) => setName(event.target.value)} />
           </label>
           <fieldset className="project-create-workspace">
-            <legend>Workspace</legend>
+            <legend>工作区</legend>
             <div className="project-create-workspace-selection">
               {workspacePath ? <span className="is-selected" title={workspacePath}>{workspacePath}</span> : null}
               <div>
                 <button type="button" disabled={creating || selectingWorkspace} onClick={() => void chooseWorkspace()}>
-                  {selectingWorkspace ? "Opening…" : workspacePath ? "Choose another…" : "Choose folder…"}
+                  {selectingWorkspace ? "正在打开…" : workspacePath ? "选择其他…" : "选择文件夹…"}
                 </button>
-                {workspacePath ? <button type="button" disabled={creating || selectingWorkspace} onClick={clearWorkspace}>Clear</button> : null}
+                {workspacePath ? <button type="button" disabled={creating || selectingWorkspace} onClick={clearWorkspace}>清除</button> : null}
               </div>
             </div>
           </fieldset>
           {!fixedType ? (
             <fieldset className="project-create-types">
-              <legend>Type</legend>
+              <legend>类型</legend>
               {projectTypes.map((option) => (
                 <button className={option.value === type ? "is-active" : undefined} type="button" key={option.value} aria-pressed={option.value === type} disabled={creating} onClick={() => setType(option.value)}>
                   <ProjectTypeIcon type={option.value} size={17} />
@@ -132,10 +132,10 @@ export function ProjectCreateDialog({ initialType = "web-game", fixedType, proje
           ) : null}
           {error ? <p className="project-create-error" role="alert">{error}</p> : null}
           <footer>
-            <button type="button" disabled={creating} onClick={onClose}>Cancel</button>
+            <button type="button" disabled={creating} onClick={onClose}>取消</button>
             <button className="project-create-submit" type="submit" disabled={creating}>
               {creating ? <LoaderCircle className="spin" size={14} /> : null}
-              Create
+              创建
             </button>
           </footer>
         </form>

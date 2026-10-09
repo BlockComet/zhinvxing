@@ -14,7 +14,7 @@ export interface ComposerAttachment {
 export type AttachmentInput = File | { file: File; relativePath?: string };
 
 export function appendAttachments(current: ComposerAttachment[], next: ComposerAttachment[]): ComposerAttachment[] {
-  if (next.some((attachment) => attachment.file.size > MAX_ATTACHMENT_BYTES)) throw new Error("An attachment cannot exceed 500 MB");
+  if (next.some((attachment) => attachment.file.size > MAX_ATTACHMENT_BYTES)) throw new Error("单个附件不能超过 500 MB");
   const paths = new Set(current.map((attachment) => attachment.relativePath));
   const duplicate = next.find((attachment) => {
     if (paths.has(attachment.relativePath)) return true;
@@ -23,8 +23,8 @@ export function appendAttachments(current: ComposerAttachment[], next: ComposerA
   });
   if (duplicate) throw new Error(`\"${duplicate.relativePath}\" is already attached`);
   const combined = [...current, ...next];
-  if (combined.length > MAX_ATTACHMENT_FILES) throw new Error("Attach at most 1,000 files at a time");
-  if (combined.reduce((total, attachment) => total + attachment.file.size, 0) > MAX_ATTACHMENT_BATCH_BYTES) throw new Error("Attached files cannot exceed 1 GB in total");
+  if (combined.length > MAX_ATTACHMENT_FILES) throw new Error("每次最多添加 1,000 个附件");
+  if (combined.reduce((total, attachment) => total + attachment.file.size, 0) > MAX_ATTACHMENT_BATCH_BYTES) throw new Error("附件总大小不能超过 1 GB");
   return combined;
 }
 
@@ -98,8 +98,8 @@ export function AttachmentPickerButton({
         type="button"
         disabled={disabled}
         onClick={() => setOpen((value) => !value)}
-        title="Add context or attach files"
-        aria-label="Add context or attach files"
+        title="添加上下文或附件"
+        aria-label="添加上下文或附件"
         aria-expanded={open}
         aria-haspopup="menu"
       >
@@ -114,11 +114,11 @@ export function AttachmentPickerButton({
       }}>
         <button type="button" role="menuitem" onClick={() => { setOpen(false); filesInput.current?.click(); }}>
           <Upload size={15} />
-          <span>Attach files</span>
+          <span>添加附件</span>
         </button>
         {onDesignReference ? <button type="button" role="menuitem" onClick={() => { setOpen(false); onDesignReference(); }}>
           <FileText size={15} />
-          <span>Reference game design</span>
+          <span>引用游戏设计</span>
         </button> : null}
       </div> : null}
       <input
@@ -141,15 +141,15 @@ export function AttachmentStrip({ items, onRemove }: { items: ComposerAttachment
   const files = items.filter((attachment) => !isPreviewableImage(attachment));
   return (
     <Fragment>
-      {images.length ? <div className="composer-images" aria-label="Attached images">
+      {images.length ? <div className="composer-images" aria-label="图片附件">
         {images.map((attachment) => <ImageAttachment key={attachment.id} attachment={attachment} onRemove={onRemove} />)}
       </div> : null}
-      {files.length ? <div className="composer-attachments" aria-label="Attached files">
+      {files.length ? <div className="composer-attachments" aria-label="附件">
         {files.map((attachment) => (
           <div className="composer-attachment" key={attachment.id} title={`${attachment.relativePath} · ${formatBytes(attachment.file.size)}`}>
             <FileText size={14} />
             <span>{attachment.relativePath}</span>
-            <button type="button" onClick={() => onRemove(attachment.id)} title={`Remove ${attachment.relativePath}`} aria-label={`Remove ${attachment.relativePath}`}>
+            <button type="button" onClick={() => onRemove(attachment.id)} title={`移除 ${attachment.relativePath}`} aria-label={`移除 ${attachment.relativePath}`}>
               <X size={11} />
             </button>
           </div>
@@ -164,7 +164,7 @@ function ImageAttachment({ attachment, onRemove }: { attachment: ComposerAttachm
   useEffect(() => () => URL.revokeObjectURL(source), [source]);
   return <div className="composer-image" title={`${attachment.relativePath} · ${formatBytes(attachment.file.size)}`}>
     <img src={source} alt={attachment.relativePath} />
-    <button type="button" onClick={() => onRemove(attachment.id)} title={`Remove ${attachment.relativePath}`} aria-label={`Remove ${attachment.relativePath}`}>
+    <button type="button" onClick={() => onRemove(attachment.id)} title={`移除 ${attachment.relativePath}`} aria-label={`移除 ${attachment.relativePath}`}>
       <X size={11} />
     </button>
   </div>;

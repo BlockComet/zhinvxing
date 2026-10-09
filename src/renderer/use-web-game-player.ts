@@ -31,7 +31,7 @@ export class BrowserGamePlayers implements WebGamePlayerBridge {
     if (!player) {
       // Create synchronously in the click handler so browsers allow the popup.
       const popup = window.open("about:blank", `ohmygame-player-${projectId}`, `popup,width=${request.viewport.width},height=${request.viewport.height}`);
-      if (!popup) throw new Error("Allow popups to play this game in a new window.");
+      if (!popup) throw new Error("请允许弹出窗口，以便在新窗口中游玩。");
       popup.opener = null;
       player = { window: popup, ready: Promise.resolve() };
       this.#players.set(projectId, player);
@@ -41,7 +41,7 @@ export class BrowserGamePlayers implements WebGamePlayerBridge {
       }, 500);
       const opening = player;
       player.ready = ensureProjectPreview(projectId).then(({ url }) => {
-        if (opening.window.closed) throw new Error("The game window was closed.");
+        if (opening.window.closed) throw new Error("游戏窗口已关闭。");
         opening.url = webGamePlayerUrl(url, request.path);
         opening.window.location.href = opening.url;
       }).catch((error) => {

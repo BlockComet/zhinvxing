@@ -129,7 +129,7 @@ export function PromptBox({
         onDropFiles(files.map((file) => ({ file })));
       }}
     >
-      {dropActive ? <div className="prompt-box-drop-overlay">Drop files to attach</div> : null}
+      {dropActive ? <div className="prompt-box-drop-overlay">拖放文件以添加附件</div> : null}
       {overlay}
       {content}
       <div className="prompt-box-input">
@@ -144,7 +144,7 @@ export function PromptBox({
         </div> : null}
         <textarea
           ref={inputRef}
-          aria-label="Prompt"
+          aria-label="提示词"
           disabled={disabled}
           readOnly={readOnly}
           onChange={(event) => {

@@ -1,6 +1,6 @@
 import { useEffect, useId, useRef, useState } from "react";
 
-export function ProjectRenameDialog({ name, title = "Rename project", returnFocus, onClose, onConfirm }: {
+export function ProjectRenameDialog({ name, title = "重命名项目", returnFocus, onClose, onConfirm }: {
   name: string;
   title?: string;
   returnFocus: HTMLElement | null;
@@ -58,7 +58,7 @@ export function ProjectRenameDialog({ name, title = "Rename project", returnFocu
           onConfirm(draft);
         }}>
           <label className="project-create-name">
-            <span>Name</span>
+            <span>名称</span>
             <input ref={nameInput} value={draft} onChange={(event) => setDraft(event.target.value)}
               onCompositionStart={() => { composing.current = true; }}
               onCompositionEnd={() => { composing.current = false; }}
@@ -67,8 +67,8 @@ export function ProjectRenameDialog({ name, title = "Rename project", returnFocu
               }} />
           </label>
           <footer>
-            <button type="button" onClick={onClose}>Cancel</button>
-            <button className="project-create-submit" type="submit">Save</button>
+            <button type="button" onClick={onClose}>取消</button>
+            <button className="project-create-submit" type="submit">保存</button>
           </footer>
         </form>
       </section>

@@ -44,9 +44,9 @@ export function CanvasDocumentNode({ data, selected }: { data: { documentId?: st
   return <div className={`story-node story-text-node design-document-node${selected ? " is-selected" : ""}`}>
     <div className="story-text-output">
       <div data-alignment-frame className="design-document-node-content">
-        <CanvasNodeLabel icon={FileText} label={doc?.title ?? issue?.title ?? "Missing document"} details={data.nodeDetails} className="design-document-node-header"
-          titleEditor={isEditing && doc ? <CanvasTextInput className="nodrag" aria-label="Document title" value={doc.title} maxLength={200} onChange={(title) => runtime?.design.update(doc.id, { title })} /> : undefined} />
-        {issue ? <div className="design-document-issue" role="status">Document unavailable: {issue.source}{doc ? ". Your unsaved draft is kept." : ". Restore the file to load it again."}</div> : null}
+        <CanvasNodeLabel icon={FileText} label={doc?.title ?? issue?.title ?? "文档缺失"} details={data.nodeDetails} className="design-document-node-header"
+          titleEditor={isEditing && doc ? <CanvasTextInput className="nodrag" aria-label="文档标题" value={doc.title} maxLength={200} onChange={(title) => runtime?.design.update(doc.id, { title })} /> : undefined} />
+        {issue ? <div className="design-document-issue" role="status">文档不可用： {issue.source}{doc ? "。未保存的草稿已保留。" : "。恢复文件后可重新加载。"}</div> : null}
         {doc ? <div ref={bodyRef} className={`design-document-node-body nowheel${isEditing ? " nodrag" : " is-preview"}`} onScrollCapture={(event) => {
           const pane = event.target as HTMLElement;
           if (pane.parentElement !== bodyRef.current || pane.hidden) return;
@@ -57,20 +57,20 @@ export function CanvasDocumentNode({ data, selected }: { data: { documentId?: st
         }} onTouchStart={(event) => {
           if ((event.target as HTMLElement).closest("a, button, input")) event.stopPropagation();
         }}>
-          <CanvasTextarea hidden={!isEditing} spellCheck={false} aria-label="Document Markdown" value={doc.markdown} onChange={(markdown) => runtime?.design.update(doc.id, { markdown })} />
+          <CanvasTextarea hidden={!isEditing} spellCheck={false} aria-label="文档 Markdown" value={doc.markdown} onChange={(markdown) => runtime?.design.update(doc.id, { markdown })} />
           <div hidden={isEditing} className="design-document-node-preview"><CanvasMarkdown projectId={runtime!.design.projectId} document={doc} /></div>
-        </div> : <div className="design-document-node-body">Document not found</div>}
+        </div> : <div className="design-document-node-body">找不到文档</div>}
         <Handle type="target" position={Position.Left} id="image" />
         <Handle type="source" position={Position.Right} id="out" />
       </div>
       {selected && doc ? <footer className="design-document-node-footer nodrag nowheel">
-        <div className="design-mode-control" role="group" aria-label="Document view">
-          <button type="button" title="Edit Markdown" aria-label="Edit Markdown" aria-pressed={editing} onClick={() => setEditing(true)}><Pencil size={14} /></button>
-          <button type="button" title="Preview document" aria-label="Preview document" aria-pressed={!editing} onClick={() => setEditing(false)}><Eye size={14} /></button>
+        <div className="design-mode-control" role="group" aria-label="文档视图">
+          <button type="button" title="编辑 Markdown" aria-label="编辑 Markdown" aria-pressed={editing} onClick={() => setEditing(true)}><Pencil size={14} /></button>
+          <button type="button" title="预览文档" aria-label="预览文档" aria-pressed={!editing} onClick={() => setEditing(false)}><Eye size={14} /></button>
         </div>
         <div className="design-document-node-actions">
-          <button type="button" title="Insert image from Library" aria-label="Insert image from Library" onClick={() => runtime?.design.pickImage(doc.id)}><ImageIcon size={14} /></button>
-          <button type="button" title="Expand document" aria-label="Expand document" onClick={() => runtime?.design.open(doc.id)}><Maximize size={14} /></button>
+          <button type="button" title="从素材库插入图片" aria-label="从素材库插入图片" onClick={() => runtime?.design.pickImage(doc.id)}><ImageIcon size={14} /></button>
+          <button type="button" title="展开文档" aria-label="展开文档" onClick={() => runtime?.design.open(doc.id)}><Maximize size={14} /></button>
         </div>
       </footer> : null}
     </div>
@@ -93,7 +93,7 @@ function CanvasImage({ projectId, documentId, src, alt }: { projectId: string; d
   const file = canvasImagePath(documentId, src);
   const { url, error, loading, retry } = useWorkspaceAssetUrl(file ? projectId : undefined, file ?? "");
   const remote = src && /^https?:\/\//i.test(src) ? src : undefined;
-  return url || remote ? <img src={url ?? remote} alt={alt ?? ""} loading="lazy" draggable={false} /> : <span className="design-image-placeholder" title={error}>{error ? `Image unavailable: ${file}` : alt || "Image"}{error ? <button className="nodrag" type="button" disabled={loading} onClick={retry}>Check again</button> : null}</span>;
+  return url || remote ? <img src={url ?? remote} alt={alt ?? ""} loading="lazy" draggable={false} /> : <span className="design-image-placeholder" title={error}>{error ? `图片不可用：${file}` : alt || "图片"}{error ? <button className="nodrag" type="button" disabled={loading} onClick={retry}>再次检查</button> : null}</span>;
 }
 export function CanvasDocumentAI({ design, document, textModels }: { design: CanvasDocuments; document: CanvasMarkdownDocument; textModels: CanvasTextModels }) {
   const state = design.generations[document.id];
@@ -102,28 +102,28 @@ export function CanvasDocumentAI({ design, document, textModels }: { design: Can
   const busy = state?.generating || state?.applying;
   return <>
     <CanvasTextComposer {...textModels} instruction={state?.instruction ?? ""} model={state?.model} reasoningLevel={state?.reasoningLevel} generating={state?.generating}
-      busy={busy} error={state?.error} label="Document generation instruction" placeholder="Describe what to write or change" generateLabel={state?.error || state?.proposal !== undefined ? "Retry document generation" : "Generate document"}
+      busy={busy} error={state?.error} label="文档生成指令" placeholder="描述要编写或修改的内容" generateLabel={state?.error || state?.proposal !== undefined ? "重新生成文档" : "生成文档"}
       onInstruction={(instruction) => design.changeGeneration(document.id, { instruction, error: undefined })}
       onModel={(model, reasoningLevel) => design.changeGeneration(document.id, { model, reasoningLevel, error: undefined })}
       onReasoningChange={(reasoningLevel) => design.changeGeneration(document.id, { model: state?.model ?? textModels.defaultModel, reasoningLevel, error: undefined })}
       onGenerate={(model, reasoningLevel) => design.generate(document.id, model, reasoningLevel)} />
-    {state?.proposal !== undefined ? <section className="design-ai-result nodrag nowheel" aria-label="AI candidate draft">
-      <p className="design-ai-result-status" role="status">{state.proposalStatus === "incomplete" ? "Incomplete draft — review before replacing the document." : "Candidate draft — review before replacing the document."}</p>
-      <div className="design-mode-control" role="group" aria-label="Candidate draft view">
-        <button type="button" title="Edit candidate draft" aria-label="Edit candidate draft" aria-pressed={!preview} onClick={() => setPreview(false)}><Pencil size={14} /></button>
-        <button type="button" title="Preview candidate draft" aria-label="Preview candidate draft" aria-pressed={preview} onClick={() => setPreview(true)}><Eye size={14} /></button>
+    {state?.proposal !== undefined ? <section className="design-ai-result nodrag nowheel" aria-label="AI 候选草稿">
+      <p className="design-ai-result-status" role="status">{state.proposalStatus === "incomplete" ? "草稿尚未完成，请检查后再替换文档。" : "候选草稿，请检查后再替换文档。"}</p>
+      <div className="design-mode-control" role="group" aria-label="候选草稿视图">
+        <button type="button" title="编辑候选草稿" aria-label="编辑候选草稿" aria-pressed={!preview} onClick={() => setPreview(false)}><Pencil size={14} /></button>
+        <button type="button" title="预览候选草稿" aria-label="预览候选草稿" aria-pressed={preview} onClick={() => setPreview(true)}><Eye size={14} /></button>
       </div>
       {preview ? <div className="design-ai-result-preview"><CanvasMarkdown projectId={design.projectId} document={{ ...document, markdown: state.proposal }} /></div>
-        : <CanvasTextarea aria-label="Candidate draft Markdown" spellCheck={false} rows={7} value={state.proposal} disabled={busy} onChange={(proposal) => design.changeGeneration(document.id, { proposal })} />}
+        : <CanvasTextarea aria-label="候选草稿 Markdown" spellCheck={false} rows={7} value={state.proposal} disabled={busy} onChange={(proposal) => design.changeGeneration(document.id, { proposal })} />}
       {copyResult?.draft === state.proposal ? <p role="status">{copyResult.message}</p> : null}
       <footer>
-        <button type="button" title="Copy candidate draft" aria-label="Copy candidate draft" onClick={async () => {
+        <button type="button" title="复制候选草稿" aria-label="复制候选草稿" onClick={async () => {
           const draft = state.proposal!;
-          try { await navigator.clipboard.writeText(draft); setCopyResult({ draft, message: "Draft copied." }); }
-          catch { setCopyResult({ draft, message: "Could not copy. Select the draft text and copy it manually." }); }
-        }}><Copy size={14} /><span>Copy</span></button>
-        <button type="button" title="Discard candidate draft" aria-label="Discard candidate draft" disabled={busy} onClick={() => design.changeGeneration(document.id, { proposal: undefined, proposalStatus: undefined, error: undefined })}><X size={14} /><span>Discard</span></button>
-        <button type="button" title="Replace document with draft" aria-label="Replace document with draft" disabled={busy || !state.proposal.trim()} onClick={() => design.applyGeneration(document.id)}><Check size={14} /><span>{state.applying ? "Saving…" : "Use draft"}</span></button>
+          try { await navigator.clipboard.writeText(draft); setCopyResult({ draft, message: "草稿已复制。" }); }
+          catch { setCopyResult({ draft, message: "无法复制。请选中草稿文本并手动复制。" }); }
+        }}><Copy size={14} /><span>复制</span></button>
+        <button type="button" title="丢弃候选草稿" aria-label="丢弃候选草稿" disabled={busy} onClick={() => design.changeGeneration(document.id, { proposal: undefined, proposalStatus: undefined, error: undefined })}><X size={14} /><span>丢弃</span></button>
+        <button type="button" title="用草稿替换文档" aria-label="用草稿替换文档" disabled={busy || !state.proposal.trim()} onClick={() => design.applyGeneration(document.id)}><Check size={14} /><span>{state.applying ? "正在保存…" : "使用草稿"}</span></button>
       </footer>
     </section> : null}
   </>;
@@ -135,24 +135,24 @@ export function ExpandedCanvasDocument({ design, document }: { design: CanvasDoc
   return <>
     <header className="design-expanded-toolbar">
       <FileText size={16} />
-      <CanvasTextInput aria-label="Expanded document title" value={document.title} maxLength={200} onChange={(title) => design.update(document.id, { title })} />
-      <div className="design-mode-control" role="group" aria-label="Document view">
-        {([ ["edit", Pencil, "Edit Markdown"], ["split", Columns2, "Split view"], ["preview", Eye, "Preview document"] ] as const).map(([value, Icon, label]) => <button key={value} type="button" title={label} aria-label={label} aria-pressed={mode === value} onClick={() => setMode(value)}><Icon size={15} /></button>)}
+      <CanvasTextInput aria-label="展开的文档标题" value={document.title} maxLength={200} onChange={(title) => design.update(document.id, { title })} />
+      <div className="design-mode-control" role="group" aria-label="文档视图">
+        {([ ["edit", Pencil, "编辑 Markdown"], ["split", Columns2, "分栏视图"], ["preview", Eye, "预览文档"] ] as const).map(([value, Icon, label]) => <button key={value} type="button" title={label} aria-label={label} aria-pressed={mode === value} onClick={() => setMode(value)}><Icon size={15} /></button>)}
       </div>
-      <button type="button" title="Insert image from Library" aria-label="Insert image from Library" onClick={() => design.pickImage(document.id)}><ImageIcon size={15} /></button>
-      <button type="button" title="Download Markdown" aria-label="Download Markdown" onClick={() => {
+      <button type="button" title="从素材库插入图片" aria-label="从素材库插入图片" onClick={() => design.pickImage(document.id)}><ImageIcon size={15} /></button>
+      <button type="button" title="下载 Markdown" aria-label="下载 Markdown" onClick={() => {
         const url = URL.createObjectURL(new Blob([document.markdown], { type: "text/markdown" })), link = window.document.createElement("a");
         link.href = url; link.download = `${document.title || "document"}.md`; link.click(); window.setTimeout(() => URL.revokeObjectURL(url), 1000);
       }}><Download size={15} /></button>
-      {design.setMain ? <button type="button" title="Document options" aria-label="Document options" onClick={(event) => { const rect = event.currentTarget.getBoundingClientRect(); setMenu({ x: rect.left, y: rect.bottom + 5 }); }}><MoreHorizontal size={15} /></button> : null}
+      {design.setMain ? <button type="button" title="文档选项" aria-label="文档选项" onClick={(event) => { const rect = event.currentTarget.getBoundingClientRect(); setMenu({ x: rect.left, y: rect.bottom + 5 }); }}><MoreHorizontal size={15} /></button> : null}
     </header>
     <div className={`design-expanded-body is-${mode}`}>
-      {mode !== "preview" ? <CanvasTextarea spellCheck={false} aria-label="Expanded document Markdown" value={document.markdown} onChange={(markdown) => design.update(document.id, { markdown })} /> : null}
+      {mode !== "preview" ? <CanvasTextarea spellCheck={false} aria-label="展开的文档 Markdown" value={document.markdown} onChange={(markdown) => design.update(document.id, { markdown })} /> : null}
       {mode !== "edit" ? <div className="design-expanded-preview"><CanvasMarkdown projectId={design.projectId} document={document} /></div> : null}
     </div>
     <div className="design-expanded-ai"><CanvasDocumentAI design={design} document={document} textModels={{ models: catalog.models, modelStatus: catalog.status, defaultModel: catalog.defaultModel ?? catalog.models[0], defaultReasoningLevel: catalog.defaultReasoningLevel }} /></div>
-    {menu ? <CanvasContextMenu screenPosition={menu} label="Document options" onClose={() => setMenu(undefined)}>
-      <button type="button" role="menuitem" disabled={document.main} onClick={() => { design.setMain?.(document.id); setMenu(undefined); }}><Check size={14} /><span>{document.main ? "Main design document" : "Set as main design document"}</span></button>
+    {menu ? <CanvasContextMenu screenPosition={menu} label="文档选项" onClose={() => setMenu(undefined)}>
+      <button type="button" role="menuitem" disabled={document.main} onClick={() => { design.setMain?.(document.id); setMenu(undefined); }}><Check size={14} /><span>{document.main ? "主设计文档" : "设为主设计文档"}</span></button>
     </CanvasContextMenu> : null}
   </>;
 }

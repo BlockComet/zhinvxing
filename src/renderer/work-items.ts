@@ -52,8 +52,8 @@ export function toolGroupSummary(tools: ToolItem[]): string {
     .sort(([left], [right]) => categoryOrder(left) - categoryOrder(right))
     .map(([category, items]) => categoryPhrase(category, items));
   const failed = tools.filter((item) => item.status === "failed").length;
-  if (failed > 0) phrases.push(failed === 1 ? "an action failed" : "actions failed");
-  if (phrases.length === 0) return "Used tools";
+  if (failed > 0) phrases.push(failed === 1 ? "个操作失败" : "个操作失败");
+  if (phrases.length === 0) return "已使用工具";
   const summary = phrases.join(", ");
   return summary[0].toUpperCase() + summary.slice(1);
 }
@@ -78,10 +78,10 @@ function categoryOrder(category: string): number {
 
 function categoryPhrase(category: string, tools: ToolItem[]): string {
   if (category === "edit") return filePhrase("edited", tools);
-  if (category === "read") return tools.length === 1 ? "read a file" : "read files";
-  if (category === "command") return tools.length === 1 ? "ran a command" : "ran commands";
-  if (category === "web-search") return tools.length === 1 ? "searched the web" : "searched the web multiple times";
-  if (category === "playtest") return "playtested the game";
+  if (category === "read") return tools.length === 1 ? "读取了文件" : "读取了文件";
+  if (category === "command") return tools.length === 1 ? "执行了命令" : "执行了命令";
+  if (category === "web-search") return tools.length === 1 ? "搜索了网络" : "多次搜索了网络";
+  if (category === "playtest") return "试玩了游戏";
   if (category.startsWith("mcp:")) {
     const name = singularToolName(mcpServerName(category.slice("mcp:".length) || undefined));
     return tools.length === 1 ? `used ${indefiniteArticle(name)} ${name} tool` : `used ${name} tools`;

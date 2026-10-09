@@ -16,7 +16,7 @@ export function CanvasFormatOptions({
     <div
       className="story-format-options"
       role="radiogroup"
-      aria-label="Canvas format"
+      aria-label="画布格式"
     >
       {CANVAS_FORMAT_PRESETS.map((preset) => (
         <button

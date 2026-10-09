@@ -130,7 +130,7 @@ export function GameStudioHome({
           aria-labelledby="studio-projects-heading"
         >
           <div className="studio-section-heading">
-            <h2 id="studio-projects-heading">Recent projects</h2>
+            <h2 id="studio-projects-heading">最近的项目</h2>
             {phase === "error" ? (
               <button
                 className="studio-text-link"
@@ -138,16 +138,16 @@ export function GameStudioHome({
                 onClick={() => void load()}
               >
                 <RefreshCw size={13} />
-                Retry
+                重试
               </button>
             ) : (
               <a className="studio-text-link" href={projectsHash(projectType)}>
-                View all
+                查看全部
               </a>
             )}
           </div>
           {phase === "loading" ? (
-            <div className="studio-project-grid" aria-label="Loading projects">
+            <div className="studio-project-grid" aria-label="正在加载项目">
               {Array.from({ length: recentProjectLimit }, (_, index) => (
                 <div className="studio-project-skeleton" key={index} />
               ))}
@@ -159,7 +159,7 @@ export function GameStudioHome({
             </p>
           ) : null}
           {phase === "ready" && !projects.length ? (
-            <p className="home-project-state">No projects yet</p>
+            <p className="home-project-state">暂无项目</p>
           ) : null}
           {phase === "ready" && projects.length > 0 ? (
             <div className="studio-project-grid">
@@ -198,7 +198,7 @@ export function GameStudioHome({
             aria-labelledby="studio-examples-heading"
           >
             <div className="studio-section-heading">
-              <h2 id="studio-examples-heading">Examples</h2>
+              <h2 id="studio-examples-heading">示例</h2>
             </div>
             <ExampleShelf
               examples={studioExamples}

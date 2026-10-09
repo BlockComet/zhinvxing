@@ -132,10 +132,10 @@ export function EditorCanvas<N extends Node>({
       {fitViewOnLoad ? <InitialCanvasView onReady={onInitialFit} /> : null}
       <Panel className="story-canvas-toolbar" position="bottom-center">
         {addControl}
-        <button className={mode === "pointer" ? "is-active" : undefined} type="button" title="Select" aria-label="Select" aria-pressed={mode === "pointer"} onClick={() => setMode("pointer")}>
+        <button className={mode === "pointer" ? "is-active" : undefined} type="button" title="选择" aria-label="选择" aria-pressed={mode === "pointer"} onClick={() => setMode("pointer")}>
           <MousePointer2 size={18} />
         </button>
-        <button className={mode === "pan" ? "is-active" : undefined} type="button" title="Pan canvas" aria-label="Pan canvas" aria-pressed={mode === "pan"} onClick={() => setMode("pan")}>
+        <button className={mode === "pan" ? "is-active" : undefined} type="button" title="平移画布" aria-label="平移画布" aria-pressed={mode === "pan"} onClick={() => setMode("pan")}>
           <Hand size={18} />
         </button>
         <FitViewButton />
@@ -254,7 +254,7 @@ function FitViewButton() {
     }
     await fitView({ padding: 0.2, duration: 200 });
   }
-  return <button type="button" title="Fit view" aria-label="Fit view" onClick={() => void fitCanvas()}><Maximize size={18} /></button>;
+  return <button type="button" title="适应视图" aria-label="适应视图" onClick={() => void fitCanvas()}><Maximize size={18} /></button>;
 }
 
 function AlignmentGuides({ guides }: { guides?: CanvasAlignmentGuides }) {
@@ -316,9 +316,9 @@ function ZoomControls() {
   const { zoom } = useViewport();
   return (
     <Panel className="story-canvas-zoom" position="bottom-left">
-      <button type="button" title="Zoom out" aria-label="Zoom out" onClick={() => void zoomOut()}><Minus size={14} /></button>
-      <button className="story-canvas-zoom-value" type="button" title="Reset zoom" onClick={() => void zoomTo(1)}>{Math.round(zoom * 100)}%</button>
-      <button type="button" title="Zoom in" aria-label="Zoom in" onClick={() => void zoomIn()}><Plus size={14} /></button>
+      <button type="button" title="缩小" aria-label="缩小" onClick={() => void zoomOut()}><Minus size={14} /></button>
+      <button className="story-canvas-zoom-value" type="button" title="重置缩放" onClick={() => void zoomTo(1)}>{Math.round(zoom * 100)}%</button>
+      <button type="button" title="放大" aria-label="放大" onClick={() => void zoomIn()}><Plus size={14} /></button>
     </Panel>
   );
 }

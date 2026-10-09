@@ -14,9 +14,11 @@ export function supportedReasoningLevels(model: { reasoning: boolean; thinkingLe
 }
 
 export function reasoningLabel(level?: AgentReasoningLevel): string {
-  if (!level) return "Default";
-  if (level === "xhigh") return "Extra high";
-  return level[0].toUpperCase() + level.slice(1);
+  if (!level) return "默认";
+  const labels: Record<AgentReasoningLevel, string> = {
+    off: "关闭", minimal: "最低", low: "低", medium: "中", high: "高", xhigh: "极高", max: "最高",
+  };
+  return labels[level];
 }
 
 export function parseReasoningLevel(value: unknown): AgentReasoningLevel | undefined {

@@ -228,26 +228,26 @@ export function PluginsSettings({ pluginId, onPluginChange, onAddPlugin, onTryPl
   const currentDetail = detailResult?.pluginId === pluginId ? detailResult : undefined;
   const detail = currentDetail?.plugin;
   const detailTitle = pluginId
-    ? detail?.displayName ?? plugins.find((plugin) => plugin.id === pluginId)?.displayName ?? "Plugin"
+    ? detail?.displayName ?? plugins.find((plugin) => plugin.id === pluginId)?.displayName ?? "插件"
     : undefined;
 
   return <section className="plugins-settings">
     <SidebarPageHeader
-      title={detailTitle ?? "Plugins"}
-      breadcrumb={pluginId ? { label: "Plugins", onClick: showCatalog } : undefined}
+      title={detailTitle ?? "插件"}
+      breadcrumb={pluginId ? { label: "插件", onClick: showCatalog } : undefined}
     >
       {!pluginId ? (
         <div className="plugins-toolbar">
           <label className="plugins-search">
             <Search size={15} />
-            <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search plugins..." aria-label="Search plugins" />
+            <input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索插件…" aria-label="搜索插件" />
           </label>
           <div className="plugins-add" ref={addMenu}>
-            <button className="settings-add-button" type="button" disabled={Boolean(adding)} aria-haspopup="menu" aria-expanded={addMenuOpen} onClick={() => setAddMenuOpen((current) => !current)}>{adding ? <LoaderCircle className="spin" size={13} /> : <Plus size={13} />}{adding === "create" ? "Opening..." : adding === "install" ? "Installing..." : "Add plugin"}</button>
+            <button className="settings-add-button" type="button" disabled={Boolean(adding)} aria-haspopup="menu" aria-expanded={addMenuOpen} onClick={() => setAddMenuOpen((current) => !current)}>{adding ? <LoaderCircle className="spin" size={13} /> : <Plus size={13} />}{adding === "create" ? "正在打开…" : adding === "install" ? "正在安装…" : "添加插件"}</button>
             {addMenuOpen ? <div className="plugins-add-menu" role="menu">
-              <button type="button" role="menuitem" onClick={() => { setAddMenuOpen(false); void addPlugin(); }}><Package size={14} /><span><strong>Create with AI</strong><small>Build a plugin with the agent</small></span></button>
-              {window.ohMyGameDesktop ? <button type="button" role="menuitem" onClick={() => void installFromFolder()}><FolderOpen size={14} /><span><strong>Install from folder...</strong><small>Choose a local plugin directory</small></span></button> : null}
-              <button type="button" role="menuitem" onClick={openGitInstallDialog}><GitBranch size={14} /><span><strong>Install from Git...</strong><small>Clone a public HTTPS repository</small></span></button>
+              <button type="button" role="menuitem" onClick={() => { setAddMenuOpen(false); void addPlugin(); }}><Package size={14} /><span><strong>使用 AI 创建</strong><small>让 AI 创建插件</small></span></button>
+              {window.ohMyGameDesktop ? <button type="button" role="menuitem" onClick={() => void installFromFolder()}><FolderOpen size={14} /><span><strong>从文件夹安装…</strong><small>选择本地插件目录</small></span></button> : null}
+              <button type="button" role="menuitem" onClick={openGitInstallDialog}><GitBranch size={14} /><span><strong>从 Git 安装…</strong><small>克隆公开的 HTTPS 仓库</small></span></button>
             </div> : null}
           </div>
         </div>
@@ -271,7 +271,7 @@ export function PluginsSettings({ pluginId, onPluginChange, onAddPlugin, onTryPl
       onTry={onTryPlugin}
     /> : <>
       {phase === "ready" && ((!gitDialogOpen && error) || catalogWarning) ? <p className="plugins-inline-error" role="alert">{!gitDialogOpen && error ? error : catalogWarning}</p> : null}
-      {phase === "loading" ? <PluginState>Loading plugins</PluginState> : null}
+      {phase === "loading" ? <PluginState>正在加载插件</PluginState> : null}
       {phase === "error" ? <PluginError message={error} onRetry={() => void load()} /> : null}
       {phase === "ready" ? <>
         <InstalledPlugins
@@ -287,15 +287,15 @@ export function PluginsSettings({ pluginId, onPluginChange, onAddPlugin, onTryPl
       <form className="plugin-install-dialog" role="dialog" aria-modal="true" aria-labelledby="plugin-install-title" onKeyDown={(event) => {
         if (event.key === "Escape" && !adding) closeInstallDialog();
       }} onSubmit={(event) => { event.preventDefault(); void installFromGit(); }}>
-        <header><h2 id="plugin-install-title">{installCandidates.length ? "Choose a plugin" : "Install from Git"}</h2><p>{installCandidates.length ? `Select a plugin from ${installCandidates[0]!.marketplace.displayName}.` : "Enter a public HTTPS repository or marketplace URL."}</p></header>
-        {installCandidates.length ? <div className="plugin-install-candidates" role="radiogroup" aria-label="Plugins">
+        <header><h2 id="plugin-install-title">{installCandidates.length ? "选择插件" : "从 Git 安装"}</h2><p>{installCandidates.length ? `Select a plugin from ${installCandidates[0]!.marketplace.displayName}.` : "输入公开的 HTTPS 仓库或插件市场地址。"}</p></header>
+        {installCandidates.length ? <div className="plugin-install-candidates" role="radiogroup" aria-label="插件">
           {installCandidates.map((candidate) => <button type="button" role="radio" aria-checked={selectedCandidate === candidate.key} className={selectedCandidate === candidate.key ? "is-selected" : ""} key={candidate.key} onClick={() => setSelectedCandidate(candidate.key)}>
             <span><strong>{candidate.displayName}</strong><small>{candidate.description}</small></span>
-            <span className="plugin-install-candidate-meta"><small>{candidate.skillCount} skill{candidate.skillCount === 1 ? "" : "s"}</small><span className="plugin-install-candidate-radio" aria-hidden="true" /></span>
+            <span className="plugin-install-candidate-meta"><small>{candidate.skillCount} 个技能</small><span className="plugin-install-candidate-radio" aria-hidden="true" /></span>
           </button>)}
-        </div> : <label><span>Repository or marketplace URL</span><input autoFocus type="url" required disabled={Boolean(adding)} value={gitUrl} placeholder="https://github.com/example/plugin" onChange={(event) => setGitUrl(event.target.value)} /></label>}
+        </div> : <label><span>仓库或插件市场地址</span><input autoFocus type="url" required disabled={Boolean(adding)} value={gitUrl} placeholder="https://github.com/example/plugin" onChange={(event) => setGitUrl(event.target.value)} /></label>}
         {error ? <p className="plugin-install-error" role="alert">{error}</p> : null}
-        <footer><button type="button" disabled={Boolean(adding)} onClick={closeInstallDialog}>Cancel</button><button className="plugin-install-submit" type="submit" disabled={Boolean(adding) || (installCandidates.length ? !selectedCandidate : !gitUrl.trim())}>{adding === "install" ? <LoaderCircle className="spin" size={13} /> : null}{adding === "install" ? "Installing..." : "Install"}</button></footer>
+        <footer><button type="button" disabled={Boolean(adding)} onClick={closeInstallDialog}>取消</button><button className="plugin-install-submit" type="submit" disabled={Boolean(adding) || (installCandidates.length ? !selectedCandidate : !gitUrl.trim())}>{adding === "install" ? <LoaderCircle className="spin" size={13} /> : null}{adding === "install" ? "正在安装…" : "安装"}</button></footer>
       </form>
     </div> : null}
   </section>;
@@ -334,11 +334,11 @@ function InstalledPlugins({ plugins, collapsible, onOpenPlugin }: {
   const limited = collapsible && !expanded && plugins.length > INSTALLED_PLUGIN_LIMIT;
   const displayed = limited ? plugins.slice(0, INSTALLED_PLUGIN_LIMIT) : plugins;
   return <section className="plugins-installed" aria-labelledby="installed-plugins-title">
-    <h2 id="installed-plugins-title">Installed</h2>
+    <h2 id="installed-plugins-title">已安装</h2>
     {plugins.length ? <div className="plugins-installed-grid">
       {displayed.map((plugin) => <PluginCard key={plugin.id} plugin={plugin} onOpen={() => onOpenPlugin(plugin.id)} />)}
-    </div> : <p className="plugins-empty">No installed plugins match your search.</p>}
-    {collapsible && plugins.length > INSTALLED_PLUGIN_LIMIT ? <button className="plugins-show-more" type="button" onClick={() => setExpanded((current) => !current)}>{expanded ? "Show less" : `Show more (${plugins.length - INSTALLED_PLUGIN_LIMIT})`}</button> : null}
+    </div> : <p className="plugins-empty">没有匹配的已安装插件。</p>}
+    {collapsible && plugins.length > INSTALLED_PLUGIN_LIMIT ? <button className="plugins-show-more" type="button" onClick={() => setExpanded((current) => !current)}>{expanded ? "收起" : `显示更多（${plugins.length - INSTALLED_PLUGIN_LIMIT})`}</button> : null}
   </section>;
 }
 
@@ -347,7 +347,7 @@ function PluginCard({ plugin, onOpen }: { plugin: PluginSummary; onOpen: () => v
     <button className="plugin-card-open" type="button" onClick={onOpen}>
       <PluginIcon plugin={plugin} />
       <span className="plugin-card-copy">
-        <span className="plugin-card-title"><strong>{plugin.displayName}</strong>{plugin.installed && !plugin.enabled ? <small className="plugin-status">Disabled</small> : null}</span>
+        <span className="plugin-card-title"><strong>{plugin.displayName}</strong>{plugin.installed && !plugin.enabled ? <small className="plugin-status">已停用</small> : null}</span>
         <span className="plugin-card-description">{plugin.description}</span>
       </span>
     </button>
@@ -412,11 +412,11 @@ function PluginDetailView({ phase, plugin, updating, error, onRetry, onTogglePlu
 
   function choosePrompt(prompt: string): void {
     if (!plugin?.installed) {
-      setTryNotice("Install this plugin to try an example.");
+      setTryNotice("安装此插件后即可尝试示例。");
       return;
     }
     if (!plugin.enabled) {
-      setTryNotice("Enable this plugin to try an example.");
+      setTryNotice("启用此插件后即可尝试示例。");
       return;
     }
     setTryNotice(undefined);
@@ -446,10 +446,10 @@ function PluginDetailView({ phase, plugin, updating, error, onRetry, onTogglePlu
   const prompts = plugin?.defaultPrompts ?? [];
   const firstPrompt = prompts[0];
   const emptyProjectLabel = normalizedProjectQuery
-    ? "No matching projects"
-    : plugin?.projectTypes?.length === 1 ? `No ${projectTypeLabel(plugin.projectTypes[0])} projects yet` : "No compatible projects yet";
+    ? "没有匹配的项目"
+    : plugin?.projectTypes?.length === 1 ? `No ${projectTypeLabel(plugin.projectTypes[0])} projects yet` : "暂无兼容项目";
   return <section className="plugin-detail">
-    {phase === "loading" ? <PluginState>Loading plugin</PluginState> : null}
+    {phase === "loading" ? <PluginState>正在加载插件</PluginState> : null}
     {phase === "error" ? <PluginError message={error} onRetry={onRetry} /> : null}
     {phase === "ready" && plugin ? <>
       <header className="plugin-detail-hero">
@@ -457,21 +457,21 @@ function PluginDetailView({ phase, plugin, updating, error, onRetry, onTogglePlu
         <div className="plugin-detail-copy">
           <div className="plugin-detail-title">
             <h2>{plugin.displayName}</h2>
-            {plugin.preinstalled ? <small className="plugin-detail-badge">Included</small> : null}
+            {plugin.preinstalled ? <small className="plugin-detail-badge">已包含</small> : null}
           </div>
           <p>{plugin.description}</p>
           <div className="plugin-detail-hero-actions" ref={tryMenu}>
-            {plugin.installed && plugin.enabled && firstPrompt ? <button className="plugin-detail-primary" type="button" aria-haspopup="dialog" aria-expanded={Boolean(tryPrompt)} onClick={() => choosePrompt(firstPrompt)}><Play size={13} />Try now</button> : null}
-            {tryPrompt ? <div className="plugin-try-popover project-switcher-popover" role="dialog" aria-label={`Try ${plugin.displayName}`}>
-              <div className="plugin-try-heading"><strong>Choose a project</strong><span>The prompt will be added to a new conversation.</span></div>
+            {plugin.installed && plugin.enabled && firstPrompt ? <button className="plugin-detail-primary" type="button" aria-haspopup="dialog" aria-expanded={Boolean(tryPrompt)} onClick={() => choosePrompt(firstPrompt)}><Play size={13} />立即试用</button> : null}
+            {tryPrompt ? <div className="plugin-try-popover project-switcher-popover" role="dialog" aria-label={`试用 ${plugin.displayName}`}>
+              <div className="plugin-try-heading"><strong>选择项目</strong><span>此提示词将添加到新对话中。</span></div>
               <label className="project-switcher-search">
                 <Search size={13} />
-                <input value={projectQuery} placeholder="Search projects" aria-label="Search projects" onChange={(event) => setProjectQuery(event.target.value)} />
+                <input value={projectQuery} placeholder="搜索项目" aria-label="搜索项目" onChange={(event) => setProjectQuery(event.target.value)} />
               </label>
               <div className="project-switcher-list">
-                {projectPhase === "loading" ? <div className="project-switcher-state"><LoaderCircle className="spin" size={14} />Loading projects</div> : null}
-                {projectPhase === "error" ? <div className="project-switcher-state is-error"><span>{projectError}</span><button type="button" onClick={() => void openProjectPicker(tryPrompt)}>Retry</button></div> : null}
-                {projectPhase === "starting" ? <div className="project-switcher-state"><LoaderCircle className="spin" size={14} />Starting conversation</div> : null}
+                {projectPhase === "loading" ? <div className="project-switcher-state"><LoaderCircle className="spin" size={14} />正在加载项目</div> : null}
+                {projectPhase === "error" ? <div className="project-switcher-state is-error"><span>{projectError}</span><button type="button" onClick={() => void openProjectPicker(tryPrompt)}>重试</button></div> : null}
+                {projectPhase === "starting" ? <div className="project-switcher-state"><LoaderCircle className="spin" size={14} />正在创建对话</div> : null}
                 {projectPhase === "ready" ? visibleProjects.map((project) => <button className="project-switcher-item" type="button" key={project.id} onClick={() => void startPlugin(project.id)}>
                   <ProjectTypeIcon type={project.type} />
                   <span><strong>{project.name}</strong><small>{projectTypeLabel(project.type)}</small></span>
@@ -479,16 +479,16 @@ function PluginDetailView({ phase, plugin, updating, error, onRetry, onTogglePlu
                 </button>) : null}
                 {projectPhase === "ready" && !visibleProjects.length ? <div className="project-switcher-state">{emptyProjectLabel}</div> : null}
               </div>
-              <div className="project-switcher-footer"><button type="button" disabled={projectPhase === "starting"} onClick={() => void startPlugin()}><FolderPlus size={14} />New {projectTypeLabel(plugin.projectTypes?.[0] ?? "web-game")} project</button></div>
+              <div className="project-switcher-footer"><button type="button" disabled={projectPhase === "starting"} onClick={() => void startPlugin()}><FolderPlus size={14} />新建{projectTypeLabel(plugin.projectTypes?.[0] ?? "web-game")}项目</button></div>
             </div> : null}
           </div>
         </div>
       </header>
       {error ? <p className="plugins-inline-error" role="alert">{error}</p> : null}
       <PluginManagement plugin={plugin} updating={updating} onBrowse={onBrowse} onRemove={onRemove} onToggle={togglePlugin} />
-      {plugin.longDescription ? <section className="plugin-about"><h2>About</h2><p>{plugin.longDescription}</p></section> : null}
+      {plugin.longDescription ? <section className="plugin-about"><h2>关于</h2><p>{plugin.longDescription}</p></section> : null}
       {prompts.length ? <section className="plugin-prompts">
-        <h2>Try it</h2>
+        <h2>试用</h2>
         <div>{prompts.map((prompt) => <button type="button" key={prompt} onClick={() => choosePrompt(prompt)}>
           <span className="plugin-prompt-copy">
             <span className="plugin-prompt-reference">{plugin.id === "ohmygame:godot" ? <GodotIcon size={14} /> : <Package size={14} aria-hidden="true" />}{plugin.displayName}</span>
@@ -506,10 +506,10 @@ function PluginDetailView({ phase, plugin, updating, error, onRetry, onTogglePlu
 
 function ConnectionSection({ items }: { items: PluginConnectionSummary[] }): ReactNode {
   if (!items.length) return null;
-  return <section className="plugin-components"><h2>Connections</h2><div>{items.map((item) => <div className="plugin-component-row" key={item.id}>
+  return <section className="plugin-components"><h2>连接</h2><div>{items.map((item) => <div className="plugin-component-row" key={item.id}>
     <span className="plugin-component-icon"><Plug size={15} /></span>
-    <span className="plugin-row-copy"><strong>{item.name}</strong><span>{item.status === "not-configured" ? "Not configured" : item.status === "disabled" ? "Disabled in Settings" : "Available"}</span></span>
-    <button className={`plugin-connection-status is-${item.status ?? "enabled"}`} type="button" onClick={() => { window.location.hash = "#/settings/connections" }}>{item.status === "not-configured" ? "Set up in Settings" : "Manage in Settings"}</button>
+    <span className="plugin-row-copy"><strong>{item.name}</strong><span>{item.status === "not-configured" ? "未配置" : item.status === "disabled" ? "已在设置中停用" : "可用"}</span></span>
+    <button className={`plugin-connection-status is-${item.status ?? "enabled"}`} type="button" onClick={() => { window.location.hash = "#/settings/connections" }}>{item.status === "not-configured" ? "在设置中配置" : "在设置中管理"}</button>
   </div>)}</div></section>;
 }
 
@@ -550,7 +550,7 @@ function SkillSection({ pluginId, items, installed, disabled, onBrowse, onToggle
   }
 
   if (!items.length) return null;
-  return <section className="plugin-components plugin-skills"><h2>Skills</h2><div>{items.map((item) => {
+  return <section className="plugin-components plugin-skills"><h2>技能</h2><div>{items.map((item) => {
     const open = expanded?.id === item.id;
     return <div className="plugin-skill-item" key={item.id}>
       <div className="plugin-component-row plugin-skill-row">
@@ -559,12 +559,12 @@ function SkillSection({ pluginId, items, installed, disabled, onBrowse, onToggle
           <span className="plugin-row-copy"><strong>{item.name}</strong>{item.description ? <span>{item.description}</span> : null}</span>
           <ChevronRight size={14} aria-hidden="true" />
         </button>
-        {installed && window.ohMyGameDesktop ? <button className="plugin-skill-browse" type="button" title="Show in Finder" aria-label={`Show ${item.name} in Finder`} onClick={() => onBrowse(item.id)}><FolderOpen size={14} /></button> : null}
-        {installed ? <PluginSwitch checked={item.enabled} disabled={disabled} label={`${item.enabled ? "Disable" : "Enable"} ${item.name}`} onClick={() => onToggle(item, !item.enabled)} /> : null}
+        {installed && window.ohMyGameDesktop ? <button className="plugin-skill-browse" type="button" title="在访达中显示" aria-label={`显示 ${item.name} in Finder`} onClick={() => onBrowse(item.id)}><FolderOpen size={14} /></button> : null}
+        {installed ? <PluginSwitch checked={item.enabled} disabled={disabled} label={`${item.enabled ? "停用" : "启用"} ${item.name}`} onClick={() => onToggle(item, !item.enabled)} /> : null}
       </div>
       {open ? <div className="plugin-skill-content">
-        {expanded.phase === "loading" ? <div className="plugin-skill-state"><LoaderCircle className="spin" size={13} />Loading skill</div> : null}
-        {expanded.phase === "error" ? <div className="plugin-skill-state is-error"><span>{expanded.error}</span><button type="button" onClick={() => void loadContent(item)}>Retry</button></div> : null}
+        {expanded.phase === "loading" ? <div className="plugin-skill-state"><LoaderCircle className="spin" size={13} />正在加载技能</div> : null}
+        {expanded.phase === "error" ? <div className="plugin-skill-state is-error"><span>{expanded.error}</span><button type="button" onClick={() => void loadContent(item)}>重试</button></div> : null}
         {expanded.phase === "ready" ? <MarkdownContent text={expanded.content ?? ""} /> : null}
       </div> : null}
     </div>;
@@ -580,7 +580,7 @@ function PluginState({ children }: { children: ReactNode }): ReactNode {
 }
 
 function PluginError({ message, onRetry }: { message?: string; onRetry: () => void }): ReactNode {
-  return <div className="plugins-state plugins-state-error" role="alert"><span>{message}</span><button type="button" onClick={onRetry}>Retry</button></div>;
+  return <div className="plugins-state plugins-state-error" role="alert"><span>{message}</span><button type="button" onClick={onRetry}>重试</button></div>;
 }
 
 function componentSettings(plugin: PluginDetail): PluginSettings {
@@ -619,32 +619,32 @@ function PluginManagement({ plugin, updating, onBrowse, onRemove, onToggle }: {
   const canBrowse = (plugin.source.type === "directory" || plugin.source.type === "git") && Boolean(window.ohMyGameDesktop);
   let source: ReactNode;
   if (plugin.preinstalled || plugin.source.type === "builtIn") {
-    source = "Included with OhMyGame";
+    source = "OhMyGame 内置";
   } else if (plugin.origin?.type === "github") {
     source = <RepositoryLink repository={plugin.origin.repository} />;
   } else if (plugin.origin?.type === "claude-marketplace") {
     source = `Claude Marketplace · ${plugin.origin.marketplace}`;
   } else if (plugin.source.type === "preinstalled") {
-    source = "Included with OhMyGame";
+    source = "OhMyGame 内置";
   } else if (plugin.source.type === "directory") {
-    source = "Local folder";
+    source = "本地文件夹";
   } else {
-    source = "Git repository";
+    source = "Git 仓库";
   }
   return <section className="plugin-management">
-    <h2>Management</h2>
+    <h2>管理</h2>
     <dl>
-      <div><dt>Status</dt><dd>{!plugin.installed ? "Not installed" : plugin.enabled ? "Enabled" : "Disabled"}</dd></div>
-      {version ? <div><dt>Version</dt><dd>v{version}</dd></div> : null}
-      <div><dt>Source</dt><dd>{source}</dd></div>
-      {plugin.origin?.type === "claude-marketplace" && repository ? <div><dt>Repository</dt><dd><RepositoryLink repository={repository} /></dd></div> : null}
+      <div><dt>状态</dt><dd>{!plugin.installed ? "未安装" : plugin.enabled ? "已启用" : "已停用"}</dd></div>
+      {version ? <div><dt>版本</dt><dd>v{version}</dd></div> : null}
+      <div><dt>来源</dt><dd>{source}</dd></div>
+      {plugin.origin?.type === "claude-marketplace" && repository ? <div><dt>仓库</dt><dd><RepositoryLink repository={repository} /></dd></div> : null}
     </dl>
     {plugin.installed ? <div className="plugin-section-actions">
-      <button className="plugin-detail-secondary" type="button" disabled={updating} onClick={() => onToggle(!plugin.enabled)}>{plugin.enabled ? "Disable" : "Enable"}</button>
+      <button className="plugin-detail-secondary" type="button" disabled={updating} onClick={() => onToggle(!plugin.enabled)}>{plugin.enabled ? "停用" : "启用"}</button>
       {plugin.source.type !== "builtIn" ? <button className="plugin-detail-secondary" type="button" disabled={updating} onClick={() => {
-        if (window.confirm(`Uninstall “${plugin.displayName}”?`)) onRemove();
-      }}>Uninstall</button> : null}
-      {canBrowse ? <button className="plugin-detail-secondary" type="button" disabled={updating} onClick={onBrowse}>Open folder</button> : null}
+        if (window.confirm(`卸载「${plugin.displayName}」？`)) onRemove();
+      }}>卸载</button> : null}
+      {canBrowse ? <button className="plugin-detail-secondary" type="button" disabled={updating} onClick={onBrowse}>打开文件夹</button> : null}
     </div> : null}
   </section>;
 }
@@ -654,5 +654,5 @@ function RepositoryLink({ repository }: { repository: string }): ReactNode {
 }
 
 function errorMessage(cause: unknown): string {
-  return cause instanceof Error ? cause.message : "Something went wrong";
+  return cause instanceof Error ? cause.message : "出现了问题";
 }

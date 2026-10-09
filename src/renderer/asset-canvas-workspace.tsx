@@ -139,13 +139,13 @@ interface CanvasNodeCreationGroup {
 
 const CANVAS_NODE_CREATION_GROUPS: CanvasNodeCreationGroup[] = [
   {
-    label: "Assets",
+    label: "素材",
     items: [
-      { label: "Text", description: "Write a reusable prompt", icon: FileText, action: { kind: "node", type: "text" } },
-      { label: "Image", description: "Generate an image on canvas", icon: ImageIcon, action: { kind: "node", type: "image" } },
-      { label: "Video", description: "Generate a video on canvas", icon: Film, action: { kind: "node", type: "video" } },
-      { label: "Model 3D", description: "Generate a 3D model on canvas", icon: Box, action: { kind: "node", type: "model-3d" } },
-      { label: "Animate 3D", description: "Rig a 3D character and add moves", icon: WandSparkles, action: { kind: "node", type: "animate-3d" } },
+      { label: "文本", description: "编写可重复使用的提示词", icon: FileText, action: { kind: "node", type: "text" } },
+      { label: "图片", description: "在画布上生成图片", icon: ImageIcon, action: { kind: "node", type: "image" } },
+      { label: "视频", description: "在画布上生成视频", icon: Film, action: { kind: "node", type: "video" } },
+      { label: "3D 建模", description: "在画布上生成 3D 模型", icon: Box, action: { kind: "node", type: "model-3d" } },
+      { label: "3D 动画", description: "为 3D 角色绑定骨骼并添加动作", icon: WandSparkles, action: { kind: "node", type: "animate-3d" } },
     ],
   },
 ];
@@ -155,9 +155,9 @@ function isCanvasNodeCreationLeaf(item: CanvasNodeCreationItem): item is CanvasN
 }
 
 function canvasCreationGroups(documents: CanvasDocuments): CanvasNodeCreationGroup[] {
-  const items: CanvasNodeCreationItem[] = [{ label: "Document", description: "Markdown document", icon: FileText, action: { kind: "node", type: "document" } }];
-  if (documents.documents.length) items.push({ label: "Existing document", description: "Add a document reference", icon: FileText, children: documents.documents.map((document) => ({ label: document.title || "Untitled document", description: "Markdown document", icon: FileText, action: { kind: "node", type: "document", documentId: document.id } })) });
-  return [{ label: "Documents", items }, ...CANVAS_NODE_CREATION_GROUPS];
+  const items: CanvasNodeCreationItem[] = [{ label: "文档", description: "Markdown 文档", icon: FileText, action: { kind: "node", type: "document" } }];
+  if (documents.documents.length) items.push({ label: "现有文档", description: "添加文档引用", icon: FileText, children: documents.documents.map((document) => ({ label: document.title || "未命名文档", description: "Markdown 文档", icon: FileText, action: { kind: "node", type: "document", documentId: document.id } })) });
+  return [{ label: "文档", items }, ...CANVAS_NODE_CREATION_GROUPS];
 }
 
 type AssetCanvasFlowData = {
@@ -667,7 +667,7 @@ export function CanvasBoardEditor({ project, initialNodeId, onInitialNodeHandled
       (error) => {
         if (!mounted.current) return;
         if (queuedCanvas.current === serialized) queuedCanvas.current = undefined;
-        setNotice({ kind: "save", message: `Could not save canvas: ${errorMessage(error)}` });
+        setNotice({ kind: "save", message: `无法保存画布：${errorMessage(error)}` });
         onStatusChange?.("error");
       },
     );
@@ -680,7 +680,7 @@ export function CanvasBoardEditor({ project, initialNodeId, onInitialNodeHandled
   function reconcileCanvas(submitted: AssetCanvasDocument, saved: AssetCanvasDocument) {
     const current = latestCanvas.current ?? submitted;
     const merged = mergeCanvasDocument(submitted, current, saved);
-    if (!merged) throw new Error("The canvas changed while saving. Review the current board before saving again.");
+    if (!merged) throw new Error("保存期间画布已发生变化。请检查当前画板后再保存。");
     if (JSON.stringify(current) === JSON.stringify(merged)) return;
     if (canvasHistoryKey(current) !== canvasHistoryKey(merged)) {
       commitPendingHistory();
@@ -743,7 +743,7 @@ export function CanvasBoardEditor({ project, initialNodeId, onInitialNodeHandled
     operationChain.current = operation;
     void operation.catch((cause) => {
       if (!mounted.current) return;
-      setNotice((current) => current?.kind === "save" ? current : { kind: "sync", message: `Could not sync canvas. Your edits are kept. ${errorMessage(cause)}` });
+      setNotice((current) => current?.kind === "save" ? current : { kind: "sync", message: `无法同步画布，修改已保留。${errorMessage(cause)}` });
       onStatusChange?.("sync-error");
     });
     return operation;
@@ -877,8 +877,8 @@ export function CanvasBoardEditor({ project, initialNodeId, onInitialNodeHandled
 
   async function uploadAssetFile(file: File): Promise<LibraryAsset> {
     const mediaType = libraryUploadMediaType(file);
-    if (!mediaType) throw new Error("Upload a PNG, JPEG, SVG, WebP, MP4, MOV, WebM, MP3, or WAV file.");
-    if (file.size > 200 * 1024 * 1024) throw new Error("The upload must be no larger than 200 MB.");
+    if (!mediaType) throw new Error("请上传 PNG、JPEG、SVG、WebP、MP4、MOV、WebM、MP3 或 WAV 文件。");
+    if (file.size > 200 * 1024 * 1024) throw new Error("上传文件不能超过 200 MB。");
     const kind = mediaType.startsWith("video/") ? "video" : mediaType.startsWith("audio/") ? "audio" : undefined;
     const duration = kind ? await readMediaFileDuration(file, kind) : undefined;
     const uploaded = await uploadLibraryAsset(file, mediaType, duration);
@@ -894,7 +894,7 @@ export function CanvasBoardEditor({ project, initialNodeId, onInitialNodeHandled
   function importCanvasFiles(source: TransferredFile[] | Promise<TransferredFile[]>, position: { x: number; y: number }): Promise<void> {
     if (pendingImport.current) {
       void Promise.resolve(source).catch(() => {});
-      setTransferError("A file import is already running."); return Promise.resolve();
+      setTransferError("已有文件正在导入。"); return Promise.resolve();
     }
     const operation = performFileImport(source, position).finally(() => { pendingImport.current = undefined; });
     pendingImport.current = operation;
@@ -908,22 +908,22 @@ export function CanvasBoardEditor({ project, initialNodeId, onInitialNodeHandled
     const imported: AssetCanvasFlowNode[] = [];
     try {
       const files = await source;
-      if (files.length > 1_000) throw new Error("Import at most 1,000 files at a time.");
-      if (nodesRef.current.length + files.length > MAX_ASSET_CANVAS_NODES) throw new Error("A canvas can contain at most 2,000 nodes.");
+      if (files.length > 1_000) throw new Error("每次最多导入 1,000 个文件。");
+      if (nodesRef.current.length + files.length > MAX_ASSET_CANVAS_NODES) throw new Error("每个画布最多包含 2,000 个节点。");
       for (const [index, { file }] of files.entries()) {
         const at = snapCanvasPosition({ x: position.x + (index % 3) * 480, y: position.y + Math.floor(index / 3) * 560 });
         try {
           if (/\.(?:md|markdown|txt)$/i.test(file.name)) {
-            if (file.size > 1_000_000) throw new Error("Text documents cannot exceed 1 MB.");
+            if (file.size > 1_000_000) throw new Error("文本文档不能超过 1 MB。");
             const text = await file.text();
             const id = await documents.add();
-            if (!id) throw new Error("Could not create a document.");
+            if (!id) throw new Error("无法创建文档。");
             documents.update(id, { title: file.name.replace(/\.[^.]+$/, "").slice(0, 200), markdown: text });
             imported.push({ id: crypto.randomUUID(), type: "document", position: at, selected: true, data: { documentId: id } });
           } else imported.push(assetFlowNode(await uploadAssetFile(file), at));
         } catch (cause) { failures.push(`${file.name}: ${errorMessage(cause)}`); }
       }
-      if (nodesRef.current.length + imported.length > MAX_ASSET_CANVAS_NODES) throw new Error("The canvas filled up during import. Add the uploaded assets from Library.");
+      if (nodesRef.current.length + imported.length > MAX_ASSET_CANVAS_NODES) throw new Error("导入期间画布已满。请从素材库添加已上传的素材。");
       const occupied = nodesRef.current.map((node) => ({ ...node.position, width: node.measured?.width ?? 440, height: node.measured?.height ?? 520 }));
       for (const node of imported) {
         // Keep imported files near the drop point while leaving space for selected node controls.
@@ -951,10 +951,10 @@ export function CanvasBoardEditor({ project, initialNodeId, onInitialNodeHandled
 
   function pasteSelection(value: CanvasClipboard, position: { x: number; y: number }): void {
     if (nodesRef.current.length + value.nodes.length > MAX_ASSET_CANVAS_NODES) {
-      setTransferError("A canvas can contain at most 2,000 nodes."); return;
+      setTransferError("每个画布最多包含 2,000 个节点。"); return;
     }
     if (value.nodes.some((node) => node.type === "document") && value.projectId !== projectId) {
-      setTransferError("Document references can only be pasted into boards in the same project."); return;
+      setTransferError("文档引用只能粘贴到同一项目的画板中。"); return;
     }
     commitPendingHistory();
     setTransferError(undefined);
@@ -1028,7 +1028,7 @@ export function CanvasBoardEditor({ project, initialNodeId, onInitialNodeHandled
 
   function downloadAsset(assetId: string, fallbackName: string): void {
     const name = libraryAssets.find((candidate) => candidate.id === assetId)?.name ?? fallbackName;
-    void assetBlob(assetId).then((blob) => downloadAssetBlob(blob, name)).catch((cause) => setNotice({ kind: "action", message: `Could not download: ${errorMessage(cause)}` }));
+    void assetBlob(assetId).then((blob) => downloadAssetBlob(blob, name)).catch((cause) => setNotice({ kind: "action", message: `无法下载：${errorMessage(cause)}` }));
   }
 
   function assetBlob(assetId: string): Promise<Blob> {
@@ -1041,7 +1041,7 @@ export function CanvasBoardEditor({ project, initialNodeId, onInitialNodeHandled
     const name = libraryAssets.find((candidate) => candidate.id === assetId)?.name ?? fallbackName;
     void (assetPaths.has(assetId) ? exportCanvasAsset(projectId, assetId) : Promise.resolve({ assetId }))
       .then((asset) => setSentAsset({ assetId: asset.assetId, name }))
-      .catch((cause) => setNotice({ kind: "action", message: `Could not send asset: ${errorMessage(cause)}` }));
+      .catch((cause) => setNotice({ kind: "action", message: `无法发送素材：${errorMessage(cause)}` }));
   }
 
   function clearSelection(): void {
@@ -1053,7 +1053,7 @@ export function CanvasBoardEditor({ project, initialNodeId, onInitialNodeHandled
     if (node.type !== "text" || generatingTextNodeId) return;
     const instruction = node.data.instruction?.trim();
     if (!instruction) {
-      setGenerationError({ nodeId: node.id, message: "Add an instruction before generating." });
+      setGenerationError({ nodeId: node.id, message: "请先添加生成指令。" });
       return;
     }
     setGeneratingTextNodeId(node.id);
@@ -1074,7 +1074,7 @@ export function CanvasBoardEditor({ project, initialNodeId, onInitialNodeHandled
     if ((node.type !== "image" && node.type !== "model-3d") || files.length === 0 || uploadingNodeId) return;
     const available = (node.type === "image" ? imageReferenceLimit(node, imageModels) : nodeModel3D(node).maxReferenceImages) - (node.data.images?.length ?? 0);
     if (available <= 0) {
-      setGenerationError({ nodeId: node.id, message: "This node cannot accept more reference images." });
+      setGenerationError({ nodeId: node.id, message: "此节点无法再添加参考图片。" });
       return;
     }
     if (files.length > available) {
@@ -1118,7 +1118,7 @@ export function CanvasBoardEditor({ project, initialNodeId, onInitialNodeHandled
     if (node.type !== "video" || files.length === 0 || uploadingNodeId) return;
     const remaining = videoReferenceLimit(selectedVideoModel(node, videoModels), node.data.referenceMode) - (node.data.references?.length ?? 0);
     if (files.length > remaining) {
-      setGenerationError({ nodeId: node.id, message: `This mode can accept ${Math.max(0, remaining)} more reference images.` });
+      setGenerationError({ nodeId: node.id, message: `此模式还可添加 ${Math.max(0, remaining)} 张参考图片。` });
       return;
     }
     setUploadingNodeId(node.id);
@@ -1191,7 +1191,7 @@ export function CanvasBoardEditor({ project, initialNodeId, onInitialNodeHandled
         const local = assetPaths.get(node.data.assetId ?? "");
         return {
           ...node.data,
-          name: asset?.name ?? local?.name ?? "Missing asset",
+          name: asset?.name ?? local?.name ?? "素材缺失",
           assetError: local?.error,
           assetOrigin: local ? "Project" as const : "Library" as const,
           contentType: asset?.contentType,
@@ -1242,7 +1242,7 @@ export function CanvasBoardEditor({ project, initialNodeId, onInitialNodeHandled
             slotLabels: MODEL_3D_VIEW_LABELS.slice(0, nodeModel3D(node).maxReferenceImages),
             uploading: uploadingNodeId === node.id,
             accept: "image/png,image/jpeg,image/webp",
-            addLabel: "Add reference images",
+            addLabel: "添加参考图片",
             onRemoveReference: (index: number) => setNodes((current) => current.map((candidate) => candidate.id === node.id && candidate.type === "model-3d"
               ? { ...candidate, data: { ...candidate.data, images: (candidate.data.images ?? []).filter((_, candidateIndex) => candidateIndex !== index) } }
               : candidate)),
@@ -1273,10 +1273,10 @@ export function CanvasBoardEditor({ project, initialNodeId, onInitialNodeHandled
             onGenerate: () => void generateMedia(node),
             references: modelReferenceViews(node, nodes, libraryAssets),
             maxReferences: 1,
-            slotLabels: ["Model"],
+            slotLabels: ["模型"],
             uploading: false,
             accept: "",
-            addLabel: "Connect a 3D model",
+            addLabel: "连接 3D 模型",
             onRemoveReference: () => setNodes((current) => current.map((candidate) => candidate.id === node.id
               ? { ...candidate, data: { ...candidate.data, images: [] } }
               : candidate)),
@@ -1316,7 +1316,7 @@ export function CanvasBoardEditor({ project, initialNodeId, onInitialNodeHandled
       maxReferences: node.type === "image" ? imageReferenceLimit(node, imageModels) : videoReferenceLimit(selectedVideoModel(node, videoModels), node.data.referenceMode),
       uploading: uploadingNodeId === node.id,
       accept: "image/png,image/jpeg,image/webp",
-      addLabel: "Add reference images",
+      addLabel: "添加参考图片",
       onRemoveReference: (index) => {
         setSelectedAssetEdgeId(undefined);
         setNodes((current) => current.map((candidate) => candidate.id === node.id && candidate.type === "image"
@@ -1348,7 +1348,7 @@ export function CanvasBoardEditor({ project, initialNodeId, onInitialNodeHandled
   }
 
   return (
-    <section className="viewer-pane interactive-story-workspace" hidden={hidden} aria-label="Asset Canvas workspace">
+    <section className="viewer-pane interactive-story-workspace" hidden={hidden} aria-label="素材画布工作区">
       <div className="interactive-story-body">
         <div ref={canvasElement} tabIndex={0} inert={resolving || undefined} aria-busy={resolving || undefined} className={`interactive-story-canvas${fileDropActive ? " is-file-drop-active" : ""}`} onPointerMoveCapture={(event) => { pointer.current = { x: event.clientX, y: event.clientY }; }}
           onPointerDownCapture={(event) => { if (!isTextEntry(event.target) && !eventWithin(event, "button, a, .nokey")) event.currentTarget.focus({ preventScroll: true }); }}
@@ -1368,9 +1368,9 @@ export function CanvasBoardEditor({ project, initialNodeId, onInitialNodeHandled
             void importCanvasFiles(transferredFiles(event.dataTransfer), at);
           }}>
           {overlay}
-          {fileDropActive ? <div className="canvas-file-drop-overlay"><Upload size={18} /><span>Drop files</span></div> : importingAssets ? <div className="canvas-file-import-status" role="status"><LoaderCircle size={13} className="spin" /><span>Importing files</span></div> : null}
-          {phase === "loading" ? <div className="story-canvas-state">Loading canvas...</div> : null}
-          {phase === "error" ? <div className="story-canvas-state story-canvas-state-error" role="alert"><span>Could not load canvas. {loadError}</span><button type="button" onClick={() => setLoadAttempt((value) => value + 1)}>Reload canvas</button></div> : null}
+          {fileDropActive ? <div className="canvas-file-drop-overlay"><Upload size={18} /><span>将文件拖放到此处</span></div> : importingAssets ? <div className="canvas-file-import-status" role="status"><LoaderCircle size={13} className="spin" /><span>正在导入文件</span></div> : null}
+          {phase === "loading" ? <div className="story-canvas-state">正在加载画布…</div> : null}
+          {phase === "error" ? <div className="story-canvas-state story-canvas-state-error" role="alert"><span>无法加载画布。 {loadError}</span><button type="button" onClick={() => setLoadAttempt((value) => value + 1)}>重新加载画布</button></div> : null}
           {phase === "ready" ? (
             <EditorCanvas<AssetCanvasFlowNode>
               nodes={renderedNodes}
@@ -1386,7 +1386,7 @@ export function CanvasBoardEditor({ project, initialNodeId, onInitialNodeHandled
                 onUpload={(file, position) => void importAssetFile(file, position)}
               />}
               onOpenMenu={setCanvasContextMenu}
-              deleteKeyCode={["Backspace", "Delete"]}
+              deleteKeyCode={["Backspace", "删除"]}
               onNodesChange={onNodesChange}
               onNodeDragStart={() => { setCanvasContextMenu(undefined); beginHistoryGesture(); }}
               onNodeDragStop={finishHistoryGesture}
@@ -1447,11 +1447,11 @@ export function CanvasBoardEditor({ project, initialNodeId, onInitialNodeHandled
             onDuplicate={() => { if (canvasContextMenu.nodeId) duplicateCanvasNode(canvasContextMenu.nodeId); }}
             onDelete={() => { if (canvasContextMenu.nodeId) removeCanvasNodes(new Set([canvasContextMenu.nodeId])); }}
           /> : null}
-          {notice && phase === "ready" && !conflicted ? <div className="story-save-notice" role="alert"><span>{notice.message}</span>{notice.kind === "action" ? <button type="button" onClick={() => setNotice(undefined)}>Dismiss</button> : <button type="button" disabled={retrying} onClick={() => {
+          {notice && phase === "ready" && !conflicted ? <div className="story-save-notice" role="alert"><span>{notice.message}</span>{notice.kind === "action" ? <button type="button" onClick={() => setNotice(undefined)}>关闭提示</button> : <button type="button" disabled={retrying} onClick={() => {
             setRetrying(true);
             void (notice.kind === "save" ? flush() : sync()).catch(() => {}).finally(() => setRetrying(false));
-          }}>{retrying ? "Retrying…" : notice.kind === "save" ? "Retry save" : "Reload changes"}</button>}</div> : null}
-          {!notice && transferError && phase === "ready" ? <div className="story-save-notice canvas-transfer-error" role="alert"><span>{transferError}</span><button type="button" title="Dismiss error" aria-label="Dismiss error" onClick={() => setTransferError(undefined)}><X size={13} /></button></div> : null}
+          }}>{retrying ? "正在重试…" : notice.kind === "save" ? "重新保存" : "重新加载更改"}</button>}</div> : null}
+          {!notice && transferError && phase === "ready" ? <div className="story-save-notice canvas-transfer-error" role="alert"><span>{transferError}</span><button type="button" title="关闭错误提示" aria-label="关闭错误提示" onClick={() => setTransferError(undefined)}><X size={13} /></button></div> : null}
         </div>
       </div>
       {viewedAsset ? <CanvasAssetViewer
@@ -1462,13 +1462,13 @@ export function CanvasBoardEditor({ project, initialNodeId, onInitialNodeHandled
         onClose={() => setViewedAsset(undefined)}
       /> : null}
       {sentAsset ? <SendToProjectDialog assetId={sentAsset.assetId} name={sentAsset.name} onClose={() => setSentAsset(undefined)} /> : null}
-      {nodeDetails ? createPortal(<div className="design-modal-backdrop nokey" onPointerDown={(event) => { if (event.target === event.currentTarget) setNodeDetails(undefined); }}><section className="design-modal" role="dialog" aria-modal="true" aria-label="Node details" onKeyDown={(event) => { if (event.key === "Escape") setNodeDetails(undefined); }}>
-        <header><h2>Node details</h2><button type="button" title="Close" aria-label="Close" onClick={() => setNodeDetails(undefined)}><X size={16} /></button></header>
+      {nodeDetails ? createPortal(<div className="design-modal-backdrop nokey" onPointerDown={(event) => { if (event.target === event.currentTarget) setNodeDetails(undefined); }}><section className="design-modal" role="dialog" aria-modal="true" aria-label="节点详情" onKeyDown={(event) => { if (event.key === "Escape") setNodeDetails(undefined); }}>
+        <header><h2>节点详情</h2><button type="button" title="关闭" aria-label="关闭" onClick={() => setNodeDetails(undefined)}><X size={16} /></button></header>
         <form onSubmit={(event) => { event.preventDefault(); setNodes((current) => current.map((node) => node.id === nodeDetails.id ? { ...node, title: nodeDetails.title.trim() || undefined, description: nodeDetails.description.trim() || undefined } : node)); setNodeDetails(undefined); }}>
-          <label>Name<input autoFocus maxLength={200} value={nodeDetails.title} placeholder="Automatic name" onChange={(event) => setNodeDetails({ ...nodeDetails, title: event.target.value })} /></label>
-          <label>Description<textarea rows={3} maxLength={2000} value={nodeDetails.description} onChange={(event) => setNodeDetails({ ...nodeDetails, description: event.target.value })} /></label>
+          <label>名称<input autoFocus maxLength={200} value={nodeDetails.title} placeholder="自动命名" onChange={(event) => setNodeDetails({ ...nodeDetails, title: event.target.value })} /></label>
+          <label>描述<textarea rows={3} maxLength={2000} value={nodeDetails.description} onChange={(event) => setNodeDetails({ ...nodeDetails, description: event.target.value })} /></label>
           <code className="canvas-node-id">{nodeDetails.id}</code>
-          <footer><button type="button" onClick={() => setNodeDetails(undefined)}>Cancel</button><button type="submit">Save</button></footer>
+          <footer><button type="button" onClick={() => setNodeDetails(undefined)}>取消</button><button type="submit">保存</button></footer>
         </form>
       </section></div>, window.document.body) : null}
     </section>
@@ -1485,15 +1485,15 @@ function TextNode({ data, selected }: Pick<NodeProps<AssetCanvasFlowNode>, "data
   return (
     <div className={`story-node story-text-node${selected ? " is-selected" : ""}`}>
       <div data-alignment-frame className="story-text-output">
-        <CanvasNodeLabel icon={FileText} label="Text" details={data.nodeDetails} />
+        <CanvasNodeLabel icon={FileText} label="文本" details={data.nodeDetails} />
         <CanvasTextarea
           className="nodrag nowheel"
-          aria-label="Text output"
+          aria-label="文本输出"
           rows={5}
           value={data.text ?? ""}
           disabled={runtime?.busy}
           readOnly={!selected}
-          placeholder="Generated or manually written text"
+          placeholder="生成或手动编写的文本"
           onChange={(text) => runtime?.onChange({ ...data, textRuntime: undefined, text })}
         />
       </div>
@@ -1545,10 +1545,10 @@ function ImageNode({ data, selected }: Pick<NodeProps<AssetCanvasFlowNode>, "dat
       {runtime?.error ? <p role="alert">{runtime.error}</p> : null}
       <div className="story-media-controls">
         <CanvasChipSelect
-          label="Image model"
+          label="图片模型"
           wide
           value={selectedModel ? modelRefKey(selectedModel) : undefined}
-          placeholder={data.model ? "Unavailable model" : runtime?.models.length ? "Select model" : "No image model"}
+          placeholder={data.model ? "模型不可用" : runtime?.models.length ? "选择模型" : "尚无图片模型"}
           options={(runtime?.models ?? []).map((model) => ({ value: modelRefKey(model), label: mediaModelName(model), group: model.providerName }))}
           notes={providerNotes(runtime?.providers)}
           action={MANAGE_PROVIDERS}
@@ -1556,14 +1556,14 @@ function ImageNode({ data, selected }: Pick<NodeProps<AssetCanvasFlowNode>, "dat
           onChange={selectModel}
         />
         <CanvasChipSelect
-          label="Image aspect ratio"
+          label="图片宽高比"
           value={data.aspectRatio}
           options={aspectRatios.map((ratio) => ({ value: ratio, label: ratio }))}
           disabled={!selectedModel || runtime?.busy}
           onChange={(aspectRatio) => runtime?.onChange({ ...data, imageRuntime: undefined, aspectRatio })}
         />
         <CanvasChipSelect
-          label="Image resolution"
+          label="图片分辨率"
           value={data.resolution}
           options={resolutions.map((resolution) => ({ value: resolution, label: resolution }))}
           disabled={!selectedModel || runtime?.busy}
@@ -1584,14 +1584,14 @@ function VideoNode({ data, selected }: Pick<NodeProps<AssetCanvasFlowNode>, "dat
   const aliases = videoReferenceAliases(references, data.referenceMentions);
   const mentionOptions = references.map((reference, index) => ({
     alias: Object.keys(aliases).find((alias) => sameVideoReference(aliases[alias]!, reference))!,
-    name: runtime?.references[index]?.name ?? `Image ${index + 1}`,
+    name: runtime?.references[index]?.name ?? `图片 ${index + 1}`,
     assetId: runtime?.references[index]?.assetId,
   }));
   let referenceError: string | undefined;
   try { resolveVideoMentions(effectivePrompt(data, runtime), references, aliases); }
   catch (cause) { referenceError = errorMessage(cause); }
   const limit = videoReferenceLimit(selectedModel, data.referenceMode);
-  if (selectedModel && references.length > limit) referenceError = `This mode supports up to ${limit} images. Remove extra images or switch reference mode.`;
+  if (selectedModel && references.length > limit) referenceError = `此模式最多支持 ${limit} 张图片。请移除多余图片或切换参考模式。`;
 
   useEffect(() => {
     if (!runtime || !selectedModel || !aspectRatios.length || aspectRatios.includes(data.videoAspectRatio as VideoAspectRatio)) return;
@@ -1618,7 +1618,7 @@ function VideoNode({ data, selected }: Pick<NodeProps<AssetCanvasFlowNode>, "dat
 
   return (
     <MediaNodeShell kind="video" selected={selected} assetId={data.assetId} aspectRatio={data.videoAspectRatio} runtime={runtime} details={data.nodeDetails}>
-      <MediaReferenceStrip runtime={runtime ? { ...runtime, slotLabels: mode === "frame" ? ["First frame", "Last frame"] : mentionOptions.map((option) => `@${option.alias}`) } : undefined} />
+      <MediaReferenceStrip runtime={runtime ? { ...runtime, slotLabels: mode === "frame" ? ["首帧", "尾帧"] : mentionOptions.map((option) => `@${option.alias}`) } : undefined} />
       <VideoReferencePrompt
         value={data.prompt ?? ""}
         disabled={runtime?.busy}
@@ -1629,10 +1629,10 @@ function VideoNode({ data, selected }: Pick<NodeProps<AssetCanvasFlowNode>, "dat
       {runtime?.error ? <p role="alert">{runtime.error}</p> : null}
       <div className="story-media-controls">
         <CanvasChipSelect
-          label="Video model"
+          label="视频模型"
           wide
           value={selectedModel ? modelKey(selectedModel) : undefined}
-          placeholder={runtime?.models.length ? "Select model" : "No video model"}
+          placeholder={runtime?.models.length ? "选择模型" : "尚无视频模型"}
           options={(runtime?.models ?? []).map((model) => ({ value: modelKey(model), label: mediaModelName(model), group: model.providerName }))}
           notes={providerNotes(runtime?.providers)}
           action={MANAGE_PROVIDERS}
@@ -1640,27 +1640,27 @@ function VideoNode({ data, selected }: Pick<NodeProps<AssetCanvasFlowNode>, "dat
           onChange={selectModel}
         />
         {selectedModel?.referenceModes?.length ? <CanvasChipSelect
-          label="Video reference mode" value={mode}
-          options={selectedModel.referenceModes.map((value) => ({ value, label: value === "reference" ? "Image references" : "First / last frame" }))}
+          label="视频参考模式" value={mode}
+          options={selectedModel.referenceModes.map((value) => ({ value, label: value === "reference" ? "图片参考" : "首帧 / 尾帧" }))}
           disabled={runtime?.busy}
           onChange={(referenceMode) => runtime?.onChange({ ...data, videoRuntime: undefined, referenceMode: referenceMode as "frame" | "reference" })}
         /> : null}
         <CanvasChipSelect
-          label="Video aspect ratio"
+          label="视频宽高比"
           value={data.videoAspectRatio}
           options={aspectRatios.map((ratio) => ({ value: ratio, label: ratio }))}
           disabled={!selectedModel || runtime?.busy}
           onChange={(videoAspectRatio) => runtime?.onChange({ ...data, videoRuntime: undefined, videoAspectRatio })}
         />
         <CanvasChipSelect
-          label="Video resolution"
+          label="视频分辨率"
           value={data.videoResolution}
           options={(selectedModel?.resolutions ?? []).map((resolution) => ({ value: resolution, label: resolution }))}
           disabled={!selectedModel || runtime?.busy}
           onChange={(videoResolution) => runtime?.onChange({ ...data, videoRuntime: undefined, videoResolution })}
         />
         <CanvasChipSelect
-          label="Video duration"
+          label="视频时长"
           value={data.duration === undefined ? undefined : String(data.duration)}
           options={(selectedModel?.durations ?? []).map((duration) => ({ value: String(duration), label: `${duration}s` }))}
           disabled={!selectedModel || runtime?.busy}
@@ -1699,10 +1699,10 @@ function Model3DNode({ data, selected }: Pick<NodeProps<AssetCanvasFlowNode>, "d
       {runtime?.error ? <p role="alert">{runtime.error}</p> : null}
       <div className="story-media-controls">
         <CanvasChipSelect
-          label="3D model"
+          label="3D 模型"
           wide
           value={selectedModel ? modelRefKey(selectedModel) : undefined}
-          placeholder={runtime?.models.length ? "Select model" : "No 3D model"}
+          placeholder={runtime?.models.length ? "选择模型" : "尚无 3D 模型"}
           options={(runtime?.models ?? []).map((model) => ({ value: modelRefKey(model), label: model.name, group: model.providerName }))}
           notes={providerNotes(runtime?.providers)}
           action={MANAGE_PROVIDERS}
@@ -1713,13 +1713,13 @@ function Model3DNode({ data, selected }: Pick<NodeProps<AssetCanvasFlowNode>, "d
           }}
         />
         <CanvasChipSelect
-          label="Polycount"
+          label="多边形数量"
           value={String(config.targetPolycount)}
           options={polycountOptions(polycount.presets, config.targetPolycount)}
           disabled={runtime?.busy}
           onChange={(value) => updateConfig({ targetPolycount: Number(value) })}
         />
-        <CanvasChipToggle label="Texture" pressed={config.texture} disabled={runtime?.busy} onChange={(texture) => updateConfig({ texture, ...(!texture ? { pbr: false } : {}) })} />
+        <CanvasChipToggle label="纹理" pressed={config.texture} disabled={runtime?.busy} onChange={(texture) => updateConfig({ texture, ...(!texture ? { pbr: false } : {}) })} />
         <CanvasChipToggle label="PBR" pressed={config.pbr} disabled={runtime?.busy || !config.texture} onChange={(pbr) => updateConfig({ pbr })} />
         <GenerateMediaButton kind="model" assetId={data.assetId} runtime={runtime} disabled={!hasImages || !selectedModel} />
       </div>
@@ -1735,14 +1735,14 @@ function AssetNode({ data, selected }: Pick<NodeProps<AssetCanvasFlowNode>, "dat
   const style = kind === "audio" ? { "--story-media-width": "300px", "--story-media-height": "92px" } as CSSProperties : mediaLayout.style;
   return (
     <div className={`story-node story-media-node story-library-asset-node story-library-${kind}-node${selected ? " is-selected" : ""}`} style={style}>
-      <CanvasNodeLabel icon={Icon} label={data.name || titleCase(kind)} details={data.nodeDetails} trailing={<small>{data.assetOrigin ?? "Library"}</small>} />
+      <CanvasNodeLabel icon={Icon} label={data.name || titleCase(kind)} details={data.nodeDetails} trailing={<small>{data.assetOrigin === "Project" ? "项目" : "素材库"}</small>} />
       <div data-alignment-frame className="story-media-stage">
         {preview.url && kind !== "audio" ? <MediaViewButton /> : null}
-        {preview.url && kind === "image" ? <img src={preview.url} alt={data.name || "Library image"} onLoad={mediaLayout.onImageLoad} /> : null}
+        {preview.url && kind === "image" ? <img src={preview.url} alt={data.name || "素材库图片"} onLoad={mediaLayout.onImageLoad} /> : null}
         {preview.url && kind === "video" ? <CanvasVideo src={preview.url} onLoadedMetadata={mediaLayout.onVideoMetadata} /> : null}
-        {preview.url && kind === "model" ? <ModelPreview source={preview.url} label={data.name || "3D model"} minHeight={220} interactive={false} /> : null}
-        {kind === "audio" ? <div className="story-audio-asset"><Music2 size={25} /><strong>{data.assetError ? "Asset unavailable" : "Audio"}</strong>{data.assetError ? <span>{data.assetError}</span> : data.assetDuration ? <span>{formatMediaTime(data.assetDuration)}</span> : null}</div> : null}
-        {!preview.url && kind !== "audio" ? <div className="story-media-empty"><Icon size={34} /><strong>{preview.error ? "Asset unavailable" : "Loading asset..."}</strong><CanvasAssetRecovery preview={preview} /></div> : null}
+        {preview.url && kind === "model" ? <ModelPreview source={preview.url} label={data.name || "3D 模型"} minHeight={220} interactive={false} /> : null}
+        {kind === "audio" ? <div className="story-audio-asset"><Music2 size={25} /><strong>{data.assetError ? "素材不可用" : "音频"}</strong>{data.assetError ? <span>{data.assetError}</span> : data.assetDuration ? <span>{formatMediaTime(data.assetDuration)}</span> : null}</div> : null}
+        {!preview.url && kind !== "audio" ? <div className="story-media-empty"><Icon size={34} /><strong>{preview.error ? "素材不可用" : "正在加载素材…"}</strong><CanvasAssetRecovery preview={preview} /></div> : null}
       </div>
       <Handle className="story-media-output-handle" id={OUTPUT_HANDLE} type="source" position={Position.Right} />
     </div>
@@ -1764,10 +1764,10 @@ function Animate3DNode({ data, selected }: Pick<NodeProps<AssetCanvasFlowNode>, 
       {runtime?.error ? <p role="alert">{runtime.error}</p> : null}
       <div className="story-media-controls">
         <button className="canvas-chip" type="button" disabled={runtime?.busy} onClick={() => setPickerOpen(true)}>
-          <WandSparkles size={12} /><span>{actionIds.length === 1 ? "1 move" : `${actionIds.length} moves`}</span>
+          <WandSparkles size={12} /><span>{actionIds.length === 1 ? "1 个动作" : `${actionIds.length} moves`}</span>
         </button>
         <CanvasChipSelect
-          label="Character height"
+          label="角色身高"
           value={String(height)}
           options={heights.map((value) => ({ value: String(value), label: `${value} m` }))}
           disabled={runtime?.busy}
@@ -1822,19 +1822,19 @@ function AnimationActionPicker({ runtime, selectedIds, onChange, onClose }: {
     // Keys typed here (search, Backspace) must not reach React Flow's delete shortcut.
     <div className="story-video-picker-backdrop nokey" onMouseDown={(event) => { if (event.target === event.currentTarget) onClose(); }}>
       <section className="story-video-picker story-animation-picker" ref={dialog} role="dialog" aria-modal="true" aria-labelledby="story-animation-picker-title" tabIndex={-1}>
-        <header><h2 id="story-animation-picker-title">Choose moves</h2><button type="button" aria-label="Close move picker" onClick={onClose}><X size={16} /></button></header>
-        <label><Search size={14} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="Search moves" /></label>
-        <div className="story-animation-picker-categories" role="group" aria-label="Move categories">
-          <button className="canvas-chip is-toggle" type="button" aria-pressed={!category} onClick={() => setCategory(undefined)}>All</button>
+        <header><h2 id="story-animation-picker-title">选择动作</h2><button type="button" aria-label="关闭动作选择器" onClick={onClose}><X size={16} /></button></header>
+        <label><Search size={14} /><input value={query} onChange={(event) => setQuery(event.target.value)} placeholder="搜索动作" /></label>
+        <div className="story-animation-picker-categories" role="group" aria-label="动作分类">
+          <button className="canvas-chip is-toggle" type="button" aria-pressed={!category} onClick={() => setCategory(undefined)}>全部</button>
           {categories.map((name) => (
             <button className="canvas-chip is-toggle" type="button" key={name} aria-pressed={category === name} onClick={() => setCategory(name)}>{splitCamelCase(name)}</button>
           ))}
         </div>
         <div className="story-animation-picker-grid">
-          {!runtime.configured ? <p>Set up Meshy in <button type="button" onClick={MANAGE_PROVIDERS.onSelect}>Manage providers</button> to browse moves.</p>
-            : runtime.actionsStatus === "loading" ? <p><LoaderCircle className="spin" size={16} /> Loading moves...</p>
-            : runtime.actionsStatus === "error" ? <p>Could not load moves. <button type="button" onClick={runtime.onReloadActions}>Try again</button></p>
-            : visible.length === 0 ? <p>No moves match your search</p>
+          {!runtime.configured ? <p>请配置 Meshy，前往 <button type="button" onClick={MANAGE_PROVIDERS.onSelect}>管理服务商</button> 后即可浏览动作。</p>
+            : runtime.actionsStatus === "loading" ? <p><LoaderCircle className="spin" size={16} /> 正在加载动作…</p>
+            : runtime.actionsStatus === "error" ? <p>无法加载动作。 <button type="button" onClick={runtime.onReloadActions}>重试</button></p>
+            : visible.length === 0 ? <p>没有匹配的动作</p>
             : visible.map((action) => {
               const chosen = selectedIds.includes(action.id);
               return (
@@ -1849,15 +1849,15 @@ function AnimationActionPicker({ runtime, selectedIds, onChange, onClose }: {
             })}
         </div>
         <footer>
-          <span>{selectedIds.length}/{MAX_ANIMATION_ACTIONS} selected · Meshy bills each move</span>
-          <div className="story-animation-picker-selected" aria-label="Selected moves, in clip order">
-            {selectedIds.length === 0 ? <span>No moves selected</span> : selectedIds.map((id) => (
-              <button className="canvas-chip" type="button" key={id} title="Remove move" onClick={() => toggle(id)}>
-                <span>{byId.get(id)?.name ?? `Move ${id}`}</span><X size={11} />
+          <span>{selectedIds.length}/{MAX_ANIMATION_ACTIONS} 个已选 · Meshy 按动作计费</span>
+          <div className="story-animation-picker-selected" aria-label="已选动作，按片段顺序排列">
+            {selectedIds.length === 0 ? <span>尚未选择动作</span> : selectedIds.map((id) => (
+              <button className="canvas-chip" type="button" key={id} title="移除动作" onClick={() => toggle(id)}>
+                <span>{byId.get(id)?.name ?? `动作 ${id}`}</span><X size={11} />
               </button>
             ))}
           </div>
-          <button className="story-animation-picker-done" type="button" onClick={onClose}>Done</button>
+          <button className="story-animation-picker-done" type="button" onClick={onClose}>完成</button>
         </footer>
       </section>
     </div>,
@@ -1878,11 +1878,11 @@ function MediaPrompt({ kind, value, runtime, onChange }: {
 }) {
   return (
     <CanvasTextarea
-      aria-label={`${kind === "model" ? "3D model" : titleCase(kind)} prompt`}
+      aria-label={`${kind === "model" ? "3D 模型" : titleCase(kind)} prompt`}
       rows={3}
       value={value}
       disabled={runtime?.busy}
-      placeholder={`Describe the ${kind === "model" ? "3D model" : kind} you want to create`}
+      placeholder={`Describe the ${kind === "model" ? "3D 模型" : kind} you want to create`}
       onChange={onChange}
     />
   );
@@ -1897,7 +1897,7 @@ function MediaReferenceStrip({ runtime, large = false }: { runtime?: ReferenceMe
   const [nextSlot, ...laterSlots] = runtime.slotLabels?.slice(references.length) ?? [];
   const addLabel = nextSlot ? `Add ${nextSlot.toLowerCase()} view` : runtime.addLabel;
   return (
-    <div className={`story-media-references${large ? " is-large" : ""}`} aria-label="References">
+    <div className={`story-media-references${large ? " is-large" : ""}`} aria-label="引用">
       {runtime?.linkedPrompt !== undefined ? <TextReferenceThumbnail runtime={runtime} /> : null}
       {references.map((reference, index) => (
         <MediaReferenceThumbnail
@@ -1956,9 +1956,9 @@ function MediaReferenceStrip({ runtime, large = false }: { runtime?: ReferenceMe
 function TextReferenceThumbnail({ runtime }: { runtime: MediaNodeRuntime }) {
   const text = runtime.linkedPrompt?.trim() ?? "";
   return (
-    <div className="story-media-reference story-text-reference" title={text || "Connected Text node is empty"}>
+    <div className="story-media-reference story-text-reference" title={text || "已连接的文本节点为空"}>
       <FileText size={19} />
-      <button type="button" title="Disconnect text" aria-label="Disconnect text" disabled={runtime.busy} onClick={() => runtime.onDisconnectPrompt?.()}><X size={11} /></button>
+      <button type="button" title="断开文本连接" aria-label="断开文本连接" disabled={runtime.busy} onClick={() => runtime.onDisconnectPrompt?.()}><X size={11} /></button>
     </div>
   );
 }
@@ -1978,8 +1978,8 @@ function MediaReferenceThumbnail({ reference, caption, disabled, onRemove }: {
         ? reference.type === "audio" ? <Music2 size={18} /> : reference.type === "model" ? <Box size={18} /> : reference.type === "video" ? <Film size={18} /> : <ImageIcon size={18} />
         : null}
       {caption ? <small>{caption}</small> : null}
-      {preview.error ? <button className="canvas-reference-retry" type="button" title={`Recheck ${reference.name}: ${preview.error}`} aria-label={`Recheck ${reference.name}`} disabled={preview.loading} onClick={preview.retry}>↻</button> : null}
-      <button type="button" title={`Remove ${reference.name}`} aria-label={`Remove ${reference.name}`} disabled={disabled} onClick={onRemove}>
+      {preview.error ? <button className="canvas-reference-retry" type="button" title={`重新检查 ${reference.name}: ${preview.error}`} aria-label={`重新检查 ${reference.name}`} disabled={preview.loading} onClick={preview.retry}>↻</button> : null}
+      <button type="button" title={`移除 ${reference.name}`} aria-label={`移除 ${reference.name}`} disabled={disabled} onClick={onRemove}>
         <X size={11} />
       </button>
     </div>
@@ -1997,7 +1997,7 @@ function MediaNodeShell({ kind, selected, assetId, aspectRatio, runtime, details
 }) {
   const preview = useWorkspaceAssetUrl(undefined, "", 0, assetId);
   const Icon = kind === "image" ? ImageIcon : kind === "video" ? Film : kind === "animation" ? WandSparkles : Box;
-  const label = kind === "image" ? "Image" : kind === "video" ? "Video" : kind === "animation" ? "Animate 3D" : "Model 3D";
+  const label = kind === "image" ? "图片" : kind === "video" ? "视频" : kind === "animation" ? "3D 动画" : "3D 建模";
   const threeD = kind === "model" || kind === "animation";
   const mediaLayout = useMediaNodeLayout(threeD ? undefined : preview.url, aspectRatio);
   return (
@@ -2005,23 +2005,23 @@ function MediaNodeShell({ kind, selected, assetId, aspectRatio, runtime, details
       <CanvasNodeLabel icon={Icon} label={label} details={details} />
       <div data-alignment-frame className={`story-media-stage${runtime?.generating ? " is-generating" : ""}`}>
         {preview.url ? <MediaViewButton /> : null}
-        {preview.url && kind === "image" ? <img src={preview.url} alt="Generated image" onLoad={mediaLayout.onImageLoad} /> : null}
+        {preview.url && kind === "image" ? <img src={preview.url} alt="已生成图片" onLoad={mediaLayout.onImageLoad} /> : null}
         {preview.url && kind === "video" ? <CanvasVideo src={preview.url} onLoadedMetadata={mediaLayout.onVideoMetadata} /> : null}
-        {preview.url && threeD ? <ModelPreview source={preview.url} label={kind === "animation" ? "Animated 3D model" : "Generated 3D model"} minHeight={220} interactive={false} /> : null}
+        {preview.url && threeD ? <ModelPreview source={preview.url} label={kind === "animation" ? "带动画的 3D 模型" : "已生成 3D 模型"} minHeight={220} interactive={false} /> : null}
         {!preview.url && !runtime?.generating ? (
           <div className="story-media-empty">
             <Icon size={34} />
-            <strong>{assetId ? preview.error ? "Asset unavailable" : "Loading asset..." : `No ${kind} yet`}</strong>
-            {assetId ? <CanvasAssetRecovery preview={preview} /> : <span>{kind === "model" ? "Add a reference image below, then generate"
-              : kind === "animation" ? "Connect a humanoid 3D model, pick moves, then animate"
+            <strong>{assetId ? preview.error ? "素材不可用" : "正在加载素材…" : `No ${kind} yet`}</strong>
+            {assetId ? <CanvasAssetRecovery preview={preview} /> : <span>{kind === "model" ? "在下方添加参考图片，然后生成"
+              : kind === "animation" ? "连接人形 3D 模型，选择动作，然后生成动画"
               : `Describe a ${kind} below, then generate`}</span>}
           </div>
         ) : null}
         {runtime?.generating ? (
           <div className="story-media-empty story-media-generation" role="status">
             <LoaderCircle className="spin" size={20} />
-            <strong>{kind === "animation" ? "Rigging and animating..." : `Generating ${kind === "model" ? "3D model" : kind}...`}</strong>
-            <span>{kind === "animation" ? "This can take a few minutes" : "This can take a moment"}</span>
+            <strong>{kind === "animation" ? "正在绑定骨骼并生成动画…" : `Generating ${kind === "model" ? "3D 模型" : kind}...`}</strong>
+            <span>{kind === "animation" ? "这可能需要几分钟" : "请稍候"}</span>
           </div>
         ) : null}
       </div>
@@ -2033,7 +2033,7 @@ function MediaNodeShell({ kind, selected, assetId, aspectRatio, runtime, details
 }
 
 function CanvasAssetRecovery({ preview }: { preview: ReturnType<typeof useWorkspaceAssetUrl> }) {
-  return preview.error ? <><span role="status">{preview.error}</span><button className="canvas-asset-retry nodrag" type="button" disabled={preview.loading} onClick={preview.retry}>{preview.loading ? "Checking…" : "Check again"}</button></> : null;
+  return preview.error ? <><span role="status">{preview.error}</span><button className="canvas-asset-retry nodrag" type="button" disabled={preview.loading} onClick={preview.retry}>{preview.loading ? "正在检查…" : "再次检查"}</button></> : null;
 }
 
 function CanvasVideo({ src, onLoadedMetadata }: {
@@ -2084,7 +2084,7 @@ function CanvasVideo({ src, onLoadedMetadata }: {
         onTimeUpdate={(event) => setCurrentTime(event.currentTarget.currentTime)}
       />
       <InlineVideoControls
-        label="Video"
+        label="视频"
         playing={playing}
         currentMs={currentTime * 1_000}
         totalMs={duration * 1_000}
@@ -2118,14 +2118,14 @@ function InlineVideoControls({ label, playing, currentMs, totalMs, muted, disabl
   const current = Math.max(0, Math.min(currentMs, duration));
   const progress = duration ? current / duration * 100 : 0;
   return <div className="story-inline-video-controls nodrag nowheel" onPointerDown={(event) => event.stopPropagation()} onDoubleClick={(event) => event.stopPropagation()}>
-    <button type="button" title={playing ? `Pause ${label}` : `Play ${label}`} aria-label={playing ? `Pause ${label}` : `Play ${label}`} disabled={disabled} onClick={onToggle}>{playing ? <Pause size={15} fill="currentColor" /> : <Play size={15} fill="currentColor" />}</button>
+    <button type="button" title={playing ? `暂停 ${label}` : `播放 ${label}`} aria-label={playing ? `暂停 ${label}` : `播放 ${label}`} disabled={disabled} onClick={onToggle}>{playing ? <Pause size={15} fill="currentColor" /> : <Play size={15} fill="currentColor" />}</button>
     <time>{formatPreviewTime(current)}</time>
     <div className="story-inline-video-scrubber">
       {markers.length ? <div className="story-inline-video-markers" aria-hidden="true">{markers.map((marker) => <i key={marker.id} className={marker.blocking ? "is-blocking" : ""} style={{ left: `${duration ? Math.max(0, Math.min(100, marker.timeMs / duration * 100)) : 0}%` }} />)}</div> : null}
       <input aria-label={`${label} position`} type="range" min={0} max={duration} step={40} value={current} disabled={disabled} style={{ "--video-progress": `${progress}%` } as CSSProperties} onChange={(event) => onSeek(Number(event.target.value))} />
     </div>
     <time>{formatPreviewTime(duration)}</time>
-    <button type="button" title={muted ? `Unmute ${label}` : `Mute ${label}`} aria-label={muted ? `Unmute ${label}` : `Mute ${label}`} disabled={disabled} onClick={onToggleMuted}>{muted ? <VolumeX size={15} /> : <Volume2 size={15} />}</button>
+    <button type="button" title={muted ? `取消静音 ${label}` : `静音 ${label}`} aria-label={muted ? `取消静音 ${label}` : `静音 ${label}`} disabled={disabled} onClick={onToggleMuted}>{muted ? <VolumeX size={15} /> : <Volume2 size={15} />}</button>
   </div>;
 }
 
@@ -2172,7 +2172,7 @@ function fitMediaNode(aspectRatio = 16 / 10): { width: number; height: number } 
   return { width: Math.round(width), height: Math.round(height) };
 }
 
-const MANAGE_PROVIDERS = { label: "Manage providers", onSelect: () => { window.location.hash = settingsHash("providers"); } };
+const MANAGE_PROVIDERS = { label: "管理服务商", onSelect: () => { window.location.hash = settingsHash("providers"); } };
 
 /** OpenRouter names start with the vendor ("ByteDance: Seedance 2.5"); the provider heading already says where it runs. */
 function mediaModelName(model: { provider: string; name: string }): string {
@@ -2202,10 +2202,10 @@ function GenerateMediaButton({ kind, assetId, runtime, disabled }: {
   runtime?: MediaNodeRuntime;
   disabled: boolean;
 }) {
-  const labelKind = kind === "model" ? "3D model" : kind;
-  const label = kind === "animation" ? (assetId ? "Animate again" : "Animate") : assetId ? `Generate ${labelKind} again` : `Generate ${labelKind}`;
+  const labelKind = kind === "model" ? "3D 模型" : kind;
+  const label = kind === "animation" ? (assetId ? "重新生成动画" : "生成动画") : assetId ? `生成 ${labelKind}（重新生成）` : `生成 ${labelKind}`;
   if (runtime?.onCancel && runtime.generating) {
-    return <button type="button" title="Cancel generation" aria-label="Cancel generation" onClick={runtime.onCancel}><Square size={13} /></button>;
+    return <button type="button" title="取消生成" aria-label="取消生成" onClick={runtime.onCancel}><Square size={13} /></button>;
   }
   return (
     <button type="button" title={label} aria-label={label} disabled={disabled || runtime?.busy} onClick={() => runtime?.onGenerate()}>
@@ -2271,7 +2271,7 @@ function AssetCanvasAddControl({
       <div ref={addMenu} className="story-add-node">
         {addOpen ? (
           <div className="story-add-node-menu-shell">
-            <div className="story-add-node-menu" role="menu" aria-label="Add node">
+            <div className="story-add-node-menu" role="menu" aria-label="添加节点">
               {creationGroups.map((group) => <Fragment key={group.label}>
                 <span className="story-add-node-menu-label">{group.label}</span>
                 {group.items.map((item) => {
@@ -2288,8 +2288,8 @@ function AssetCanvasAddControl({
                   return <button type="button" role="menuitem" key={item.label} onPointerEnter={() => setOpenCreationBranch(undefined)} onClick={() => addItem(item)}><Icon size={15} /><span><strong>{item.label}</strong><small>{item.description}</small></span></button>;
                 })}
               </Fragment>)}
-              <button type="button" role="menuitem" disabled={importing} onPointerEnter={() => setOpenCreationBranch(undefined)} onClick={() => uploadInput.current?.click()}><Upload size={15} /><span><strong>{importing ? "Uploading..." : "Upload"}</strong><small>Add files from this device</small></span></button>
-              <button type="button" role="menuitem" onPointerEnter={() => setOpenCreationBranch(undefined)} onClick={() => { setAddOpen(false); setLibraryOpen(true); }}><Folder size={15} /><span><strong>From Library</strong><small>Use an existing asset</small></span></button>
+              <button type="button" role="menuitem" disabled={importing} onPointerEnter={() => setOpenCreationBranch(undefined)} onClick={() => uploadInput.current?.click()}><Upload size={15} /><span><strong>{importing ? "正在上传…" : "上传"}</strong><small>从此设备添加文件</small></span></button>
+              <button type="button" role="menuitem" onPointerEnter={() => setOpenCreationBranch(undefined)} onClick={() => { setAddOpen(false); setLibraryOpen(true); }}><Folder size={15} /><span><strong>来自素材库</strong><small>使用现有素材</small></span></button>
             </div>
             {openCreationBranch ? <div className="story-add-node-submenu" role="menu" aria-label={openCreationBranch.branch.label} style={{ top: openCreationBranch.top }}>
               {openCreationBranch.branch.children.map((child) => { const ChildIcon = child.icon; return <button type="button" role="menuitem" key={child.label} onClick={() => addItem(child)}><ChildIcon size={15} /><span><strong>{child.label}</strong><small>{child.description}</small></span></button>; })}
@@ -2309,11 +2309,11 @@ function AssetCanvasAddControl({
             setAddOpen(false);
           }}
         />
-        <button className={addOpen ? "is-active" : undefined} type="button" title="Add node" aria-label="Add node" aria-expanded={addOpen} onClick={() => { setOpenCreationBranch(undefined); setAddOpen((open) => !open); }}>
+        <button className={addOpen ? "is-active" : undefined} type="button" title="添加节点" aria-label="添加节点" aria-expanded={addOpen} onClick={() => { setOpenCreationBranch(undefined); setAddOpen((open) => !open); }}>
           <Plus size={18} />
         </button>
       </div>
-      {libraryOpen ? <LibraryAssetPicker title="Add from Library" assets={libraryAssets} onClose={() => setLibraryOpen(false)} onSelect={(asset) => {
+      {libraryOpen ? <LibraryAssetPicker title="从素材库添加" assets={libraryAssets} onClose={() => setLibraryOpen(false)} onSelect={(asset) => {
         const position = placementPosition();
         if (position) onAddAsset(asset, position);
         setLibraryOpen(false);
@@ -2339,7 +2339,7 @@ function viewableCanvasAsset(node: AssetCanvasFlowNode): ViewableCanvasAsset | u
 /** The workspace opens the viewer from onNodeClick, which already knows the node. */
 function MediaViewButton() {
   return (
-    <button className="story-media-view-button nodrag" type="button" title="View" aria-label="View" onDoubleClick={(event) => event.stopPropagation()}>
+    <button className="story-media-view-button nodrag" type="button" title="查看" aria-label="查看" onDoubleClick={(event) => event.stopPropagation()}>
       <Maximize size={14} />
     </button>
   );
@@ -2363,13 +2363,13 @@ function CanvasAssetViewer({ asset, name, onDownload, onSendToProject, onClose }
       title={name}
       labelledBy="canvas-asset-viewer-title"
       headerActions={<>
-        <button type="button" title="Add to project" aria-label={`Add ${name} to a project`} onClick={() => onSendToProject(name)}><FolderPlus size={17} /></button>
-        <button type="button" title="Download" aria-label={`Download ${name}`} onClick={() => onDownload(name)}><Download size={17} /></button>
+        <button type="button" title="添加到项目" aria-label={`Add ${name} to a project`} onClick={() => onSendToProject(name)}><FolderPlus size={17} /></button>
+        <button type="button" title="下载" aria-label={`下载 ${name}`} onClick={() => onDownload(name)}><Download size={17} /></button>
       </>}
       onClose={onClose}
       preview={preview.url
         ? <AssetMedia type={asset.mediaType} url={preview.url} label={name} />
-        : <span className="library-dialog-state">{preview.error ? "Asset unavailable" : "Loading asset..."}</span>}
+        : <span className="library-dialog-state">{preview.error ? "素材不可用" : "正在加载素材…"}</span>}
       footer={null}
     />
   </div>;
@@ -2438,17 +2438,17 @@ function AssetCanvasContextMenu({
   };
 
   return (
-    <CanvasContextMenu screenPosition={menu.screenPosition} label={menu.kind === "pane" ? "Canvas actions" : "Node actions"} onClose={onClose}>
-      {onDetails ? <button type="button" role="menuitem" onClick={() => run(onDetails)}><Pencil size={15} /><span>Node details</span></button> : null}
-      {onUseInDocument ? <button type="button" role="menuitem" onClick={() => run(onUseInDocument)}><FileText size={15} /><span>Add to document</span></button> : null}
+    <CanvasContextMenu screenPosition={menu.screenPosition} label={menu.kind === "pane" ? "画布操作" : "节点操作"} onClose={onClose}>
+      {onDetails ? <button type="button" role="menuitem" onClick={() => run(onDetails)}><Pencil size={15} /><span>节点详情</span></button> : null}
+      {onUseInDocument ? <button type="button" role="menuitem" onClick={() => run(onUseInDocument)}><FileText size={15} /><span>添加到文档</span></button> : null}
       {menu.kind === "pane" ? <>
-        <button type="button" role="menuitem" disabled={!canUndo} onClick={() => run(onUndo)}><Undo2 size={15} /><span>Undo</span></button>
-        <button type="button" role="menuitem" disabled={!canRedo} onClick={() => run(onRedo)}><Redo2 size={15} /><span>Redo</span></button>
-        <button type="button" role="menuitem" disabled={!canPaste} onClick={() => run(onPaste)}><Clipboard size={15} /><span>Paste</span></button>
+        <button type="button" role="menuitem" disabled={!canUndo} onClick={() => run(onUndo)}><Undo2 size={15} /><span>撤销</span></button>
+        <button type="button" role="menuitem" disabled={!canRedo} onClick={() => run(onRedo)}><Redo2 size={15} /><span>重做</span></button>
+        <button type="button" role="menuitem" disabled={!canPaste} onClick={() => run(onPaste)}><Clipboard size={15} /><span>粘贴</span></button>
         <div className="story-canvas-context-submenu-root" onPointerEnter={() => setAddOpen(true)}>
-          <button type="button" role="menuitem" aria-haspopup="menu" aria-expanded={addOpen} onClick={() => setAddOpen(true)}><Plus size={15} /><span>Add node</span><ChevronRight size={13} /></button>
+          <button type="button" role="menuitem" aria-haspopup="menu" aria-expanded={addOpen} onClick={() => setAddOpen(true)}><Plus size={15} /><span>添加节点</span><ChevronRight size={13} /></button>
           {addOpen ? <div className="story-canvas-context-add-menu">
-            <div className="story-canvas-context-submenu" role="menu" aria-label="Add node">
+            <div className="story-canvas-context-submenu" role="menu" aria-label="添加节点">
               {creationGroups.map((group) => <Fragment key={group.label}>
                 <span className="story-canvas-context-menu-label">{group.label}</span>
                 {group.items.map((item) => {
@@ -2471,7 +2471,7 @@ function AssetCanvasContextMenu({
             </div> : null}
           </div> : null}
         </div>
-        <button type="button" role="menuitem" disabled={importing} onClick={() => uploadInput.current?.click()}><Upload size={15} /><span>{importing ? "Uploading..." : "Upload"}</span></button>
+        <button type="button" role="menuitem" disabled={importing} onClick={() => uploadInput.current?.click()}><Upload size={15} /><span>{importing ? "正在上传…" : "上传"}</span></button>
         <input
           ref={uploadInput}
           hidden
@@ -2485,12 +2485,12 @@ function AssetCanvasContextMenu({
           }}
         />
       </> : <>
-        {canView ? <button type="button" role="menuitem" disabled={nodeActionsDisabled} onClick={() => run(onView)}><Maximize size={15} /><span>View</span></button> : null}
-        {canDownload ? <button type="button" role="menuitem" disabled={nodeActionsDisabled} onClick={() => run(onDownload)}><Download size={15} /><span>Download</span></button> : null}
-        {canSendToProject ? <button type="button" role="menuitem" disabled={nodeActionsDisabled} onClick={() => run(onSendToProject)}><FolderPlus size={15} /><span>Add to project…</span></button> : null}
-        <button type="button" role="menuitem" disabled={nodeActionsDisabled} onClick={() => run(onCopy)}><Copy size={15} /><span>Copy node</span></button>
-        <button type="button" role="menuitem" disabled={nodeActionsDisabled || !canDuplicate} onClick={() => run(onDuplicate)}><Plus size={15} /><span>Duplicate</span></button>
-        <button className="is-danger" type="button" role="menuitem" disabled={nodeActionsDisabled} onClick={() => run(onDelete)}><Trash2 size={15} /><span>Delete</span></button>
+        {canView ? <button type="button" role="menuitem" disabled={nodeActionsDisabled} onClick={() => run(onView)}><Maximize size={15} /><span>查看</span></button> : null}
+        {canDownload ? <button type="button" role="menuitem" disabled={nodeActionsDisabled} onClick={() => run(onDownload)}><Download size={15} /><span>下载</span></button> : null}
+        {canSendToProject ? <button type="button" role="menuitem" disabled={nodeActionsDisabled} onClick={() => run(onSendToProject)}><FolderPlus size={15} /><span>添加到项目…</span></button> : null}
+        <button type="button" role="menuitem" disabled={nodeActionsDisabled} onClick={() => run(onCopy)}><Copy size={15} /><span>复制节点</span></button>
+        <button type="button" role="menuitem" disabled={nodeActionsDisabled || !canDuplicate} onClick={() => run(onDuplicate)}><Plus size={15} /><span>创建副本</span></button>
+        <button className="is-danger" type="button" role="menuitem" disabled={nodeActionsDisabled} onClick={() => run(onDelete)}><Trash2 size={15} /><span>删除</span></button>
       </>}
     </CanvasContextMenu>
   );
@@ -2747,7 +2747,7 @@ function assetCanvasNodeData(node: AssetCanvasFlowNode): AssetCanvasNode {
       },
     };
   }
-  throw new Error("Unsupported Asset Canvas Node type");
+  throw new Error("不支持的素材画布节点类型");
 }
 
 /** Keeps only the reference fields accepted by the persisted board schema. */
@@ -2766,10 +2766,10 @@ function sameImageModel(left: ImageModelRef, right?: ImageModelRef): boolean {
 function imageReferenceViews(node: AssetCanvasFlowNode, nodes: AssetCanvasFlowNode[], libraryAssets: LibraryAsset[]): MediaReferenceView[] {
   if (node.type !== "image" && node.type !== "model-3d") return [];
   return (node.data.images ?? []).map((reference, index) => {
-    const label = node.type === "model-3d" ? MODEL_3D_VIEW_LABELS[index] ?? `View ${index + 1}` : `Image ${index + 1}`;
+    const label = node.type === "model-3d" ? MODEL_3D_VIEW_LABELS[index] ?? `视图 ${index + 1}` : `图片 ${index + 1}`;
     if (reference.type === "library") {
       const asset = libraryAssets.find((candidate) => candidate.id === reference.assetId);
-      return { assetId: reference.assetId, key: `library:${reference.assetId}:${index}`, name: asset?.name ?? "Missing image", label, type: "image" };
+      return { assetId: reference.assetId, key: `library:${reference.assetId}:${index}`, name: asset?.name ?? "图片缺失", label, type: "image" };
     }
     const source = nodes.find((candidate) => candidate.id === reference.nodeId && isImageFlowSource(candidate));
     const assetId = source?.data.assetId;
@@ -2780,8 +2780,8 @@ function imageReferenceViews(node: AssetCanvasFlowNode, nodes: AssetCanvasFlowNo
       type: "image",
       label,
       name: source?.type === "image"
-        ? source.data.prompt?.trim() || "Connected image"
-        : asset?.name ?? (source ? "Connected image" : "Missing image node"),
+        ? source.data.prompt?.trim() || "已连接的图片"
+        : asset?.name ?? (source ? "已连接的图片" : "图片节点缺失"),
     };
   });
 }
@@ -2791,7 +2791,7 @@ function modelReferenceViews(node: AssetCanvasFlowNode, nodes: AssetCanvasFlowNo
   if (!source) return [];
   if (source.type === "library") {
     const asset = libraryAssets.find((candidate) => candidate.id === source.assetId);
-    return [{ assetId: source.assetId, key: `library:${source.assetId}`, name: asset?.name ?? "Missing model", label: "Model", type: "model" }];
+    return [{ assetId: source.assetId, key: `library:${source.assetId}`, name: asset?.name ?? "模型缺失", label: "模型", type: "model" }];
   }
   const sourceNode = nodes.find((candidate) => candidate.id === source.nodeId);
   const assetId = sourceNode?.data.assetId;
@@ -2800,8 +2800,8 @@ function modelReferenceViews(node: AssetCanvasFlowNode, nodes: AssetCanvasFlowNo
     ...(assetId ? { assetId } : {}),
     key: `node:${source.nodeId}`,
     type: "model",
-    label: "Model",
-    name: asset?.name ?? (sourceNode ? "Connected 3D model" : "Missing model node"),
+    label: "模型",
+    name: asset?.name ?? (sourceNode ? "已连接的 3D 模型" : "模型节点缺失"),
   }];
 }
 
@@ -2819,7 +2819,7 @@ function videoReferenceViews(node: AssetCanvasFlowNode, nodes: AssetCanvasFlowNo
     return {
       ...(assetId ? { assetId } : {}),
       key: reference.type === "library" ? `library:${reference.assetId}:${index}` : `node:${reference.nodeId}`,
-      name: asset?.name ?? (source?.type === "image" || source?.type === "video" ? source.data.prompt?.trim() || `Connected ${type}` : source ? `Connected ${type}` : `Missing ${type} node`),
+      name: asset?.name ?? (source?.type === "image" || source?.type === "video" ? source.data.prompt?.trim() || `已连接 ${type}` : source ? `已连接 ${type}` : `缺失 ${type} node`),
       label: `${titleCase(type)} ${counts[type]}`,
       type,
       ...(asset?.duration !== undefined ? { duration: asset.duration } : {}),
@@ -2847,7 +2847,7 @@ function sameModel(model: ModelRef, ref?: ModelRef): boolean {
 
 /** The model a 3D node runs: its saved choice, or the default when it has none or names one that no longer exists. */
 /** Meshy reads the first image as the front; the rest are any other angles, named here as suggestions. */
-const MODEL_3D_VIEW_LABELS = ["Front", "Side", "Back", "Other angle"];
+const MODEL_3D_VIEW_LABELS = ["正面", "侧面", "背面", "其他角度"];
 
 function nodeModel3D(node: Pick<AssetCanvasFlowNode, "type" | "data">): Model3DModel {
   return resolveModel3D(nodeModel3DConfig(node).model) ?? DEFAULT_MODEL_3D;
@@ -2978,11 +2978,11 @@ function effectivePrompt(data: AssetCanvasFlowData, runtime?: MediaNodeRuntime):
 
 async function promptImage(blob: Blob): Promise<CreateLibraryImageRequest["image"]> {
   if (blob.type !== "image/png" && blob.type !== "image/jpeg" && blob.type !== "image/webp") {
-    throw new Error("Connected images must be PNG, JPEG, or WebP.");
+    throw new Error("连接的图片必须为 PNG、JPEG 或 WebP 格式。");
   }
   const dataUrl = await new Promise<string>((resolve, reject) => {
     const reader = new FileReader();
-    reader.onerror = () => reject(new Error("Could not read the connected image."));
+    reader.onerror = () => reject(new Error("无法读取已连接的图片。"));
     reader.onload = () => resolve(String(reader.result));
     reader.readAsDataURL(blob);
   });
@@ -2991,9 +2991,9 @@ async function promptImage(blob: Blob): Promise<CreateLibraryImageRequest["image
 
 async function readUploadImage(file: File): Promise<{ name: string; image: CreateLibraryImageRequest["image"] }> {
   if (file.type !== "image/png" && file.type !== "image/jpeg" && file.type !== "image/webp") {
-    throw new Error("Use PNG, JPEG, or WebP reference images.");
+    throw new Error("请使用 PNG、JPEG 或 WebP 格式的参考图片。");
   }
-  if (file.size > 10 * 1024 * 1024) throw new Error("Each reference image must be no larger than 10 MB.");
+  if (file.size > 10 * 1024 * 1024) throw new Error("每张参考图片不能超过 10 MB。");
   return { name: file.name, image: await promptImage(file) };
 }
 
@@ -3043,7 +3043,7 @@ async function mediaBlobToWebP(blob: Blob, mediaType: "image" | "video"): Promis
   try {
     await new Promise<void>((resolve, reject) => {
       video.addEventListener("loadeddata", () => resolve(), { once: true });
-      video.addEventListener("error", () => reject(new Error("Could not read video cover")), { once: true });
+      video.addEventListener("error", () => reject(new Error("无法读取视频封面")), { once: true });
       video.load();
     });
     video.currentTime = 0;
