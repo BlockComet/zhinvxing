@@ -4,7 +4,7 @@ import { useAuth } from "./auth.js";
 import type { AppNavigationTarget, SidebarPage } from "./routes.js";
 import { UserAvatar } from "./user-avatar.js";
 import type { DesktopUpdateState } from "../shared/desktop-update.js";
-import brandMark from "../shared/assets/ohmygame-mark-v2.svg";
+import brandMark from "../shared/assets/vega-mark.svg";
 
 interface AppSidebarProps {
   active: SidebarPage;
@@ -110,8 +110,8 @@ export function AppSidebar({ active, onNavigate }: AppSidebarProps) {
       {resizing ? <div className="home-sidebar-resize-shield" /> : null}
       <div className="home-sidebar-header-spacer" aria-hidden="true" />
       <div className="home-sidebar-brand">
-        <img src={brandMark} alt="OhMyGame" />
-        <span>OhMyGame</span>
+        <img src={brandMark} alt="织女星" />
+        <span>织女星</span>
       </div>
       <nav aria-label="主导航">
         <NavigationItem active={active === "home"} icon="home" label="首页" onClick={() => onNavigate("home")} />

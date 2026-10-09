@@ -67,7 +67,7 @@ export async function startOAuthCallbackServer(onCallback: (url: string) => void
     }
     completed = true;
     response.writeHead(200, { "content-type": "text/html; charset=utf-8", "cache-control": "no-store" });
-    response.end("<!doctype html><meta charset=\"utf-8\"><title>OhMyGame</title><p>Sign-in complete. You can close this window and return to OhMyGame.</p>");
+    response.end("<!doctype html><meta charset=\"utf-8\"><title>织女星</title><p>登录完成。可以关闭此窗口并返回织女星。</p>");
     onCallback(callback);
   });
   await new Promise<void>((resolve, reject) => {

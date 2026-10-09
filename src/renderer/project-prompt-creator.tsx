@@ -419,8 +419,8 @@ function WorkspaceSelector({ value, disabled, onChoose, onUseManaged }: {
         aria-controls={menuId}
         aria-expanded={open}
         aria-haspopup="menu"
-        aria-label={value ? `工作区：${value}` : "工作区：在 OhMyGame 存储目录中新建文件夹"}
-        title={value ?? "在 OhMyGame 项目存储目录中新建文件夹"}
+        aria-label={value ? `工作区：${value}` : "工作区：在织女星存储目录中新建文件夹"}
+        title={value ?? "在织女星项目存储目录中新建文件夹"}
         disabled={disabled}
         onClick={() => setOpen((currentOpen) => !currentOpen)}
       >

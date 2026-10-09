@@ -42,8 +42,8 @@ export function PlanApprovalCard({ disabled, onApprove, onRefine, onCancel }: Pl
           editing
           value={feedback}
           disabled={disabled || submitting}
-          label="不，告诉 OhMyGame 如何调整"
-          placeholder="告诉 OhMyGame 如何调整"
+          label="不，告诉织女星如何调整"
+          placeholder="告诉织女星如何调整"
           onChange={setFeedback}
           onSubmit={() => void run(() => onRefine(feedback.trim()))}
           onCancel={() => { setEditing(false); setFeedback(""); }}
@@ -53,7 +53,7 @@ export function PlanApprovalCard({ disabled, onApprove, onRefine, onCancel }: Pl
           <InlineAnswer
             editing={false}
             disabled={disabled || submitting}
-            label="不，告诉 OhMyGame 如何调整"
+            label="不，告诉织女星如何调整"
             onEdit={() => setEditing(true)}
           />
           <button className="plan-approval-skip" type="button" disabled={disabled || submitting} onClick={() => void run(onCancel)}>跳过</button>

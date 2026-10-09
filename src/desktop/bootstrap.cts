@@ -3,6 +3,10 @@ import { readFileSync } from "node:fs";
 import path from "node:path";
 import { init as initSentry } from "@sentry/electron/main";
 
+// Preserve the existing projects, model configuration and login storage after rebranding.
+app.setPath("userData", path.join(app.getPath("appData"), "ohmygame"));
+app.setName("织女星");
+
 const sentryDsn = readSentryDsn();
 initSentry({
   dsn: sentryDsn,

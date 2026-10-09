@@ -9,7 +9,7 @@ describe("desktop OAuth", () => {
     const response = await fetch(`${server.url}?code=auth-code`);
 
     expect(response.status).toBe(200);
-    expect(await response.text()).toContain("Sign-in complete");
+    expect(await response.text()).toContain("登录完成。可以关闭此窗口并返回织女星。");
     expect(onCallback).toHaveBeenCalledWith(`${server.url}?code=auth-code`);
     await server.close();
   });

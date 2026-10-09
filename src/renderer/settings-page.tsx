@@ -247,7 +247,8 @@ function AboutSettings() {
   const busy = status?.type === "checking" || status?.type === "downloading";
   return (
     <section className="settings-panel settings-overview-panel">
-      <header className="settings-panel-header"><h3>关于</h3></header>
+      <header className="settings-panel-header"><h3>织女星</h3></header>
+      <p className="settings-about-status">AI 游戏工作室 · 基于 OhMyGame 开源项目开发</p>
       <div className="settings-about-list">
         <div className="settings-about-row">
           <span>版本</span>
@@ -256,7 +257,7 @@ function AboutSettings() {
         <div className="settings-about-row">
           <span>更新</span>
           <div className="settings-about-update">
-            <span className="settings-about-status">{localChineseBuild ? "本地简体中文版。升级需要重新汉化打包。" : message}</span>
+            <span className="settings-about-status">{localChineseBuild ? "织女星本地版本。通过新版安装包升级。" : message}</span>
             {updates && !localChineseBuild ? (
               <div className="settings-about-actions">
                 {status?.type === "available" ? <button className="settings-primary-button" type="button" onClick={() => void updates.download()}>下载更新</button> : null}

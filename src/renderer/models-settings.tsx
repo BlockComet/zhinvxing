@@ -462,7 +462,7 @@ function AuthMethodChoice({ provider, onBack, onChoose }: { provider: ModelProvi
     <section className="settings-panel settings-provider-detail">
       <ProviderDetailHeader provider={provider} onBack={onBack} />
       <div className="settings-detail-section">
-        <DetailSectionHeader title="连接" description="选择 OhMyGame 连接此服务商的方式。" />
+        <DetailSectionHeader title="连接" description="选择织女星连接此服务商的方式。" />
         <div className="settings-method-list">
           {provider.methods.map((method) => {
             const Icon = method.type === "oauth" ? UserRound : Code2;

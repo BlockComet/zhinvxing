@@ -54,3 +54,10 @@
 @media (prefers-reduced-motion: reduce) {
   .studio-entry-card { transition: none; }
 }
+
+/* The Vega mark has its own contrast in either theme. */
+.home-sidebar-brand img, :root[data-appearance="light"] .home-sidebar-brand img { width: 26px; height: 26px; filter: none; opacity: 1; }
+.home-sidebar-brand { gap: 10px; height: 28px; }
+.home-sidebar-brand span { font-size: 15px; letter-spacing: .08em; }
+
+.sign-in-heading img, :root[data-appearance="light"] .sign-in-heading img { width: 32px; height: 32px; filter: none; }

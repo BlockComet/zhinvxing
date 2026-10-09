@@ -1,8 +1,12 @@
-# 中文统一游戏工作室：开发状态
+# 织女星：开发状态
 
-本地分支：`feat/unified-game-studio`。开发版：`0.0.0-beta.4-zh.4`。
+本地分支：`feat/unified-game-studio`。开发版：`0.0.0-beta.4-zh.5`。
 基于现有汉化版继续开发；暂不接入回城卷、替换登录或变更云端账号。
 这不是完整需求的最终验收版本。
+
+## 品牌与升级
+
+软件名称为“织女星”，星形矢量标识与 Windows/macOS 图标由 `scripts/build-vega-icons.py` 生成。保留原上游许可证和来源说明。应用继续使用既有 `ohmygame` 数据目录和安装标识，确保现有项目、设置与登录连续；Windows 主程序名为 `Zhinvxing.exe`。
 
 ## 界面整理
 

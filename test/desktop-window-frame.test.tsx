@@ -16,10 +16,10 @@ describe("DesktopWindowFrame", () => {
     const html = renderToStaticMarkup(<DesktopWindowFrame><main>Workspace</main></DesktopWindowFrame>);
 
     expect(html).toContain('role="menubar"');
-    expect(html).toContain('>File</button>');
-    expect(html).toContain('>Edit</button>');
-    expect(html).toContain('>View</button>');
-    expect(html).toContain('>Window</button>');
+    expect(html).toContain('>文件</button>');
+    expect(html).toContain('>编辑</button>');
+    expect(html).toContain('>视图</button>');
+    expect(html).toContain('>窗口</button>');
     expect(html).not.toContain("Project workspace");
     expect(html.match(/desktop-window-menu-bar/g)).toHaveLength(1);
   });

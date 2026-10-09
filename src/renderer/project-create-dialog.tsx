@@ -72,7 +72,7 @@ export function ProjectCreateDialog({ initialType = "web-game", fixedType, proje
     if (creating || selectingWorkspace) return;
     const selectDirectory = window.ohMyGameDesktop?.selectProjectDirectory;
     if (!selectDirectory) {
-      setError("请重启 OhMyGame 桌面应用以启用文件夹选择功能。");
+      setError("请重启织女星桌面应用以启用文件夹选择功能。");
       return;
     }
     setSelectingWorkspace(true);

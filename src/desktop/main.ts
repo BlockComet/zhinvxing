@@ -4,7 +4,7 @@ import { readFileSync } from "node:fs";
 import { createRequire } from "node:module";
 import path from "node:path";
 import { fileURLToPath } from "node:url";
-import { app, BrowserWindow, clipboard, dialog, ipcMain, Menu, nativeTheme, session, shell } from "electron";
+import { app, BrowserWindow, clipboard, dialog, ipcMain, Menu, nativeImage, nativeTheme, session, shell } from "electron";
 import { clipboardFilePaths, loadClipboardFiles } from "./file-clipboard.js";
 import { startDaemon, type ManagedDaemon } from "./daemon-process.js";
 import { isOAuthAuthorizationUrl, OAuthCallbackFlow } from "./oauth.js";
@@ -120,7 +120,7 @@ handle("ohmygame:set-appearance", (event, appearance: unknown) => {
 });
 handle("ohmygame:window-menu-icon", async (event) => {
   if (!mainWindow || event.sender !== mainWindow.webContents) throw new Error("Invalid window menu source");
-  applicationIconDataUrl ??= app.getFileIcon(process.execPath, { size: "small" }).then((icon) => icon.toDataURL());
+  applicationIconDataUrl ??= Promise.resolve(nativeImage.createFromPath(path.join(repositoryRoot, "build/icon.png")).resize({ width: 20, height: 20 }).toDataURL());
   return applicationIconDataUrl;
 });
 handle("ohmygame:popup-window-menu", (event, label: unknown, x: unknown, y: unknown) => {
@@ -329,7 +329,7 @@ app.on("activate", () => {
   if (!daemon || mainWindow || quitting) return;
   openMainWindow().catch((error) => {
     console.error(error);
-    dialog.showErrorBox("OhMyGame could not open a window", error instanceof Error ? error.message : String(error));
+    dialog.showErrorBox("织女星无法打开窗口", error instanceof Error ? error.message : String(error));
   });
 });
 app.on("before-quit", (event) => {
@@ -396,7 +396,7 @@ try {
 } catch (error) {
   const message = error instanceof Error ? error.message : String(error);
   console.error(error);
-  if (app.isReady()) dialog.showErrorBox("OhMyGame could not start", message);
+  if (app.isReady()) dialog.showErrorBox("织女星无法启动", message);
   await stopServices();
   app.exit(1);
 }

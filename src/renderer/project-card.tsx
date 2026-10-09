@@ -106,7 +106,7 @@ export function ProjectCard({ project, fallback, onOpen, actions, agentStatus }:
               {actions.onDesign ? <button type="button" role="menuitem" onClick={() => { setMenuOpen(false); actions.onDesign?.(); }}>游戏设计</button> : null}
               <button type="button" role="menuitem" onClick={() => { setMenuOpen(false); actions.onDuplicate(); }}>创建副本</button>
               <button className="project-card-actions-delete" type="button" role="menuitem" onClick={() => { setMenuOpen(false); actions.onDelete(); }}>
-                {project.workspaceLocation === "external" ? "从 OhMyGame 中移除" : "删除"}
+                {project.workspaceLocation === "external" ? "从织女星中移除" : "删除"}
               </button>
             </div>,
             document.body,

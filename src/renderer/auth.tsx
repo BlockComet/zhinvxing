@@ -225,7 +225,7 @@ export function useAuth(): AuthContextValue {
 export function authUser(user: User): AuthUser {
   const metadata = user.user_metadata;
   const name = stringValue(metadata.full_name) ?? stringValue(metadata.name)
-    ?? stringValue(metadata.user_name) ?? user.email ?? "OhMyGame 创作者";
+    ?? stringValue(metadata.user_name) ?? user.email ?? "织女星创作者";
   return {
     id: user.id,
     name,

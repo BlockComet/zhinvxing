@@ -1,3 +1,16 @@
+# 织女星
+
+<img src="src/shared/assets/vega-mark.svg" alt="织女星" width="72" />
+
+面向新游戏创作、旧游戏复原与多平台发布的中文 AI 游戏工作室。
+本分支基于 WhiteTowerAI/OhMyGame 开发，保留上游许可证与来源说明。
+当前实现范围、使用方式和未完成能力见 [开发状态](docs/unified-studio.md)。
+本地 Windows 安装包位于 `release/织女星-0.0.0-beta.4-zh.5-x64.exe`。
+
+以下保留上游项目介绍与链接；上游下载地址提供的是 OhMyGame，并非织女星。
+
+---
+
 <div align="center">
 
 <img src="docs/assets/banner.webp" alt="OhMyGame — the open-source studio for making games with AI" width="100%" />

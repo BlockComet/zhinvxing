@@ -1,5 +1,5 @@
 appId: ai.ohmygame.desktop
-productName: OhMyGame
+productName: 织女星
 asar: true
 beforePack: scripts/prepare-desktop-typebox.mjs
 asarUnpack:
@@ -11,6 +11,8 @@ directories:
   output: release
 
 files:
+  - build/icon.ico
+  - build/icon.png
   - dist/desktop/**/*.js
   - dist/desktop/**/*.cjs
   - dist/daemon/**/*.js
@@ -49,10 +51,12 @@ mac:
     - zip
 
 win:
+  executableName: Zhinvxing
+  signExecutable: false
   icon: build/icon.ico
   target:
     - nsis
-  artifactName: OhMyGame-${version}-${arch}.${ext}
+  artifactName: 织女星-${version}-${arch}.${ext}
 
 publish:
   provider: generic
@@ -60,4 +64,4 @@ publish:
   channel: latest
 
 dmg:
-  artifactName: OhMyGame-${version}-${arch}.${ext}
+  artifactName: 织女星-${version}-${arch}.${ext}
