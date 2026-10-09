@@ -1,11 +1,46 @@
-# 织女星
+# 织女星 · OhMyGame 中文版
 
-<img src="src/shared/assets/vega-mark.svg" alt="织女星" width="72" />
+<img src="src/shared/assets/vega-mark.png" alt="织女星" width="72" />
 
 面向新游戏创作、旧游戏复原与多平台发布的中文 AI 游戏工作室。
 本分支基于 WhiteTowerAI/OhMyGame 开发，保留上游许可证与来源说明。
-当前实现范围、使用方式和未完成能力见 [开发状态](docs/unified-studio.md)。
-本地 Windows 安装包位于 `release/织女星-0.0.0-beta.4-zh.6-x64.exe`。
+当前版本：**0.0.0-beta.4-zh.7**。这是基于 OhMyGame 的独立中文分叉，使用 Apache-2.0 许可证。
+
+**[下载 Windows 安装包与源码](https://github.com/BlockComet/zhinvxing/releases/tag/v0.0.0-beta.4-zh.7)** · [新增功能与开发状态](docs/unified-studio.md) · [中文版更新记录](CHANGELOG.zh-CN.md) · [构建说明](docs/zhinvxing-build.md)
+
+织女的编织代表创造新游戏，缝补代表复原旧项目。两种工作方式共用创作工作台、项目管理和发布入口。
+
+### 中文版新增了什么
+
+| 功能 | 当前实现 |
+| --- | --- |
+| 中文界面与新品牌 | 工作台、设置、项目操作等中文化；织女侧脸、丝带与主星标志；冷白与靛蓝首页。少量上游提示和第三方内容仍可能是英文。 |
+| 统一工作室入口 | 创造新游戏、复原已有游戏、继续项目，保留上游 Web 游戏与互动故事创作能力。 |
+| 复原材料导入 | 文件与目录导入、SHA-256 清单、EXE/APK 与工程线索识别、材料来源和任务记录。 |
+| 复原工作流 | 修复、组件重建、玩法重制路线；文件分析与编辑、暂停；副本模式支持回滚，也可直接使用现有目录。 |
+| 游戏导出 | Web ZIP、独立 Electron 桌面工程、Windows 便携运行目录，以及 Android/iOS Capacitor 原生工程。 |
+| 项目封面 | 自动截图、自定义图片、无截图时的名称封面；可直接更换封面或恢复自动封面。 |
+
+**开发边界：**当前复原模式尚未接入原生隔离运行器，也没有完成真实旧游戏的自动复原验收；Android APK/AAB、macOS APP/DMG、iOS 签名与设备验证尚未实现。平台工程生成与安装包交付在界面中分别记录，详细状态见[开发状态](docs/unified-studio.md)。
+
+**验证状态：**本版是预览版，类型检查、构建及新增功能的 24 项测试通过；全量测试尚未通过，包含汉化文案断言与 Windows 权限等问题，见[完整验证说明](docs/zhinvxing-build.md#验证记录)。
+
+<img src="design/vega-brand/interface-concept-v1.png" alt="织女星品牌和首页设计参考；实际软件保留真实项目与游戏封面" width="100%" />
+
+### 本地开发
+
+需要 Node.js 22.19+ 与 Bun 1.4.2+。
+
+```bash
+git clone https://github.com/BlockComet/zhinvxing.git
+cd zhinvxing
+bun install --frozen-lockfile
+bun run dev:desktop
+```
+
+在设置中配置自己的模型服务商。项目制作、复原材料处理与本地导出可以本地进行；云端登录和在线发布沿用上游配置方式。
+
+本仓库默认展示 `feat/unified-game-studio` 中文开发分支，`main` 保留上游代码。问题和贡献请提交到 [织女星 Issues](https://github.com/BlockComet/zhinvxing/issues)；向上游贡献时请说明修改范围。
 
 以下保留上游项目介绍与链接；上游下载地址提供的是 OhMyGame，并非织女星。
 

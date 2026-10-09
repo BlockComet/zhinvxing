@@ -1,9 +1,9 @@
-// Renders build/icon-macos.svg into build/icon.icns. macOS only: `swift scripts/build-mac-icon.swift`.
-// macOS does not mask app icons, so the SVG carries Apple's rounded tile and transparent margin itself.
+// Converts build/icon.png into build/icon.icns. macOS only: `swift scripts/build-mac-icon.swift`.
+// The approved PNG carries the rounded tile and transparent margin itself.
 import AppKit
 
 let root = URL(fileURLWithPath: #filePath).deletingLastPathComponent().deletingLastPathComponent()
-let source = root.appendingPathComponent("build/icon-macos.svg")
+let source = root.appendingPathComponent("build/icon.png")
 let output = root.appendingPathComponent("build/icon.icns")
 guard let svg = NSImage(contentsOf: source) else { fatalError("Could not load \(source.path)") }
 

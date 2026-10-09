@@ -1,7 +1,7 @@
 import { LoaderCircle, X } from "./icons.js";
 import { useEffect, useId, useRef } from "react";
 import { createPortal } from "react-dom";
-import brandMark from "../shared/assets/vega-mark.svg";
+import brandMark from "../shared/assets/vega-mark.png";
 
 export type SignInProvider = "google" | "github";
 

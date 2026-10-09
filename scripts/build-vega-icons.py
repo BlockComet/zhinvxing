@@ -1,24 +1,29 @@
-"""Build the original Vega vector mark and desktop icon sizes from one geometry."""
+"""Convert approved Vega artwork to renderer and desktop packaging formats.
+
+Source artwork lives in build/brand. This script only resizes and converts it;
+the illustration itself is authored separately, not reconstructed in code.
+Run with Python 3 and Pillow installed.
+"""
 from pathlib import Path
-from PIL import Image, ImageDraw
+from PIL import Image
+
 ROOT = Path(__file__).resolve().parents[1]
-STAR = [(46,18),(55,41),(78,50),(55,59),(46,82),(37,59),(14,50),(37,41)]
-SPARK = [(77,13),(80,21),(88,24),(80,27),(77,35),(74,27),(66,24),(74,21)]
-svg = f'''<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 96 96">
-  <rect width="96" height="96" rx="24" fill="#4940A6"/>
-  <polygon points="{' '.join(f'{x},{y}' for x,y in STAR)}" fill="#FFFFFF"/>
-  <polygon points="{' '.join(f'{x},{y}' for x,y in SPARK)}" fill="#CEC9FF"/>
-</svg>\n'''
-for dest in ['src/shared/assets/vega-mark.svg','build/logo.svg','build/icon-macos.svg']:
-    (ROOT/dest).write_text(svg, encoding='utf-8')
-scale=16
-im=Image.new('RGBA',(96*scale,96*scale))
-draw=ImageDraw.Draw(im)
-draw.rounded_rectangle((0,0,96*scale-1,96*scale-1),radius=24*scale,fill='#4940A6')
-draw.polygon([(x*scale,y*scale) for x,y in STAR],fill='white')
-draw.polygon([(x*scale,y*scale) for x,y in SPARK],fill='#CEC9FF')
-im=im.resize((1024,1024),Image.Resampling.LANCZOS)
-im.save(ROOT/'build/icon.png')
-im.save(ROOT/'build/icon.ico',sizes=[(n,n) for n in (16,20,24,32,40,48,64,128,256)])
-im.save(ROOT/'build/icon.icns')
-print('Vega SVG, PNG, ICO and ICNS generated')
+SOURCES = ROOT / "build/brand"
+ASSETS = ROOT / "src/shared/assets"
+
+def export_png(source: Path, destination: Path, size: int) -> Image.Image:
+    with Image.open(source) as original:
+        image = original.convert("RGBA")
+        if image.width != image.height:
+            raise ValueError(f"Expected square source artwork: {source}")
+        image = image.resize((size, size), Image.Resampling.LANCZOS)
+        image.save(destination, optimize=True)
+    return image
+
+icon = export_png(SOURCES / "vega-icon-source.png", ROOT / "build/icon.png", 1024)
+icon.save(ROOT / "build/icon.ico", sizes=[(n, n) for n in (16, 20, 24, 32, 40, 48, 64, 128, 256)])
+icon.save(ROOT / "build/icon.icns")
+export_png(SOURCES / "vega-icon-source.png", ASSETS / "vega-mark.png", 256)
+export_png(SOURCES / "vega-emblem-source.png", ASSETS / "vega-emblem.png", 512)
+export_png(SOURCES / "vega-emblem-dark-source.png", ASSETS / "vega-emblem-dark.png", 512)
+print("Vega renderer PNGs, desktop PNG, ICO and ICNS generated from approved artwork")

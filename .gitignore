@@ -16,3 +16,5 @@ coverage/
 .env.*
 !.env.example
 .claude/worktrees/
+design/vega-brand/current-home.png
+localization-remaining.json

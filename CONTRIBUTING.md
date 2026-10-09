@@ -1,4 +1,6 @@
-# Contributing to OhMyGame
+# Contributing to 织女星 / OhMyGame
+
+中文版的问题和功能建议请提交到 [BlockComet/zhinvxing Issues](https://github.com/BlockComet/zhinvxing/issues)。中文开发默认分支是 `feat/unified-game-studio`；提交通常使用 `feat/`、`fix/`、`docs/` 等分支与 Conventional Commits。构建方式见 [织女星构建说明](docs/zhinvxing-build.md)。以下保留上游贡献指南，涉及上游仓库的链接供上游贡献使用。
 
 Thanks for helping. OhMyGame is in early alpha, so the most useful
 contributions right now are bug reports with clear steps, small fixes, and

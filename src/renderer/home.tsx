@@ -13,6 +13,8 @@ import { GAME_PROJECT_TYPES } from "./project-types.js";
 import { projectsHash, type AppNavigationTarget } from "./routes.js";
 import { WindowDragRegion } from "./window-drag-region.js";
 import { useProjectShelfLayout } from "./use-project-shelf-layout.js";
+import brandEmblem from "../shared/assets/vega-emblem.png";
+import brandEmblemDark from "../shared/assets/vega-emblem-dark.png";
 import "./studios.css";
 import { StudioCenter } from "./studio-center.js";
 
@@ -84,8 +86,16 @@ export function Home({ onNavigate, onCreate, onOpen }: HomeProps) {
       <section className="home-content home-content-fitted">
         <WindowDragRegion />
         <div className="home-start">
-          <h1>今天，创造一点不同。</h1>
-          <p className="home-start-subtitle">从一个新想法开始，或让熟悉的游戏再次运行。</p>
+          <header className="home-welcome">
+            <div className="home-welcome-copy">
+              <h1>今天，创造一点不同。</h1>
+              <p className="home-start-subtitle">从一个新想法开始，或让熟悉的游戏再次运行。</p>
+            </div>
+            <div className="home-brand-emblem" aria-hidden="true">
+              <img className="home-brand-emblem-light" src={brandEmblem} alt="" draggable={false} />
+              <img className="home-brand-emblem-dark" src={brandEmblemDark} alt="" draggable={false} />
+            </div>
+          </header>
           <nav className="studio-entry-grid" aria-label="开始工作">
             <button className="studio-entry-card" type="button" onClick={() => setCreateOpen(true)}><strong>创造新游戏</strong><span>把想法变成可玩的作品</span></button>
             <button className="studio-entry-card" type="button" onClick={() => setRestoreOpen(true)}><strong>复原已有游戏</strong><span>从客户端、源码或资料开始</span></button>
