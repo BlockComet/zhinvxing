@@ -61,3 +61,17 @@
 .home-sidebar-brand span { font-size: 15px; letter-spacing: .08em; }
 
 .sign-in-heading img, :root[data-appearance="light"] .sign-in-heading img { width: 32px; height: 32px; filter: none; }
+
+/* Keep unplayed projects identifiable without inventing a gameplay screenshot. */
+.project-card-preview.is-placeholder { position: relative; background: var(--surface); border: 1px solid var(--border); color: var(--text); }
+.project-card-preview-0 { --cover-accent: #377565; }
+.project-card-preview-1 { --cover-accent: #487293; }
+.project-card-preview-2 { --cover-accent: #956052; }
+.project-card-preview-3 { --cover-accent: #7163a4; }
+.project-card-preview.is-placeholder::after { content: ""; position: absolute; width: 160px; height: 160px; border: 24px solid color-mix(in srgb, var(--cover-accent) 7%, transparent); border-radius: 50%; right: -72px; top: -56px; pointer-events: none; }
+.project-cover-identity { position: relative; z-index: 1; display: flex; height: 100%; flex-direction: column; align-items: flex-start; justify-content: flex-end; gap: 6px; padding: 16px; }
+.project-cover-symbol { position: absolute; top: 14px; right: 16px; display: flex; color: var(--cover-accent); opacity: .7; }
+.project-cover-identity strong { display: -webkit-box; max-width: 100%; overflow: hidden; -webkit-box-orient: vertical; -webkit-line-clamp: 2; font-size: 16px; line-height: 1.4; font-weight: 600; overflow-wrap: anywhere; }
+.project-cover-caption { font-size: 10px; line-height: 1.4; color: var(--text-muted); }
+.project-cover-notice { position: absolute; top: 8px; left: 8px; padding: 5px 8px; border-radius: 6px; font-size: 11px; background: var(--surface); color: var(--text-secondary); }
+.project-cover-error { font-size: 12px; line-height: 1.5; color: var(--danger); }
